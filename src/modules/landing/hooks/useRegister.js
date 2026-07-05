@@ -1,0 +1,81 @@
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { registerService } from "../services/registerService";
+import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { useNavigate } from "react-router-dom";
+import { getCurrentUserService } from "../../../globals/services/getCurrentUserService";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
+
+export function useRegister() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    repeat_password: "",
+    accept_terms: Boolean,
+  });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { fieldError, clearError, validate } = useFormValidation();
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
+  }
+
+  async function handleSubmit(e, openInnerModal) {
+    e.preventDefault();
+
+    const isValid = validate(form);
+
+    if (!isValid) return;
+
+    const triggerButton = getModalTrigger(e);
+
+    setLoading(true);
+
+    try {
+      const response = await registerService(form);
+
+      if (response.success === true) {
+        const freshData = await queryClient.fetchQuery({
+          queryKey: ["currentUser"],
+          queryFn: getCurrentUserService,
+        });
+
+        if (freshData.onboarding_completed === false) {
+          navigate("/on-boarding");
+        } else {
+          navigate("/home");
+        }
+      } else {
+        setError(
+          response.error ??
+            "Lo sentimos, por el momento no podemos crear tu cuenta. Verifica los datos e intentalo de nuevo.",
+        );
+        openInnerModal("error", triggerButton);
+      }
+    } catch {
+      setError(
+        "Lo sentimos, por el momento no podemos crear tu cuenta, por favor intentalo nuevamente más tarde",
+      );
+      openInnerModal("error", triggerButton);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return {
+    form,
+    loading,
+    error,
+    fieldError,
+    showPassword,
+    setShowPassword,
+    handleChange,
+    handleSubmit,
+  };
+}

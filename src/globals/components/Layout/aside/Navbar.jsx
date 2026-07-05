@@ -1,0 +1,58 @@
+// Hooks
+import { useModal } from "../../../hooks/useModal";
+// Constantes
+import { firstSectionItems } from "../../../constants/asideMenuItems";
+// Componentes
+import NavItem from "./NavItem";
+import Icon from "../../ui/Icon";
+// Modales
+import NavbarMenuModal from "./NavbarMenuModal";
+
+export default function Navbar({ hasRole }) {
+  const { isOpen, triggerRef, modalType, openModal, closeModal } = useModal();
+
+  return (
+    <section className="relative w-screen flex items-center justify-center gap-10 pb-1 pl-1 pr-2 transition-all duration-700">
+      <ul
+        className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[0px_0px_20px_-2px_#EBE6E7] bg-white transition-all duration-700 
+        dark:bg-black dark:shadow-[0px_0px_10px_5px_#ffffff14]"
+      >
+        {firstSectionItems
+          .filter((item) => hasRole(item.roles))
+          .map((item) => (
+            <li
+              key={item.name}
+              className="py-1.5 rounded-full transition-all duration-700"
+            >
+              <NavItem
+                itemId={`${item.itemId}`}
+                path={item.path}
+                name={item.name}
+                icon={item.icon}
+              />
+            </li>
+          ))}
+      </ul>
+
+      <button
+        id="more-options-aside-button"
+        onClick={(e) => openModal(null, "menu", e.currentTarget)}
+        className="self-end w-auto h-16 flex flex-col items-center justify-center py-2.5 px-5 rounded-[40px] bg-black cursor-pointer group
+        dark:bg-white"
+      >
+        <Icon
+          name={"more_horiz"}
+          className="text-white group-hover:text-white dark:text-black dark:group-hover:text-black"
+        />
+      </button>
+
+      {modalType === "menu" && (
+        <NavbarMenuModal
+          isOpen={isOpen}
+          triggerRef={triggerRef}
+          onClose={closeModal}
+        />
+      )}
+    </section>
+  );
+}
