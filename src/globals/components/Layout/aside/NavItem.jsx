@@ -22,7 +22,7 @@ export default function NavItem({
             ${
               isActive
                 ? `bg-black shadow-[0px_0px_32px_-9px_#000000] text-white
-              dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
+              dark:bg-white dark:text-black dark:shadow-[0px_0px_18px_-11px_#ffffff] animate-clickEffect`
                 : `text-[#75777E]
               hover:bg-[#e5e7eb96]
               dark:text-[#75777eb7] dark:hover:bg-[#181818]`
