@@ -12,7 +12,6 @@ input[type="checkbox"] {
   input[type="checkbox"]:checked {
     background-color: #0a0a0a;
     border: 2px solid #0a0a0a;
-    transform: scale(1.2);
   }
   
   /* Estilos para la palomita dentro del check input */
