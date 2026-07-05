@@ -16,12 +16,20 @@ export default function VideoSection() {
           src="/parking-2.webp"
           alt="Video demostrativo del sistema"
           className="hidden w-full h-full rounded-3xl object-contain
-          md:inline-block"
+          md:inline-block
+          dark:hidden"
+        />
+
+        <img
+          src="/parking-dark-3.png"
+          alt="Video demostrativo del sistema"
+          className="hidden w-full h-full rounded-3xl object-contain
+          md:dark:inline-block"
         />
 
         {/* Mobile video */}
         <img
-          src="parking-mobile.png"
+          src="parking-mobile.webp"
           className="w-full h-full rounded-3xl object-contain
           md:hidden"
         />
