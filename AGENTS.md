@@ -84,8 +84,12 @@ Detailed context, read the relevant skill before acting:
 | Skill | When to read it |
 |---|---|
 | `.agents/architecture/SKILL.md` | Structure decisions, where each file goes, how the modal / routing / data fetching system works |
-| `.agents/code-conventions/SKILL.md` | Code style, naming, Tailwind conventions, error handling, validations |
+| `.agents/code-conventions/SKILL.md` | Code style, naming, Tailwind conventions, error handling, design system tokens, manual verification checklist |
 | `.agents/commits-and-prs/SKILL.md` | Commit format, branches, PR description |
+| `.agents/auth-flow/SKILL.md` | Login / register / on-boarding / logout / token refresh — full auth lifecycle |
+| `.agents/module-pattern/SKILL.md` | How to scaffold a new module correctly (folder structure, file responsibilities, integration with routing + sidebar + API) |
+| `.agents/animations/SKILL.md` | When to use CSS vs GSAP, how the FLIP modal system works, shared elements (`data-shared-id`), common pitfalls |
+| `.agents/environment/SKILL.md` | Env vars (`.env`, `VITE_API_URL`), Vite config, jsconfig, ESLint config, deployment notes |
 
 ---
 
