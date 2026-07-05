@@ -63,8 +63,8 @@ export default function LiquidGlass({ children, className, onClick }) {
         style={{ backdropFilter: `url(#${filterId})` }}
       >
         <div
-          className="pointer-events-none absolute w-full h-full rounded-full bg-linear-to-b from-white/30 to-white/5 
-          dark:from-white/3 dark:to-black/30"
+          className="pointer-events-none absolute w-full h-full rounded-full bg-linear-to-b from-white/5 to-white/1 
+          dark:from-white/1 dark:to-black/30"
         />
 
         <div
