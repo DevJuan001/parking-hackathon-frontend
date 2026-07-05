@@ -6,18 +6,19 @@ export default function NavBar({ openModal }) {
 
   return (
     <nav
-      className={`hidden h-[60px] sticky z-10 top-5 items-center justify-between px-3 py-2 rounded-full bg-[#ffffff4f] transition-all duration-500
+      className={`hidden h-[60px] sticky z-10 top-5 items-center justify-between px-3 py-2 rounded-full transition-all duration-500
         md:flex
-        dark:bg-[#00000099]
+        
         ${
           scrolled
-            ? `shadow-[0px_0px_0.1px_0.1px_#00000099] backdrop-blur-sm
-            md:w-2xl  
-            xl:w-3xl 
-              dark:shadow-[0px_0px_1px_0.2px_#ffffff48]`
+            ? `bg-[#ffffff4f] shadow-[0px_0px_0.1px_0.1px_#00000099] backdrop-blur-sm
+              md:w-2xl  
+              xl:w-3xl
+              dark:bg-[#0000007e] dark:shadow-[0px_0px_1px_0.2px_#ffffff48]`
             : `border-transparent
               md:w-3xl
-              xl:w-5xl`
+              xl:w-5xl
+              dark:bg-[#0a0a0a]`
         }`}
     >
       <a
