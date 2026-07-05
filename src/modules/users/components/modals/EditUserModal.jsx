@@ -1,15 +1,15 @@
 // Hooks
-import { useUpdateUser } from "../../hooks/useUpdateUser";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
-import { useRoles } from "../../hooks/useRoles";
+import { useUpdateUser } from "@/modules/users/hooks/useUpdateUser";
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useRoles } from "@/modules/users/hooks/useRoles";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import SelectMenu from "@modals/SelectMenu";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
 
 export default function EditUserModal({ onClose, user }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

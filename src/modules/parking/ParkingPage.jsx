@@ -1,18 +1,18 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
+import { useModal } from "@hooks/useModal";
 // Constants
-import { modalTitles } from "./constants/modalTitles";
+import { modalTitles } from "@/modules/parking/constants/modalTitles";
 // Components
-import Modal from "../../globals/components/modals/Modal";
-import Layout from "../../globals/components/Layout/Layout";
-import ParkingSectionsContainer from "./components/ui/ParkingSectionsContainer";
+import Modal from "@modals/Modal";
+import Layout from "@components/Layout/Layout";
+import ParkingSectionsContainer from "@/modules/parking/components/ui/ParkingSectionsContainer";
 // Modals
-import EditSpotModal from "./components/modals/EditSpotModal";
-import EditFloorModal from "./components/modals/EditFloorModal";
-import EditTariffModal from "./components/modals/EditTariffModal";
-import CreateSpotModal from "./components/modals/CreateSpotModal";
-import CreateFloorModal from "./components/modals/CreateFloorModal";
-import CreateTariffModal from "./components/modals/CreateTariffModal";
+import EditSpotModal from "@/modules/parking/components/modals/EditSpotModal";
+import EditFloorModal from "@/modules/parking/components/modals/EditFloorModal";
+import EditTariffModal from "@/modules/parking/components/modals/EditTariffModal";
+import CreateSpotModal from "@/modules/parking/components/modals/CreateSpotModal";
+import CreateFloorModal from "@/modules/parking/components/modals/CreateFloorModal";
+import CreateTariffModal from "@/modules/parking/components/modals/CreateTariffModal";
 
 export default function ParkingPage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =

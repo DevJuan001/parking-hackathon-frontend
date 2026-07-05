@@ -1,6 +1,6 @@
-import { apiRoutes } from "../../../config/apiRoutes";
-import { buildQueryParams } from "../../../utils/buildQueryParams";
-import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { apiRoutes } from "@/config/apiRoutes";
+import { buildQueryParams } from "@/utils/buildQueryParams";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 export async function getAllSpotsService(filters) {
   const params = buildQueryParams(filters);

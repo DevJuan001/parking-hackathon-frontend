@@ -1,4 +1,4 @@
-import { apiRoutes } from "../../../config/apiRoutes";
+import { apiRoutes } from "@/config/apiRoutes";
 
 export async function recoverPasswordService(email) {
   const response = await fetch(

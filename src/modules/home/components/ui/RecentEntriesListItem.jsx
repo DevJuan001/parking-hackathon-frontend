@@ -1,9 +1,9 @@
 // Utils
-import { formatTime } from "../../../../utils/formatTime";
+import { formatTime } from "@/utils/formatTime";
 // Constantes
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Components
-import Icon from "../../../../globals/components/ui/Icon";
+import Icon from "@components/ui/Icon";
 
 export default function RecentEntriesList({ entry }) {
   return (

@@ -1,7 +1,7 @@
-import { months } from "../../../utils/months";
-import { useCalendar } from "../../hooks/useCalendar";
-import Icon from "./Icon";
-import Modal from "../modals/Modal";
+import { months } from "@/utils/months";
+import { useCalendar } from "@hooks/useCalendar";
+import Icon from "@components/ui/Icon";
+import Modal from "@modals/Modal";
 
 export default function Calendar({
   onClose,

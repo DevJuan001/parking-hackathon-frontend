@@ -1,6 +1,6 @@
-import ProtectedRoutes from "./ProtectedRoutes";
-import { routesConfig } from "./constants/routesConfig";
-import LandingPage from "../modules/landing/LandingPage";
+import ProtectedRoutes from "@/router/ProtectedRoutes";
+import { routesConfig } from "@/router/constants/routesConfig";
+import LandingPage from "@/modules/landing/LandingPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 export default function AppRouter() {

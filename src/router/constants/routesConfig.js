@@ -1,12 +1,12 @@
-import HomePage from "../../modules/home/HomePage";
-import UsersPage from "../../modules/users/UsersPage";
-import ExitsPage from "../../modules/exits/ExitsPage";
-import EntriesPage from "../../modules/entries/EntriesPage";
-import ParkingPage from "../../modules/parking/ParkingPage";
-import FinancePage from "../../modules/finance/FinancePage";
-import CheckInPage from "../../modules/check-in/CheckInPage";
-import OnBoardingPage from "../../modules/on-boarding/OnBoardingPage";
-import VehiclePayment from "../../modules/vehicle-payment/VehiclePayment";
+import HomePage from "@/modules/home/HomePage";
+import UsersPage from "@/modules/users/UsersPage";
+import ExitsPage from "@/modules/exits/ExitsPage";
+import EntriesPage from "@/modules/entries/EntriesPage";
+import ParkingPage from "@/modules/parking/ParkingPage";
+import FinancePage from "@/modules/finance/FinancePage";
+import CheckInPage from "@/modules/check-in/CheckInPage";
+import OnBoardingPage from "@/modules/on-boarding/OnBoardingPage";
+import VehiclePayment from "@/modules/vehicle-payment/VehiclePayment";
 
 export const routesConfig = [
   {

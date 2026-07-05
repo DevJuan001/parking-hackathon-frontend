@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllSpotsService } from "../services/getAllSpotsService";
+import { getAllSpotsService } from "@/modules/parking/services/getAllSpotsService";
 
 export function useParkingSpots() {
   const [filters, setFilters] = useState({

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getEntriesStatsService } from "../services/getEntriesStatsService";
+import { getEntriesStatsService } from "@/modules/entries/services/getEntriesStatsService";
 
 export function useEntriesStats() {
   const query = useQuery({

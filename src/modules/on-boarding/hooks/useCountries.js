@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCountriesService } from "../service/getAllCountriesService";
+import { getAllCountriesService } from "@/modules/on-boarding/service/getAllCountriesService";
 
 export function useCountries() {
   const query = useQuery({

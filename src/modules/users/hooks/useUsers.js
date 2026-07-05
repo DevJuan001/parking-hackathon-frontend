@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllUsersService } from "../services/getAllUsersService";
+import { getAllUsersService } from "@/modules/users/services/getAllUsersService";
 
 export function useUsers() {
   const [filters, setFilters] = useState({

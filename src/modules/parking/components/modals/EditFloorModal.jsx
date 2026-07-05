@@ -1,15 +1,15 @@
 // Hooks
-import { useUpdateFloor } from "../../hooks/useUpdateFloor";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useUpdateFloor } from "@/modules/parking/hooks/useUpdateFloor";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import DeleteFloorModal from "./DeleteFloorModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ModalHighSection from "../../../../globals/components/modals/ModalHighSection";
+import DeleteFloorModal from "@/modules/parking/components/modals/DeleteFloorModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
+import ModalHighSection from "@modals/ModalHighSection";
 
 export default function EditFloorModal({ onClose, floor }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =

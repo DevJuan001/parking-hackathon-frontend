@@ -1,6 +1,6 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
-import { useExitsStats } from "../../../exits/hooks/useExitsStats";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
+import { useExitsStats } from "@/modules/exits/hooks/useExitsStats";
 import {
   ResponsiveContainer,
   PieChart,

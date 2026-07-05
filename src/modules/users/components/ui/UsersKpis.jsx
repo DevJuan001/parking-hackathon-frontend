@@ -1,5 +1,5 @@
-import { useUserStats } from "../../hooks/useUserStats";
-import UsersKpi from "./UsersKpi";
+import { useUserStats } from "@/modules/users/hooks/useUserStats";
+import UsersKpi from "@/modules/users/components/ui/UsersKpi";
 
 export default function UsersKpis() {
   const { stats } = useUserStats();

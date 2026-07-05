@@ -1,20 +1,20 @@
 // Hooks
-import { useUpdateSpot } from "../../hooks/useUpdateSpot";
-import { useVehicleTypes } from "../../hooks/useVehicleTypes";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useUpdateSpot } from "@/modules/parking/hooks/useUpdateSpot";
+import { useVehicleTypes } from "@/modules/parking/hooks/useVehicleTypes";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import SelectMenu from "@modals/SelectMenu";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Constants
-import { placeStatus } from "../../constants/spotStatus";
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import { placeStatus } from "@/modules/parking/constants/spotStatus";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Modals
-import DeleteSpotModal from "./DeleteSpotModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ModalHighSection from "../../../../globals/components/modals/ModalHighSection";
+import DeleteSpotModal from "@/modules/parking/components/modals/DeleteSpotModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
+import ModalHighSection from "@modals/ModalHighSection";
 
 export default function EditSpotModal({ onClose, spot }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =

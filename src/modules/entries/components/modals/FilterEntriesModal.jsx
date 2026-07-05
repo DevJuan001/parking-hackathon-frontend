@@ -1,6 +1,6 @@
-import { useFilterEntries } from "../../hooks/useFilterEntries";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import FilterModal from "../../../../globals/components/modals/FilterModal";
+import { useFilterEntries } from "@/modules/entries/hooks/useFilterEntries";
+import SelectMenu from "@modals/SelectMenu";
+import FilterModal from "@modals/FilterModal";
 
 export default function FilterEntriesModal({ filters, setFilters, onClose }) {
   const { handleChange } = useFilterEntries(setFilters);

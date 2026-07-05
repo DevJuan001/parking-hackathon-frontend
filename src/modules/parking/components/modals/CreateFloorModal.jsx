@@ -1,13 +1,13 @@
 // Hooks
-import { useCreateFloor } from "../../hooks/useCreateFloor";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useCreateFloor } from "@/modules/parking/hooks/useCreateFloor";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
 
 export default function CreateFloorModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

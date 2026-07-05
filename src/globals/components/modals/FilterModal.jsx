@@ -1,5 +1,5 @@
-import Icon from "../ui/Icon";
-import DateField from "../ui/DateField";
+import Icon from "@components/ui/Icon";
+import DateField from "@components/ui/DateField";
 
 export default function FilterModal({
   orderByStartDateOnChange,

@@ -1,14 +1,14 @@
 // Hooks
-import { useCreateTariff } from "../../hooks/useCreateTariff";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
-import { useAvailableVehicleTypes } from "../../hooks/useAvailableVehicleTypes";
+import { useCreateTariff } from "@/modules/parking/hooks/useCreateTariff";
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useAvailableVehicleTypes } from "@/modules/parking/hooks/useAvailableVehicleTypes";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import SelectMenu from "@modals/SelectMenu";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function CreateTariffModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

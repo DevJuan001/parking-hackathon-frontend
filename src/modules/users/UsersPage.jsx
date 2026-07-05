@@ -1,20 +1,20 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
-import { useUsers } from "./hooks/useUsers";
+import { useModal } from "@hooks/useModal";
+import { useUsers } from "@/modules/users/hooks/useUsers";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modalTitles } from "@/modules/users/constants/modalTitles";
 // Componentes
-import UsersKpis from "./components/ui/UsersKpis";
-import UsersTable from "./components/ui/UsersTable";
-import Layout from "../../globals/components/Layout/Layout";
-import TopSection from "../../globals/components/ui/TopSection";
+import UsersKpis from "@/modules/users/components/ui/UsersKpis";
+import UsersTable from "@/modules/users/components/ui/UsersTable";
+import Layout from "@components/Layout/Layout";
+import TopSection from "@components/ui/TopSection";
 // Modales
-import Modal from "../../globals/components/modals/Modal";
-import EditUserModal from "./components/modals/EditUserModal";
-import CreateUserModal from "./components/modals/CreateUserModal";
-import EnableUserModal from "./components/modals/EnableUserModal";
-import DisableUserModal from "./components/modals/DisableUserModal";
-import FilterUsersModal from "./components/modals/FilterUsersModal";
+import Modal from "@modals/Modal";
+import EditUserModal from "@/modules/users/components/modals/EditUserModal";
+import CreateUserModal from "@/modules/users/components/modals/CreateUserModal";
+import EnableUserModal from "@/modules/users/components/modals/EnableUserModal";
+import DisableUserModal from "@/modules/users/components/modals/DisableUserModal";
+import FilterUsersModal from "@/modules/users/components/modals/FilterUsersModal";
 
 export default function UsersPage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =

@@ -1,4 +1,4 @@
-import Icon from "../../../../globals/components/ui/Icon";
+import Icon from "@components/ui/Icon";
 
 export default function SuccessPaymentSection({
   setActiveSection,

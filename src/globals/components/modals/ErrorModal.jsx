@@ -1,6 +1,6 @@
-import Modal from "./Modal";
-import ConfirmCancelButtons from "./ConfirmCancelButtons";
-import Icon from "../ui/Icon";
+import Modal from "@modals/Modal";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import Icon from "@components/ui/Icon";
 
 export default function ErrorModal({
   triggerRef,

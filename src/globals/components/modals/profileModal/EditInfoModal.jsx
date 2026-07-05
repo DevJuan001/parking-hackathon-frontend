@@ -1,13 +1,13 @@
 //Hooks
-import { useInnerModal } from "../../../hooks/useInnerModal";
-import { useUpdateCurrentUserInfo } from "../../../hooks/useUpdateCurrentUserInfo";
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useUpdateCurrentUserInfo } from "@hooks/useUpdateCurrentUserInfo";
 // Components
-import Loader from "../../ui/Loader";
-import FormField from "../../ui/FormField";
-import ConfirmCancelButtons from "../ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Modal from "../Modal";
-import ErrorModal from "../ErrorModal";
+import Modal from "@modals/Modal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =

@@ -1,5 +1,5 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import { placeStatus } from "../../constants/spotStatus";
+import Icon from "@components/ui/Icon";
+import { placeStatus } from "@/modules/parking/constants/spotStatus";
 
 export default function SpotItem({ name, status = 2, icon, onClick }) {
   const config = placeStatus[status] || placeStatus[2];

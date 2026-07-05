@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
-import { calculatePaymentService } from "../services/calculatePaymentService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { useFormValidation } from "@hooks/useFormValidation";
+import { calculatePaymentService } from "@/modules/vehicle-payment/services/calculatePaymentService";
 
 export function useCalculatePayment(setActiveSection) {
   const [paymentData, setPaymentData] = useState({ plate: "" });

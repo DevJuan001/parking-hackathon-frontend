@@ -1,13 +1,13 @@
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
 // Constants
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Utils
 import {
   formatDateTime,
   formatTimeDate,
-} from "../../../../utils/formatDateTime";
+} from "@/utils/formatDateTime";
 
 export default function EntriesTable({ entries, loading }) {
   const noEntries = entries.length === 0 && !loading;

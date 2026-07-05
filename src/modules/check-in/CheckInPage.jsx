@@ -1,9 +1,9 @@
 // Hooks
 import { useState } from "react";
-import { useCreateEntry } from "./hooks/useCreateEntry";
+import { useCreateEntry } from "@/modules/check-in/hooks/useCreateEntry";
 // Componentes
-import CreateEntrySection from "./components/ui/CreateEntrySection";
-import SuccessEntrySection from "./components/ui/SuccessEntrySection";
+import CreateEntrySection from "@/modules/check-in/components/ui/CreateEntrySection";
+import SuccessEntrySection from "@/modules/check-in/components/ui/SuccessEntrySection";
 
 export default function CheckInPage() {
   const [activeSection, setActiveSection] = useState("createEntry");

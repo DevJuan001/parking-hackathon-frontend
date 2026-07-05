@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRecentEntriesService } from "../services/getRecentEntriesService";
+import { getRecentEntriesService } from "@/modules/home/services/getRecentEntriesService";
 
 export function useRecentEntries() {
   const query = useQuery({

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./router/AppRouter";
-import { useTheme } from "./globals/hooks/useTheme";
+import AppRouter from "@/router/AppRouter";
+import { useTheme } from "@hooks/useTheme";
 
 function App() {
   useTheme();

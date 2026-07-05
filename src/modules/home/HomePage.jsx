@@ -1,11 +1,11 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
+import { useModal } from "@hooks/useModal";
 // Components
-import Layout from "../../globals/components/Layout/Layout";
-import HomeSectionsContainer from "./components/ui/HomeSectionsContainer";
-import Modal from "../../globals/components/modals/Modal";
-import EditSpotModal from "../parking/components/modals/EditSpotModal";
-import CreateSpotModal from "../parking/components/modals/CreateSpotModal";
+import Layout from "@components/Layout/Layout";
+import HomeSectionsContainer from "@/modules/home/components/ui/HomeSectionsContainer";
+import Modal from "@modals/Modal";
+import EditSpotModal from "@/modules/parking/components/modals/EditSpotModal";
+import CreateSpotModal from "@/modules/parking/components/modals/CreateSpotModal";
 
 export default function HomePage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =

@@ -1,19 +1,19 @@
 // Hooks
-import { useUpdateTariff } from "../../hooks/useUpdateTariff";
-import { useVehicleTypes } from "../../hooks/useVehicleTypes";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useUpdateTariff } from "@/modules/parking/hooks/useUpdateTariff";
+import { useVehicleTypes } from "@/modules/parking/hooks/useVehicleTypes";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Constants
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import SelectMenu from "@modals/SelectMenu";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import DeleteTariffModal from "./DeleteTariffModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ModalHighSection from "../../../../globals/components/modals/ModalHighSection";
+import DeleteTariffModal from "@/modules/parking/components/modals/DeleteTariffModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
+import ModalHighSection from "@modals/ModalHighSection";
 
 export default function EditTariffModal({ onClose, tariff }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =

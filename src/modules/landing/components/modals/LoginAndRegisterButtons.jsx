@@ -1,4 +1,4 @@
-import { icons } from "../../../../assets/icons";
+import { icons } from "@/assets/icons";
 
 export default function LoginAndRegisterButtons({
   confirmButtonText,

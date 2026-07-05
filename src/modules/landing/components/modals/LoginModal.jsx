@@ -1,14 +1,14 @@
 // Hooks
-import { useLogin } from "../../hooks/useLogin";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useLogin } from "@/modules/landing/hooks/useLogin";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Loader from "../../../../globals/components/ui/Loader";
-import LoginAndRegisterButtons from "./LoginAndRegisterButtons";
-import FormField from "../../../../globals/components/ui/FormField";
+import Icon from "@components/ui/Icon";
+import Loader from "@components/ui/Loader";
+import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
+import FormField from "@components/ui/FormField";
 // Modales
-import RecoverPasswordModal from "./RecoverPasswordModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import RecoverPasswordModal from "@/modules/landing/components/modals/RecoverPasswordModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function LoginModal() {
   const {

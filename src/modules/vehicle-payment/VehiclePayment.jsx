@@ -1,10 +1,10 @@
 //Hooks
 import { useState } from "react";
-import { useCalculatePayment } from "./hooks/useCalculatePayment";
+import { useCalculatePayment } from "@/modules/vehicle-payment/hooks/useCalculatePayment";
 // Componentes
-import CreatePaymentSection from "./components/ui/CreatePaymentSection";
-import SuccessPaymentSection from "./components/ui/SuccessPaymentSection";
-import CalculatePaymentSection from "./components/ui/CalculatePaymentSection";
+import CreatePaymentSection from "@/modules/vehicle-payment/components/ui/CreatePaymentSection";
+import SuccessPaymentSection from "@/modules/vehicle-payment/components/ui/SuccessPaymentSection";
+import CalculatePaymentSection from "@/modules/vehicle-payment/components/ui/CalculatePaymentSection";
 
 export default function VehiclePayment() {
   const [activeSection, setActiveSection] = useState("calculatePayment");

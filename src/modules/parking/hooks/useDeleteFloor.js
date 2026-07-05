@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteFloorService } from "../services/deleteFloorService";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { deleteFloorService } from "@/modules/parking/services/deleteFloorService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
 
 export function useDeleteFloor(floor) {
   const [loading, setLoading] = useState(false);

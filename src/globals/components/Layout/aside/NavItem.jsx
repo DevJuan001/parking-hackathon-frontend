@@ -1,4 +1,4 @@
-import Icon from "../../ui/Icon";
+import Icon from "@components/ui/Icon";
 import { NavLink } from "react-router-dom";
 
 export default function NavItem({

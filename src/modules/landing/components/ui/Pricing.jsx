@@ -1,5 +1,5 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import { pricingPlans } from "../../data/pricingPlans";
+import Icon from "@components/ui/Icon";
+import { pricingPlans } from "@/modules/landing/data/pricingPlans";
 
 export default function Pricing({ openModal }) {
   return (

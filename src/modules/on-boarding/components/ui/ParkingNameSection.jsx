@@ -1,5 +1,5 @@
-import FormField from "../../../../globals/components/ui/FormField";
-import SectionButtons from "./SectionButtons";
+import FormField from "@components/ui/FormField";
+import SectionButtons from "@/modules/on-boarding/components/ui/SectionButtons";
 
 export default function ParkingNameSection({
   activeSection,

@@ -1,7 +1,7 @@
-import { useFilterUsers } from "../../hooks/useFilterUsers";
-import { useSurnames } from "../../hooks/useSurnames";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import FilterModal from "../../../../globals/components/modals/FilterModal";
+import { useFilterUsers } from "@/modules/users/hooks/useFilterUsers";
+import { useSurnames } from "@/modules/users/hooks/useSurnames";
+import SelectMenu from "@modals/SelectMenu";
+import FilterModal from "@modals/FilterModal";
 
 export default function FilterUsersModal({ filters, setFilters, onClose }) {
   const { handleChange } = useFilterUsers(setFilters);

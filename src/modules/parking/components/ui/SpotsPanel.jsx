@@ -1,16 +1,16 @@
 // Hooks
-import { useFloors } from "../../hooks/useFloors";
-import { useFilterSpots } from "../../hooks/useFilterSpots";
-import { useParkingSpots } from "../../hooks/useParkingSpots";
+import { useFloors } from "@/modules/parking/hooks/useFloors";
+import { useFilterSpots } from "@/modules/parking/hooks/useFilterSpots";
+import { useParkingSpots } from "@/modules/parking/hooks/useParkingSpots";
 // Components
-import SpotItem from "./SpotItem";
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
+import SpotItem from "@/modules/parking/components/ui/SpotItem";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
 // Constants
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Modales
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import CreateButton from "../../../../globals/components/ui/CreateButton";
+import SelectMenu from "@modals/SelectMenu";
+import CreateButton from "@components/ui/CreateButton";
 
 export default function SpotsPanel({ openModal }) {
   const { floors } = useFloors();

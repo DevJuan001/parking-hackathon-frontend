@@ -1,5 +1,5 @@
-import { apiRoutes } from "../../../config/apiRoutes";
-import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { apiRoutes } from "@/config/apiRoutes";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 export async function deleteSpotService(spot_id) {
   const response = await fetchWithAuth(

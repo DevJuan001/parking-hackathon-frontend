@@ -1,15 +1,15 @@
 // Hooks
-import { useInnerModal } from "../../../hooks/useInnerModal";
-import { useUpdateCurrentUserPassword } from "../../../hooks/useUpdateCurrentUserPassword";
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useUpdateCurrentUserPassword } from "@hooks/useUpdateCurrentUserPassword";
 // Components
-import Icon from "../../ui/Icon";
-import Loader from "../../ui/Loader";
-import FormField from "../../ui/FormField";
-import ConfirmCancelButtons from "../ConfirmCancelButtons";
+import Icon from "@components/ui/Icon";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Modal from "../Modal";
-import ErrorModal from "../ErrorModal";
-import SuccessModal from "../SuccessModal";
+import Modal from "@modals/Modal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
 
 export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } = useInnerModal();

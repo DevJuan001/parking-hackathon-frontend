@@ -1,6 +1,6 @@
-import Skeleton from "../../../../globals/components/ui/Skeleton";
-import { useExitsStats } from "../../hooks/useExitsStats";
-import ExitsKpi from "./ExitsKpi";
+import Skeleton from "@components/ui/Skeleton";
+import { useExitsStats } from "@/modules/exits/hooks/useExitsStats";
+import ExitsKpi from "@/modules/exits/components/ui/ExitsKpi";
 
 export default function ExitsKpis() {
   const { stats, loading } = useExitsStats();

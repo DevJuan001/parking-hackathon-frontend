@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllVehicleTypesService } from "../services/getAllVehicleTypesService";
+import { getAllVehicleTypesService } from "@/modules/parking/services/getAllVehicleTypesService";
 
 export function useVehicleTypes() {
   const query = useQuery({

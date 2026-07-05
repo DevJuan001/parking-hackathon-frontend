@@ -1,17 +1,17 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
+import { useModal } from "@hooks/useModal";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modalTitles } from "@/modules/exits/constants/modalTitles";
 // Componentes
-import ExitsKpis from "./components/ui/ExitsKpis";
-import ExitsTable from "./components/ui/ExitsTable";
-import Layout from "../../globals/components/Layout/Layout";
-import TopSection from "../../globals/components/ui/TopSection";
+import ExitsKpis from "@/modules/exits/components/ui/ExitsKpis";
+import ExitsTable from "@/modules/exits/components/ui/ExitsTable";
+import Layout from "@components/Layout/Layout";
+import TopSection from "@components/ui/TopSection";
 // Modales
-import Modal from "../../globals/components/modals/Modal";
-import CreateExitModal from "./components/modals/CreateExitModal";
-import FilterExitsModal from "./components/modals/FilterExitsModal";
-import { useExits } from "./hooks/useExits";
+import Modal from "@modals/Modal";
+import CreateExitModal from "@/modules/exits/components/modals/CreateExitModal";
+import FilterExitsModal from "@/modules/exits/components/modals/FilterExitsModal";
+import { useExits } from "@/modules/exits/hooks/useExits";
 
 export default function ExitsPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();

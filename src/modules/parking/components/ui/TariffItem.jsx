@@ -1,5 +1,5 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import { vehicleTypesConstant } from "../../../../globals/constants/vehicleTypes";
+import Icon from "@components/ui/Icon";
+import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 
 export default function TariffItem({ openModal, tariff }) {
   return (

@@ -1,15 +1,15 @@
 // Hooks
 import { useState } from "react";
-import { useInnerModal } from "../../../hooks/useInnerModal";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useCurrentUser } from "@hooks/useCurrentUser";
 // Components
-import Icon from "../../ui/Icon";
-import GeneralContent from "./GeneralContent";
-import AppearanceContent from "./AppearanceContent";
+import Icon from "@components/ui/Icon";
+import GeneralContent from "@modals/profileModal/GeneralContent";
+import AppearanceContent from "@modals/profileModal/AppearanceContent";
 // Modals
-import EditInfoModal from "./EditInfoModal";
-import ChangePasswordModal from "./ChangePasswordModal";
-import Modal from "../Modal";
+import EditInfoModal from "@modals/profileModal/EditInfoModal";
+import ChangePasswordModal from "@modals/profileModal/ChangePasswordModal";
+import Modal from "@modals/Modal";
 
 export default function ProfileModal({ triggerRef, onCloseModal }) {
   const { user } = useCurrentUser();

@@ -1,4 +1,4 @@
-import RevenueChart from "../charts/RevenueChart";
+import RevenueChart from "@/modules/home/components/charts/RevenueChart";
 
 export default function EarningsPanel() {
   return (

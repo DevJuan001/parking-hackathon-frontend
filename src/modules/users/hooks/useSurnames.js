@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllSurnamesService } from "../services/getAllSurnamesService";
+import { getAllSurnamesService } from "@/modules/users/services/getAllSurnamesService";
 
 export function useSurnames() {
   const query = useQuery({

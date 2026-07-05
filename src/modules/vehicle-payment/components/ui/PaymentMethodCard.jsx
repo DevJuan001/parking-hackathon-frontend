@@ -1,5 +1,5 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import { paymentMethodStyles } from "../../constants/paymentMethodStyles";
+import Icon from "@components/ui/Icon";
+import { paymentMethodStyles } from "@/modules/vehicle-payment/constants/paymentMethodStyles";
 
 export default function PaymentMethodCard({
   id,

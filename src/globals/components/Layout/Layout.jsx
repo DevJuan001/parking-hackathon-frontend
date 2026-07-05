@@ -1,4 +1,4 @@
-import Aside from "./aside/Aside";
+import Aside from "@components/Layout/aside/Aside";
 
 export default function Layout({ children }) {
   return (

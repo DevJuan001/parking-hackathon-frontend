@@ -1,7 +1,7 @@
-import RecentEntriesList from "./RecentEntriesListItem";
-import { useRecentEntries } from "../../hooks/useRecentEntries";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
-import Icon from "../../../../globals/components/ui/Icon";
+import RecentEntriesList from "@/modules/home/components/ui/RecentEntriesListItem";
+import { useRecentEntries } from "@/modules/home/hooks/useRecentEntries";
+import Skeleton from "@components/ui/Skeleton";
+import Icon from "@components/ui/Icon";
 
 export default function RecentEntriesPanel() {
   const { entries, loading } = useRecentEntries();

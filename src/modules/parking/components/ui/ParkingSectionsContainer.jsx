@@ -1,7 +1,7 @@
 // Components
-import SpotsPanel from "./SpotsPanel";
-import FloorsPanel from "./FloorsPanel";
-import TariffsPanel from "./TariffsPanel";
+import SpotsPanel from "@/modules/parking/components/ui/SpotsPanel";
+import FloorsPanel from "@/modules/parking/components/ui/FloorsPanel";
+import TariffsPanel from "@/modules/parking/components/ui/TariffsPanel";
 
 export default function ParkingSectionsContainer({ openModal }) {
   return (

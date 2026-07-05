@@ -1,5 +1,5 @@
-import Icon from "../../../../globals/components/ui/Icon";
-import { useScrolled } from "../../../../globals/hooks/useScrolled";
+import Icon from "@components/ui/Icon";
+import { useScrolled } from "@hooks/useScrolled";
 
 export default function NavBar({ openModal }) {
   const { scrolled } = useScrolled();

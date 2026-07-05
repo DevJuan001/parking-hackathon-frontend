@@ -1,7 +1,7 @@
 // Hooks
-import { useLogout } from "../../../hooks/useLogout";
+import { useLogout } from "@hooks/useLogout";
 // Componentes
-import Icon from "../../ui/Icon";
+import Icon from "@components/ui/Icon";
 
 export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
   const { logout } = useLogout();

@@ -1,5 +1,5 @@
-import { apiRoutes } from "../../../config/apiRoutes";
-import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { apiRoutes } from "@/config/apiRoutes";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 export async function updateFloorService(floor_id, changes) {
   const response = await fetchWithAuth(

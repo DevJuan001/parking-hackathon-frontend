@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
-import { createEntryService } from "../services/createEntryService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { useFormValidation } from "@hooks/useFormValidation";
+import { createEntryService } from "@/modules/check-in/services/createEntryService";
 
 export function useCreateEntry(setActiveSection) {
   const [entryData, setEntryData] = useState({ plate: "" });

@@ -1,7 +1,7 @@
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import Icon from "../../../../globals/components/ui/Icon";
-import Loader from "../../../../globals/components/ui/Loader";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import ErrorModal from "@modals/ErrorModal";
+import Icon from "@components/ui/Icon";
+import Loader from "@components/ui/Loader";
+import { useInnerModal } from "@hooks/useInnerModal";
 
 export default function CalculatePaymentSection({
   paymentData,

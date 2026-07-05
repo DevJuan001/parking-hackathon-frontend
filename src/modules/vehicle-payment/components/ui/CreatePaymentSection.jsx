@@ -1,11 +1,11 @@
 // Hooks
-import { useCreatePayment } from "../../hooks/useCreatePayment";
-import { usePaymentMethods } from "../../hooks/usePaymentMethods";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useCreatePayment } from "@/modules/vehicle-payment/hooks/useCreatePayment";
+import { usePaymentMethods } from "@/modules/vehicle-payment/hooks/usePaymentMethods";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
-import PaymentMethodCard from "./PaymentMethodCard";
-import Loader from "../../../../globals/components/ui/Loader";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import PaymentMethodCard from "@/modules/vehicle-payment/components/ui/PaymentMethodCard";
+import Loader from "@components/ui/Loader";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function CreatePaymentSection({
   setActiveSection,

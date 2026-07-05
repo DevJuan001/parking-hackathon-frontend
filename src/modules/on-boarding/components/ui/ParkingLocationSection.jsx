@@ -1,12 +1,12 @@
 // Hooks
-import { useCountries } from "../../hooks/useCountries";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useCountries } from "@/modules/on-boarding/hooks/useCountries";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
-import SectionButtons from "./SectionButtons";
-import Loader from "../../../../globals/components/ui/Loader";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+import SectionButtons from "@/modules/on-boarding/components/ui/SectionButtons";
+import Loader from "@components/ui/Loader";
+import SelectMenu from "@modals/SelectMenu";
 // Modales
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function ParkingLocationSection({
   activeSection,

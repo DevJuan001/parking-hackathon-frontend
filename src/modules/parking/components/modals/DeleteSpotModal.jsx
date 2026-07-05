@@ -1,12 +1,12 @@
 // Hooks
-import { useDeleteSpot } from "../../hooks/useDeleteSpot";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useDeleteSpot } from "@/modules/parking/hooks/useDeleteSpot";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Modal from "../../../../globals/components/modals/Modal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import Modal from "@modals/Modal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function DeleteSpotModal({
   isOpen,

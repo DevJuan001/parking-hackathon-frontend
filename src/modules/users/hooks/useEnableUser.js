@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { enableUserService } from "../services/enableUserService";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { enableUserService } from "@/modules/users/services/enableUserService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
 
 export function useEnableUser(user) {
   const [loading, setLoading] = useState(false);

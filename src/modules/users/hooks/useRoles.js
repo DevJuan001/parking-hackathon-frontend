@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllRolesService } from "../services/getAllRolesService";
+import { getAllRolesService } from "@/modules/users/services/getAllRolesService";
 
 export function useRoles() {
   const query = useQuery({

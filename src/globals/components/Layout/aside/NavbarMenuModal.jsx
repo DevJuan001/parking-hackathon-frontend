@@ -1,14 +1,14 @@
 // Hooks
-import { useLogout } from "../../../hooks/useLogout";
-import { useInnerModal } from "../../../hooks/useInnerModal";
+import { useLogout } from "@hooks/useLogout";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Constants
-import { secondSectionItems } from "../../../constants/asideMenuItems";
+import { secondSectionItems } from "@/globals/constants/asideMenuItems";
 // Components
-import NavItem from "./NavItem";
-import AvatarButton from "./AvatarButton";
+import NavItem from "@components/Layout/aside/NavItem";
+import AvatarButton from "@components/Layout/aside/AvatarButton";
 // Modals
-import Modal from "../../modals/Modal";
-import ProfileModal from "../../modals/profileModal/ProfileModal";
+import Modal from "@modals/Modal";
+import ProfileModal from "@modals/profileModal/ProfileModal";
 
 export default function NavbarMenuModal({ isOpen, triggerRef, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =

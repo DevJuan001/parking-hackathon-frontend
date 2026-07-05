@@ -1,9 +1,9 @@
 // Hooks
-import { useFloors } from "../../hooks/useFloors";
+import { useFloors } from "@/modules/parking/hooks/useFloors";
 // Components
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
-import CreateButton from "../../../../globals/components/ui/CreateButton";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
+import CreateButton from "@components/ui/CreateButton";
 
 export default function FloorsPanel({ openModal }) {
   const { floors, loading } = useFloors();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { createExitService } from "../services/createExitService";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { createExitService } from "@/modules/exits/services/createExitService";
+import { useFormValidation } from "@hooks/useFormValidation";
 
 export function useCreateExit() {
   const [form, setForm] = useState({ plate: "" });

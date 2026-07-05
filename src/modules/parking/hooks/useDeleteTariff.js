@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteTariffService } from "../services/deleteTariffService";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { deleteTariffService } from "@/modules/parking/services/deleteTariffService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
 
 export function useDeleteTariff(tariff) {
   const [loading, setLoading] = useState(false);

@@ -1,13 +1,13 @@
 // Hooks
-import { useRecoverPassword } from "../../hooks/useRecoverPassword";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useRecoverPassword } from "@/modules/landing/hooks/useRecoverPassword";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Loader from "../../../../globals/components/ui/Loader";
-import Modal from "../../../../globals/components/modals/Modal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import Loader from "@components/ui/Loader";
+import Modal from "@modals/Modal";
+import SuccessModal from "@modals/SuccessModal";
 
 export default function RecoverPasswordModal({ triggerRef, onClose }) {
   const { innerTrigger, innerType, openInnerModal, closeInnerModal } =

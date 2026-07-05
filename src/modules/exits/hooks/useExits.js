@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllExitsService } from "../services/getAllExitsService";
+import { getAllExitsService } from "@/modules/exits/services/getAllExitsService";
 
 export function useExits() {
   const [filters, setFilters] = useState({

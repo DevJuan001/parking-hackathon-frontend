@@ -1,5 +1,5 @@
-import { apiRoutes } from "../../../config/apiRoutes";
-import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { apiRoutes } from "@/config/apiRoutes";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 export async function createUserService(user_data) {
   const response = await fetchWithAuth(

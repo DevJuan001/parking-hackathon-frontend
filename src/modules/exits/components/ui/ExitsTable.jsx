@@ -1,11 +1,11 @@
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
 // Utils
 import {
   formatDateTime,
   formatTimeDate,
-} from "../../../../utils/formatDateTime";
+} from "@/utils/formatDateTime";
 
 export default function ExitsTable({ exits, loading }) {
   const noExits = exits.length === 0 && !loading;

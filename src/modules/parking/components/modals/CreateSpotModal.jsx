@@ -1,14 +1,14 @@
 // Hooks
-import { useCreateSpot } from "../../hooks/useCreateSpot";
-import { useVehicleTypes } from "../../hooks/useVehicleTypes";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useCreateSpot } from "@/modules/parking/hooks/useCreateSpot";
+import { useVehicleTypes } from "@/modules/parking/hooks/useVehicleTypes";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+import ErrorModal from "@modals/ErrorModal";
+import SelectMenu from "@modals/SelectMenu";
 
 export default function CreateSpotModal({ floor, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logoutService } from "../services/logoutService";
+import { logoutService } from "@/globals/services/logoutService";
 import { useQueryClient } from "@tanstack/react-query";
 
 export function useLogout() {

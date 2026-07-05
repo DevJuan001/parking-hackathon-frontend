@@ -1,12 +1,12 @@
 // Hooks
-import { useModal } from "../../../hooks/useModal";
+import { useModal } from "@hooks/useModal";
 // Constantes
-import { firstSectionItems } from "../../../constants/asideMenuItems";
+import { firstSectionItems } from "@/globals/constants/asideMenuItems";
 // Componentes
-import NavItem from "./NavItem";
-import Icon from "../../ui/Icon";
+import NavItem from "@components/Layout/aside/NavItem";
+import Icon from "@components/ui/Icon";
 // Modales
-import NavbarMenuModal from "./NavbarMenuModal";
+import NavbarMenuModal from "@components/Layout/aside/NavbarMenuModal";
 
 export default function Navbar({ hasRole }) {
   const { isOpen, triggerRef, modalType, openModal, closeModal } = useModal();

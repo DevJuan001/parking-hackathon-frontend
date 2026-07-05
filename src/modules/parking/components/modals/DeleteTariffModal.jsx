@@ -1,12 +1,12 @@
 // Hooks
-import { useDeleteTariff } from "../../hooks/useDeleteTariff";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useDeleteTariff } from "@/modules/parking/hooks/useDeleteTariff";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Modal from "../../../../globals/components/modals/Modal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import Modal from "@modals/Modal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function DeleteTariffModal({
   isOpen,

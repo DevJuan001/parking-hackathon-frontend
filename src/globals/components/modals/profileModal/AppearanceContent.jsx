@@ -1,6 +1,6 @@
-import Icon from "../../ui/Icon";
-import SelectMenu from "../SelectMenu";
-import { useTheme } from "../../../hooks/useTheme";
+import Icon from "@components/ui/Icon";
+import SelectMenu from "@modals/SelectMenu";
+import { useTheme } from "@hooks/useTheme";
 
 export default function AppearanceContent() {
   const { setTheme } = useTheme();

@@ -1,5 +1,5 @@
-import Navbar from "./Navbar";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import Navbar from "@components/Layout/aside/Navbar";
+import { useCurrentUser } from "@hooks/useCurrentUser";
 
 export default function Aside() {
   const { hasRole } = useCurrentUser();

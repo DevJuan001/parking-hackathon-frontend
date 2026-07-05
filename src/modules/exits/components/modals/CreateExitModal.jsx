@@ -1,13 +1,13 @@
 // Hooks
-import { useCreateExit } from "../../hooks/useCreateExit";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useCreateExit } from "@/modules/exits/hooks/useCreateExit";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import FormField from "@components/ui/FormField";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import ErrorModal from "@modals/ErrorModal";
+import SuccessModal from "@modals/SuccessModal";
 
 export default function CreateExitModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

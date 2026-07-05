@@ -1,10 +1,10 @@
 // Hooks
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Loader from "../../../../globals/components/ui/Loader";
+import Icon from "@components/ui/Icon";
+import Loader from "@components/ui/Loader";
 // Modales
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function CreateEntrySection({
   entryData,

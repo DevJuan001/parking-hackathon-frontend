@@ -1,6 +1,6 @@
-import { useInnerModal } from "../../hooks/useInnerModal";
-import Calendar from "./Calendar";
-import Icon from "./Icon";
+import { useInnerModal } from "@hooks/useInnerModal";
+import Calendar from "@components/ui/Calendar";
+import Icon from "@components/ui/Icon";
 
 export default function DateField({
   id,

@@ -1,11 +1,11 @@
 // Hooks
-import { useCompleteOnBoarding } from "./hooks/useCompleteOnBoarding";
-import { useOnboardingSections } from "./hooks/useOnboardingSections";
+import { useCompleteOnBoarding } from "@/modules/on-boarding/hooks/useCompleteOnBoarding";
+import { useOnboardingSections } from "@/modules/on-boarding/hooks/useOnboardingSections";
 // Componentes
-import ProgressBar from "./components/ui/ProgressBar";
-import UserInfoSection from "./components/ui/UserInfoSection";
-import ParkingNameSection from "./components/ui/ParkingNameSection";
-import ParkingLocationSection from "./components/ui/ParkingLocationSection";
+import ProgressBar from "@/modules/on-boarding/components/ui/ProgressBar";
+import UserInfoSection from "@/modules/on-boarding/components/ui/UserInfoSection";
+import ParkingNameSection from "@/modules/on-boarding/components/ui/ParkingNameSection";
+import ParkingLocationSection from "@/modules/on-boarding/components/ui/ParkingLocationSection";
 
 export default function OnBoardingPage() {
   const {

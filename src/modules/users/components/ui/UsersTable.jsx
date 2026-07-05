@@ -1,9 +1,9 @@
 // Constantes
-import { userStatus } from "../../constants/userStatus";
+import { userStatus } from "@/modules/users/constants/userStatus";
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
-import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
+import ActionButtons from "@components/ui/ActionButtons";
 
 export default function UsersTable({ users, loading, openModal }) {
   const noUsers = users.length === 0 && !loading;

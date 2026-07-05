@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { createPaymentService } from "../services/createPaymentService";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { createPaymentService } from "@/modules/vehicle-payment/services/createPaymentService";
+import { useFormValidation } from "@hooks/useFormValidation";
 
 export function useCreatePayment(setActiveSection, paymentDetails) {
   const [activePaymentMethod, setActivePaymentMethod] = useState("");

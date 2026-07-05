@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
-import { getCurrentUserService } from "../../../globals/services/getCurrentUserService";
-import { completeOnBoardingService } from "../service/completeOnBoardingService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { useFormValidation } from "@hooks/useFormValidation";
+import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
+import { completeOnBoardingService } from "@/modules/on-boarding/service/completeOnBoardingService";
 
 const SECTION_FIELDS = {
   userInfo: ["name", "first_surname"],

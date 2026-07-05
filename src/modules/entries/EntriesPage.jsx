@@ -1,17 +1,17 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
+import { useModal } from "@hooks/useModal";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modalTitles } from "@/modules/entries/constants/modalTitles";
 // Componentes
-import EntriesKpis from "./components/ui/EntriesKpis";
-import EntriesTable from "./components/ui/EntriesTable";
-import Layout from "../../globals/components/Layout/Layout";
-import TopSection from "../../globals/components/ui/TopSection";
+import EntriesKpis from "@/modules/entries/components/ui/EntriesKpis";
+import EntriesTable from "@/modules/entries/components/ui/EntriesTable";
+import Layout from "@components/Layout/Layout";
+import TopSection from "@components/ui/TopSection";
 // Modales
-import Modal from "../../globals/components/modals/Modal";
-import CreateEntryModal from "./components/modals/CreateEntryModal";
-import FilterEntriesModal from "./components/modals/FilterEntriesModal";
-import { useEntries } from "./hooks/useEntries";
+import Modal from "@modals/Modal";
+import CreateEntryModal from "@/modules/entries/components/modals/CreateEntryModal";
+import FilterEntriesModal from "@/modules/entries/components/modals/FilterEntriesModal";
+import { useEntries } from "@/modules/entries/hooks/useEntries";
 
 export default function EntriesPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();

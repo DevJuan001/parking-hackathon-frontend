@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { useFormValidation } from "../../../globals/hooks/useFormValidation";
-import { updateFloorService } from "../services/updateFloorService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
+import { useFormValidation } from "@hooks/useFormValidation";
+import { updateFloorService } from "@/modules/parking/services/updateFloorService";
 
 export function useUpdateFloor(floor) {
   const [floorData, setFloorData] = useState({

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllFloorsService } from "../services/getAllfloorsService";
+import { getAllFloorsService } from "@/modules/parking/services/getAllfloorsService";
 
 export function useFloors() {
   const query = useQuery({

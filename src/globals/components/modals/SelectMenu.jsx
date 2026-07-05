@@ -1,6 +1,6 @@
-import Icon from "../ui/Icon";
-import Modal from "./Modal";
-import { useSelectMenu } from "../../hooks/useSelectMenu";
+import Icon from "@components/ui/Icon";
+import Modal from "@modals/Modal";
+import { useSelectMenu } from "@hooks/useSelectMenu";
 
 export default function SelectMenu({
   id,

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllEntriesService } from "../services/getAllEntriesService";
+import { getAllEntriesService } from "@/modules/entries/services/getAllEntriesService";
 
 export function useEntries() {
   const [filters, setFilters] = useState({

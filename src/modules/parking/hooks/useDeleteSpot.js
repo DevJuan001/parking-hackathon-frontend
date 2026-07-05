@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteSpotService } from "../services/deleteSpotService";
-import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { deleteSpotService } from "@/modules/parking/services/deleteSpotService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
 
 export function useDeleteSpot(spot) {
   const [loading, setLoading] = useState(false);

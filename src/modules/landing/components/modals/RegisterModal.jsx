@@ -1,13 +1,13 @@
 /// Hooks
-import { useRegister } from "../../hooks/useRegister";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useRegister } from "@/modules/landing/hooks/useRegister";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
-import Icon from "../../../../globals/components/ui/Icon";
-import Loader from "../../../../globals/components/ui/Loader";
-import LoginAndRegisterButtons from "./LoginAndRegisterButtons";
-import FormField from "../../../../globals/components/ui/FormField";
+import Icon from "@components/ui/Icon";
+import Loader from "@components/ui/Loader";
+import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
+import FormField from "@components/ui/FormField";
 // Modales
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function RegisterModal() {
   const {

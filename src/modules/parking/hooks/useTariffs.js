@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllTariffsService } from "../services/getAlltariffsService";
+import { getAllTariffsService } from "@/modules/parking/services/getAlltariffsService";
 
 export function useTariffs() {
   const query = useQuery({

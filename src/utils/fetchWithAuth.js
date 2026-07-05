@@ -1,4 +1,4 @@
-import { apiRoutes } from "../config/apiRoutes";
+import { apiRoutes } from "@/config/apiRoutes";
 
 let isRefreshing = false;
 let refreshPromise = null;

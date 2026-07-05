@@ -1,5 +1,5 @@
-import { useEntriesStats } from "../../hooks/useEntriesStats";
-import EntriesKpi from "./EntriesKpi";
+import { useEntriesStats } from "@/modules/entries/hooks/useEntriesStats";
+import EntriesKpi from "@/modules/entries/components/ui/EntriesKpi";
 
 export default function EntriesKpis() {
   const { stats } = useEntriesStats();

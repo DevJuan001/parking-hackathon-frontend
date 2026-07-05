@@ -1,4 +1,4 @@
-import { useCurrentUser } from "../globals/hooks/useCurrentUser";
+import { useCurrentUser } from "@hooks/useCurrentUser";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoutes({ roles }) {

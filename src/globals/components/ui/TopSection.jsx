@@ -1,5 +1,5 @@
-import FilterButton from "./FilterButton";
-import CreateButton from "./CreateButton";
+import FilterButton from "@components/ui/FilterButton";
+import CreateButton from "@components/ui/CreateButton";
 
 export default function TopSection({
   sectionVisible = true,

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Icon from "../../../../globals/components/ui/Icon";
-import { questions } from "../../data/questions";
+import Icon from "@components/ui/Icon";
+import { questions } from "@/modules/landing/data/questions";
 
 export default function Questions() {
   const [openQuestions, setOpenQuestions] = useState(new Set());

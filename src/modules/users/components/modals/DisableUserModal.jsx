@@ -1,11 +1,11 @@
 // Hooks
-import { useDisableUser } from "../../hooks/useDisableUser";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useDisableUser } from "@/modules/users/hooks/useDisableUser";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Components
-import Loader from "../../../../globals/components/ui/Loader";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "@components/ui/Loader";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import ErrorModal from "@modals/ErrorModal";
 
 export default function DisableUserModal({ onClose, user }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
