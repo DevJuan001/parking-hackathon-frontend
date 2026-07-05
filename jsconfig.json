@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/globals/components/*"],
+      "@modals/*": ["src/globals/components/modals/*"],
+      "@hooks/*": ["src/globals/hooks/*"]
+    },
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2020"
+  },
+  "include": ["src/**/*"]
+}

@@ -2,8 +2,19 @@ import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-// https://vite.dev/config/
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
   plugins: [react(), svgr(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@components": path.resolve(__dirname, "./src/globals/components"),
+      "@modals": path.resolve(__dirname, "./src/globals/components/modals"),
+      "@hooks": path.resolve(__dirname, "./src/globals/hooks"),
+    },
+  },
 });
