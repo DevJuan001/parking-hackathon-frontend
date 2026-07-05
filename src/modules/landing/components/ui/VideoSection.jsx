@@ -1,4 +1,5 @@
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "@/globals/components/ui/LiquidGlass";
 
 export default function VideoSection() {
   return (
@@ -26,9 +27,12 @@ export default function VideoSection() {
         />
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <button className="h-16 w-16 flex items-center justify-center rounded-full bg-[#00000012] backdrop-blur-xs shadow-[0px_0px_5px_2px_#00000003]">
-            <Icon name={"play_arrow"} size={40} color={"#FFFFFF"} fill />
-          </button>
+          <LiquidGlass
+            className="h-24 w-24 flex items-center justify-center rounded-full bg-[#99999910]
+            hover:cursor-pointer"
+          >
+            <Icon name={"play_arrow"} size={70} color={"#FFFFFF"} fill />
+          </LiquidGlass>
         </div>
       </div>
     </section>
