@@ -1,6 +1,5 @@
-import { useFilterExits } from "@/modules/exits/hooks/useFilterExits";
-import SelectMenu from "@modals/SelectMenu";
 import FilterModal from "@modals/FilterModal";
+import { useFilterExits } from "@/modules/exits/hooks/useFilterExits";
 
 export default function FilterExitsModal({ filters, setFilters, onClose }) {
   const { handleChange } = useFilterExits(setFilters);
