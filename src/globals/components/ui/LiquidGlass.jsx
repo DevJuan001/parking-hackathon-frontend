@@ -64,12 +64,12 @@ export default function LiquidGlass({ children, className, onClick }) {
       >
         <div
           className="pointer-events-none absolute w-full h-full rounded-full bg-linear-to-b from-white/30 to-white/5 
-          dark:from-white/8 dark:to-black/30"
+          dark:from-white/3 dark:to-black/30"
         />
 
         <div
           className="pointer-events-none absolute w-full h-full rounded-full shadow-[0px_0px_1.5px_0.1px_#999999] ring ring-inset ring-white/20
-          dark:ring-white/10"
+          dark:ring-white/10 dark:shadow-[0px_0px_1px_0.1px_#fff]"
         />
 
         <div className="relative w-full h-full flex items-center justify-center">
