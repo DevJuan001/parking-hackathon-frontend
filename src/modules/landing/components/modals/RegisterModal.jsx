@@ -25,7 +25,7 @@ export default function RegisterModal() {
 
   return (
     <section
-      className="flex flex-col py-10 gap-3 font-poppins
+      className="flex flex-col py-2 gap-3 font-poppins
       md:py-28 md:px-36
       xl:py-22 xl:px-52"
     >
