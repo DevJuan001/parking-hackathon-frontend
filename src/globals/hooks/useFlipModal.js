@@ -86,9 +86,7 @@ function radiusAsFourCorners(el) {
 function createPhantom(element, rect, targetEl = null) {
   const phantom = element.cloneNode(true);
   const styles = window.getComputedStyle(element);
-  const targetStyles = targetEl
-    ? window.getComputedStyle(targetEl)
-    : styles;
+  const targetStyles = targetEl ? window.getComputedStyle(targetEl) : styles;
 
   // LineHeight como ratio unitless para que escale con fontSize durante
   // la animación. Si el target no es texto (img), lo dejamos como el del source.
@@ -240,7 +238,7 @@ function animatePhantom(
     },
   );
 
-    // 2) Font-size: interpolamos desde el del source hasta el del target
+  // 2) Font-size: interpolamos desde el del source hasta el del target
   //    para que el texto/icono crezca de forma smooth y nativa. Usamos
   //    roundProps para que el rendering no fluctúe en subpixels.
   if (fromFontSize && toFontSize && fromFontSize !== toFontSize) {
@@ -546,11 +544,6 @@ export const useFlipModal = ({
         });
       }
 
-      // Apertura: con shared element 0.45s (el phantom llena el viaje),
-      // sin shared element 0.35s — punto medio para que se sienta
-      // similar a la versión con shared sin ser tan lenta como 0.45s.
-      const openDuration = sharedPairs.length > 0 ? MODAL_OPEN_DURATION : 0.35;
-
       const tl = gsap.timeline();
 
       // Aqui comparamos el estado guardado (trigger)
@@ -560,7 +553,7 @@ export const useFlipModal = ({
         Flip.from(state, {
           targets: [modal, ...modalShared],
           nested: true,
-          duration: openDuration,
+          duration: MODAL_OPEN_DURATION,
           ease: MODAL_OPEN_EASE,
           props: "color,padding",
           onComplete: () => {
@@ -824,7 +817,6 @@ export const useFlipModal = ({
       // Buscamos pares de data-shared-id entre la modal y el trigger para
       // animar los phantoms de vuelta a su posición original.
       const sharedPairs = findSharedPairs(element, modal, modal);
-      const hasSharedId = sharedPairs.length > 0;
       const closePhantoms = [];
 
       for (const pair of sharedPairs) {
@@ -954,7 +946,7 @@ export const useFlipModal = ({
         // power2.inOut es más natural que sine.inOut (sine se siente
         // "flotando" al final) y menos agresivo que power4 — el sweet spot.
         animatePhantom(phantom, currentRect, sourceRect, fromBR, toBR, {
-          duration: hasSharedId ? 0.3 : 0.3,
+          duration: 0.3,
           ease: "power2.inOut",
           fromFontSize,
           toFontSize,
@@ -1098,34 +1090,25 @@ export const useFlipModal = ({
         Flip.from(state, {
           targets: [modal, ...modalShared],
           nested: true,
-          duration: hasSharedId ? 0.3 : 0.3,
+          duration: 0.3,
           ease: "power2.inOut",
           props: "backgroundColor,color,padding",
         }),
         0,
       );
 
-      // Fade a opacity:0 de los hijos difuminados. El timing depende de
-      // si hay shared element o no:
-      //
-      // - CON data-shared-id: el phantom vuela al trigger y mantiene el
-      //   interés visual aunque el resto se vaya rápido → fade casi
-      //   inmediato (0.02s) y corto (0.08s), termina a 0.1s.
-      // - SIN data-shared-id: no hay phantom, el contenido ES todo lo que
-      //   se ve. Si arranca tarde y dura poco (ej: 0.2s start, 0.1s
-      //   duration) el contenido se queda borroso-visible hasta el final
-      //   y de golpe se desvanece → "muy de golpe, nada nativo". Fade
-      //   temprano (0.1s) y gradual (0.2s) → se disuelve junto con la
-      //   modal mientras se encoge, sensación nativa.
-      const hasSharedIdLocal = sharedPairs.length > 0;
+      // Fade a opacity:0 de los hijos difuminados. Mismo timing en ambos
+      // casos (con/sin shared) para que el cierre se sienta consistente:
+      // arranca temprano y dura poco para que la modal se vaya limpia sin
+      // quedarse con contenido borroso-visible al final.
       tl.to(
         blurChildren,
         {
           opacity: 0,
-          duration: hasSharedIdLocal ? 0.08 : 0.2,
+          duration: 0.2,
           ease: "power1.out",
         },
-        hasSharedIdLocal ? 0.02 : 0.1,
+        0.1,
       );
 
       // Ajustamos el borderRadius gradualmente para que al final coincida con el del trigger
