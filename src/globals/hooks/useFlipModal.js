@@ -195,11 +195,13 @@ function animatePhantom(
     delay = 0,
     fromFontSize,
     toFontSize,
+    fromColor,
+    toColor,
   } = {},
 ) {
   gsap.set(phantom, {
     force3D: true,
-    willChange: "transform,width,height,top,left,border-radius,opacity",
+    willChange: "transform,width,height,top,left,border-radius,opacity,color",
   });
 
   const tl = gsap.timeline();
@@ -257,6 +259,23 @@ function animatePhantom(
         // a 60fps pero suficiente para que el glyph quede fijo.
         roundProps: "fontSize",
       },
+      delay,
+    );
+  }
+
+  // 3) Color: interpolamos el color de texto del source al del target
+  //    para que el texto se funda progresivamente con el estilo del
+  //    destino en lugar de saltar al final del swap. Mismo duration/ease
+  //    que el resto del vuelo para que el cambio de color vaya
+  //    sincronizado con la transición de tamaño/forma. Sin esto, el
+  //    phantom mantiene el color del source hasta el snap-to-final
+  //    (ej: blanco sobre negro) y al revelar el target se ve un brinco
+  //    al color real del modal (negro).
+  if (fromColor && toColor && fromColor !== toColor) {
+    tl.fromTo(
+      phantom,
+      { color: fromColor },
+      { color: toColor, duration, ease },
       delay,
     );
   }
@@ -512,6 +531,14 @@ export const useFlipModal = ({
         const toFontSize = isImage
           ? null
           : window.getComputedStyle(pair.target).fontSize;
+        // Color del texto: idem, interpolamos el del source al del target
+        // para que la transición de color sea gradual y no salte al final.
+        const fromColor = isImage
+          ? null
+          : window.getComputedStyle(pair.source).color;
+        const toColor = isImage
+          ? null
+          : window.getComputedStyle(pair.target).color;
 
         // Creamos el phantom posicionado sobre el elemento fuente, con la
         // forma (borderRadius) visible del source. Pasamos el target para
@@ -530,17 +557,19 @@ export const useFlipModal = ({
         pair.target.style.setProperty("opacity", "0", "important");
 
         // Animamos el phantom desde la posición/forma/tamaño del source hasta
-        // los del target. El borderRadius y el fontSize se interpolan para
-        // que el elemento vaya tomando poco a poco la forma y el tamaño del
-        // destino mientras se desliza, evitando el brinco al hacer el swap.
-        // Usamos la MISMA duración y la MISMA curva (MODAL_OPEN_EASE) que
-        // el FLIP de apertura del modal, así el deslizamiento va al mismo
+        // los del target. El borderRadius, el fontSize y el color se interpolan
+        // para que el elemento vaya tomando poco a poco la forma, tamaño y
+        // estilo del destino mientras se desliza, evitando el brinco al hacer
+        // el swap. Usamos la MISMA duración y la MISMA curva (MODAL_OPEN_EASE)
+        // que el FLIP de apertura del modal, así el deslizamiento va al mismo
         // ritmo que la apertura y no se siente rezagado/lento.
         animatePhantom(phantom, sourceRect, targetRect, fromBR, toBR, {
           duration: MODAL_OPEN_DURATION,
           ease: MODAL_OPEN_EASE,
           fromFontSize,
           toFontSize,
+          fromColor,
+          toColor,
         });
       }
 
@@ -708,9 +737,10 @@ export const useFlipModal = ({
       if (element) {
         if (hideTrigger) {
           element.style.removeProperty("opacity");
+          element.style.removeProperty("transition");
           gsap.set(element, {
             opacity: 1,
-            clearProps: "opacity",
+            clearProps: "opacity,transition",
           });
         }
       }
@@ -838,7 +868,10 @@ export const useFlipModal = ({
         const fromFontSize = isImage
           ? null
           : window.getComputedStyle(pair.target).fontSize;
-        closePhantoms.push({ phantom, pair, fromBR, fromFontSize });
+        const fromColor = isImage
+          ? null
+          : window.getComputedStyle(pair.target).color;
+        closePhantoms.push({ phantom, pair, fromBR, fromFontSize, fromColor });
 
         // Magia del shared element: ocultamos el target visualmente pero
         // SIN sacarlo del flow (display:none causa layout shift — los
@@ -928,7 +961,7 @@ export const useFlipModal = ({
       // El borderRadius y el fontSize se interpolan desde los valores del
       // target (modal) hasta los del source (trigger) para que el elemento
       // vaya recuperando su forma y tamaño original mientras se desliza.
-      for (const { phantom, pair, fromBR, fromFontSize } of closePhantoms) {
+      for (const { phantom, pair, fromBR, fromFontSize, fromColor } of closePhantoms) {
         const currentRect = {
           top: parseFloat(phantom.style.top),
           left: parseFloat(phantom.style.left),
@@ -941,6 +974,9 @@ export const useFlipModal = ({
         const toFontSize = isImage
           ? null
           : window.getComputedStyle(pair.source).fontSize;
+        const toColor = isImage
+          ? null
+          : window.getComputedStyle(pair.source).color;
 
         // Misma duración y misma curva (power2.inOut) que el FLIP de cierre.
         // power2.inOut es más natural que sine.inOut (sine se siente
@@ -950,6 +986,8 @@ export const useFlipModal = ({
           ease: "power2.inOut",
           fromFontSize,
           toFontSize,
+          fromColor,
+          toColor,
         });
       }
 
