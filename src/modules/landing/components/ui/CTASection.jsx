@@ -3,6 +3,7 @@ import Icon from "@components/ui/Icon";
 export default function CTASection({ openModal }) {
   return (
     <section
+      id="contact"
       className="my-20 w-full flex flex-col gap-3 items-center
       md:my-44"
     >
