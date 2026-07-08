@@ -998,6 +998,20 @@ export const useFlipModal = ({
         delete modal.dataset.closing;
         modal.style.removeProperty("min-height");
         modal.style.removeProperty("min-width");
+        // Limpiamos los inline de width/height/top/left/position que el
+        // FLIP y el gsap.set de cierre dejaron en el modal. Si los
+        // dejamos, el modal queda "pegado" al tamaño/posición del
+        // trigger, y cuando React re-renderiza con isOpen=false el
+        // style attribute (visibility:hidden) no alcanza a entrar
+        // antes del siguiente paint → el modal "reabre" con el tamaño
+        // del trigger (que al final del FLIP es casi el del modal) y
+        // se ve el flash. Mantenemos opacity:0 inline para que siga
+        // invisible durante el re-render.
+        modal.style.removeProperty("width");
+        modal.style.removeProperty("height");
+        modal.style.removeProperty("top");
+        modal.style.removeProperty("left");
+        modal.style.removeProperty("position");
         gsap.set(modal, { willChange: "auto" });
         // Restauramos la visibilidad del content que difuminamos durante el
         // viaje de los phantoms de cierre — limpiamos el blur inline de
@@ -1088,14 +1102,13 @@ export const useFlipModal = ({
           pair.source.style.removeProperty("opacity");
           gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
 
-          // Desvanecemos el phantom lentamente para que el source (ya a
-          // opacity 1) se vaya revelando de forma progresiva y nativa.
-          gsap.to(phantom, {
-            opacity: 0,
-            duration: 0.18,
-            ease: "power1.out",
-            onComplete: () => phantom.remove(),
-          });
+          // Swap instantáneo: el snap-to-final de arriba dejó el phantom
+          // pixel-perfect sobre el source (misma posición, tamaño,
+          // borderRadius, fontSize, color, bg, etc.), así que quitarlo
+          // y revelar el source es atómico — sin el fade de 0.18s el
+          // usuario ve el phantom un frame y el source al siguiente,
+          // sin la transición perceptible que se notaba como un "brinco".
+          phantom.remove();
 
           requestAnimationFrame(() => {
             if (pair.source) pair.source.style.transition = prevTransition;
@@ -1160,12 +1173,16 @@ export const useFlipModal = ({
         0.04,
       );
 
-      // El modal hace fade out revealing el contenido del botón de forma natural.
-      // Arranca a 0.24s y termina a 0.29s — 10ms ANTES de que el FLIP
-      // termine (0.3s) para que cuando el onComplete se dispare la modal
-      // ya esté invisible. Sin ese colchón se ve la modal ya encogida
-      // al tamaño del botón durante un frame antes de removerse del DOM.
-      tl.to(modal, { opacity: 0, duration: 0.05, ease: "power1.in" }, 0.24);
+      // El modal hace fade out para que cuando llegue al tamaño del
+      // trigger (al final del FLIP, t=0.3s) ya sea totalmente invisible.
+      // Antes el fade arrancaba a 0.24s con duration 0.05s (terminaba a
+      // 0.29s), pero a 0.29s el FLIP ya estaba al ~97% del tamaño del
+      // trigger y el modal aún tenía opacidad > 0 → se veía "salir" con
+      // el tamaño del trigger antes de que el FLIP terminara. Ahora el
+      // fade arranca a 0.12s y termina a 0.22s: el modal es invisible
+      // durante el último ~25% del FLIP, así nunca se ve al tamaño del
+      // trigger con opacidad visible.
+      tl.to(modal, { opacity: 0, duration: 0.1, ease: "power2.in" }, 0.12);
     },
     [onClose, triggerRef, modalRef, contentRef, overlayRef, id, hideTrigger],
   );
