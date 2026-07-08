@@ -1,4 +1,4 @@
-export const placeStatus = {
+export const spotStatus = {
   1: {
     text: "Deshabilitada",
     modalType: "disable",
