@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllSpotsService } from "@/modules/parking/services/getAllSpotsService";
 
-export function useParkingSpots() {
+export function useSpots() {
   const [filters, setFilters] = useState({
-    floor_id: "",
+    floor_id: 1,
     spot_status: "",
   });
 
