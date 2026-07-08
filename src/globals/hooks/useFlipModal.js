@@ -1012,6 +1012,11 @@ export const useFlipModal = ({
         modal.style.removeProperty("top");
         modal.style.removeProperty("left");
         modal.style.removeProperty("position");
+        // Mantenemos el modal invisible hasta que React lo desmonte.
+        // Sin esto, hay un frame donde el modal (sin position:fixed ni
+        // dimensions inline) se renderiza en su posición natural (top-left)
+        // antes de que onClose() lo retire del DOM → flash visible.
+        modal.style.setProperty("visibility", "hidden", "important");
         gsap.set(modal, { willChange: "auto" });
         // Restauramos la visibilidad del content que difuminamos durante el
         // viaje de los phantoms de cierre — limpiamos el blur inline de
