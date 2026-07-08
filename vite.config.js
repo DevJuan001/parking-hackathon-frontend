@@ -15,6 +15,7 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/globals/components"),
       "@modals": path.resolve(__dirname, "./src/globals/components/modals"),
       "@hooks": path.resolve(__dirname, "./src/globals/hooks"),
+      "@constants": path.resolve(__dirname, "./src/globals/constants"),
     },
   },
 });
