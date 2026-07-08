@@ -42,7 +42,8 @@ export function useCreateTariff() {
         onClose();
       } else {
         setError(
-          "No se pudo crear la tarifa, intentalo nuevamente mas tarde.",
+          response.error ??
+            "No se pudo crear la tarifa, intentalo nuevamente mas tarde.",
         );
         openInnerModal("error", triggerButton);
       }

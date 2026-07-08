@@ -49,7 +49,8 @@ export function useUpdateTariff(tariff) {
         onClose();
       } else {
         setError(
-          "No se pudo editar la tarifa, intentalo nuevamente mas tarde.",
+          response.error ??
+            "No se pudo editar la tarifa, intentalo nuevamente mas tarde.",
         );
         openInnerModal("error", triggerButton);
       }

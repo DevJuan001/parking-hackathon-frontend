@@ -20,7 +20,10 @@ export function useDeleteSpot(spot) {
         await queryClient.invalidateQueries({ queryKey: ["spots"] });
         onDeleted();
       } else {
-        setError(response.error);
+        setError(
+          response.error ??
+            "No se pudo eliminar la plaza, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {

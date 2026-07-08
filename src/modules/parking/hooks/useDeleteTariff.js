@@ -23,7 +23,10 @@ export function useDeleteTariff(tariff) {
         });
         onClose();
       } else {
-        setError(response.error);
+        setError(
+          response.error ??
+            "No se pudo eliminar la la tarifa, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {
