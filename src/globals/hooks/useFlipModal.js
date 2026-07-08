@@ -86,9 +86,7 @@ function radiusAsFourCorners(el) {
 function createPhantom(element, rect, targetEl = null) {
   const phantom = element.cloneNode(true);
   const styles = window.getComputedStyle(element);
-  const targetStyles = targetEl
-    ? window.getComputedStyle(targetEl)
-    : styles;
+  const targetStyles = targetEl ? window.getComputedStyle(targetEl) : styles;
 
   // LineHeight como ratio unitless para que escale con fontSize durante
   // la animación. Si el target no es texto (img), lo dejamos como el del source.
@@ -197,11 +195,13 @@ function animatePhantom(
     delay = 0,
     fromFontSize,
     toFontSize,
+    fromColor,
+    toColor,
   } = {},
 ) {
   gsap.set(phantom, {
     force3D: true,
-    willChange: "transform,width,height,top,left,border-radius,opacity",
+    willChange: "transform,width,height,top,left,border-radius,opacity,color",
   });
 
   const tl = gsap.timeline();
@@ -240,7 +240,7 @@ function animatePhantom(
     },
   );
 
-    // 2) Font-size: interpolamos desde el del source hasta el del target
+  // 2) Font-size: interpolamos desde el del source hasta el del target
   //    para que el texto/icono crezca de forma smooth y nativa. Usamos
   //    roundProps para que el rendering no fluctúe en subpixels.
   if (fromFontSize && toFontSize && fromFontSize !== toFontSize) {
@@ -259,6 +259,23 @@ function animatePhantom(
         // a 60fps pero suficiente para que el glyph quede fijo.
         roundProps: "fontSize",
       },
+      delay,
+    );
+  }
+
+  // 3) Color: interpolamos el color de texto del source al del target
+  //    para que el texto se funda progresivamente con el estilo del
+  //    destino en lugar de saltar al final del swap. Mismo duration/ease
+  //    que el resto del vuelo para que el cambio de color vaya
+  //    sincronizado con la transición de tamaño/forma. Sin esto, el
+  //    phantom mantiene el color del source hasta el snap-to-final
+  //    (ej: blanco sobre negro) y al revelar el target se ve un brinco
+  //    al color real del modal (negro).
+  if (fromColor && toColor && fromColor !== toColor) {
+    tl.fromTo(
+      phantom,
+      { color: fromColor },
+      { color: toColor, duration, ease },
       delay,
     );
   }
@@ -514,6 +531,14 @@ export const useFlipModal = ({
         const toFontSize = isImage
           ? null
           : window.getComputedStyle(pair.target).fontSize;
+        // Color del texto: idem, interpolamos el del source al del target
+        // para que la transición de color sea gradual y no salte al final.
+        const fromColor = isImage
+          ? null
+          : window.getComputedStyle(pair.source).color;
+        const toColor = isImage
+          ? null
+          : window.getComputedStyle(pair.target).color;
 
         // Creamos el phantom posicionado sobre el elemento fuente, con la
         // forma (borderRadius) visible del source. Pasamos el target para
@@ -532,24 +557,21 @@ export const useFlipModal = ({
         pair.target.style.setProperty("opacity", "0", "important");
 
         // Animamos el phantom desde la posición/forma/tamaño del source hasta
-        // los del target. El borderRadius y el fontSize se interpolan para
-        // que el elemento vaya tomando poco a poco la forma y el tamaño del
-        // destino mientras se desliza, evitando el brinco al hacer el swap.
-        // Usamos la MISMA duración y la MISMA curva (MODAL_OPEN_EASE) que
-        // el FLIP de apertura del modal, así el deslizamiento va al mismo
+        // los del target. El borderRadius, el fontSize y el color se interpolan
+        // para que el elemento vaya tomando poco a poco la forma, tamaño y
+        // estilo del destino mientras se desliza, evitando el brinco al hacer
+        // el swap. Usamos la MISMA duración y la MISMA curva (MODAL_OPEN_EASE)
+        // que el FLIP de apertura del modal, así el deslizamiento va al mismo
         // ritmo que la apertura y no se siente rezagado/lento.
         animatePhantom(phantom, sourceRect, targetRect, fromBR, toBR, {
           duration: MODAL_OPEN_DURATION,
           ease: MODAL_OPEN_EASE,
           fromFontSize,
           toFontSize,
+          fromColor,
+          toColor,
         });
       }
-
-      // Apertura: con shared element 0.45s (el phantom llena el viaje),
-      // sin shared element 0.35s — punto medio para que se sienta
-      // similar a la versión con shared sin ser tan lenta como 0.45s.
-      const openDuration = sharedPairs.length > 0 ? MODAL_OPEN_DURATION : 0.35;
 
       const tl = gsap.timeline();
 
@@ -560,7 +582,7 @@ export const useFlipModal = ({
         Flip.from(state, {
           targets: [modal, ...modalShared],
           nested: true,
-          duration: openDuration,
+          duration: MODAL_OPEN_DURATION,
           ease: MODAL_OPEN_EASE,
           props: "color,padding",
           onComplete: () => {
@@ -715,9 +737,10 @@ export const useFlipModal = ({
       if (element) {
         if (hideTrigger) {
           element.style.removeProperty("opacity");
+          element.style.removeProperty("transition");
           gsap.set(element, {
             opacity: 1,
-            clearProps: "opacity",
+            clearProps: "opacity,transition",
           });
         }
       }
@@ -824,7 +847,6 @@ export const useFlipModal = ({
       // Buscamos pares de data-shared-id entre la modal y el trigger para
       // animar los phantoms de vuelta a su posición original.
       const sharedPairs = findSharedPairs(element, modal, modal);
-      const hasSharedId = sharedPairs.length > 0;
       const closePhantoms = [];
 
       for (const pair of sharedPairs) {
@@ -846,7 +868,10 @@ export const useFlipModal = ({
         const fromFontSize = isImage
           ? null
           : window.getComputedStyle(pair.target).fontSize;
-        closePhantoms.push({ phantom, pair, fromBR, fromFontSize });
+        const fromColor = isImage
+          ? null
+          : window.getComputedStyle(pair.target).color;
+        closePhantoms.push({ phantom, pair, fromBR, fromFontSize, fromColor });
 
         // Magia del shared element: ocultamos el target visualmente pero
         // SIN sacarlo del flow (display:none causa layout shift — los
@@ -936,7 +961,7 @@ export const useFlipModal = ({
       // El borderRadius y el fontSize se interpolan desde los valores del
       // target (modal) hasta los del source (trigger) para que el elemento
       // vaya recuperando su forma y tamaño original mientras se desliza.
-      for (const { phantom, pair, fromBR, fromFontSize } of closePhantoms) {
+      for (const { phantom, pair, fromBR, fromFontSize, fromColor } of closePhantoms) {
         const currentRect = {
           top: parseFloat(phantom.style.top),
           left: parseFloat(phantom.style.left),
@@ -949,15 +974,20 @@ export const useFlipModal = ({
         const toFontSize = isImage
           ? null
           : window.getComputedStyle(pair.source).fontSize;
+        const toColor = isImage
+          ? null
+          : window.getComputedStyle(pair.source).color;
 
         // Misma duración y misma curva (power2.inOut) que el FLIP de cierre.
         // power2.inOut es más natural que sine.inOut (sine se siente
         // "flotando" al final) y menos agresivo que power4 — el sweet spot.
         animatePhantom(phantom, currentRect, sourceRect, fromBR, toBR, {
-          duration: hasSharedId ? 0.3 : 0.3,
+          duration: 0.3,
           ease: "power2.inOut",
           fromFontSize,
           toFontSize,
+          fromColor,
+          toColor,
         });
       }
 
@@ -968,6 +998,20 @@ export const useFlipModal = ({
         delete modal.dataset.closing;
         modal.style.removeProperty("min-height");
         modal.style.removeProperty("min-width");
+        // Limpiamos los inline de width/height/top/left/position que el
+        // FLIP y el gsap.set de cierre dejaron en el modal. Si los
+        // dejamos, el modal queda "pegado" al tamaño/posición del
+        // trigger, y cuando React re-renderiza con isOpen=false el
+        // style attribute (visibility:hidden) no alcanza a entrar
+        // antes del siguiente paint → el modal "reabre" con el tamaño
+        // del trigger (que al final del FLIP es casi el del modal) y
+        // se ve el flash. Mantenemos opacity:0 inline para que siga
+        // invisible durante el re-render.
+        modal.style.removeProperty("width");
+        modal.style.removeProperty("height");
+        modal.style.removeProperty("top");
+        modal.style.removeProperty("left");
+        modal.style.removeProperty("position");
         gsap.set(modal, { willChange: "auto" });
         // Restauramos la visibilidad del content que difuminamos durante el
         // viaje de los phantoms de cierre — limpiamos el blur inline de
@@ -1058,14 +1102,13 @@ export const useFlipModal = ({
           pair.source.style.removeProperty("opacity");
           gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
 
-          // Desvanecemos el phantom lentamente para que el source (ya a
-          // opacity 1) se vaya revelando de forma progresiva y nativa.
-          gsap.to(phantom, {
-            opacity: 0,
-            duration: 0.18,
-            ease: "power1.out",
-            onComplete: () => phantom.remove(),
-          });
+          // Swap instantáneo: el snap-to-final de arriba dejó el phantom
+          // pixel-perfect sobre el source (misma posición, tamaño,
+          // borderRadius, fontSize, color, bg, etc.), así que quitarlo
+          // y revelar el source es atómico — sin el fade de 0.18s el
+          // usuario ve el phantom un frame y el source al siguiente,
+          // sin la transición perceptible que se notaba como un "brinco".
+          phantom.remove();
 
           requestAnimationFrame(() => {
             if (pair.source) pair.source.style.transition = prevTransition;
@@ -1098,34 +1141,25 @@ export const useFlipModal = ({
         Flip.from(state, {
           targets: [modal, ...modalShared],
           nested: true,
-          duration: hasSharedId ? 0.3 : 0.3,
+          duration: 0.3,
           ease: "power2.inOut",
           props: "backgroundColor,color,padding",
         }),
         0,
       );
 
-      // Fade a opacity:0 de los hijos difuminados. El timing depende de
-      // si hay shared element o no:
-      //
-      // - CON data-shared-id: el phantom vuela al trigger y mantiene el
-      //   interés visual aunque el resto se vaya rápido → fade casi
-      //   inmediato (0.02s) y corto (0.08s), termina a 0.1s.
-      // - SIN data-shared-id: no hay phantom, el contenido ES todo lo que
-      //   se ve. Si arranca tarde y dura poco (ej: 0.2s start, 0.1s
-      //   duration) el contenido se queda borroso-visible hasta el final
-      //   y de golpe se desvanece → "muy de golpe, nada nativo". Fade
-      //   temprano (0.1s) y gradual (0.2s) → se disuelve junto con la
-      //   modal mientras se encoge, sensación nativa.
-      const hasSharedIdLocal = sharedPairs.length > 0;
+      // Fade a opacity:0 de los hijos difuminados. Mismo timing en ambos
+      // casos (con/sin shared) para que el cierre se sienta consistente:
+      // arranca temprano y dura poco para que la modal se vaya limpia sin
+      // quedarse con contenido borroso-visible al final.
       tl.to(
         blurChildren,
         {
           opacity: 0,
-          duration: hasSharedIdLocal ? 0.08 : 0.2,
+          duration: 0.2,
           ease: "power1.out",
         },
-        hasSharedIdLocal ? 0.02 : 0.1,
+        0.1,
       );
 
       // Ajustamos el borderRadius gradualmente para que al final coincida con el del trigger
@@ -1139,12 +1173,16 @@ export const useFlipModal = ({
         0.04,
       );
 
-      // El modal hace fade out revealing el contenido del botón de forma natural.
-      // Arranca a 0.24s y termina a 0.29s — 10ms ANTES de que el FLIP
-      // termine (0.3s) para que cuando el onComplete se dispare la modal
-      // ya esté invisible. Sin ese colchón se ve la modal ya encogida
-      // al tamaño del botón durante un frame antes de removerse del DOM.
-      tl.to(modal, { opacity: 0, duration: 0.05, ease: "power1.in" }, 0.24);
+      // El modal hace fade out para que cuando llegue al tamaño del
+      // trigger (al final del FLIP, t=0.3s) ya sea totalmente invisible.
+      // Antes el fade arrancaba a 0.24s con duration 0.05s (terminaba a
+      // 0.29s), pero a 0.29s el FLIP ya estaba al ~97% del tamaño del
+      // trigger y el modal aún tenía opacidad > 0 → se veía "salir" con
+      // el tamaño del trigger antes de que el FLIP terminara. Ahora el
+      // fade arranca a 0.12s y termina a 0.22s: el modal es invisible
+      // durante el último ~25% del FLIP, así nunca se ve al tamaño del
+      // trigger con opacidad visible.
+      tl.to(modal, { opacity: 0, duration: 0.1, ease: "power2.in" }, 0.12);
     },
     [onClose, triggerRef, modalRef, contentRef, overlayRef, id, hideTrigger],
   );

@@ -45,6 +45,8 @@ export default function Features() {
               src={feature.video}
               className="h-auto rounded-2xl aspect-video
               xl:h-[400px]"
+              loading="lazy"
+              decoding="async"
             />
 
             <div

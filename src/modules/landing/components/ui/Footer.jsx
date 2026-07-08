@@ -142,7 +142,7 @@ export default function Footer() {
         dark:text-[#7E8088] dark:border-[#202022]"
       >
         <span className="text-center">
-          © 2026, Parking hackathon • All rights reserved
+          © {new Date().getFullYear()}, Parking hackathon • All rights reserved
         </span>
 
         <div

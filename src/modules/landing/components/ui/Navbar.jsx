@@ -57,7 +57,7 @@ export default function NavBar({ openModal }) {
         </a>
 
         <a
-          href="/#footer"
+          href="/#contact"
           className="px-4 py-2 rounded-3xl transition-all duration-300
           hover:bg-gray-200 hover:text-black hover:font-semibold
           dark:hover:bg-[#202022] dark:hover:text-white"
@@ -81,7 +81,7 @@ export default function NavBar({ openModal }) {
         hover:bg-black hover:text-white
         dark:text-[#758088] dark:border-[#202222] dark:hover:bg-[#202022]`}
       >
-        Iniciar sesión
+        <span data-shared-id="login-modal-title">Iniciar sesión</span>
       </button>
     </nav>
   );
