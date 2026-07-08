@@ -2,6 +2,7 @@ import ProtectedRoutes from "@/router/ProtectedRoutes";
 import { routesConfig } from "@/router/constants/routesConfig";
 import LandingPage from "@/modules/landing/LandingPage";
 import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "@/globals/components/Layout/Layout";
 
 export default function AppRouter() {
   return (
@@ -12,11 +13,13 @@ export default function AppRouter() {
       {/* Página Login o de Inicio de Sesión */}
       <Route path="/" element={<LandingPage />} />
 
-      {routesConfig.map(({ path, component: Component, roles }) => (
-        <Route key={path} element={<ProtectedRoutes roles={roles} />}>
-          <Route path={path} element={<Component />} />
-        </Route>
-      ))}
+      <Route element={<Layout />}>
+        {routesConfig.map(({ path, component: Component, roles }) => (
+          <Route key={path} element={<ProtectedRoutes roles={roles} />}>
+            <Route path={path} element={<Component />} />
+          </Route>
+        ))}
+      </Route>
     </Routes>
   );
 }

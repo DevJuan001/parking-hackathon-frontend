@@ -1,12 +1,11 @@
+import { Outlet } from "react-router-dom";
 import Aside from "@components/Layout/aside/Aside";
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
     // Container
     <div className="w-screen h-screen flex flex-col py-3 px-6">
-      <main className="w-full h-full dark:bg-black overflow-hidden">
-        {children}
-      </main>
+      <Outlet />
 
       <Aside />
     </div>
