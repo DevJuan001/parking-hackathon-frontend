@@ -21,7 +21,7 @@ export default function NavItem({
           className={`w-auto h-14 flex items-center py-3 px-6 gap-2 subpixel-antialiased rounded-full transition-all duration-500 group
             ${
               isActive
-                ? `bg-black shadow-[0px_0px_32px_-9px_#000000] text-white
+                ? `bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
               dark:bg-white dark:text-black dark:shadow-[0px_0px_18px_-11px_#ffffff] animate-clickEffect`
                 : `text-[#75777E]
               hover:bg-[#e5e7eb96]
