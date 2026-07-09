@@ -1,6 +1,7 @@
 import Icon from "@components/ui/Icon";
 import Modal from "@modals/Modal";
 import { useSelectMenu } from "@hooks/useSelectMenu";
+import { useInnerModal } from "@hooks/useInnerModal";
 
 export default function SelectMenu({
   id,
@@ -18,15 +19,9 @@ export default function SelectMenu({
   showAllOption = false,
   miniVersion = false,
 }) {
-  const {
-    open,
-    search,
-    setSearch,
-    triggerRef,
-    handleSelect,
-    handleClose,
-    handleToggle,
-  } = useSelectMenu();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
+  const { search, setSearch, handleSelect } = useSelectMenu();
 
   const allOptions = showAllOption
     ? [{ value: "", label: "Todos" }, ...options]
@@ -48,8 +43,10 @@ export default function SelectMenu({
         <button
           type="button"
           id={id}
-          ref={triggerRef}
-          onClick={handleToggle}
+          onClick={(e) => {
+            setSearch("");
+            openInnerModal("select", e);
+          }}
           className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
             ${spanText ? "h-full pt-1.5 rounded-2xl" : miniVersion ? "h-9 rounded-xl" : "h-14 rounded-2xl"}
             cursor-pointer text-sm
@@ -99,11 +96,14 @@ export default function SelectMenu({
         )}
       </div>
 
-      {open && (
+      {innerType === "select" && (
         <Modal
-          isOpen={open}
-          onClose={handleClose}
-          triggerRef={triggerRef}
+          isOpen={true}
+          onClose={() => {
+            setSearch("");
+            closeInnerModal();
+          }}
+          triggerRef={innerTrigger}
           growDirection={growDirection}
           type="select"
           z_index="600"
@@ -145,7 +145,9 @@ export default function SelectMenu({
                   <button
                     id={`${id}-${option.value}-option`}
                     key={option.value}
-                    onClick={() => handleSelect(option, name, onChange)}
+                    onClick={() =>
+                      handleSelect(option, name, onChange, closeInnerModal)
+                    }
                     className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
                       hover:bg-[#efedf0] hover:font-medium  
                       dark:hover:bg-[#ffffff15]
