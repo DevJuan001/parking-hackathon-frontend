@@ -1,6 +1,6 @@
 // Hooks
-import { useDeleteSpot } from "@/modules/parking/hooks/useDeleteSpot";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useDeleteSpot } from "@/modules/parking/hooks/useDeleteSpot";
 // Components
 import Loader from "@components/ui/Loader";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";

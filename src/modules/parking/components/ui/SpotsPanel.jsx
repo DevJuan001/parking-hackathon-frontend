@@ -1,20 +1,20 @@
 // Hooks
+import { useSpots } from "@/modules/parking/hooks/useSpots";
 import { useFloors } from "@/modules/parking/hooks/useFloors";
 import { useFilterSpots } from "@/modules/parking/hooks/useFilterSpots";
-import { useParkingSpots } from "@/modules/parking/hooks/useParkingSpots";
-// Components
-import SpotItem from "@/modules/parking/components/ui/SpotItem";
-import Icon from "@components/ui/Icon";
-import Skeleton from "@components/ui/Skeleton";
 // Constants
 import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
+// Components
+import Icon from "@components/ui/Icon";
+import Skeleton from "@components/ui/Skeleton";
+import SpotItem from "@/modules/parking/components/ui/SpotItem";
 // Modales
 import SelectMenu from "@modals/SelectMenu";
 import CreateButton from "@components/ui/CreateButton";
 
 export default function SpotsPanel({ openModal }) {
   const { floors } = useFloors();
-  const { spots, loading, filters, setFilters } = useParkingSpots();
+  const { spots, loading, filters, setFilters } = useSpots();
   const { handleChange } = useFilterSpots(filters, setFilters);
   const noSpots = spots.length === 0 && !loading;
   const isFirstLoad = spots.length === 0 && loading;
@@ -26,7 +26,7 @@ export default function SpotsPanel({ openModal }) {
     >
       <div className="flex items-center justify-between">
         <span className="font-semibold">Plazas</span>
-
+        
         <SelectMenu
           id={"floors-menu"}
           name={"floor_id"}

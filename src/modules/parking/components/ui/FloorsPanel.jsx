@@ -19,12 +19,11 @@ export default function FloorsPanel({ openModal }) {
         <span className="font-semibold">Pisos</span>
 
         <CreateButton
-          borderRadius={"20px"}
           onClick={(e) => openModal(null, "createFloor", e.currentTarget)}
         />
       </div>
 
-      <div className="h-full w-full flex flex-col gap-2 pt-4 overflow-y-auto">
+      <div className="h-full w-full flex gap-2 pt-1 overflow-y-auto">
         {nofloors && (
           <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-[#75777E]">
             <Icon name={"border_clear"} size={90} />
@@ -51,21 +50,22 @@ export default function FloorsPanel({ openModal }) {
             <button
               key={floor.id}
               onClick={(e) => openModal(floor, "editFloor", e.currentTarget)}
-              className="flex items-center gap-3 px-3 py-2 rounded-2xl transition-colors hover:bg-[#efedf0] dark:hover:bg-[#ffffff15]"
+              className="h-32 w-32 flex flex-col items-center justify-center gap-3 px-3 py-2 rounded-3xl bg-[#efedf0] transition-colors 
+              hover:bg-[#EAE8EB] 
+              dark:bg-[#101012] dark:hover:bg-[#ffffff15]"
             >
-              <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-[#EAE8EB] dark:bg-[#1e1e20cb]">
-                <Icon name="stairs" size={20} fill />
+              <div className="h-10 w-10 flex items-center justify-center rounded-xl">
+                <Icon
+                  data-shared-id="floor-icon"
+                  name="stairs"
+                  size={35}
+                  fill
+                />
               </div>
 
-              <div className="flex-1 text-left">
-                <span className="font-semibold">{floor.name}</span>
-              </div>
-
-              <Icon
-                name="edit"
-                size={18}
-                className="text-gray-400 dark:text-gray-500"
-              />
+              <span data-shared-id="floor-text" className="font-semibold">
+                {floor.name}
+              </span>
             </button>
           ))
         )}

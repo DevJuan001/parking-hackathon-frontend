@@ -1,11 +1,12 @@
 // Hooks
 import { useTariffs } from "@/modules/parking/hooks/useTariffs";
+// Constantes
+import { useAvailableVehicleTypes } from "@/modules/parking/hooks/useAvailableVehicleTypes";
 // Components
-import TariffItem from "@/modules/parking/components/ui/TariffItem";
 import Icon from "@components/ui/Icon";
 import Skeleton from "@components/ui/Skeleton";
-import { useAvailableVehicleTypes } from "@/modules/parking/hooks/useAvailableVehicleTypes";
 import CreateButton from "@components/ui/CreateButton";
+import TariffItem from "@/modules/parking/components/ui/TariffItem";
 
 export default function TariffsPanel({ openModal }) {
   const { tariffs, loading } = useTariffs();

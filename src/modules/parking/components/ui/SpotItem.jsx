@@ -1,24 +1,30 @@
 import Icon from "@components/ui/Icon";
-import { placeStatus } from "@/modules/parking/constants/spotStatus";
+import { spotStatus } from "@/modules/parking/constants/spotStatus";
 
 export default function SpotItem({ name, status = 2, icon, onClick }) {
-  const config = placeStatus[status] || placeStatus[2];
+  const config = spotStatus[status] || spotStatus[2];
 
   return (
     <button
       onClick={onClick}
-      className={`h-full w-full flex flex-col items-center justify-center gap-2 rounded-3xl transition-colors duration-200 overflow-hidden text-ellipsis
+      className={`h-full w-full flex flex-col items-center justify-center gap-1 rounded-3xl transition-colors duration-200 overflow-hidden text-ellipsis
       ${config.styles}`}
     >
-      <span className="w-20 text-ellipsis overflow-hidden font-semibold">
+      <Icon
+        data-shared-id="spot-icon"
+        name={icon}
+        size={14}
+        fill={config.fill}
+      />
+
+      <span
+        data-shared-id="spot-text"
+        className="w-fit max-w-20 overflow-hidden font-semibold"
+      >
         {name}
       </span>
 
-      <div className="flex flex-col items-center gap-1">
-        <Icon name={icon} size={14} fill={config.fill} />
-
-        <span className="text-xs">{config.text}</span>
-      </div>
+      <span className="text-xs">{config.text}</span>
     </button>
   );
 }

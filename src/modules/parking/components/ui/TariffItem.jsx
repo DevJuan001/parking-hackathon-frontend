@@ -1,5 +1,5 @@
 import Icon from "@components/ui/Icon";
-import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@constants/vehicleTypes";
 
 export default function TariffItem({ openModal, tariff }) {
   return (
@@ -10,10 +10,16 @@ export default function TariffItem({ openModal, tariff }) {
       hover:bg-[#EAE8EB]
       dark:bg-[#101012] dark:hover:bg-[#ffffff15]"
     >
-      <Icon name={"💵"} size={30} fill color={"#016630"} />
+      <Icon
+        data-shared-id="tariff-icon"
+        name={"💵"}
+        size={30}
+        fill
+        color={"#016630"}
+      />
 
       <div className="flex flex-col items-center justify-between">
-        <span className="font-semibold">
+        <span data-shared-id="tariff-text" className="font-semibold">
           {vehicleTypesConstant[tariff.vehicle_type]?.text}
         </span>
 

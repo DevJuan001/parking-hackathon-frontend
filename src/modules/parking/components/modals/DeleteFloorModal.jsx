@@ -1,6 +1,6 @@
 // Hooks
-import { useDeleteFloor } from "@/modules/parking/hooks/useDeleteFloor";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useDeleteFloor } from "@/modules/parking/hooks/useDeleteFloor";
 // Components
 import Loader from "@components/ui/Loader";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
