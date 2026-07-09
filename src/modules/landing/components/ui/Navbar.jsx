@@ -78,6 +78,7 @@ export default function NavBar({ openModal }) {
             dark:bg-white dark:text-black`
               : "border-2 border-[#e5e7eb]"
           }
+        focus:animate-click-effect
         hover:bg-black hover:text-white
         dark:text-[#758088] dark:border-[#202222] dark:hover:bg-[#202022]`}
       >
