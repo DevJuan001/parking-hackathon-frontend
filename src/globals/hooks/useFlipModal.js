@@ -123,7 +123,6 @@ function createPhantom(element, rect, targetEl = null) {
     pointerEvents: "none",
     borderRadius: radiusAsFourCorners(element),
     objectFit: styles.objectFit || "cover",
-    overflow: "hidden",
     // Matamos cualquier CSS transition que el source tuviera (ej:
     // `transition-all duration-200` en botones). Si la dejáramos, el
     // browser animaría los inline styles de posición/tamaño desde los
