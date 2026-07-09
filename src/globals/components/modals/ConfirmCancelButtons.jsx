@@ -26,6 +26,7 @@ export default function ConfirmCancelButtons({
         disabled={disabled}
         style={{ backgroundColor: confirmBgColor }}
         className={`h-11 flex items-center px-5 py-2.5 gap-2 font-medium text-sm text-white rounded-2xl transition duration-300
+        focus:animate-click-effect
         hover:text-gray-300
         dark:bg-white! dark:text-black dark:hover:text-gray-800`}
       >
@@ -45,6 +46,7 @@ export default function ConfirmCancelButtons({
         disabled={disabled}
         onClick={cancelButtonOnClick}
         className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 bg-[#F5F3F6]
+        focus:animate-click-effect
         hover:bg-gray-200
         dark:bg-[#101012] dark:text-white dark:hover:bg-[#28282bbd]`}
       >
