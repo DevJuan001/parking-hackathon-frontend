@@ -86,7 +86,7 @@ export default function Modal({
         className={`${modal_styles[type] ?? modal_styles.default} flex flex-col bg-[#fbf9fc] font-poppins shadow-lg
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
-        <div ref={contentRef} className="overflow-y-auto flex-1">
+        <div ref={contentRef} className="overflow-y-auto flex-1 p-0.5">
           {![
             "calendar",
             "select",
