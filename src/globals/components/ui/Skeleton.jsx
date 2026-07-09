@@ -8,6 +8,7 @@ export default function Skeleton({
   darkModeShineColor = "rgba(255,255,255,0.1)",
   borderRadius = 6,
   marginBottom = 8,
+  className,
 }) {
   const dark = document.documentElement.classList.contains("dark");
 
@@ -16,7 +17,7 @@ export default function Skeleton({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className={`relative overflow-hidden`}
+          className={`relative overflow-hidden ${className}`}
           style={{
             height: height,
             width: width,

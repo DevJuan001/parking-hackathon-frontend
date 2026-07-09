@@ -1,4 +1,5 @@
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "../ui/LiquidGlass";
 
 export default function ModalHighSection({
   deleteButtonOnClick,
@@ -15,10 +16,11 @@ export default function ModalHighSection({
       dark:bg-[#101012] dark:border-[#202022]"
     >
       {deleteButtonOnClick && (
-        <button
-          type="button"
+        <LiquidGlass
           onClick={deleteButtonOnClick}
-          className="self-start flex items-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200 group
+          className="self-start flex items-center justify-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200 group
+          hover:cursor-pointer
+          focus:animate-click-effect
           hover:bg-[#ff5b5b41]
           dark:bg-black dark:text-[#7E8088] dark:border-[#202022]"
         >
@@ -27,7 +29,7 @@ export default function ModalHighSection({
             size={20}
             className={"group-hover:text-red-700"}
           />
-        </button>
+        </LiquidGlass>
       )}
 
       <div className="justify-self-center flex flex-col items-center gap-3">
@@ -48,15 +50,16 @@ export default function ModalHighSection({
         </span>
       </div>
 
-      <button
-        type="button"
+      <LiquidGlass
         onClick={closeButtonOnClick}
-        className="self-start flex items-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200
+        className="self-start flex items-center justify-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200
+        focus:animate-click-effect
+        hover:cursor-pointer
         hover:bg-[#ffffff3d]
         dark:bg-black dark:text-[#7E8088] dark:hover:bg-[#101012] dark:border-[#202022]"
       >
         <Icon name={"close"} size={20} />
-      </button>
+      </LiquidGlass>
     </div>
   );
 }

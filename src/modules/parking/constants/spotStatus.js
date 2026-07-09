@@ -1,4 +1,4 @@
-  export const placeStatus = {
+export const spotStatus = {
   1: {
     text: "Deshabilitada",
     modalType: "disable",
@@ -17,7 +17,8 @@
     optionStyles: "hover:bg-green-100 text-green-600 dark:hover:bg-[#052e1a8a]",
     visibilityIcon: true,
     fill: true,
-    styles: "bg-[#efedf0] hover:bg-[#EAE8EB] dark:bg-[#1e1e20cb] dark:hover:bg-[#202022]",
+    styles:
+      "bg-[#efedf0] hover:bg-[#EAE8EB] dark:bg-[#101012] dark:hover:bg-[#ffffff15]",
     roles: ["Admin"],
   },
 

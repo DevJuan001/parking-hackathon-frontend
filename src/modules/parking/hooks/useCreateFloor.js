@@ -38,7 +38,10 @@ export function useCreateFloor() {
         await queryClient.invalidateQueries({ queryKey: ["floors"] });
         openInnerModal("success", triggerButton);
       } else {
-        setError("No se pudo crear el piso, intentalo nuevamente mas tarde.");
+        setError(
+          response.error ??
+            "No se pudo crear el piso, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {

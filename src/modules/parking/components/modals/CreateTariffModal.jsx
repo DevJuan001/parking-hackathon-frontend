@@ -1,17 +1,18 @@
 // Hooks
-import { useCreateTariff } from "@/modules/parking/hooks/useCreateTariff";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useCreateTariff } from "@/modules/parking/hooks/useCreateTariff";
 import { useAvailableVehicleTypes } from "@/modules/parking/hooks/useAvailableVehicleTypes";
 // Components
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import SelectMenu from "@modals/SelectMenu";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import SelectMenu from "@components/modals/SelectMenu";
+import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "@modals/ErrorModal";
+import ErrorModal from "@components/modals/ErrorModal";
 
 export default function CreateTariffModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { availableVehicleTypes } = useAvailableVehicleTypes();
   const { handleChange, handleSubmit, tariffData, loading, error } =
     useCreateTariff();
@@ -59,7 +60,7 @@ export default function CreateTariffModal({ onClose }) {
           errorTitle="¡No se pudo crear la tarifa!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

@@ -1,15 +1,15 @@
 // Hooks
-import { useUpdateFloor } from "@/modules/parking/hooks/useUpdateFloor";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useUpdateFloor } from "@/modules/parking/hooks/useUpdateFloor";
 // Components
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modals
-import DeleteFloorModal from "@/modules/parking/components/modals/DeleteFloorModal";
-import ErrorModal from "@modals/ErrorModal";
-import SuccessModal from "@modals/SuccessModal";
-import ModalHighSection from "@modals/ModalHighSection";
+import DeleteFloorModal from "./DeleteFloorModal";
+import ErrorModal from "@components/modals/ErrorModal";
+import SuccessModal from "@components/modals/SuccessModal";
+import ModalHighSection from "@components/modals/ModalHighSection";
 
 export default function EditFloorModal({ onClose, floor }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -24,7 +24,9 @@ export default function EditFloorModal({ onClose, floor }) {
     >
       <ModalHighSection
         icon={"stairs"}
+        iconDataSharedId={"floor-icon"}
         text={floorData.name}
+        textDataSharedId={"floor-text"}
         deleteButtonOnClick={(e) => openInnerModal("delete", e)}
         closeButtonOnClick={onClose}
       />
@@ -67,7 +69,7 @@ export default function EditFloorModal({ onClose, floor }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -80,7 +82,7 @@ export default function EditFloorModal({ onClose, floor }) {
           errorTitle="¡No se pudo editar el piso!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

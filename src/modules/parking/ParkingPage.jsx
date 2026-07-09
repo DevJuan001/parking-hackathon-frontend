@@ -1,10 +1,9 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
 // Constants
-import { modalTitles } from "@/modules/parking/constants/modalTitles";
+import { modals } from "@/modules/parking/constants/modals";
 // Components
 import Modal from "@modals/Modal";
-import Layout from "@components/Layout/Layout";
 import ParkingSectionsContainer from "@/modules/parking/components/ui/ParkingSectionsContainer";
 // Modals
 import EditSpotModal from "@/modules/parking/components/modals/EditSpotModal";
@@ -19,14 +18,17 @@ export default function ParkingPage() {
     useModal();
 
   return (
-    <Layout avatarOnClick={(e) => openModal(null, "avatar", e.currentTarget)}>
+    <main
+      className="w-full h-full overflow-hidden
+      dark:bg-black"
+    >
       <ParkingSectionsContainer openModal={openModal} />
 
       {modalType && (
         <Modal
           isOpen={isOpen}
           type={modalType}
-          title={modalTitles[modalType] ?? ""}
+          title={modals[modalType]?.title}
           onClose={closeModal}
           location="anchored"
           growDirection="center"
@@ -57,6 +59,6 @@ export default function ParkingPage() {
           )}
         </Modal>
       )}
-    </Layout>
+    </main>
   );
 }

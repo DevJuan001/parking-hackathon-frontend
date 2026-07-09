@@ -1,6 +1,6 @@
 // Hooks
-import { useDeleteTariff } from "@/modules/parking/hooks/useDeleteTariff";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useDeleteTariff } from "@/modules/parking/hooks/useDeleteTariff";
 // Components
 import Loader from "@components/ui/Loader";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";

@@ -1,16 +1,17 @@
 // Hooks
-import { useCreateFloor } from "@/modules/parking/hooks/useCreateFloor";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useCreateFloor } from "@/modules/parking/hooks/useCreateFloor";
 // Components
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "@modals/ErrorModal";
-import SuccessModal from "@modals/SuccessModal";
+import ErrorModal from "@components/modals/ErrorModal";
+import SuccessModal from "@components/modals/SuccessModal";
 
 export default function CreateFloorModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { handleChange, handleSubmit, floorData, loading, error } =
     useCreateFloor();
 
@@ -47,7 +48,7 @@ export default function CreateFloorModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -62,7 +63,7 @@ export default function CreateFloorModal({ onClose }) {
           errorTitle="¡No se pudo crear el piso!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

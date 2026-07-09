@@ -18,6 +18,7 @@
   --animate-shake: shake 0.35s ease-in;
   --animate-shimmer: shimmer 3s linear infinite;
   --animate-jump: jump 2s infinite;
+  --animate-click-effect: clickEffect .5s cubic-bezier(.37,1.42,.37,1);
 
   @keyframes blur-up {
     0% {
@@ -95,6 +96,20 @@
       opacity: 1;
       transform: translateY(0);
       height: 100%;
+    }
+  }
+
+  @keyframes clickEffect {
+    0% {
+      transform: scaleX(1) scaleY(1)
+    }
+    
+    50% {
+      transform: scaleX(0.95) scaleY(0.9)
+    }
+
+    100% {
+      transform: scaleX(1)
     }
   }
 

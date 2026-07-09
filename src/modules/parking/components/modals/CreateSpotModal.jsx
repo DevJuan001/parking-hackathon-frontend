@@ -1,17 +1,18 @@
 // Hooks
+import { useInnerModal } from "@hooks/useInnerModal";
 import { useCreateSpot } from "@/modules/parking/hooks/useCreateSpot";
 import { useVehicleTypes } from "@/modules/parking/hooks/useVehicleTypes";
-import { useInnerModal } from "@hooks/useInnerModal";
 // Components
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modals
-import ErrorModal from "@modals/ErrorModal";
-import SelectMenu from "@modals/SelectMenu";
+import ErrorModal from "@components/modals/ErrorModal";
+import SelectMenu from "@components/modals/SelectMenu";
 
 export default function CreateSpotModal({ floor, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { vehicleTypes } = useVehicleTypes();
   const { handleChange, handleSubmit, spotData, loading, error } =
     useCreateSpot(floor);
@@ -58,7 +59,7 @@ export default function CreateSpotModal({ floor, onClose }) {
           errorTitle="¡No se pudo crear la plaza!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

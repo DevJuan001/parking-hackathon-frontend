@@ -86,7 +86,7 @@ export default function Modal({
         className={`${modal_styles[type] ?? modal_styles.default} flex flex-col bg-[#fbf9fc] font-poppins shadow-lg
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
-        <div ref={contentRef} className="overflow-y-auto flex-1">
+        <div ref={contentRef} className="overflow-y-auto flex-1 p-0.5">
           {![
             "calendar",
             "select",
@@ -98,9 +98,7 @@ export default function Modal({
             "filter",
           ].includes(type) && (
             <header className="flex justify-between items-center mb-2 shrink-0">
-              <span
-                className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]"
-              >
+              <span className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]">
                 {title}
               </span>
 

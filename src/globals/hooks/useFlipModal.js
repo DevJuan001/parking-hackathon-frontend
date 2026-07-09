@@ -123,7 +123,6 @@ function createPhantom(element, rect, targetEl = null) {
     pointerEvents: "none",
     borderRadius: radiusAsFourCorners(element),
     objectFit: styles.objectFit || "cover",
-    overflow: "hidden",
     // Matamos cualquier CSS transition que el source tuviera (ej:
     // `transition-all duration-200` en botones). Si la dejáramos, el
     // browser animaría los inline styles de posición/tamaño desde los
@@ -1012,6 +1011,11 @@ export const useFlipModal = ({
         modal.style.removeProperty("top");
         modal.style.removeProperty("left");
         modal.style.removeProperty("position");
+        // Mantenemos el modal invisible hasta que React lo desmonte.
+        // Sin esto, hay un frame donde el modal (sin position:fixed ni
+        // dimensions inline) se renderiza en su posición natural (top-left)
+        // antes de que onClose() lo retire del DOM → flash visible.
+        modal.style.setProperty("visibility", "hidden", "important");
         gsap.set(modal, { willChange: "auto" });
         // Restauramos la visibilidad del content que difuminamos durante el
         // viaje de los phantoms de cierre — limpiamos el blur inline de

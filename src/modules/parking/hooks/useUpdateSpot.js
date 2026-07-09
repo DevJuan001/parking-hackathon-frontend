@@ -48,7 +48,10 @@ export function useUpdateSpot(spot) {
         await queryClient.invalidateQueries({ queryKey: ["spots"] });
         onClose();
       } else {
-        setError("No se pudo editar la plaza, intentalo nuevamente mas tarde.");
+        setError(
+          response.error ??
+            "No se pudo editar la plaza, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {

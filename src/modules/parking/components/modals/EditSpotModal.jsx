@@ -1,20 +1,20 @@
 // Hooks
+import { useInnerModal } from "@hooks/useInnerModal";
 import { useUpdateSpot } from "@/modules/parking/hooks/useUpdateSpot";
 import { useVehicleTypes } from "@/modules/parking/hooks/useVehicleTypes";
-import { useInnerModal } from "@hooks/useInnerModal";
 // Components
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import SelectMenu from "@modals/SelectMenu";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
+import SelectMenu from "@components/modals/SelectMenu";
+import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Constants
-import { placeStatus } from "@/modules/parking/constants/spotStatus";
-import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
+import { spotStatus } from "@/modules/parking/constants/spotStatus";
+import { vehicleTypesConstant } from "@constants/vehicleTypes";
 // Modals
-import DeleteSpotModal from "@/modules/parking/components/modals/DeleteSpotModal";
-import ErrorModal from "@modals/ErrorModal";
-import SuccessModal from "@modals/SuccessModal";
-import ModalHighSection from "@modals/ModalHighSection";
+import DeleteSpotModal from "./DeleteSpotModal";
+import ErrorModal from "@components/modals/ErrorModal";
+import SuccessModal from "@components/modals/SuccessModal";
+import ModalHighSection from "@components/modals/ModalHighSection";
 
 export default function EditSpotModal({ onClose, spot }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -30,6 +30,8 @@ export default function EditSpotModal({ onClose, spot }) {
     >
       <ModalHighSection
         text={spotData.spot}
+        textDataSharedId={"spot-text"}
+        iconDataSharedId={"spot-icon"}
         icon={vehicleTypesConstant[spot.vehicle_type_id]?.icon}
         closeButtonOnClick={onClose}
         deleteButtonOnClick={(e) => openInnerModal("delete", e)}
@@ -74,7 +76,7 @@ export default function EditSpotModal({ onClose, spot }) {
         name={"spot_status"}
         value={spotData.spot_status}
         onChange={handleChange}
-        options={Object.entries(placeStatus).map(([index, value]) => ({
+        options={Object.entries(spotStatus).map(([index, value]) => ({
           value: index,
           label: value.text,
         }))}
@@ -96,7 +98,7 @@ export default function EditSpotModal({ onClose, spot }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -109,7 +111,7 @@ export default function EditSpotModal({ onClose, spot }) {
           errorTitle="¡No se pudo editar la plaza!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
 

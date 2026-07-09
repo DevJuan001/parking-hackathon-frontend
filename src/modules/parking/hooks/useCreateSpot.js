@@ -42,7 +42,10 @@ export function useCreateSpot(floor) {
         await queryClient.invalidateQueries({ queryKey: ["spots"] });
         onClose();
       } else {
-        setError("No se pudo crear la plaza, intentalo nuevamente mas tarde.");
+        setError(
+          response.error ??
+            "No se pudo crear la plaza, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {
