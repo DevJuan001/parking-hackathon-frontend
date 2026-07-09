@@ -11,7 +11,8 @@ export default function SectionButtons({
         <button
           type="button"
           onClick={returnButtonOnClick}
-          className="w-full h-[66px] flex items-center justify-center py-5 gap-3 rounded-4xl font-semibold border-2 border-[#e5e7eb] transition-colors
+          className="w-full h-[66px] flex items-center justify-center py-5 gap-3 rounded-4xl font-semibold border-2 border-[#e5e7eb] outline-0 transition-colors
+          focus:animate-click-effect
           hover:bg-gray-200
           dark:border-[#20202296] dark:text-white dark:hover:bg-[#20202296]"
         >
@@ -25,6 +26,7 @@ export default function SectionButtons({
         type="button"
         onClick={continueButtonOnClick}
         className="w-full h-[66px] py-5 rounded-4xl font-semibold border bg-black text-white transition-transform duration-300
+        focus:animate-click-effect
         hover:text-[#ffffffb4]
         dark:bg-white dark:text-black dark:hover:text-black dark:hover:scale-[1.01]"
       >
