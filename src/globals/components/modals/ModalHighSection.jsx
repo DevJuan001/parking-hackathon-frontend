@@ -19,6 +19,7 @@ export default function ModalHighSection({
         <LiquidGlass
           onClick={deleteButtonOnClick}
           className="self-start flex items-center justify-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200 group
+          hover:cursor-pointer
           focus:animate-click-effect
           hover:bg-[#ff5b5b41]
           dark:bg-black dark:text-[#7E8088] dark:border-[#202022]"
@@ -50,10 +51,10 @@ export default function ModalHighSection({
       </div>
 
       <LiquidGlass
-        type="button"
         onClick={closeButtonOnClick}
         className="self-start flex items-center justify-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200
         focus:animate-click-effect
+        hover:cursor-pointer
         hover:bg-[#ffffff3d]
         dark:bg-black dark:text-[#7E8088] dark:hover:bg-[#101012] dark:border-[#202022]"
       >
