@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { loginService } from "@/modules/landing/services/loginService";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
+import { getModalTrigger } from "@/utils/getModalTrigger";
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export function useLogin() {
 
     if (!isValid) return;
 
-    const triggerButton = e.currentTarget;
+    const triggerButton = getModalTrigger(e);
 
     setLoading(true);
 
@@ -52,11 +53,25 @@ export function useLogin() {
           navigate("/home");
         }
       } else {
-        openInnerModal("error", { currentTarget: triggerButton });
+        setError(
+          response.error ??
+            "Verifica que tus credenciales esten escritas correctamente e intentalo nuevamente",
+        );
+
+        if (
+          response.error ===
+          "¡Parece que aún no tienes cuenta! Regístrate en unos segundos y empieza a usar la app."
+        ) {
+          openInnerModal("notRegistered", triggerButton);
+        } else {
+          openInnerModal("error", triggerButton);
+        }
       }
-    } catch (error) {
-      setError(error);
-      openInnerModal("error", { currentTarget: triggerButton });
+    } catch {
+      setError(
+        "Verifica que tus credenciales esten escritas correctamente e intentalo nuevamente",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
