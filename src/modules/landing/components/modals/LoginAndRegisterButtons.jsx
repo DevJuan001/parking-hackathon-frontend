@@ -17,6 +17,7 @@ export default function LoginAndRegisterButtons({
           type="button"
           onClick={recoverPasswordButtonOnClick}
           className="w-full mb-3 text-start text-sm text-blue-800 underline
+          focus:animate-click-effect
           hover:cursor-pointer"
         >
           <span>¿Olvidaste tu contraseña?</span>
@@ -29,6 +30,7 @@ export default function LoginAndRegisterButtons({
         disabled={disabled}
         onClick={confirmButtonOnClick}
         className="w-full h-15 flex items-center justify-center px-5 py-2.5 gap-2 font-semibold text-sm bg-black text-white rounded-2xl transition duration-300
+        focus:animate-click-effect
         hover:text-gray-300 hover:cursor-pointer
         dark:bg-white dark:text-black dark:hover:text-gray-800"
       >
@@ -61,7 +63,8 @@ export default function LoginAndRegisterButtons({
               type="button"
               disabled
               onClick={googleButtonOnClick}
-              className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm transition duration-300
+              className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
+              focus:animate-click-effect
               hover:bg-gray-200 hover:cursor-pointer
               dark:border-[#1e1e20cb] dark:text-white dark:hover:bg-[#28282bbd]"
             >
@@ -73,7 +76,8 @@ export default function LoginAndRegisterButtons({
                 type="button"
                 disabled
                 onClick={githubButtonOnClick}
-                className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm transition duration-300
+                className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
+                focus:animate-click-effect
                 hover:bg-gray-200 hover:cursor-pointer
                 dark:border-[#1e1e20cb] dark:text-white dark:hover:bg-[#28282bbd]"
               >

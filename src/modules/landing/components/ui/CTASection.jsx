@@ -30,6 +30,7 @@ export default function CTASection({ openModal }) {
             openModal(null, "register", e.currentTarget);
           }}
           className="px-7 py-3 border rounded-3xl font-semibold bg-black text-white transition-transform duration-300
+          focus:animate-click-effect
           hover:scale-[1.02] hover:text-[#ffffffb4]
           dark:bg-white dark:text-black dark:hover:text-black"
         >
@@ -40,6 +41,7 @@ export default function CTASection({ openModal }) {
           target="_blank"
           href="https://wa.me/3001231231"
           className="px-6 py-3 border border-[#e5e7eb] rounded-3xl font-semibold transition-colors duration-300
+          focus:animate-click-effect
           hover:bg-gray-200
           dark:text-[#e4e2e5] dark:border-[#202022] dark:hover:bg-[#202022]"
         >

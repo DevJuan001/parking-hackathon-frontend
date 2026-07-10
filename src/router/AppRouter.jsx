@@ -6,6 +6,8 @@ import { layoutRoutes, standAloneRoutes } from "@/router/constants/routes";
 import ProtectedRoutes from "@/router/ProtectedRoutes";
 import LandingPage from "@/modules/landing/LandingPage";
 import Layout from "@/globals/components/Layout/Layout";
+import CookiesPage from "@/modules/cookies/CookiesPage";
+import PrivacyPolicyPage from "@/modules/privacy-policy/PrivacyPolicyPage";
 
 export default function AppRouter() {
   return (
@@ -13,6 +15,12 @@ export default function AppRouter() {
       <Route path="*" element={<Navigate to="/" />} />
 
       <Route path="/" element={<LandingPage />} />
+
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+
+      <Route path="/terms" element={<CookiesPage />} />
+
+      <Route path="/cookies" element={<CookiesPage />} />
 
       <Route element={<Layout />}>
         {layoutRoutes.map(
