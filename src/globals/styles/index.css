@@ -140,6 +140,6 @@ button {
 }
 
 /* Clase para ocultar la barra de navegación */
-::-webkit-scrollbar {
+html::-webkit-scrollbar {
   display: none;
 }
