@@ -34,8 +34,6 @@ export function useSpots() {
     staleTime: 10_000,
   });
 
-  console.log(spots);
-
   return {
     spots: spots.data,
     fetchNextPage: spots.fetchNextPage,
