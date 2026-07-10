@@ -4,8 +4,8 @@ import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import Loader from "@components/ui/Loader";
-import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
 import FormField from "@components/ui/FormField";
+import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
 
@@ -99,7 +99,7 @@ export default function RegisterModal() {
             required
             id="accept-terms-checkbox"
             name="accept_terms"
-            value={form.acept_terms}
+            value={form.accept_terms}
             type="checkbox"
             onChange={handleChange}
             className={`${fieldError("accept_terms")} transition-transform duration-100`}
@@ -107,7 +107,7 @@ export default function RegisterModal() {
 
           <p className="text-xs">
             He leído y acepto la {""}
-            <a href="/privacy" className="text-blue-700 underline">
+            <a href="/privacy-policy" className="text-blue-700 underline">
               Politica de Privacidad {""}
             </a>
             y los {""}

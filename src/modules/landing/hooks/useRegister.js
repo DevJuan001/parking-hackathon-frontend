@@ -13,7 +13,7 @@ export function useRegister() {
     email: "",
     password: "",
     repeat_password: "",
-    accept_terms: Boolean,
+    accept_terms: true,
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
