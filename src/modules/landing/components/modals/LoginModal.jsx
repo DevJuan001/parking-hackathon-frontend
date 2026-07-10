@@ -4,16 +4,19 @@ import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import Loader from "@components/ui/Loader";
-import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
 import FormField from "@components/ui/FormField";
+import LoginAndRegisterButtons from "./LoginAndRegisterButtons";
 // Modales
-import RecoverPasswordModal from "@/modules/landing/components/modals/RecoverPasswordModal";
 import ErrorModal from "@modals/ErrorModal";
+import RegisterModal from "./RegisterModal";
+import RecoverPasswordModal from "./RecoverPasswordModal";
+import AddInnerModal from "@/globals/components/modals/AddInnerModal";
 
 export default function LoginModal() {
   const {
     form,
     loading,
+    error,
     handleChange,
     handleSubmit,
     setShowPassword,
@@ -99,16 +102,39 @@ export default function LoginModal() {
         />
       )}
 
+      {innerType === "register" && (
+        <AddInnerModal
+          isOpen={true}
+          type="register"
+          location="center"
+          triggerRef={innerTrigger}
+          onClose={closeInnerModal}
+        >
+          <RegisterModal />
+        </AddInnerModal>
+      )}
+
       {innerType === "error" && (
         <ErrorModal
           isOpen={true}
           location="center"
           triggerRef={innerTrigger}
           errorTitle={"Usuario o contraseña incorrectos"}
-          errorText={
-            "Verifica que tus credenciales esten escritas correctamente e intentalo nuevamente"
-          }
+          errorText={error}
           confirmButtonText={"Volver"}
+          onClose={closeInnerModal}
+        />
+      )}
+
+      {innerType === "notRegistered" && (
+        <ErrorModal
+          isOpen={true}
+          location="center"
+          triggerRef={innerTrigger}
+          errorTitle={"Cuenta no encontrada"}
+          errorText={error}
+          confirmButtonText={"Registrarse"}
+          confirmButtonOnClick={(e) => openInnerModal("register", e)}
           onClose={closeInnerModal}
         />
       )}
