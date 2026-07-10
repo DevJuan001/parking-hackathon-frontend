@@ -11,6 +11,7 @@ export default function ErrorModal({
   growDirection,
   location = "center",
   confirmButtonText,
+  confirmButtonOnClick,
 }) {
   return (
     <Modal
@@ -35,7 +36,7 @@ export default function ErrorModal({
 
         <ConfirmCancelButtons
           confirmText={confirmButtonText}
-          confirmButtonOnClick={onClose}
+          confirmButtonOnClick={confirmButtonOnClick ?? onClose}
           cancelButtonOnClick={onClose}
         />
       </section>
