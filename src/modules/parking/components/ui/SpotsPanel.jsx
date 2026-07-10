@@ -16,8 +16,8 @@ export default function SpotsPanel({ openModal }) {
   const { floors } = useFloors();
   const { spots, loading, filters, setFilters } = useSpots();
   const { handleChange } = useFilterSpots(filters, setFilters);
-  const noSpots = spots.length === 0 && !loading;
-  const isFirstLoad = spots.length === 0 && loading;
+  const noSpots = spots?.length === 0 && !loading;
+  const isFirstLoad = spots?.length === 0 && loading;
 
   return (
     <section
@@ -80,7 +80,7 @@ export default function SpotsPanel({ openModal }) {
             lg:grid-cols-6 lg:gap-x-2 lg:gap-y-4
             2xl:grid-cols-8 2xl:gap-2.5"
           >
-            {spots.map((spot) => (
+            {spots?.map((spot) => (
               <SpotItem
                 key={spot.spot_id}
                 name={spot.spot}

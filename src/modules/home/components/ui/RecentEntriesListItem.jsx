@@ -12,16 +12,22 @@ export default function RecentEntriesList({ entry }) {
       className="flex items-center gap-3 px-2 py-2 rounded-2xl hover:bg-[#efedf0] transition-colors dark:hover:bg-[#ffffff15]"
     >
       <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-[#EAE8EB] dark:bg-[#1e1e20cb]">
-        <Icon name={vehicleTypesConstant[entry.vehicle_type]?.icon} size={20} fill />
+        <Icon
+          name={vehicleTypesConstant[entry.vehicle_type]?.icon}
+          size={20}
+          fill
+        />
       </div>
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className="font-semibold truncate">{entry.plate}</span>
+
           <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
             {entry.spot}
           </span>
         </div>
+
         <span className="text-xs text-gray-500 dark:text-gray-400">
           {entry.vehicle_type}
         </span>
