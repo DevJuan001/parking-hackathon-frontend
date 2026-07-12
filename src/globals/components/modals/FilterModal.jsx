@@ -61,7 +61,7 @@ export default function FilterModal({
         <div className="flex items-end gap-2 px-2">
           <button
             onClick={cleanFiltersOnClick}
-            className="h-11 flex items-center px-3 py-2.5 gap-2 text-[#c0392b] rounded-2xl border
+            className="h-11 flex items-center px-3 py-2.5 gap-2 text-[#c0392b] rounded-2xl border border-[#E4E2E5]
             hover:bg-red-100 transition-colors duration-200
             dark:hover:bg-[#450a0a96] dark:border-[#28282ba1]"
           >
