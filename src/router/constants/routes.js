@@ -36,7 +36,7 @@ export const layoutRoutes = [
   {
     path: "/entries",
     component: EntriesPage,
-    loading: ParkingLoading,
+    loading: UsersLoading,
     roles: ["Admin"],
   },
 
