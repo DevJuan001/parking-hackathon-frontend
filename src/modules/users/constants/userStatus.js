@@ -7,7 +7,7 @@ export const userStatus = {
     visibilityIcon: false,
     icon: "block",
     fill: false,
-    styles: "bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400",
+    styles: "bg-gray-100 text-gray-500 dark:bg-[#202022] dark:text-gray-400",
   },
 
   2: {

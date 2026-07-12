@@ -1,24 +1,28 @@
 // Hooks
-import { useUpdateUser } from "@/modules/users/hooks/useUpdateUser";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useRoles } from "@/modules/users/hooks/useRoles";
+import { useUpdateUser } from "@/modules/users/hooks/useUpdateUser";
 // Components
 import Loader from "@components/ui/Loader";
-import FormField from "@components/ui/FormField";
 import SelectMenu from "@modals/SelectMenu";
+import FormField from "@components/ui/FormField";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "@modals/ErrorModal";
 import SuccessModal from "@modals/SuccessModal";
 
 export default function EditUserModal({ onClose, user }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { handleChange, handleSubmit, form, loading, error } =
     useUpdateUser(user);
   const { roles } = useRoles();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <SelectMenu
         id={"role-menu"}
         name={"role_id"}
@@ -38,6 +42,7 @@ export default function EditUserModal({ onClose, user }) {
         value={form.name}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Miguel"}
       />
 
       <FormField
@@ -47,6 +52,7 @@ export default function EditUserModal({ onClose, user }) {
         value={form.first_surname}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Pérez"}
       />
 
       <FormField
@@ -56,6 +62,7 @@ export default function EditUserModal({ onClose, user }) {
         value={form.second_surname}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Contreras"}
       />
 
       <FormField
@@ -65,6 +72,7 @@ export default function EditUserModal({ onClose, user }) {
         value={form.email}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"miguel@gmail.com"}
       />
 
       <SelectMenu
@@ -95,7 +103,7 @@ export default function EditUserModal({ onClose, user }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -108,9 +116,9 @@ export default function EditUserModal({ onClose, user }) {
           errorTitle="¡No se pudo editar el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }

@@ -10,10 +10,13 @@ export default function UsersTable({ users, loading, openModal }) {
   const isFirstLoad = users.length === 0 && loading;
 
   return (
-    <div className="w-full h-full border rounded-2xl dark:border-[#17171a] dark:text-white">
+    <div
+      className="w-full h-full border border-[#E4E2E5] rounded-3xl overflow-x-auto overflow-y-auto
+      dark:border-[#17171a] dark:text-[#E4E2E5]"
+    >
       {noUsers && (
         <div
-          className="flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
+          className="flex flex-col items-center justify-center gap-1 rounded-3xl text-[#7E8088] bg-[#f5f3f6]
           dark:text-[#E4E2E5]"
         >
           <div className="flex items-center justify-center w-24 h-24 rounded-full">
@@ -38,7 +41,10 @@ export default function UsersTable({ users, loading, openModal }) {
       ) : (
         !noUsers && (
           <table className="h-full w-full">
-            <thead className="sticky h-12 border-b dark:border-[#17171a]">
+            <thead
+              className="sticky h-10 border-b border-[#E4E2E5]
+              dark:border-[#17171a]"
+            >
               <tr>
                 <th className="font-medium text-sm pl-4 text-start">Rol</th>
 

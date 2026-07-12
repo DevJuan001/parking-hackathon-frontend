@@ -32,7 +32,6 @@ export function useCreateUser() {
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerButton);
       return;
     }
 

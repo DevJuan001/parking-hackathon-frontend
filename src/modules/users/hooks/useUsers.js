@@ -3,11 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllUsersService } from "@/modules/users/services/getAllUsersService";
 
 export function useUsers() {
-  const [filters, setFilters] = useState({
-    first_surname: "",
-    start_date: "",
-    end_date: "",
-  });
+  const [filters, setFilters] = useState({});
 
   const query = useQuery({
     queryKey: ["users", filters],

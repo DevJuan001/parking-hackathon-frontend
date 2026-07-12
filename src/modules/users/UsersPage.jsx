@@ -2,12 +2,11 @@
 import { useModal } from "@hooks/useModal";
 import { useUsers } from "@/modules/users/hooks/useUsers";
 // Constantes
-import { modalTitles } from "@/modules/users/constants/modalTitles";
+import { modals } from "@/modules/users/constants/modals";
 // Componentes
+import TopSection from "@components/ui/TopSection";
 import UsersKpis from "@/modules/users/components/ui/UsersKpis";
 import UsersTable from "@/modules/users/components/ui/UsersTable";
-import Layout from "@components/Layout/Layout";
-import TopSection from "@components/ui/TopSection";
 // Modales
 import Modal from "@modals/Modal";
 import EditUserModal from "@/modules/users/components/modals/EditUserModal";
@@ -22,7 +21,10 @@ export default function UsersPage() {
   const { users, loading, filters, setFilters } = useUsers();
 
   return (
-    <Layout>
+    <main
+      className="w-full h-full overflow-hidden overflow-y-auto
+      dark:bg-black"
+    >
       <TopSection
         sectionName={"Usuarios"}
         addButtonText={"Crear Usuario"}
@@ -39,12 +41,11 @@ export default function UsersPage() {
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
-          location={modalType === "createUser" ? "center" : "anchored"}
-          growDirection={modalType === "editUser" ? "center" : "bottom-center"}
+          location={modals[modalType]?.location}
         >
           {modalType === "createUser" && (
             <CreateUserModal onClose={closeModal} />
@@ -71,6 +72,6 @@ export default function UsersPage() {
           )}
         </Modal>
       )}
-    </Layout>
+    </main>
   );
 }

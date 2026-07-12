@@ -1,23 +1,27 @@
 // Hooks
-import { useCreateUser } from "@/modules/users/hooks/useCreateUser";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useRoles } from "@/modules/users/hooks/useRoles";
+import { useCreateUser } from "@/modules/users/hooks/useCreateUser";
 // Components
 import Loader from "@components/ui/Loader";
-import FormField from "@components/ui/FormField";
 import SelectMenu from "@modals/SelectMenu";
+import FormField from "@components/ui/FormField";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "@modals/ErrorModal";
 import SuccessModal from "@modals/SuccessModal";
 
 export default function CreateUserModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { handleChange, handleSubmit, form, loading, error } = useCreateUser();
   const { roles } = useRoles();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
+  const { handleChange, handleSubmit, form, loading, error } = useCreateUser();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <SelectMenu
         id={"role-menu"}
         name={"role_id"}
@@ -37,6 +41,7 @@ export default function CreateUserModal({ onClose }) {
         value={form.name}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Miguel"}
       />
 
       <FormField
@@ -46,6 +51,7 @@ export default function CreateUserModal({ onClose }) {
         value={form.first_surname}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Pérez"}
       />
 
       <FormField
@@ -55,6 +61,7 @@ export default function CreateUserModal({ onClose }) {
         value={form.second_surname}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"Contreras"}
       />
 
       <FormField
@@ -64,6 +71,7 @@ export default function CreateUserModal({ onClose }) {
         value={form.email}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"miguel@gmail.com"}
       />
 
       <ConfirmCancelButtons
@@ -82,7 +90,7 @@ export default function CreateUserModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -95,9 +103,9 @@ export default function CreateUserModal({ onClose }) {
           errorTitle="¡No se pudo crear el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
