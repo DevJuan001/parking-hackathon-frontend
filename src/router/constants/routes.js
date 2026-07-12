@@ -1,6 +1,7 @@
 import { lazy } from "react";
 // Loadings
 import HomeLoading from "@/modules/home/components/ui/HomeLoading";
+import UsersLoading from "@/modules/users/components/ui/UsersLoading";
 import ParkingLoading from "@/modules/parking/components/ui/ParkingLoading";
 // Pages
 const HomePage = lazy(() => import("@/modules/home/HomePage"));
@@ -28,7 +29,7 @@ export const layoutRoutes = [
   {
     path: "/users",
     component: UsersPage,
-    loading: ParkingLoading,
+    loading: UsersLoading,
     roles: ["Admin"],
   },
 
