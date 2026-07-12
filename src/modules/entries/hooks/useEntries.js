@@ -1,29 +1,35 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllEntriesService } from "@/modules/entries/services/getAllEntriesService";
 
 export function useEntries() {
-  const [filters, setFilters] = useState({
-    plate_id: "",
-    start_date: "",
-    end_date: "",
-  });
+  const [filters, setFilters] = useState({});
 
-  const query = useQuery({
+  const entries = useInfiniteQuery({
     queryKey: ["entries", filters],
-    queryFn: () => getAllEntriesService(filters),
+    queryFn: ({ pageParam }) => getAllEntriesService({ pageParam, filters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 14 ? allPages.length + 1 : undefined,
+    select: (data) =>
+      data.pages.flatMap((page) =>
+        page.map((entry) => ({
+          ...entry,
+        })),
+      ),
     refetchInterval: 25_000,
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: true,
     staleTime: 60_000,
   });
 
-  const entries = query.data?.data ?? [];
-
   return {
-    entries,
-    loading: query.isLoading,
-    error: query.error,
+    entries: entries.data || [],
+    hasNextPage: entries.hasNextPage,
+    isFetchingNextPage: entries.isFetchingNextPage,
+    fetchNextPage: entries.fetchNextPage,
+    loading: entries.isLoading,
+    error: entries.error,
     filters,
     setFilters,
   };
