@@ -1,7 +1,7 @@
 export default function Kpi({ title, value }) {
   return (
     <div
-      className="w-full flex flex-col items-start py-5 px-6 rounded-2xl bg-[#f5f3f6]
+      className="w-full flex flex-col items-start py-5 px-6 rounded-3xl bg-[#f5f3f6]
       dark:bg-[#101012]"
     >
       <span
