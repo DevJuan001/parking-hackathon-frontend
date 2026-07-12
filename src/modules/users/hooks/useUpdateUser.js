@@ -6,12 +6,12 @@ import { updateUserService } from "@/modules/users/services/updateUserService";
 
 export function useUpdateUser(user) {
   const [form, setForm] = useState({
-    role_id: user?.role_id?.toString() ?? "",
+    role_id: user?.role_id ?? "",
     name: user?.name ?? "",
     first_surname: user?.first_surname ?? "",
     second_surname: user?.second_surname ?? "",
     email: user?.email ?? "",
-    status: user?.status?.toString() ?? "2",
+    status: user?.status ?? "2",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -40,7 +40,6 @@ export function useUpdateUser(user) {
     const changes = getChanges(user, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerButton);
       return;
     }
 
