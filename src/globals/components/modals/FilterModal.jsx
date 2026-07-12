@@ -21,7 +21,7 @@ export default function FilterModal({
           <Icon
             data-shared-id="filter-icon"
             name={"page_info"}
-            size={28}
+            size={24}
             className={"font-bold"}
           />
 
