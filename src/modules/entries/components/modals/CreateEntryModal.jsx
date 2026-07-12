@@ -10,11 +10,15 @@ import ErrorModal from "@modals/ErrorModal";
 import SuccessModal from "@modals/SuccessModal";
 
 export default function CreateEntryModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { handleChange, handleSubmit, form, loading, error } = useCreateEntry();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <FormField
         id={"plate"}
         name={"plate"}
@@ -40,7 +44,7 @@ export default function CreateEntryModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -53,9 +57,9 @@ export default function CreateEntryModal({ onClose }) {
           errorTitle="¡No se pudo registrar el ingreso!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
