@@ -22,10 +22,15 @@ export default function FilterModal({
             data-shared-id="filter-icon"
             name={"page_info"}
             size={24}
-            className={"font-bold"}
+            className={`font-bold
+            dark:text-[#E4E2E5]`}
           />
 
-          <span data-shared-id="filter-text" className="font-medium text-lg">
+          <span
+            data-shared-id="filter-text"
+            className="font-medium text-lg
+            dark:text-[#E4E2E5]"
+          >
             Filtros
           </span>
         </div>
@@ -34,14 +39,19 @@ export default function FilterModal({
           onClick={cleanFiltersOnClick}
           className="flex items-center justify-center p-2.5 rounded-3xl border border-[#E4E2E5] transition-colors duration-200
           hover:bg-[#49454f21] hover:cursor-pointer
-          dark:text-[#7E8088] dark:hover:bg-[#28282bbd]"
+          dark:border-[#00000003] dark:text-[#7E8088] dark:hover:bg-[#28282bbd]"
         >
           <Icon name={"close"} size={20} />
         </LiquidGlass>
       </div>
 
       <div className="flex flex-col gap-1 px-1">
-        <span className="text-sm dark:text-white">Fecha de {fieldName}</span>
+        <span
+          className="text-sm 
+          dark:text-[#E4E2E5]"
+        >
+          Fecha de {fieldName}
+        </span>
 
         <div className="max-w-full flex gap-2">
           <DateField

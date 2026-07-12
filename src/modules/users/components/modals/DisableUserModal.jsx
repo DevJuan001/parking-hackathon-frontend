@@ -13,7 +13,10 @@ export default function DisableUserModal({ onClose, user }) {
   const { handleDisable, loading, error } = useDisableUser(user);
 
   return (
-    <section className="flex flex-col gap-2">
+    <section
+      className="flex flex-col gap-2
+      dark:text-[#E4E2E5]"
+    >
       <span>
         Deseas deshabilitar al usuario{" "}
         <strong>
