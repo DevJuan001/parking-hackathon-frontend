@@ -16,7 +16,7 @@ export const modal_styles = {
 
   delete: `p-6 w-[400px] h-auto rounded-[32px]`,
 
-  filter: `pt-3 px-3 pb-4 h-auto w-[365px] rounded-[32px]
+  filter: `p-5 h-auto w-[365px] rounded-[32px]
     sm:w-[400px]`,
 
   menu: `p-2 max-w-[280px] h-auto rounded-[40px]`,
