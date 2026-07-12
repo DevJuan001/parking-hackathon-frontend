@@ -10,7 +10,7 @@ export function useEntries() {
     queryFn: ({ pageParam }) => getAllEntriesService({ pageParam, filters }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
-      lastPage.length === 14 ? allPages.length + 1 : undefined,
+      lastPage.length === 15 ? allPages.length + 1 : undefined,
     select: (data) =>
       data.pages.flatMap((page) =>
         page.map((entry) => ({
