@@ -46,7 +46,6 @@ export default function UsersPage() {
           onClose={closeModal}
           triggerRef={triggerRef}
           location={modals[modalType]?.location}
-          growDirection={modalType === "editUser" ? "center" : "bottom-center"}
         >
           {modalType === "createUser" && (
             <CreateUserModal onClose={closeModal} />
