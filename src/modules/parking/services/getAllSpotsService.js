@@ -2,8 +2,11 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-export async function getAllSpotsService(filters) {
-  const params = buildQueryParams(filters);
+export async function getAllSpotsService({
+  pageParam = 1,
+  effectiveFilters = {},
+}) {
+  const params = buildQueryParams({ ...effectiveFilters, page: pageParam });
 
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.spots}/?${params}`,
@@ -16,5 +19,7 @@ export async function getAllSpotsService(filters) {
     throw new Error("Error al intentar obtener las plazas");
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  return data.data;
 }

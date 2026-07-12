@@ -1,30 +1,29 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
+// Constantes
 // Components
-import Layout from "@components/Layout/Layout";
 import HomeSectionsContainer from "@/modules/home/components/ui/HomeSectionsContainer";
+// Modales
 import Modal from "@modals/Modal";
 import EditSpotModal from "@/modules/parking/components/modals/EditSpotModal";
 import CreateSpotModal from "@/modules/parking/components/modals/CreateSpotModal";
+import { modals } from "./constants/modals";
 
 export default function HomePage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =
     useModal();
 
   return (
-    <Layout avatarOnClick={(e) => openModal(null, "avatar", e.currentTarget)}>
+    <main
+      className="w-full h-full overflow-hidden
+      dark:bg-black"
+    >
       <HomeSectionsContainer openModal={openModal} />
 
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={
-            modalType === "editSpot"
-              ? "Editar Plaza"
-              : modalType === "createSpot"
-                ? "Agregar Plaza"
-                : ""
-          }
+          title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
           location="anchored"
@@ -40,6 +39,6 @@ export default function HomePage() {
           )}
         </Modal>
       )}
-    </Layout>
+    </main>
   );
 }

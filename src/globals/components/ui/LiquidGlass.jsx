@@ -68,7 +68,7 @@ export default function LiquidGlass({ children, className, onClick }) {
         />
 
         <div
-          className="pointer-events-none absolute w-full h-full rounded-full shadow-[0px_0px_1.5px_0.1px_#999999] ring ring-inset ring-white/20
+          className="pointer-events-none absolute w-full h-full rounded-[inherit] shadow-[0px_0px_1.5px_0.1px_#999999] ring ring-inset ring-white/20
           dark:ring-white/10 dark:shadow-[0px_0px_1px_0.1px_#fff]"
         />
 

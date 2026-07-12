@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFloors } from "./useFloors";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllSpotsService } from "@/modules/parking/services/getAllSpotsService";
 
 export function useSpots() {
@@ -15,21 +15,32 @@ export function useSpots() {
     floor_id: filters.floor_id || floors[0]?.id,
   };
 
-  const query = useQuery({
+  const spots = useInfiniteQuery({
     queryKey: ["spots", effectiveFilters],
-    queryFn: () => getAllSpotsService(effectiveFilters),
+    queryFn: ({ pageParam }) =>
+      getAllSpotsService({ pageParam, effectiveFilters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 20 ? allPages.length + 1 : undefined,
+    select: (data) =>
+      data.pages.flatMap((page) =>
+        page.map((spot) => ({
+          ...spot,
+        })),
+      ),
     refetchInterval: 25_000,
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: true,
     staleTime: 10_000,
   });
 
-  const spots = query.data?.data ?? [];
-
   return {
-    spots,
-    loading: query.isLoading,
-    error: query.error,
+    spots: spots.data,
+    fetchNextPage: spots.fetchNextPage,
+    hasNextPage: spots.hasNextPage,
+    isFetchingNextPage: spots.isFetchingNextPage,
+    loading: spots.isLoading,
+    error: spots.error,
     filters: effectiveFilters,
     setFilters,
   };
