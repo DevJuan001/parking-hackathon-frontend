@@ -26,6 +26,7 @@ export default function CreateEntryModal({ onClose }) {
         value={form.plate}
         onChange={handleChange}
         autoComplete="off"
+        placeholder={"ABC123"}
       />
 
       <ConfirmCancelButtons
