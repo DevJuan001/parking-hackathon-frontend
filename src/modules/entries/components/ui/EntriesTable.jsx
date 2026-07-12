@@ -4,17 +4,17 @@ import Skeleton from "@components/ui/Skeleton";
 // Constants
 import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
 // Utils
-import {
-  formatDateTime,
-  formatTimeDate,
-} from "@/utils/formatDateTime";
+import { formatDateTime, formatTimeDate } from "@/utils/formatDateTime";
 
 export default function EntriesTable({ entries, loading }) {
   const noEntries = entries.length === 0 && !loading;
   const isFirstLoad = entries.length === 0 && loading;
 
   return (
-    <div className="w-full h-auto max-h-[700px] border rounded-2xl overflow-y-auto">
+    <div
+      className="w-full h-auto max-h-[700px] border border-[#E4E2E5] rounded-2xl overflow-y-auto overflow-x-auto
+      dark:border-[#17171a] dark:text-[#E4E2E5]"
+    >
       {noEntries && (
         <div
           className="h-[700px] flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
@@ -43,43 +43,49 @@ export default function EntriesTable({ entries, loading }) {
       ) : (
         !noEntries && (
           <table className="h-full w-full">
-            <thead className="sticky top-0 z-10 h-12 border-b bg-[#FBF9FC]">
-              <tr>
-                <th className="font-medium text-sm pl-4 text-start">
-                  <div className="flex gap-1">
-                    <Icon name={"emoji_transportation"} size={20} fill />
+            <thead
+              className="sticky top-0 z-10 h-10 border-b border-[#E4E2E5] bg-[#FBF9FC]
+              dark:bg-[#000000] dark:border-[#17171a]"
+            >
+              <tr
+                className="text-[#75777E] text-sm text-nowrap text-start
+                dark:text-[#7E8088]"
+              >
+                <th className="font-medium pl-4">
+                  <div className="flex items-center gap-1">
+                    <Icon name={"emoji_transportation"} size={18} fill />
 
                     <span>Placa</span>
                   </div>
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">
-                  <div className="flex gap-1">
-                    <Icon name={"traffic_jam"} size={20} fill />
+                <th className="font-medium pl-4">
+                  <div className="flex items-center gap-1">
+                    <Icon name={"traffic_jam"} size={18} fill />
 
                     <span>Tipo de vehículo</span>
                   </div>
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">
-                  <div className="flex gap-1">
-                    <Icon name={"pin_drop"} size={20} fill />
+                <th className="font-medium pl-4">
+                  <div className="flex items-center gap-1">
+                    <Icon name={"pin_drop"} size={18} fill />
 
                     <span>Plaza</span>
                   </div>
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">
-                  <div className="flex gap-1">
-                    <Icon name={"nest_clock_farsight_analog"} size={20} />
+                <th className="font-medium pl-4">
+                  <div className="flex items-center gap-1">
+                    <Icon name={"nest_clock_farsight_analog"} size={18} />
 
                     <span>Hora de ingreso</span>
                   </div>
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">
-                  <div className="flex gap-1">
-                    <Icon name={"calendar_today"} size={20} fill />
+                <th className="font-medium pl-4">
+                  <div className="flex items-center gap-1">
+                    <Icon name={"calendar_today"} size={18} fill />
 
                     <span>Fecha de ingreso</span>
                   </div>
@@ -91,7 +97,9 @@ export default function EntriesTable({ entries, loading }) {
               {entries.map((entry) => (
                 <tr
                   key={entry.id}
-                  className="h-12 transition-colors duration-200 hover:bg-[#f5f3f6]"
+                  className="h-12 transition-colors 
+                  hover:bg-[#f5f3f6]
+                  dark:hover:bg-[#101012]"
                 >
                   <th className="font-medium text-sm pl-4 text-start">
                     {entry.plate}
@@ -105,7 +113,9 @@ export default function EntriesTable({ entries, loading }) {
                         fill
                       />
 
-                      <span>{vehicleTypesConstant[entry.vehicle_type].text}</span>
+                      <span>
+                        {vehicleTypesConstant[entry.vehicle_type].text}
+                      </span>
                     </div>
                   </th>
 
