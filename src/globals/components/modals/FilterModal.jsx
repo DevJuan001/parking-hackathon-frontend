@@ -13,6 +13,7 @@ export default function FilterModal({
   fieldName = "Creación",
   seeCleanFiltersButton = false,
   cleanFiltersOnClick,
+  onClose,
 }) {
   return (
     <section className="w-full flex flex-col gap-2 font-dmsans">
@@ -36,7 +37,7 @@ export default function FilterModal({
         </div>
 
         <LiquidGlass
-          onClick={cleanFiltersOnClick}
+          onClick={onClose}
           className="flex items-center justify-center p-2.5 rounded-3xl border border-[#E4E2E5] transition-colors duration-200
           hover:bg-[#49454f21] hover:cursor-pointer
           dark:border-[#00000003] dark:text-[#7E8088] dark:hover:bg-[#28282bbd]"
