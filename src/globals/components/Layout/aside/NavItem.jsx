@@ -14,7 +14,8 @@ export default function NavItem({
       {({ isActive }) => (
         <div
           id={`${itemId}-aside-button`}
-          className={`w-auto h-14 flex items-center py-3 px-6 gap-2 subpixel-antialiased rounded-full transition-[background-color,color,box-shadow] duration-500 ease-in-out group
+          className={`w-auto h-14 flex items-center py-3 px-5 gap-2 subpixel-antialiased rounded-full transition-[background-color,color,box-shadow] duration-500 ease-in-out group
+            md:py-3 md:px-6
             ${
               isActive
                 ? `bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
@@ -39,7 +40,8 @@ export default function NavItem({
           />
 
           <div
-            className={`text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
+            className={`hidden text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
+            md:block
             ${
               showName
                 ? `max-w-[200px] opacity-100`
