@@ -22,7 +22,7 @@ export default function UsersPage() {
 
   return (
     <main
-      className="w-full h-full overflow-hidden
+      className="w-full h-full overflow-hidden overflow-y-auto
       dark:bg-black"
     >
       <TopSection
