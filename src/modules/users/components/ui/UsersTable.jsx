@@ -11,7 +11,7 @@ export default function UsersTable({ users, loading, openModal }) {
 
   return (
     <div
-      className="w-full h-full border border-[#E4E2E5] rounded-3xl
+      className="w-full h-full border border-[#E4E2E5] rounded-3xl overflow-x-auto overflow-y-auto
       dark:border-[#17171a] dark:text-[#E4E2E5]"
     >
       {noUsers && (
