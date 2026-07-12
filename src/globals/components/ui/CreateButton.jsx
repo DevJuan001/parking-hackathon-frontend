@@ -12,6 +12,7 @@ export default function CreateButton({
       style={{ borderRadius: borderRadius }}
       className={`flex items-center ${text ? "px-5" : "px-3"} py-5 gap-2 bg-black font-poppins transition duration-500
       lg:py-3
+      focus:animate-click-effect
       hover:shadow-lg
       dark:bg-white dark:hover:shadow-[0px_0px_32px_-11px_#ffffff]`}
     >
