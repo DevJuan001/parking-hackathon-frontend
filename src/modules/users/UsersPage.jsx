@@ -32,7 +32,7 @@ export default function UsersPage() {
         filterOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
-      <div className="h-[90%] flex flex-col gap-4">
+      <div className="h-[91%] flex flex-col gap-4">
         <UsersKpis />
 
         <UsersTable users={users} loading={loading} openModal={openModal} />
