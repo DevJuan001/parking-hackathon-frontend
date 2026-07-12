@@ -1,24 +1,26 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
+import { useEntries } from "@/modules/entries/hooks/useEntries";
 // Constantes
-import { modalTitles } from "@/modules/entries/constants/modalTitles";
+import { modals } from "@/modules/entries/constants/modals";
 // Componentes
+import TopSection from "@components/ui/TopSection";
 import EntriesKpis from "@/modules/entries/components/ui/EntriesKpis";
 import EntriesTable from "@/modules/entries/components/ui/EntriesTable";
-import Layout from "@components/Layout/Layout";
-import TopSection from "@components/ui/TopSection";
 // Modales
 import Modal from "@modals/Modal";
 import CreateEntryModal from "@/modules/entries/components/modals/CreateEntryModal";
 import FilterEntriesModal from "@/modules/entries/components/modals/FilterEntriesModal";
-import { useEntries } from "@/modules/entries/hooks/useEntries";
 
 export default function EntriesPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
   const { entries, loading, filters, setFilters } = useEntries();
 
   return (
-    <Layout>
+    <main
+      className="w-full h-full overflow-hidden
+      dark:bg-black"
+    >
       <TopSection
         sectionName={"Ingresos"}
         addButtonText={"Registrar Ingreso"}
@@ -36,12 +38,11 @@ export default function EntriesPage() {
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
-          location={modalType === "createEntry" ? "center" : "anchored"}
-          growDirection="bottom-center"
+          location={modals[modalType]?.location}
         >
           {modalType === "createEntry" && (
             <CreateEntryModal onClose={closeModal} />
@@ -56,6 +57,6 @@ export default function EntriesPage() {
           )}
         </Modal>
       )}
-    </Layout>
+    </main>
   );
 }
