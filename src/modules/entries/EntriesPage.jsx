@@ -29,7 +29,10 @@ export default function EntriesPage() {
         filterOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
-      <div className="flex flex-col gap-4">
+      <div
+        className="h-[85%] flex flex-col gap-4
+        md:h-[90%]"
+      >
         <EntriesKpis />
 
         <EntriesTable entries={entries} loading={loading} />
