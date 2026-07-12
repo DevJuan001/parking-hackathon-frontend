@@ -14,12 +14,19 @@ import FilterEntriesModal from "@/modules/entries/components/modals/FilterEntrie
 
 export default function EntriesPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
-  const { entries, loading, filters, setFilters } = useEntries();
+  const {
+    entries,
+    loading,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useEntries();
 
   return (
     <main
-      className="w-full h-full overflow-hidden
-      dark:bg-black"
+      className="w-full h-full overflow-hidden"
     >
       <TopSection
         sectionName={"Ingresos"}
@@ -35,7 +42,13 @@ export default function EntriesPage() {
       >
         <EntriesKpis />
 
-        <EntriesTable entries={entries} loading={loading} />
+        <EntriesTable
+          entries={entries}
+          loading={loading}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+        />
       </div>
 
       {modalType && (
