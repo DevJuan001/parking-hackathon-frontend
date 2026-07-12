@@ -11,12 +11,12 @@ export default function UsersTable({ users, loading, openModal }) {
 
   return (
     <div
-      className="w-full h-full border border-[#E4E2E5] rounded-2xl
+      className="w-full h-full border border-[#E4E2E5] rounded-3xl
       dark:border-[#17171a] dark:text-[#E4E2E5]"
     >
       {noUsers && (
         <div
-          className="flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
+          className="flex flex-col items-center justify-center gap-1 rounded-3xl text-[#7E8088] bg-[#f5f3f6]
           dark:text-[#E4E2E5]"
         >
           <div className="flex items-center justify-center w-24 h-24 rounded-full">
