@@ -10,21 +10,19 @@ export default function UsersTable({ users, loading, openModal }) {
   const isFirstLoad = users.length === 0 && loading;
 
   return (
-    <div
-      className="w-full h-full border border-[#E4E2E5] rounded-3xl overflow-x-auto overflow-y-auto
-      dark:border-[#17171a] dark:text-[#E4E2E5]"
+    <section
+      className={`${noUsers || isFirstLoad ? "h-full" : "h-auto border"} w-full border border-[#E4E2E5] rounded-3xl overflow-x-auto overflow-y-auto
+      dark:border-[#17171a] dark:text-[#E4E2E5]`}
     >
       {noUsers && (
         <div
-          className="flex flex-col items-center justify-center gap-1 rounded-3xl text-[#7E8088] bg-[#f5f3f6]
-          dark:text-[#E4E2E5]"
+          className="h-full w-full flex flex-col items-center justify-center gap-2 rounded-3xl text-[#75777E] bg-[#f5f3f6] font-dmsans
+          dark:bg-[#101012] dark:text-[#7E8088]"
         >
-          <div className="flex items-center justify-center w-24 h-24 rounded-full">
-            <Icon name={"border_clear"} size={60} />
-          </div>
+          <Icon name={"border_clear"} size={70} />
 
-          <span className="text-xl font-medium text-center">
-            No hay usuarios registrados
+          <span className="text-2xl font-medium text-center">
+            No se encontraron usuarios
           </span>
         </div>
       )}
@@ -141,6 +139,6 @@ export default function UsersTable({ users, loading, openModal }) {
           </table>
         )
       )}
-    </div>
+    </section>
   );
 }
