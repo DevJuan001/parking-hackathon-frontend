@@ -1,6 +1,7 @@
 // Hooks
 import { useFloors } from "@/modules/parking/hooks/useFloors";
 // Components
+import FloorItem from "./FloorItem";
 import Icon from "@components/ui/Icon";
 import Skeleton from "@components/ui/Skeleton";
 import CreateButton from "@components/ui/CreateButton";
@@ -12,7 +13,7 @@ export default function FloorsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full flex flex-col px-7 py-5 rounded-[50px] border-3 border-[#EBE6E7]
+      className="h-full w-full flex flex-col px-6 py-5 rounded-[50px] border-3 border-[#EBE6E7]
       dark:text-white dark:border-[#202022]"
     >
       <div className="flex items-center justify-between">
@@ -23,7 +24,7 @@ export default function FloorsPanel({ openModal }) {
         />
       </div>
 
-      <div className="h-full w-full flex gap-2 pt-1 overflow-y-auto">
+      <div className="h-full w-full flex flex-wrap gap-2 pt-2 overflow-y-auto">
         {nofloors && (
           <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-[#75777E]">
             <Icon name={"border_clear"} size={90} />
@@ -46,27 +47,9 @@ export default function FloorsPanel({ openModal }) {
             darkModeBackgroundColor={"#101012"}
           />
         ) : (
-          floors.map((floor) => (
-            <button
-              key={floor.id}
-              onClick={(e) => openModal(floor, "editFloor", e.currentTarget)}
-              className="h-32 w-32 flex flex-col items-center justify-center gap-3 px-3 py-2 rounded-3xl bg-[#efedf0] transition-colors 
-              hover:bg-[#EAE8EB] 
-              dark:bg-[#101012] dark:hover:bg-[#ffffff15]"
-            >
-              <div className="h-10 w-10 flex items-center justify-center rounded-xl">
-                <Icon
-                  data-shared-id="floor-icon"
-                  name="stairs"
-                  size={35}
-                  fill
-                />
-              </div>
 
-              <span data-shared-id="floor-text" className="font-semibold">
-                {floor.name}
-              </span>
-            </button>
+          floors.map((floor) => (
+            <FloorItem floor={floor} openModal={openModal} />
           ))
         )}
       </div>
