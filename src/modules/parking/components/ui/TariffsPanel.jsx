@@ -16,7 +16,7 @@ export default function TariffsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full flex flex-col gap-2 p-6 rounded-[50px] border-3 border-[#EBE6E7] animate-blur-up
+      className="h-full w-full flex flex-col gap-2 p-6 rounded-[50px] border border-[#EBE6E7] animate-blur-up
       dark:text-white dark:border-[#202022]"
     >
       <div className="flex items-center">

@@ -25,8 +25,8 @@ export default function RevenueChart() {
         >
           <Icon name={"border_clear"} size={90} />
 
-          <span className="text-xl font-semibold">
-            Aún no hay ganancias registradas
+          <span className="text-xl text-center font-semibold">
+            No hay ganancias registradas
           </span>
         </div>
       )}

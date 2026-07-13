@@ -8,33 +8,47 @@ import Icon from "@components/ui/Icon";
 export default function RecentEntriesList({ entry }) {
   return (
     <div
-      key={entry.id}
-      className="flex items-center gap-3 px-2 py-2 rounded-2xl hover:bg-[#efedf0] transition-colors dark:hover:bg-[#ffffff15]"
+      key={entry?.id}
+      className="flex items-center gap-3 px-2 py-2 rounded-2xl transition-colors
+      hover:bg-[#efedf0]
+      dark:hover:bg-[#ffffff15]"
     >
-      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-[#EAE8EB] dark:bg-[#1e1e20cb]">
+      <div
+        className="h-10 w-11 flex items-center justify-center rounded-xl bg-[#EAE8EB]
+        dark:bg-[#1e1e20cb]"
+      >
         <Icon
-          name={vehicleTypesConstant[entry.vehicle_type]?.icon}
+          name={vehicleTypesConstant[entry?.vehicle_type]?.icon}
           size={20}
           fill
         />
       </div>
 
-      <div className="flex-1 min-w-0">
+      <div className="w-full flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <span className="font-semibold truncate">{entry.plate}</span>
+          <span className="font-semibold truncate">{entry?.plate}</span>
 
-          <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
-            {entry.spot}
+          <span
+            className="text-xs text-start text-gray-400
+            dark:text-gray-500"
+          >
+            {entry?.spot}
           </span>
         </div>
 
-        <span className="text-xs text-gray-500 dark:text-gray-400">
-          {entry.vehicle_type}
+        <span
+          className="w-fit text-xs text-gray-500
+          dark:text-gray-400"
+        >
+          {vehicleTypesConstant[entry?.vehicle_type]?.text}
         </span>
       </div>
 
-      <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
-        {formatTime(entry.created_at)}
+      <span
+        className="w-8 text-xs text-gray-400
+        dark:text-gray-500"
+      >
+        {formatTime(entry?.created_at)}
       </span>
     </div>
   );

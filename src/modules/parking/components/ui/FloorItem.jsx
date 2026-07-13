@@ -3,7 +3,6 @@ import Icon from "@/globals/components/ui/Icon";
 export default function FloorItem({ floor, openModal }) {
   return (
     <button
-      key={floor.id}
       onClick={(e) => openModal(floor, "editFloor", e.currentTarget)}
       className="h-26 w-24 flex flex-col items-center justify-center gap-3 px-3 py-2 rounded-3xl bg-[#efedf0] transition-colors
       md:w-32 md:h-32 

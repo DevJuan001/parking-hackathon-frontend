@@ -13,7 +13,7 @@ export default function FloorsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full flex flex-col px-6 py-5 rounded-[50px] border-3 border-[#EBE6E7]
+      className="h-full w-full flex flex-col px-6 py-5 rounded-[50px] border border-[#EBE6E7]
       dark:text-white dark:border-[#202022]"
     >
       <div className="flex items-center justify-between">
@@ -47,9 +47,8 @@ export default function FloorsPanel({ openModal }) {
             darkModeBackgroundColor={"#101012"}
           />
         ) : (
-
           floors.map((floor) => (
-            <FloorItem floor={floor} openModal={openModal} />
+            <FloorItem key={floor.id} floor={floor} openModal={openModal} />
           ))
         )}
       </div>
