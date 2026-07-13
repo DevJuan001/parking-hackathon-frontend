@@ -35,7 +35,8 @@ export default function SpotsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full px-6.5 py-6 flex flex-col gap-1 col-span-1 row-span-2 border-3 border-[#EBE6E7] rounded-[50px]
+      className="h-full w-full px-6.5 py-6 flex flex-col gap-1 col-span-1 row-span-1 border-3 border-[#EBE6E7] rounded-[50px]
+      md:row-span-2
       dark:text-white dark:border-[#202022]"
     >
       <div className="flex items-center justify-between">
@@ -89,7 +90,7 @@ export default function SpotsPanel({ openModal }) {
       ) : (
         !noSpots && (
           <div
-            className="h-full w-full grid grid-cols-8 auto-rows-[100px] pt-2 p-0.5 gap-2 scrollbar-thumb-[#E4E2E5] overflow-y-auto
+            className="h-full w-full grid grid-cols-3 auto-rows-[100px] pt-2 p-0.5 gap-2 scrollbar-thumb-[#E4E2E5] overflow-y-auto
             md:grid-cols-4
             lg:grid-cols-6 lg:gap-x-2 lg:gap-y-4
             2xl:grid-cols-8 2xl:gap-2.5"
