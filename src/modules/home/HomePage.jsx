@@ -26,6 +26,7 @@ export default function HomePage() {
           location="anchored"
           growDirection="center"
           triggerRef={triggerRef}
+          margin={0}
         >
           {modalType === "editSpot" && (
             <EditSpotModal onClose={closeModal} spot={modalData} />
