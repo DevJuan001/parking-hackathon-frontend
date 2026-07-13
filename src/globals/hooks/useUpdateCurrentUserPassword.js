@@ -16,7 +16,7 @@ export function useUpdateCurrentUserPassword() {
     new: false,
     repeat: false,
   });
-  const { validate, clearError, fieldError } = useFormValidation();
+  const { setErrors, validate, clearError, fieldError } = useFormValidation();
 
   function togglePassword(field) {
     setShowPasswords((prev) => ({ ...prev, [field]: !prev[field] }));
@@ -34,7 +34,13 @@ export function useUpdateCurrentUserPassword() {
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    if (!passwordsMatch) return;
+    if (!passwordsMatch) {
+      setErrors({
+        new_password: "El campo new_password es requerido",
+        repeat_password: "El campo repeat_password es requerido",
+      });
+      return;
+    }
 
     const triggerButton = getModalTrigger(e);
 
@@ -51,11 +57,17 @@ export function useUpdateCurrentUserPassword() {
       if (response.success === true) {
         openInnerModal("success", triggerButton);
       } else {
+        setError(
+          response.error ??
+            "Verifique que su contraseña anterior sea la correcta y vuelva a intentarlo",
+        );
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Verifique que su contraseña anterior sea la correcta y vuelva a intentarlo",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }

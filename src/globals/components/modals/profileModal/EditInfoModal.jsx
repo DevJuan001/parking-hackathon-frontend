@@ -12,7 +12,7 @@ import ErrorModal from "@modals/ErrorModal";
 export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
-  const { handleChange, handleSubmit, userData, loading } =
+  const { userData, loading, error, handleChange, handleSubmit } =
     useUpdateCurrentUserInfo(user);
 
   return (
@@ -25,7 +25,10 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
       onClose={onClose}
       triggerRef={triggerRef}
     >
-      <section className="flex flex-col items-center gap-2">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="flex flex-col items-center gap-2"
+      >
         <FormField
           id={"name"}
           name={"name"}
@@ -33,6 +36,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           value={userData.name}
           onChange={handleChange}
           autoComplete="given-name"
+          placeholder={user.name ?? "Miguel"}
         />
 
         <FormField
@@ -42,6 +46,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           value={userData.first_surname}
           onChange={handleChange}
           autoComplete="family-name"
+          placeholder={user.first_surname ?? "Pérez"}
         />
 
         <FormField
@@ -51,6 +56,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           value={userData.second_surname}
           onChange={handleChange}
           autoComplete="family-name"
+          placeholder={user.second_surname ?? "Contreras"}
         />
 
         <FormField
@@ -60,6 +66,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           value={userData.email}
           onChange={handleChange}
           autoComplete="email"
+          placeholder={user.email ?? "Pérez"}
         />
 
         <ConfirmCancelButtons
@@ -67,14 +74,14 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
           cancelButtonOnClick={onClose}
         />
-      </section>
+      </form>
 
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo completar el registro!"
-          errorText="Verfica que todos los campos esten completos y que el correo electronico es el correcto"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={closeInnerModal}
         />

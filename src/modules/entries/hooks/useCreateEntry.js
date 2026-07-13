@@ -40,11 +40,16 @@ export function useCreateEntry() {
         await queryClient.invalidateQueries({ queryKey: ["entriesStats"] });
         openInnerModal("success", triggerButton);
       } else {
-        setError("No se pudo registrar el ingreso, intentalo nuevamente mas tarde.");
+        setError(
+          response.error ??
+            "No se pudo registrar el ingreso, intentalo nuevamente mas tarde.",
+        );
         openInnerModal("error", triggerButton);
       }
     } catch {
-      setError("No se pudo registrar el ingreso, intentalo nuevamente mas tarde.");
+      setError(
+        "No se pudo registrar el ingreso, intentalo nuevamente mas tarde.",
+      );
       openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);

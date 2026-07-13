@@ -3,16 +3,16 @@ import SelectMenu from "@modals/SelectMenu";
 import FilterModal from "@modals/FilterModal";
 
 export default function FilterEntriesModal({ filters, setFilters, onClose }) {
-  const { handleChange } = useFilterEntries(setFilters);
+  const { form, handleChange } = useFilterEntries(filters);
 
   return (
     <FilterModal
-      orderByStartDateValue={filters.start_date}
+      orderByStartDateValue={form.start_date}
       orderByStartDateOnChange={handleChange}
-      orderByFinishDateValue={filters.end_date}
+      orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       applyButtonOnClick={() => {
-        setFilters({ ...filters });
+        setFilters({ ...form });
         onClose();
       }}
       seeCleanFiltersButton={Object.keys(filters).length > 0}
@@ -20,13 +20,14 @@ export default function FilterEntriesModal({ filters, setFilters, onClose }) {
         setFilters({});
         onClose();
       }}
+      onClose={onClose}
     >
       <div className="flex flex-col">
         <SelectMenu
           showAllOption
           id={"plates-menu"}
           spanText={"Placa"}
-          value={filters.plate_id}
+          value={form.plate_id}
           onChange={handleChange}
           options={[]}
         />

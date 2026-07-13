@@ -7,9 +7,9 @@ import Icon from "@components/ui/Icon";
 import GeneralContent from "@modals/profileModal/GeneralContent";
 import AppearanceContent from "@modals/profileModal/AppearanceContent";
 // Modals
+import Modal from "@modals/Modal";
 import EditInfoModal from "@modals/profileModal/EditInfoModal";
 import ChangePasswordModal from "@modals/profileModal/ChangePasswordModal";
-import Modal from "@modals/Modal";
 
 export default function ProfileModal({ triggerRef, onCloseModal }) {
   const { user } = useCurrentUser();
@@ -27,14 +27,13 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
       onClose={onCloseModal}
     >
       <section
-        className="h-screen flex flex-col-reverse items-center justify-between gap-4
+        className="h-full flex flex-col-reverse items-center justify-between gap-4
         md:h-[445px] md:grid md:grid-cols-[150px_1fr]"
       >
         <aside
-          className="h-[30%] justify-self-end w-full border-gray-300
+          className="h-[15%] justify-self-end w-full border-gray-300
           md:h-full md:justify-self-start md:self-start
-          dark:border-[#3a3d43]
-        "
+          dark:border-[#3a3d43]"
         >
           {/* Lista de opciones */}
           <ul
@@ -43,7 +42,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
           >
             <li
               onClick={() => setActiveSection("general")}
-              className={`flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 text-xs transition duration-300
+              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 text-xs transition duration-300
                 md:flex-row md:w-full md:text-sm
                 ${
                   activeSection === "general"
@@ -80,7 +79,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
         </aside>
 
         <section
-          className="h-[80%] w-full flex flex-col gap-7 animate-blur-up
+          className="h-[85%] w-full flex flex-col gap-7 animate-blur-up
           md:h-full
           dark:text-white"
         >

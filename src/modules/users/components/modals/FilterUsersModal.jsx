@@ -24,6 +24,7 @@ export default function FilterUsersModal({ filters, setFilters, onClose }) {
         setFilters({});
         onClose();
       }}
+      onClose={onClose}
     >
       <div className="flex flex-col gap-2">
         <SelectMenu

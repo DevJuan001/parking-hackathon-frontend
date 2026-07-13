@@ -50,5 +50,13 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
 
   const clearErrors = () => setErrors({});
 
-  return { errors, validate, getChanges, clearError, clearErrors, fieldError };
+  return {
+    errors,
+    setErrors,
+    validate,
+    getChanges,
+    clearError,
+    clearErrors,
+    fieldError,
+  };
 };
