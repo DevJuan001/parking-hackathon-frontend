@@ -5,7 +5,10 @@ import SpotsPanel from "@/modules/parking/components/ui/SpotsPanel";
 
 export default function HomeSectionsContainer({ openModal }) {
   return (
-    <section className="h-full w-full grid grid-cols-2 grid-rows-2 gap-4 animate-blur-up">
+    <section
+      className="h-full w-full grid grid-cols-1 grid-rows-[repeat(3,315px)] gap-4 overflow-y-auto animate-blur-up
+      md:grid-cols-2 md:grid-rows-2"
+    >
       <SpotsPanel openModal={openModal} />
 
       <RecentEntriesPanel />
