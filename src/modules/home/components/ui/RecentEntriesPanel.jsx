@@ -10,7 +10,7 @@ export default function RecentEntriesPanel() {
 
   return (
     <section
-      className="h-full w-full flex flex-col px-7 py-6 rounded-[50px] border-3 border-[#EBE6E7]
+      className="h-full w-full flex flex-col px-7 py-6 rounded-[50px] border border-[#EBE6E7]
       dark:text-white dark:border-[#202022]"
     >
       <span className="font-semibold">Entradas recientes</span>

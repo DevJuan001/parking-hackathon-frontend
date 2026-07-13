@@ -35,7 +35,7 @@ export default function SpotsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full px-6.5 py-6 flex flex-col gap-1 col-span-1 row-span-1 border-3 border-[#EBE6E7] rounded-[50px]
+      className="h-full w-full px-6.5 py-6 flex flex-col gap-1 col-span-1 row-span-1 border border-[#EBE6E7] rounded-[50px]
       md:row-span-2
       dark:text-white dark:border-[#202022]"
     >
