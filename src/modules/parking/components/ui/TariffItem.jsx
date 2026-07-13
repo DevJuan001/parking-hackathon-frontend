@@ -6,7 +6,8 @@ export default function TariffItem({ openModal, tariff }) {
     <button
       key={tariff.id}
       onClick={(e) => openModal(tariff, "editTariff", e.currentTarget)}
-      className="h-32 w-32 flex flex-col items-center gap-3 px-3 py-5 rounded-3xl bg-[#efedf0] transition-colors
+      className="h-30 w-24 flex flex-col items-center gap-3 px-3 py-4 rounded-3xl bg-[#efedf0] transition-colors
+      md:w-32 md:h-32 md:py-5
       hover:bg-[#EAE8EB]
       dark:bg-[#101012] dark:hover:bg-[#ffffff15]"
     >

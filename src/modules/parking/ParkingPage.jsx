@@ -31,7 +31,7 @@ export default function ParkingPage() {
           title={modals[modalType]?.title}
           onClose={closeModal}
           location="anchored"
-          growDirection="center"
+          growDirection={modals[modalType]?.growDirection}
           triggerRef={triggerRef}
         >
           {modalType === "editSpot" && (

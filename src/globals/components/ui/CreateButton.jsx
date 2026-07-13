@@ -10,7 +10,7 @@ export default function CreateButton({
     <button
       onClick={onClick}
       style={{ borderRadius: borderRadius }}
-      className={`flex items-center ${text ? "px-5" : "px-3"} py-5 gap-2 bg-black font-poppins transition duration-500
+      className={`flex items-center ${text ? "p-5" : "p-3"} gap-2 bg-black font-poppins transition duration-500
       lg:py-3
       focus:animate-click-effect
       hover:shadow-lg
@@ -19,8 +19,8 @@ export default function CreateButton({
       <Icon
         name={icon ? icon : "add"}
         weight={500}
-        className="invert
-        dark:invert-0"
+        className="text-white
+        dark:text-black"
       />
 
       {text && (
