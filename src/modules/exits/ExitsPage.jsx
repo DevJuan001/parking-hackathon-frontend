@@ -2,15 +2,17 @@
 import { useModal } from "@hooks/useModal";
 import { useExits } from "@/modules/exits/hooks/useExits";
 // Constantes
-import { modalTitles } from "@/modules/exits/constants/modalTitles";
+import { modals } from "@/modules/exits/constants/modals";
 // Componentes
 import TopSection from "@components/ui/TopSection";
 import ExitsKpis from "@/modules/exits/components/ui/ExitsKpis";
 import ExitsTable from "@/modules/exits/components/ui/ExitsTable";
 // Modales
 import Modal from "@modals/Modal";
+import ExportModal from "@modals/ExportModal";
 import CreateExitModal from "@/modules/exits/components/modals/CreateExitModal";
 import FilterExitsModal from "@/modules/exits/components/modals/FilterExitsModal";
+import SearchModal from "@/globals/components/modals/SearchModal";
 
 export default function ExitsPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
@@ -26,7 +28,8 @@ export default function ExitsPage() {
           openModal(null, "createExit", e.currentTarget)
         }
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
-        exportButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
+        exportButtonOnClick={(e) => openModal(null, "export", e.currentTarget)}
+        searchButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
       />
 
       <div
@@ -41,12 +44,13 @@ export default function ExitsPage() {
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
+          margin={5}
           triggerRef={triggerRef}
-          location={modalType === "createExit" ? "center" : "anchored"}
-          growDirection="bottom-center"
+          location={modals[modalType]?.location}
+          growDirection={modals[modalType]?.growDirection}
         >
           {modalType === "createExit" && (
             <CreateExitModal onClose={closeModal} />
@@ -59,6 +63,10 @@ export default function ExitsPage() {
               onClose={closeModal}
             />
           )}
+
+          {modalType === "export" && <ExportModal />}
+
+          {modalType === "search" && <SearchModal />}
         </Modal>
       )}
     </main>
