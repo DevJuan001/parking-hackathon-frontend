@@ -11,8 +11,8 @@ import {
 } from "recharts";
 
 export default function RevenueChart() {
-  const { stats, loading } = useExitsStats();
-  const hasRevenues = stats.some((stat) => stat.value > 0);
+  const { chartStats, loading } = useExitsStats();
+  const hasRevenues = chartStats.some((stat) => stat.value > 0);
   const noRevenues = !hasRevenues && !loading;
   const isFirstLoad = loading;
 
@@ -49,7 +49,7 @@ export default function RevenueChart() {
             <Tooltip />
 
             <Pie
-              data={stats}
+              data={chartStats}
               dataKey="value"
               nameKey="name"
               cy="85%"
@@ -60,7 +60,7 @@ export default function RevenueChart() {
               innerRadius="100"
               outerRadius="150"
             >
-              {stats.map((item, index) => (
+              {chartStats.map((item, index) => (
                 <Cell key={index} fill={item.color} stroke={item.color} />
               ))}
             </Pie>

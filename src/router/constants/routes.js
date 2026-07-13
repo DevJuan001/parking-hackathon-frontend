@@ -2,6 +2,7 @@ import { lazy } from "react";
 // Loadings
 import HomeLoading from "@/modules/home/components/ui/HomeLoading";
 import UsersLoading from "@/modules/users/components/ui/UsersLoading";
+import ExitsLoading from "@/modules/exits/components/ui/ExitsLoading";
 import ParkingLoading from "@/modules/parking/components/ui/ParkingLoading";
 // Pages
 const HomePage = lazy(() => import("@/modules/home/HomePage"));
@@ -50,7 +51,7 @@ export const layoutRoutes = [
   {
     path: "/exits",
     component: ExitsPage,
-    loading: ParkingLoading,
+    loading: ExitsLoading,
     roles: ["Admin"],
   },
 

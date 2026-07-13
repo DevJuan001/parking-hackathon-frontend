@@ -1,6 +1,8 @@
-import Skeleton from "@components/ui/Skeleton";
+// Hooks
 import { useExitsStats } from "@/modules/exits/hooks/useExitsStats";
-import ExitsKpi from "@/modules/exits/components/ui/ExitsKpi";
+// Componentes
+import Kpi from "@components/ui/Kpi";
+import Skeleton from "@components/ui/Skeleton";
 
 export default function ExitsKpis() {
   const { stats, loading } = useExitsStats();
@@ -8,10 +10,42 @@ export default function ExitsKpis() {
   return (
     <section>
       {loading ? (
-        <div className="flex items-center gap-4">
+        <div
+          className="w-full flex flex-wrap items-center justify-center gap-2
+          md:flex-nowrap md:gap-4"
+        >
           <Skeleton
-            count={4}
-            width="460px"
+            width="48%"
+            height={"92px"}
+            borderRadius={"20px"}
+            backgroundColor={"#F3EEF5"}
+            darkModeBackgroundColor={"#101012"}
+            shineColor="#C5C1C7"
+            darkModeShineColor="#1e1e1e"
+          />
+
+          <Skeleton
+            width="48%"
+            height={"92px"}
+            borderRadius={"20px"}
+            backgroundColor={"#F3EEF5"}
+            darkModeBackgroundColor={"#101012"}
+            shineColor="#C5C1C7"
+            darkModeShineColor="#1e1e1e"
+          />
+
+          <Skeleton
+            width="48%"
+            height={"92px"}
+            borderRadius={"20px"}
+            backgroundColor={"#F3EEF5"}
+            darkModeBackgroundColor={"#101012"}
+            shineColor="#C5C1C7"
+            darkModeShineColor="#1e1e1e"
+          />
+
+          <Skeleton
+            width="48%"
             height={"92px"}
             borderRadius={"20px"}
             backgroundColor={"#F3EEF5"}
@@ -21,17 +55,23 @@ export default function ExitsKpis() {
           />
         </div>
       ) : (
-        <div className="flex items-center gap-4">
-          <ExitsKpi
+        <div
+          className="w-full flex flex-wrap items-center justify-center gap-2
+          md:flex-nowrap md:gap-4"
+        >
+          <Kpi
             title={"Ganancia de hoy"}
-            value={`$${stats.today_revenue}`}
+            value={`$${stats.today_revenue ?? 0}`}
           />
-          <ExitsKpi title={"Salidas de hoy"} value={stats.today_exits} />
-          <ExitsKpi
-            title={"Salidas de este mes"}
-            value={stats.this_month_exits}
+
+          <Kpi title={"Hoy"} value={stats.today_exits ?? 0} />
+
+          <Kpi
+            title={"Este mes"}
+            value={stats.this_month_exits ?? 0}
           />
-          <ExitsKpi title={"Salidas Totales"} value={stats.total_exits} />
+
+          <Kpi title={"Total"} value={stats.total_exits ?? 0} />
         </div>
       )}
     </section>

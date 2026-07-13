@@ -2,16 +2,16 @@ import FilterModal from "@modals/FilterModal";
 import { useFilterExits } from "@/modules/exits/hooks/useFilterExits";
 
 export default function FilterExitsModal({ filters, setFilters, onClose }) {
-  const { handleChange } = useFilterExits(setFilters);
+  const { form, handleChange } = useFilterExits();
 
   return (
     <FilterModal
-      orderByStartDateValue={filters.start_date}
+      orderByStartDateValue={form.start_date}
       orderByStartDateOnChange={handleChange}
-      orderByFinishDateValue={filters.end_date}
+      orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       applyButtonOnClick={() => {
-        setFilters({ ...filters });
+        setFilters({ ...form });
         onClose();
       }}
       seeCleanFiltersButton={Object.keys(filters).length > 0}
@@ -19,6 +19,7 @@ export default function FilterExitsModal({ filters, setFilters, onClose }) {
         setFilters({});
         onClose();
       }}
+      onClose={onClose}
     />
   );
 }
