@@ -51,11 +51,17 @@ export function useUpdateCurrentUserPassword() {
       if (response.success === true) {
         openInnerModal("success", triggerButton);
       } else {
+        setError(
+          response.error ??
+            "Verifique que su contraseña anterior sea la correcta y vuelva a intentarlo",
+        );
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Verifique que su contraseña anterior sea la correcta y vuelva a intentarlo",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }

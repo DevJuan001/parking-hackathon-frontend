@@ -21,6 +21,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
     passwordsMatch,
     loading,
     showPasswords,
+    error,
     togglePassword,
     fieldError,
   } = useUpdateCurrentUserPassword();
@@ -118,9 +119,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
             triggerRef={innerTrigger}
             isOpen={true}
             errorTitle={"No se pudo actualizar su contraseña!"}
-            errorText={
-              "Verifique que su contraseña anterior sea la correcta y vuelva a intentarlo"
-            }
+            errorText={error}
             confirmButtonText={"Volver a intentarlo"}
             onClose={closeInnerModal}
           />
