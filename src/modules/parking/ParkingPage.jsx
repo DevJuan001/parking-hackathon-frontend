@@ -18,10 +18,7 @@ export default function ParkingPage() {
     useModal();
 
   return (
-    <main
-      className="w-full h-full overflow-hidden
-      dark:bg-black"
-    >
+    <main className="w-full h-full overflow-hidden">
       <ParkingSectionsContainer openModal={openModal} />
 
       {modalType && (
