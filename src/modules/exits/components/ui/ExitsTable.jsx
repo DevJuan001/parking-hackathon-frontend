@@ -10,7 +10,7 @@ export default function ExitsTable({ exits, loading }) {
 
   return (
     <div
-      className={`${noExits || isFirstLoad ? "h-full" : "h-auto border"} w-full border border-[#E4E2E5] rounded-2xl overflow-y-auto
+      className={`${noExits || isFirstLoad ? "h-full" : "h-auto border"} w-full border border-[#E4E2E5] rounded-3xl overflow-y-auto
       dark:border-[#17171a] dark:text-[#E4E2E5]`}
     >
       {noExits && (
@@ -18,7 +18,7 @@ export default function ExitsTable({ exits, loading }) {
           className="h-[700px] flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
           dark:text-[#E4E2E5] dark:bg-black"
         >
-          <Icon name={"border_clear"} size={60} />
+          <Icon name={"border_clear"} size={64} />
 
           <span
             className="text-xl font-medium text-center

@@ -20,6 +20,7 @@ export default function FloorsPanel({ openModal }) {
         <span className="font-semibold">Pisos</span>
 
         <CreateButton
+        miniVersion
           onClick={(e) => openModal(null, "createFloor", e.currentTarget)}
         />
       </div>
