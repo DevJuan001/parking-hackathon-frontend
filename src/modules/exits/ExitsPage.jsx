@@ -1,33 +1,38 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
+import { useExits } from "@/modules/exits/hooks/useExits";
 // Constantes
 import { modalTitles } from "@/modules/exits/constants/modalTitles";
 // Componentes
+import TopSection from "@components/ui/TopSection";
 import ExitsKpis from "@/modules/exits/components/ui/ExitsKpis";
 import ExitsTable from "@/modules/exits/components/ui/ExitsTable";
-import Layout from "@components/Layout/Layout";
-import TopSection from "@components/ui/TopSection";
 // Modales
 import Modal from "@modals/Modal";
 import CreateExitModal from "@/modules/exits/components/modals/CreateExitModal";
 import FilterExitsModal from "@/modules/exits/components/modals/FilterExitsModal";
-import { useExits } from "@/modules/exits/hooks/useExits";
 
 export default function ExitsPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
   const { exits, loading, filters, setFilters } = useExits();
 
   return (
-    <Layout>
+    <main className="w-full h-full overflow-hidden">
       <TopSection
         sectionName={"Salidas"}
         addButtonText={"Registrar Salida"}
         createButtonVisibility={true}
-        createOnClick={(e) => openModal(null, "createExit", e.currentTarget)}
-        filterOnClick={(e) => openModal(null, "filter", e.currentTarget)}
+        createButtonOnClick={(e) =>
+          openModal(null, "createExit", e.currentTarget)
+        }
+        filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
+        exportButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
       />
 
-      <div className="flex flex-col gap-4">
+      <div
+        className="h-[85%] flex flex-col gap-4
+        md:h-[90%]"
+      >
         <ExitsKpis />
 
         <ExitsTable exits={exits} loading={loading} />
@@ -56,6 +61,6 @@ export default function ExitsPage() {
           )}
         </Modal>
       )}
-    </Layout>
+    </main>
   );
 }
