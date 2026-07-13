@@ -1,13 +1,13 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
 // Constantes
+import { modals } from "./constants/modals";
 // Components
 import HomeSectionsContainer from "@/modules/home/components/ui/HomeSectionsContainer";
 // Modales
 import Modal from "@modals/Modal";
 import EditSpotModal from "@/modules/parking/components/modals/EditSpotModal";
 import CreateSpotModal from "@/modules/parking/components/modals/CreateSpotModal";
-import { modals } from "./constants/modals";
 
 export default function HomePage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =
