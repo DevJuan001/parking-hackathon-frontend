@@ -6,7 +6,7 @@ export const modal_styles = {
     md:w-[400px]`,
 
   editSpot: `p-4 w-screen h-screen
-    md:w-[380px] md:rounded-[32px]`,
+    md:w-[380px] md:h-auto md:rounded-[32px]`,
 
   editTariff: `p-4 w-screen h-screen
     md:w-[380px] md:rounded-[32px]`,
