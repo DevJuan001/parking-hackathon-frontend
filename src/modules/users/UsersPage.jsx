@@ -9,6 +9,8 @@ import UsersKpis from "@/modules/users/components/ui/UsersKpis";
 import UsersTable from "@/modules/users/components/ui/UsersTable";
 // Modales
 import Modal from "@modals/Modal";
+import SearchModal from "@modals/SearchModal";
+import ExportModal from "@modals/ExportModal";
 import EditUserModal from "@/modules/users/components/modals/EditUserModal";
 import CreateUserModal from "@/modules/users/components/modals/CreateUserModal";
 import EnableUserModal from "@/modules/users/components/modals/EnableUserModal";
@@ -35,9 +37,13 @@ export default function UsersPage() {
     >
       <TopSection
         sectionName={"Usuarios"}
-        addButtonText={"Crear Usuario"}
-        createButtonOnClick={(e) => openModal(null, "createUser", e.currentTarget)}
+        addButtonText={"Crear usuario"}
+        createButtonOnClick={(e) =>
+          openModal(null, "createUser", e.currentTarget)
+        }
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
+        exportButtonOnClick={(e) => openModal(null, "export", e.currentTarget)}
+        searchButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
       />
 
       <div
@@ -64,6 +70,8 @@ export default function UsersPage() {
           onClose={closeModal}
           triggerRef={triggerRef}
           location={modals[modalType]?.location}
+          growDirection={modals[modalType]?.growDirection}
+          margin={5}
         >
           {modalType === "createUser" && (
             <CreateUserModal onClose={closeModal} />
@@ -87,6 +95,14 @@ export default function UsersPage() {
               setFilters={setFilters}
               onClose={closeModal}
             />
+          )}
+
+          {modalType === "export" && (
+            <ExportModal />
+          )}
+
+          {modalType === "search" && (
+            <SearchModal />
           )}
         </Modal>
       )}

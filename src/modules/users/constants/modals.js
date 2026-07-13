@@ -3,5 +3,4 @@ export const modals = {
   createUser: { title: "Crear Usuario", location: "center" },
   disableUser: { title: "Deshabilitar Usuario" },
   enableUser: { title: "Habilitar Usuario" },
-  filterUsers: { title: "Filtrar Usuarios" },
 };
