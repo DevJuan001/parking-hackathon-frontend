@@ -36,8 +36,8 @@ export default function UsersPage() {
       <TopSection
         sectionName={"Usuarios"}
         addButtonText={"Crear Usuario"}
-        createOnClick={(e) => openModal(null, "createUser", e.currentTarget)}
-        filterOnClick={(e) => openModal(null, "filter", e.currentTarget)}
+        createButtonOnClick={(e) => openModal(null, "createUser", e.currentTarget)}
+        filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
       <div

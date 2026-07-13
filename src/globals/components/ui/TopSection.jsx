@@ -1,5 +1,6 @@
 import FilterButton from "@components/ui/FilterButton";
 import CreateButton from "@components/ui/CreateButton";
+import ExportButton from "@components/ui/ExportButton";
 
 export default function TopSection({
   sectionVisible = true,
@@ -7,10 +8,9 @@ export default function TopSection({
   addButtonIcon,
   addButtonText,
   children,
-  filterOnClick,
-  filterButton = true,
-  createOnClick,
-  createButtonVisibility,
+  filterButtonOnClick,
+  createButtonOnClick,
+  exportButtonOnClick,
 }) {
   return (
     <section
@@ -32,17 +32,17 @@ export default function TopSection({
       >
         {children}
 
-        <FilterButton
-          onClick={filterOnClick}
-          filterButtonVisibility={filterButton}
-        />
+        {filterButtonOnClick && <FilterButton onClick={filterButtonOnClick} />}
 
-        <CreateButton
-          icon={addButtonIcon}
-          text={addButtonText}
-          onClick={createOnClick}
-          createButtonVisibility={createButtonVisibility}
-        />
+        {createButtonOnClick && (
+          <CreateButton
+            icon={addButtonIcon}
+            text={addButtonText}
+            onClick={createButtonOnClick}
+          />
+        )}
+
+        {exportButtonOnClick && <ExportButton onClick={exportButtonOnClick} />}
       </div>
     </section>
   );

@@ -31,9 +31,8 @@ export default function EntriesPage() {
       <TopSection
         sectionName={"Ingresos"}
         addButtonText={"Registrar Ingreso"}
-        createButtonVisibility={true}
-        createOnClick={(e) => openModal(null, "createEntry", e.currentTarget)}
-        filterOnClick={(e) => openModal(null, "filter", e.currentTarget)}
+        createButtonOnClick={(e) => openModal(null, "createEntry", e.currentTarget)}
+        filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
       <div
