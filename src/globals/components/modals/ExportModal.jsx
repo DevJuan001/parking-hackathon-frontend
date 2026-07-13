@@ -5,11 +5,15 @@ export default function ExportModal({
   exportToExcelButtonOnCLick,
 }) {
   return (
-    <div className="flex flex-col">
+    <div
+      className="flex flex-col
+      dark:text-[#E4E2E5]"
+    >
       <button
         onClick={exportToPdfButtonOnClick}
         className="w-full flex items-center rounded-4xl p-4 gap-2 text-start
-        hover:bg-[#f5f3f6]"
+        hover:bg-[#f5f3f6]
+        dark:hover:bg-[#101012]"
       >
         <Icon data-shared-id="export-icon" name={"download"} />
 
@@ -19,7 +23,8 @@ export default function ExportModal({
       <button
         onClick={exportToExcelButtonOnCLick}
         className="w-full flex items-center rounded-4xl p-4 gap-2 text-start
-        hover:bg-[#f5f3f6]"
+        hover:bg-[#f5f3f6]
+        dark:hover:bg-[#101012]"
       >
         <Icon name={"table"} />
 

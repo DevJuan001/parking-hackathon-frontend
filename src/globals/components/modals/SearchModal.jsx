@@ -14,7 +14,8 @@ export default function SearchModal() {
         type="text"
         placeholder="Buscar"
         autoFocus
-        className="h-full w-full text-sm outline-0"
+        className="h-full w-full text-sm outline-0
+        dark:text-[#E4E2E5]"
       />
     </div>
   );
