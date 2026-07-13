@@ -96,6 +96,10 @@ export default function Modal({
             "editSpot",
             "editFloor",
             "filter",
+            "export",
+            "search",
+            "topSectionMobileOptions",
+            "entryInfo",  
           ].includes(type) && (
             <header className="flex justify-between items-center mb-2 shrink-0">
               <span className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]">
