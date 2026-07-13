@@ -57,3 +57,6 @@
 ## Notes
 
 <!-- Breaking changes, follow-ups, things reviewers should know -->
+
+> [!IMPORTANT]
+> **Labels:** Always add at least one label (e.g. `feature`, `bug`, `refactor`, `style`) before merging.
