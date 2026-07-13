@@ -101,7 +101,6 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
           confirmText={loading ? <Loader /> : "Cambiar"}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           cancelButtonOnClick={onClose}
-          disabled={!passwordsMatch}
         />
 
         {innerType === "success" && (
