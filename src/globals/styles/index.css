@@ -19,8 +19,8 @@
   --animate-shimmer: shimmer 3s linear infinite;
   --animate-jump: jump 2s infinite;
   --animate-click-effect: clickEffect .5s cubic-bezier(.37,1.42,.37,1);
-  --animate-orbit-white: orbit-white 25s linear infinite;
-  --animate-orbit-purple: orbit-purple 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  --animate-main-orbit: main-orbit 25s linear infinite;
+  --animate-second-orbit: second-orbit 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 
   @keyframes blur-up {
     0% {
@@ -115,12 +115,12 @@
     }
   }
 
-  @keyframes orbit-white {
+  @keyframes main-orbit {
     0% { transform: rotate(0deg) translate(150px) rotate(0deg); }
     100% { transform: rotate(360deg) translate(150px) rotate(-360deg); }
   }
 
-  @keyframes orbit-purple {
+  @keyframes second-orbit {
     0% { transform: rotate(0deg) translate(150px) rotate(0deg); }
     100% { transform: rotate(360deg) translate(150px) rotate(-360deg); }
   }
