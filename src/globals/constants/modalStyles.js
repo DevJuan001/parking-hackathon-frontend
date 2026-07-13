@@ -9,13 +9,13 @@ export const modal_styles = {
     md:w-[380px] md:h-auto md:rounded-[32px]`,
 
   editTariff: `p-4 w-screen h-screen
-    md:w-[380px] md:rounded-[32px]`,
+    md:w-[380px] md:h-auto md:rounded-[32px]`,
 
   createFloor: `p-7 w-[350px] h-auto rounded-[32px]
     md:w-[450px]`,
 
   editFloor: `p-4 w-screen h-screen
-    md:w-[380px] md:rounded-[32px]`,
+    md:w-[380px] md:h-auto md:rounded-[32px]`,
 
   delete: `p-6 w-[400px] h-auto rounded-[32px]`,
 
