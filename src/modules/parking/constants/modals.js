@@ -1,6 +1,6 @@
 export const modals = {
   editSpot: { title: "Editar Plaza", growDirection: "center" },
-  createSpot: { title: "Agregar Plaza" },
+  createSpot: { title: "Agregar Plaza", growDirection: "center" },
   editFloor: { title: "Editar Piso", growDirection: "center" },
   createFloor: { title: "Agregar Piso", },
   editTariff: { title: "Editar Tarifa", growDirection: "center" },
