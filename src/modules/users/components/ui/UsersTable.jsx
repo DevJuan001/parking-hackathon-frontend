@@ -4,8 +4,21 @@ import { userStatus } from "@/modules/users/constants/userStatus";
 import Icon from "@components/ui/Icon";
 import Skeleton from "@components/ui/Skeleton";
 import ActionButtons from "@components/ui/ActionButtons";
+import { useInfiniteScroll } from "@/globals/hooks/useInfiniteScroll";
 
-export default function UsersTable({ users, loading, openModal }) {
+export default function UsersTable({
+  users,
+  loading,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
+  openModal,
+}) {
+  const { getItemRef } = useInfiniteScroll({
+    items: users,
+    hasNextPage,
+    fetchNextPage,
+  });
   const noUsers = users.length === 0 && !loading;
   const isFirstLoad = users.length === 0 && loading;
 
@@ -55,6 +68,7 @@ export default function UsersTable({ users, loading, openModal }) {
                 <th className="font-medium text-sm pl-4 text-start">
                   Segundo apellido
                 </th>
+
                 <th className="font-medium text-sm pl-4 text-start">Correo</th>
 
                 <th className="font-medium text-sm pl-4 text-start">
@@ -62,6 +76,7 @@ export default function UsersTable({ users, loading, openModal }) {
                 </th>
 
                 <th className="font-medium text-sm pl-4 text-start">Estado</th>
+
                 <th className="font-medium text-sm pl-4 text-center">
                   Acciones
                 </th>
@@ -69,8 +84,9 @@ export default function UsersTable({ users, loading, openModal }) {
             </thead>
 
             <tbody>
-              {users.map((user) => (
+              {users.map((user, index) => (
                 <tr
+                  ref={getItemRef(index)}
                   key={user.id}
                   className="h-12 transition-colors duration-200
                   hover:bg-[#f5f3f6]
@@ -135,6 +151,21 @@ export default function UsersTable({ users, loading, openModal }) {
                   </th>
                 </tr>
               ))}
+
+              {isFetchingNextPage && (
+                <tr>
+                  <th colSpan={8}>
+                    <Skeleton
+                      width="100%"
+                      height="48px"
+                      backgroundColor={"#F3EEF5"}
+                      darkModeBackgroundColor={"#101012"}
+                      shineColor="#C5C1C7"
+                      darkModeShineColor="#1e1e1e"
+                    />
+                  </th>
+                </tr>
+              )}
             </tbody>
           </table>
         )

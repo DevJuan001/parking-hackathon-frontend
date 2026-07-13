@@ -18,7 +18,15 @@ import FilterUsersModal from "@/modules/users/components/modals/FilterUsersModal
 export default function UsersPage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =
     useModal();
-  const { users, loading, filters, setFilters } = useUsers();
+  const {
+    users,
+    loading,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useUsers();
 
   return (
     <main
@@ -38,7 +46,14 @@ export default function UsersPage() {
       >
         <UsersKpis />
 
-        <UsersTable users={users} loading={loading} openModal={openModal} />
+        <UsersTable
+          users={users}
+          loading={loading}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          openModal={openModal}
+        />
       </div>
 
       {modalType && (

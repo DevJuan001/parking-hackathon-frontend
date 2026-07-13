@@ -2,8 +2,8 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-export async function getAllUsersService(filters = {}) {
-  const params = buildQueryParams(filters);
+export async function getAllUsersService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.users}/?${params}`,
@@ -11,8 +11,10 @@ export async function getAllUsersService(filters = {}) {
   );
 
   if (!response.ok) {
-    throw new Error("Error al intentar obtener los usuarios");
+    throw new Error("Error en la petición");
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  return data.data;
 }
