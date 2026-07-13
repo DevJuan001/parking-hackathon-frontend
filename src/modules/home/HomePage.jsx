@@ -14,10 +14,7 @@ export default function HomePage() {
     useModal();
 
   return (
-    <main
-      className="w-full h-full overflow-hidden
-      dark:bg-black"
-    >
+    <main className="w-full h-full overflow-hidden">
       <HomeSectionsContainer openModal={openModal} />
 
       {modalType && (
