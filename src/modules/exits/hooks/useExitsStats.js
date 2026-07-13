@@ -9,22 +9,24 @@ export function useExitsStats() {
     staleTime: 60_000,
   });
 
-  const stats = [
-    { name: "Hoy", value: query.data?.data?.today_revenue, color: "#a5acfa" },
+  const chartStats = [
+    { name: "Hoy", value: query?.data?.today_revenue, color: "#a5acfa" },
     {
       name: "Esta semana",
-      value: query.data?.data?.this_week_revenue,
+      value: query?.data?.this_week_revenue,
       color: "#5769ff",
     },
     {
       name: "Este mes",
-      value: query.data?.data?.this_month_revenue,
+      value: query?.data?.this_month_revenue,
       color: "#4f5ff1",
     },
+    {name: ""}
   ];
 
   return {
-    stats,
+    stats: query.data,
+    chartStats,
     loading: query.isLoading,
     error: query.error,
     refetch: query.refetch,

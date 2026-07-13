@@ -10,8 +10,10 @@ export async function getExitsStatsService() {
   );
 
   if (!response.ok) {
-    throw new Error("Error al intentar obtener las estadisticas de salidas");
+    throw new Error("Error en la petición");
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  return data.data;
 }
