@@ -50,9 +50,16 @@ export function useUpdateCurrentUserInfo(user) {
         await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
         onClose();
       } else {
+        setError(
+          response.error ??
+            "Verfica que todos los campos esten completos y que el correo electronico es el correcto",
+        );
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Verfica que todos los campos esten completos y que el correo electronico es el correcto",
+      );
       openInnerModal("error", triggerButton);
       setError(error);
     } finally {
