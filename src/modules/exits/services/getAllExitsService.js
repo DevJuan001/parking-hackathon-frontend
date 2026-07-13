@@ -2,8 +2,8 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-export async function getAllExitsService(filters) {
-  const params = buildQueryParams(filters);
+export async function getAllExitsService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.exits}/?${params}`,
@@ -13,8 +13,10 @@ export async function getAllExitsService(filters) {
   );
 
   if (!response.ok) {
-    throw new Error("Error al intentar obtener las salidas");
+    throw new Error("Error en la petición");
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  return data.data;
 }
