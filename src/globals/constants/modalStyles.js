@@ -21,8 +21,8 @@ export const modal_styles = {
 
   menu: `p-2 max-w-[280px] h-auto rounded-[40px]`,
 
-  user: `p-7 w-[400px] h-auto rounded-[32px]
-    md:w-[655px]`,
+  user: `p-7 w-screen h-screen
+    md:w-[655px] md:h-auto md:rounded-[32px]`,
 
   logIn: `p-7 w-screen h-screen
     md:h-auto md:w-[730px] md:rounded-[32px]

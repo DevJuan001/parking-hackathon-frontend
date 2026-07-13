@@ -1,26 +1,31 @@
+// Hooks
+import { useTheme } from "@hooks/useTheme";
+// Componentes
 import Icon from "@components/ui/Icon";
 import SelectMenu from "@modals/SelectMenu";
-import { useTheme } from "@hooks/useTheme";
 
 export default function AppearanceContent() {
   const { setTheme } = useTheme();
 
   return (
-    <section className="h-full w-full flex flex-col pb-10 gap-7 animate-blur-up dark:text-white">
+    <section
+      className="h-full w-full flex flex-col pb-10 gap-7 animate-blur-up
+      dark:text-[#E2E4E5]"
+    >
       {/* Opciones de apariencia */}
       <div className="w-full flex flex-col gap-2">
         <span className="font-medium text-sm">Apariencia</span>
-        <div className="flex gap-3 w-full">
+
+        <div className="flex items-center justify-between gap-3 w-full">
           {/* Sistema */}
           <button
             onClick={() => setTheme("system")}
-            className={`w-28 flex flex-col items-start justify-between gap-1.5 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
-            md:w-[135px]
+            className={`w-full flex flex-col items-start justify-between gap-1.5 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             `}
           >
-            <div className="flex items-center">
+            <div className="h-full flex items-center">
               <Icon
                 fill
                 name={"circle"}
@@ -37,14 +42,14 @@ export default function AppearanceContent() {
                 className={"rounded-3xl dark:border dark:border-gray-900"}
               />
             </div>
+
             <span className="font-medium text-sm">Sistema</span>
           </button>
 
           {/* Claro */}
           <button
             onClick={() => setTheme("light")}
-            className={`w-28 flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
-            md:w-[135px]
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}
@@ -63,8 +68,7 @@ export default function AppearanceContent() {
           {/* Oscuro */}
           <button
             onClick={() => setTheme("dark")}
-            className={`w-28 flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb]  rounded-xl
-            md:w-[135px]
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb]  rounded-xl
             dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}
