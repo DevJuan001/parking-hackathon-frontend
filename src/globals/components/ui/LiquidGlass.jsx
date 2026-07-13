@@ -35,7 +35,7 @@ export default function LiquidGlass({ children, className, onClick }) {
         {/* Base del glass — iridiscencia sutil */}
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-br from-white/4 via-white/2 to-transparent
-          dark:from-white/10 dark:via-white/4 dark:to-transparent"
+          dark:from-white/4 dark:via-white/2 dark:to-transparent"
         />
 
         {/* Textura líquida (noise) */}
