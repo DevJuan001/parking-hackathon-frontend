@@ -1,8 +1,11 @@
-import Icon from "@components/ui/Icon";
-import { createPortal } from "react-dom";
+// Hooks
 import React, { useRef, useId } from "react";
 import { useFlipModal } from "@hooks/useFlipModal";
-import { modal_styles } from "@/globals/constants/modalStyles";
+// Constantes
+import { modals } from "@/globals/constants/modals";
+// Componentes
+import Icon from "@components/ui/Icon";
+import { createPortal } from "react-dom";
 
 export default function Modal({
   isOpen,
@@ -24,14 +27,6 @@ export default function Modal({
   const id = useId();
   const modalId = id.replace(/:/g, "");
 
-  if (type === "user" || type === "help") {
-    location = "center";
-  }
-
-  if (type === "filter") {
-    growDirection = "bottom-center";
-  }
-
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "clip";
@@ -50,8 +45,8 @@ export default function Modal({
     triggerRef,
     overlayRef,
     onClose,
-    location,
-    growDirection,
+    location: modals[type]?.location || location,
+    growDirection: modals[type]?.growDirection || growDirection,
     margin,
     id: modalId,
   });
@@ -83,7 +78,7 @@ export default function Modal({
           maxHeight: "100vh",
         }}
         ref={modalRef}
-        className={`${modal_styles[type] ?? modal_styles.default} flex flex-col bg-[#fbf9fc] font-poppins shadow-lg
+        className={`${modals[type]?.styles ?? modals.default.styles} flex flex-col bg-[#fbf9fc] font-poppins shadow-lg
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef} className="overflow-y-auto flex-1 p-0.5">
@@ -99,11 +94,11 @@ export default function Modal({
             "export",
             "search",
             "topSectionMobileOptions",
-            "entryInfo",  
+            "entryInfo",
           ].includes(type) && (
             <header className="flex justify-between items-center mb-2 shrink-0">
               <span className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]">
-                {title}
+                {modals[type]?.title || title}
               </span>
 
               <button
