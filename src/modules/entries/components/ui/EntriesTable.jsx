@@ -150,7 +150,7 @@ export default function EntriesTable({
                   <th colSpan={5}>
                     <Skeleton
                       width="100%"
-                      height="56px"
+                      height="48px"
                       backgroundColor={"#F3EEF5"}
                       darkModeBackgroundColor={"#101012"}
                       shineColor="#C5C1C7"
