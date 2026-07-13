@@ -47,9 +47,8 @@ export default function FloorsPanel({ openModal }) {
             darkModeBackgroundColor={"#101012"}
           />
         ) : (
-
           floors.map((floor) => (
-            <FloorItem floor={floor} openModal={openModal} />
+            <FloorItem key={floor.id} floor={floor} openModal={openModal} />
           ))
         )}
       </div>
