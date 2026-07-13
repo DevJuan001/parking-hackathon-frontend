@@ -11,6 +11,9 @@ export const modal_styles = {
   editTariff: `p-4 w-[300px] h-auto rounded-[32px]
     md:w-[380px]`,
 
+  createFloor: `p-7 w-[350px] h-auto rounded-[32px]
+    md:w-[450px]`,
+
   editFloor: `p-4 w-[300px] h-auto rounded-[32px]
     md:w-[380px]`,
 
