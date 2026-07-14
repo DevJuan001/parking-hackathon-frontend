@@ -4,6 +4,7 @@ import HomeLoading from "@/modules/home/components/ui/HomeLoading";
 import UsersLoading from "@/modules/users/components/ui/UsersLoading";
 import ExitsLoading from "@/modules/exits/components/ui/ExitsLoading";
 import ParkingLoading from "@/modules/parking/components/ui/ParkingLoading";
+import FinanceLoading from "@/modules/finance/components/ui/FinanceLoading";
 // Pages
 const HomePage = lazy(() => import("@/modules/home/HomePage"));
 const UsersPage = lazy(() => import("@/modules/users/UsersPage"));
@@ -58,7 +59,7 @@ export const layoutRoutes = [
   {
     path: "/finance",
     component: FinancePage,
-    loading: ParkingLoading,
+    loading: FinanceLoading,
     roles: ["Admin"],
   },
 ];

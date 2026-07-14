@@ -1,7 +1,9 @@
+import TopSection from "@/globals/components/ui/TopSection";
+
 export default function FinancePage() {
   return (
-    <div>
-      <div></div>
-    </div>
+    <main className="w-full h-full">
+      <TopSection sectionName={"Finanzas"} exportButtonOnClick={() => alert()} />
+    </main>
   );
 }
