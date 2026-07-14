@@ -1,6 +1,9 @@
-export default function AnimatedBackground() {
+export default function AnimatedBackground({ className }) {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      className={`absolute inset-0 overflow-hidden pointer-events-none
+      ${className}`}
+    >
       {/* Orb secundario — movimiento circular uniforme */}
       <div className="absolute top-1/2 left-1/2">
         <div
