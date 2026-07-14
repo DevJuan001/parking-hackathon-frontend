@@ -65,8 +65,8 @@ export const modals = {
   },
 
   user: {
-    styles: `p-7 w-screen h-screen
-    md:w-[655px] md:h-auto md:rounded-[32px]`,
+    styles: `p-3 w-screen h-screen
+    md:w-[700px] md:h-[calc(100vh-30%)] md:rounded-[32px]`,
     location: "center",
   },
 

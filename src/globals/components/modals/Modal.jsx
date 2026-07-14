@@ -95,9 +95,13 @@ export default function Modal({
             "search",
             "topSectionMobileOptions",
             "entryInfo",
+            "user",
           ].includes(type) && (
             <header className="flex justify-between items-center mb-2 shrink-0">
-              <span className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]">
+              <span
+                className="min-w-56 font-medium text-lg
+                dark:text-[#e4e2e5]"
+              >
                 {modals[type]?.title || title}
               </span>
 
