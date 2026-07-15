@@ -5,9 +5,9 @@ import { useCurrentUser } from "@hooks/useCurrentUser";
 // Components
 import Icon from "@components/ui/Icon";
 import LiquidGlass from "@components/ui/LiquidGlass";
-import SubscriptionContent from "./SubscriptionContent";
 import GeneralContent from "@modals/profileModal/GeneralContent";
 import AppearanceContent from "@modals/profileModal/AppearanceContent";
+import SubscriptionContent from "@modals/profileModal/SubscriptionContent";
 // Modals
 import Modal from "@modals/Modal";
 import EditInfoModal from "@modals/profileModal/EditInfoModal";
@@ -33,7 +33,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
         md:grid md:grid-cols-[150px_1fr]"
       >
         <aside
-          className="h-[15%] w-full justify-self-end mt-5 border-gray-300
+          className="h-[15%] w-full justify-self-end mt-3 font-dmsans border-gray-300
           md:h-full md:justify-self-start md:self-start
           dark:border-[#3a3d43]"
         >
@@ -125,7 +125,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
         >
           <LiquidGlass
             onClick={onCloseModal}
-            className="absolute w-10 max-h-10 my-2 self-end p-2 rounded-full
+            className="absolute w-10 max-h-10 mt-3 mr-1 self-end p-2 rounded-full
             hover:cursor-pointer hover:bg-[#49454f21]"
           >
             <Icon name={"close"} />
