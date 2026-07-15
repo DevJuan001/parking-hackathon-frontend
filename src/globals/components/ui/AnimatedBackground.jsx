@@ -23,14 +23,14 @@ export default function AnimatedBackground({ className }) {
 
       {/* Textura SVG noise/grain overlay */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-20 
-        dark:opacity-8"
+        className="absolute inset-0 w-full h-full opacity-40
+        dark:opacity-6"
       >
         <filter id="noise">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.5"
-            numOctaves="3"
+            baseFrequency="0.65"
+            numOctaves="4"
             result="noise"
           />
           <feColorMatrix
