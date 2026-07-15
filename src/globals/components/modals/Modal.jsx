@@ -96,6 +96,7 @@ export default function Modal({
             "topSectionMobileOptions",
             "entryInfo",
             "user",
+            "chat",
           ].includes(type) && (
             <header className="flex justify-between items-center mb-2 shrink-0">
               <span
