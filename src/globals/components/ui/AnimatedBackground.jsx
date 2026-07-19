@@ -7,9 +7,9 @@ export default function AnimatedBackground({ className }) {
       {/* Orb secundario — movimiento circular uniforme */}
       <div className="absolute top-1/2 left-1/2">
         <div
-          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-70 animate-main-orbit
+          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-50 animate-main-orbit
           bg-[radial-gradient(circle,#000000_0%,transparent_70%)]
-          dark:bg-[radial-gradient(circle_at_center,#FFFFFF_0%,transparent_70%)] dark:opacity-35"
+          dark:bg-[radial-gradient(circle_at_center,#FFFFFF_0%,transparent_70%)] dark:opacity-70"
         />
       </div>
 
@@ -17,14 +17,15 @@ export default function AnimatedBackground({ className }) {
       <div className="absolute top-1/2 left-1/2">
         <div
           className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-70 animate-second-orbit
-          bg-[radial-gradient(circle_at_center,#A235C6_0%,transparent_70%)] dark:opacity-80"
+          bg-[radial-gradient(circle_at_center,#A235C6_0%,transparent_70%)] dark:opacity-100"
         />
       </div>
 
       {/* Textura SVG noise/grain overlay */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-40
-        dark:opacity-6"
+        fill="currentColor"
+        className="absolute inset-0 w-full h-full opacity-8
+        dark:opacity-45"
       >
         <filter id="noise">
           <feTurbulence
@@ -35,7 +36,7 @@ export default function AnimatedBackground({ className }) {
           />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 1 0"
+            values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0.21 0.71 0.07 0 0"
             in="noise"
           />
         </filter>
