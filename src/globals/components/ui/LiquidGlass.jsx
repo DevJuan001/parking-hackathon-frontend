@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-export default function LiquidGlass({ children, className, onClick }) {
+export default function LiquidGlass({ children, className, role, onClick }) {
   const filterId = `liquid-glass-noise-${useId()}`;
 
   return (
@@ -23,13 +23,14 @@ export default function LiquidGlass({ children, className, onClick }) {
       </svg>
 
       <div
+        role={role}
         onClick={onClick}
         className={`relative overflow-hidden shadow-lg shadow-gray-900/4 
         ${className}
         dark:shadow-black/10`}
         style={{
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
+          backdropFilter: "blur(1px)",
+          WebkitBackdropFilter: "blur(1px)",
         }}
       >
         {/* Base del glass — iridiscencia sutil */}
