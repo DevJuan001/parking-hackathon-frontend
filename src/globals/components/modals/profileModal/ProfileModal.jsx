@@ -4,8 +4,10 @@ import { useInnerModal } from "@hooks/useInnerModal";
 import { useCurrentUser } from "@hooks/useCurrentUser";
 // Components
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "@components/ui/LiquidGlass";
 import GeneralContent from "@modals/profileModal/GeneralContent";
 import AppearanceContent from "@modals/profileModal/AppearanceContent";
+import SubscriptionContent from "@modals/profileModal/SubscriptionContent";
 // Modals
 import Modal from "@modals/Modal";
 import EditInfoModal from "@modals/profileModal/EditInfoModal";
@@ -28,10 +30,10 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
     >
       <section
         className="h-full flex flex-col-reverse items-center justify-between gap-4
-        md:h-[445px] md:grid md:grid-cols-[150px_1fr]"
+        md:grid md:grid-cols-[150px_1fr]"
       >
         <aside
-          className="h-[15%] justify-self-end w-full border-gray-300
+          className="h-[15%] w-full justify-self-end mt-3 font-dmsans border-gray-300
           md:h-full md:justify-self-start md:self-start
           dark:border-[#3a3d43]"
         >
@@ -42,11 +44,12 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
           >
             <li
               onClick={() => setActiveSection("general")}
-              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 text-xs transition duration-300
+              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-2xl gap-2 text-xs transition
+                hover:cursor-pointer
                 md:flex-row md:w-full md:text-sm
                 ${
                   activeSection === "general"
-                    ? `bg-gray-200 font-medium text-black
+                    ? `bg-[#F5F3F6] font-medium text-[#44474e]
                       dark:text-white dark:bg-[#202022] dark:hover:bg-[#28282b]`
                     : `text-[#68676786] hover:bg-[#efedf0]
                       dark:hover:bg-[#101012] dark:hover:text-[#ffffff8a]`
@@ -54,35 +57,80 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
             >
               <Icon name={"apps"} size={24} />
 
-              <span> General </span>
+              <span>General</span>
             </li>
 
             <li
               onClick={() => setActiveSection("appearance")}
-              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 transition duration-300
-              hover:bg-[#efedf0]
+              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-2xl gap-2 transition
+              hover:bg-[#efedf0] hover:cursor-pointer
               md:flex-row md:pr-0 md:pl-3
               dark:hover:bg-[#202022]
               ${
                 activeSection === "appearance"
-                  ? `bg-gray-200 font-medium text-black
+                  ? `bg-[#F5F3F6] font-medium text-[#44474e]
                     dark:text-white dark:bg-[#202022] dark:hover:bg-[#28282b]`
                   : `text-[#68676786] hover:bg-[#efedf0]
                     dark:hover:bg-[#101012] dark:hover:text-[#ffffff8a]`
               }`}
             >
-              <Icon name={"palette"} size={24} />
+              <Icon
+                name={"palette"}
+                size={24}
+                fill={activeSection === "appearance" ? true : false}
+              />
 
-              <span className="text-xs md:text-sm"> Apariencia </span>
+              <span
+                className="text-xs 
+                md:text-sm"
+              >
+                Apariencia
+              </span>
+            </li>
+
+            <li
+              onClick={() => setActiveSection("subscription")}
+              className={`w-full flex flex-col items-center py-2.5 px-3 rounded-2xl gap-2 transition
+              hover:bg-[#efedf0] hover:cursor-pointer
+              md:flex-row md:pr-0 md:pl-3
+              dark:hover:bg-[#202022]
+              ${
+                activeSection === "subscription"
+                  ? `bg-[#F5F3F6] font-medium text-[#44474e]
+                    dark:text-white dark:bg-[#202022] dark:hover:bg-[#28282b]`
+                  : `text-[#68676786] hover:bg-[#efedf0]
+                    dark:hover:bg-[#101012] dark:hover:text-[#ffffff8a]`
+              }`}
+            >
+              <Icon
+                name={"savings"}
+                size={24}
+                fill={activeSection === "subscription" ? true : false}
+              />
+
+              <span
+                className="text-xs 
+                md:text-sm"
+              >
+                Suscripción
+              </span>
             </li>
           </ul>
         </aside>
 
         <section
-          className="h-[85%] w-full flex flex-col gap-7 animate-blur-up
+          className="relative h-[85%] w-full flex flex-col px-2 gap-2 animate-blur-up
           md:h-full
           dark:text-white"
         >
+          <LiquidGlass
+            onClick={onCloseModal}
+            className="absolute w-10 max-h-10 mt-3 mr-1 self-end p-2 rounded-full
+            hover:cursor-pointer hover:bg-[#49454f21]"
+          >
+            <Icon name={"close"} />
+          </LiquidGlass>
+
           {/* Contenido de la sección seleccionada */}
           {activeSection === "general" && (
             <GeneralContent
@@ -98,6 +146,8 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
           )}
 
           {activeSection === "appearance" && <AppearanceContent />}
+
+          {activeSection === "subscription" && <SubscriptionContent />}
 
           {/* Modales Internas */}
           {innerType === "editInfo" && (

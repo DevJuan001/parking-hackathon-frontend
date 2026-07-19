@@ -52,7 +52,7 @@ export default function LoginModal() {
       </span>
 
       <form
-        action={(e) => handleChange(e, openInnerModal)}
+        onSubmit={(e) => handleSubmit(e, openInnerModal)}
         className="flex flex-col gap-2"
       >
         <FormField

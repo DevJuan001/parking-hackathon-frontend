@@ -7,13 +7,20 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
   const { logout } = useLogout();
 
   return (
-    <div className="h-full w-full flex flex-col gap-7 animate-blur-up dark:text-white">
+    <div
+      className="h-full w-full flex flex-col gap-7 animate-blur-up
+      dark:text-white"
+    >
       {/* Información general del usuario */}
       <div className="flex flex-col">
         <span className="font-medium text-sm pl-1">Perfil</span>
 
         <div className="flex gap-4 items-center mt-4">
-          <img src={"/public/parking-logo.svg"} alt="" className="h-14 w-14" />
+          <img
+            src={"/public/parking-logo.svg"}
+            alt="Logo del parqueadero"
+            className="h-14 w-14"
+          />
 
           <article className="flex flex-col justify-center">
             <span className="font-medium">
@@ -36,7 +43,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
 
         <button
           onClick={onEditClick}
-          className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-white
+          className="flex items-center gap-1.5 px-4 py-3 rounded-xl bg-black text-white
           dark:bg-[#20202296] dark:hover:text-gray-300"
         >
           <Icon name={"app_registration"} color={"#fff"} size={21} />
@@ -54,7 +61,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
 
         <button
           onClick={onPasswordClick}
-          className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-sm bg-blacktransition text-white
+          className="flex items-center gap-1.5 px-4 py-3 rounded-xl bg-black text-sm bg-blacktransition text-white
           dark:bg-[#20202296] dark:text-white dark:hover:text-gray-300"
         >
           <Icon name={"edit_square"} color={"#fff"} size={20} />
@@ -74,7 +81,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
 
         <button
           onClick={logout}
-          className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-sm bg-blacktransition text-white
+          className="flex items-center gap-1.5 px-4 py-3 rounded-xl bg-black text-sm bg-blacktransition text-white
           dark:bg-[#20202296] dark:text-white dark:hover:text-gray-300"
         >
           <Icon name="logout" size={22} color={"#fff"} />

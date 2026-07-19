@@ -26,7 +26,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
       triggerRef={triggerRef}
     >
       <form
-        action={(e) => handleSubmit(e, openInnerModal)}
+        onSubmit={(e) => handleSubmit(e, openInnerModal)}
         className="flex flex-col items-center gap-2"
       >
         <FormField

@@ -16,7 +16,7 @@ export default function CreateEntryModal({ onClose }) {
 
   return (
     <form
-      action={(e) => handleSubmit(e, openInnerModal)}
+      onSubmit={(e) => handleSubmit(e, openInnerModal)}
       className="flex flex-col items-center gap-2"
     >
       <FormField

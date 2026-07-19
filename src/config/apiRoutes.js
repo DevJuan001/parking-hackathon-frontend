@@ -11,4 +11,5 @@ export const apiRoutes = {
   dashboard: "/dashboard",
   payments: "/payments",
   countries: "/countries",
+  chatbot: "/chatbot",
 };

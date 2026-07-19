@@ -9,18 +9,32 @@ export default function AppearanceContent() {
 
   return (
     <section
-      className="h-full w-full flex flex-col pb-10 gap-7 animate-blur-up
+      className="h-full w-full flex flex-col pb-10 gap-2 font-dmsans animate-blur-up
       dark:text-[#E2E4E5]"
     >
       {/* Opciones de apariencia */}
-      <div className="w-full flex flex-col gap-2">
-        <span className="font-medium text-sm">Apariencia</span>
+      <div
+        className="w-full flex flex-col p-7 gap-2 rounded-[40px] bg-[#F5F3F6]
+        dark:bg-[#101012]"
+      >
+        <div className="flex flex-col">
+          <Icon name={"palette"} fill />
 
-        <div className="flex items-center justify-between gap-3 w-full">
+          <span className="font-medium text-xl">Apariencia</span>
+
+          <span
+            className="text-sm text-[#75777E]
+            dark:text-[#7E8088]"
+          >
+            Elige cómo se ve tu app
+          </span>
+        </div>
+
+        <div className="w-full flex items-center justify-between gap-2">
           {/* Sistema */}
           <button
             onClick={() => setTheme("system")}
-            className={`w-full flex flex-col items-start justify-between gap-1.5 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             `}
@@ -49,7 +63,7 @@ export default function AppearanceContent() {
           {/* Claro */}
           <button
             onClick={() => setTheme("light")}
-            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}
@@ -68,7 +82,7 @@ export default function AppearanceContent() {
           {/* Oscuro */}
           <button
             onClick={() => setTheme("dark")}
-            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb]  rounded-xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
             dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}
@@ -86,11 +100,21 @@ export default function AppearanceContent() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-24 md:gap-44">
-        <div className="flex flex-col gap-1">
-          <span className="font-medium text-sm">Lenguaje</span>
+      <div
+        className="flex flex-col justify-between p-7 gap-2 rounded-[40px] bg-[#F5F3F6]
+        dark:bg-[#101012]"
+      >
+        <div className="flex flex-col gap-0.5">
+          <Icon name={"language"} fill />
 
-          <span className="text-xs font-light">Español</span>
+          <span className="font-medium text-xl">Lenguaje</span>
+
+          <span
+            className="text-sm text-[#75777E] font-light
+            dark:text-[#7E8088]"
+          >
+            Elige tu idioma preferido
+          </span>
         </div>
 
         <SelectMenu

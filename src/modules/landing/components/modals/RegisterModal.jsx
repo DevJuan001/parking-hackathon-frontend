@@ -40,7 +40,7 @@ export default function RegisterModal() {
       </span>
 
       <form
-        action={(e) => handleChange(e, openInnerModal)}
+        onSubmit={(e) => handleSubmit(e, openInnerModal)}
         className="flex flex-col gap-2 dark:text-white"
       >
         <FormField

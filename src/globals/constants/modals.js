@@ -65,8 +65,8 @@ export const modals = {
   },
 
   user: {
-    styles: `p-7 w-screen h-screen
-    md:w-[655px] md:h-auto md:rounded-[32px]`,
+    styles: `p-3 w-screen h-screen
+    md:w-[750px] md:h-[calc(100vh-30%)] md:rounded-[32px]`,
     location: "center",
   },
 
@@ -86,6 +86,12 @@ export const modals = {
     md:h-auto md:w-[730px] md:rounded-[32px]
     lg:w-[770px]
     xl:w-[900px]`,
+  },
+
+  chat: {
+    styles: `p-2 w-screen h-screen
+    md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
+    lg:w-[800px]`,
   },
 
   default: {

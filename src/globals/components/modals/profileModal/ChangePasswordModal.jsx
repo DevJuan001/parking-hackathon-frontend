@@ -37,7 +37,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
       triggerRef={triggerRef}
     >
       <form
-        action={(e) => handleSubmit(e, openInnerModal)}
+        onSubmit={(e) => handleSubmit(e, openInnerModal)}
         className="flex flex-col items-center w-full gap-2"
       >
         <FormField
