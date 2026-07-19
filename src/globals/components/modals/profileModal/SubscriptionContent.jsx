@@ -3,7 +3,7 @@ import AnimatedBackground from "@components/ui/AnimatedBackground";
 export default function SubscriptionContent() {
   return (
     <div className="w-full h-full rounded-2xl">
-      <AnimatedBackground className="rounded-4xl" />
+      <AnimatedBackground className="rounded-3xl" />
 
       <div
         className="w-full flex flex-col px-4 gap-6 text-[#1b1b1eef] font-dmsans animate-blur-up
