@@ -7,7 +7,7 @@ export default function AnimatedBackground({ className }) {
       {/* Orb secundario — movimiento circular uniforme */}
       <div className="absolute top-1/2 left-1/2">
         <div
-          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-35 animate-main-orbit
+          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-25 animate-main-orbit
           bg-[radial-gradient(circle,#000000_0%,transparent_70%)]
           dark:bg-[radial-gradient(circle_at_center,#FFFFFF_0%,transparent_70%)] dark:opacity-70"
         />
