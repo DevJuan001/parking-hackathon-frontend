@@ -5,7 +5,7 @@ import { useCurrentUser } from "@hooks/useCurrentUser";
 import Icon from "@components/ui/Icon";
 import Navbar from "@components/Layout/aside/Navbar";
 // Modales
-import ChatModal from "@components/Layout/aside/ChatModal";
+import ChatModal from "@modals/ChatModal";
 
 export default function Aside() {
   const { hasRole } = useCurrentUser();
