@@ -1,6 +1,9 @@
+import { useCurrentUser } from "@/globals/hooks/useCurrentUser";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
 
 export default function SubscriptionContent() {
+  const { user } = useCurrentUser();
+
   return (
     <div className="w-full h-full rounded-2xl">
       <AnimatedBackground className="rounded-3xl" />
@@ -10,9 +13,11 @@ export default function SubscriptionContent() {
         dark:text-[#E4E2E5]"
       >
         <div className="w-full flex flex-col">
-          <span className="text-2xl font-semibold">Plan Empresarial</span>
+          <span className="text-2xl font-semibold">
+            {user.plan ?? "Plan Gratuito"}
+          </span>
 
-          <span>$149.999 / mes</span>
+          <span>Gratís</span>
         </div>
 
         <div className="flex flex-col">
