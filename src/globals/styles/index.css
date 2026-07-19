@@ -22,9 +22,9 @@
   --animate-main-orbit: main-orbit 25s linear infinite;
   --animate-second-orbit: second-orbit 18s cubic-bezier(0.45, 0.05, 0.55, 0.95)
     infinite;
-  --animate-message-in-left: message-in 0.42s cubic-bezier(.2, .9, .3, 1.15)
+  --animate-message-in-left: message-in-left 0.42s cubic-bezier(0.2, 0.9, 0.3, 1.15)
     forwards;
-  --animate-message-in-right: message-in 0.42s cubic-bezier(.2, .9, .3, 1.15)
+  --animate-message-in-right: message-in-right 0.42s cubic-bezier(0.2, 0.9, 0.3, 1.15)
     forwards;
 
   @keyframes blur-up {

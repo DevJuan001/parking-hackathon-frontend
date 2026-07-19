@@ -81,7 +81,7 @@ export default function ChatModal({ triggerRef, onClose }) {
 
           {isPending && (
             <LiquidGlass
-              className="max-w-[80%] min-h-fit self-start px-6 py-4 rounded-4xl bg-[#ffffffc7] wrap-break-word
+              className="max-w-[80%] min-h-fit self-start px-6 py-4 rounded-4xl bg-[#ffffffc7] wrap-break-word animate-message-in-left
               dark:bg-[#000000a2] dark:text-[#E4E2E5]"
             >
               <p className="animate-pulse">Pensando...</p>
