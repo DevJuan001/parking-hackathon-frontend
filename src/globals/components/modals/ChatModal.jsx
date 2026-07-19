@@ -61,7 +61,7 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <div
           ref={chatRef}
-          className="absolute w-full h-[90%] flex flex-col p-2 gap-4 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto"
+          className="absolute w-full h-[90%] flex flex-col p-2 gap-4 mt-2 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto"
         >
           {messages?.map((message) => (
             <LiquidGlass
@@ -93,7 +93,8 @@ export default function ChatModal({ triggerRef, onClose }) {
           onSubmit={handleSubmit}
           className="absolute bottom-0 w-full h-[10%] flex items-center px-2 py-3 font-dmsans"
         >
-          <input
+          <textarea
+            autoFocus
             id="message"
             type="text"
             name="message"
@@ -107,7 +108,7 @@ export default function ChatModal({ triggerRef, onClose }) {
           <LiquidGlass
             role="button"
             onClick={(e) => handleSubmit(e)}
-            className="h-fit flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
+            className="flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
             hover:bg-[#4a484b17] hover:cursor-pointer
             dark:bg-[#000000]"
           >
