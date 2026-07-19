@@ -69,9 +69,9 @@ export default function ChatModal({ triggerRef, onClose }) {
               className={`max-w-[80%] min-h-fit px-6 py-3.5 rounded-4xl font-medium wrap-break-word
               ${
                 message.role === "user"
-                  ? `self-end bg-[#00000028] text-[#ffffff]
+                  ? `self-end bg-[#00000028] text-[#ffffff] animate-message-in-right
                   dark:bg-[#ffffff46] dark:text-[#000000]`
-                  : `self-start bg-[#ffffffc7]
+                  : `self-start bg-[#ffffffc7] animate-message-in-left
                   dark:bg-[#000000d5] dark:text-[#E4E2E5]`
               }`}
             >
@@ -107,12 +107,24 @@ export default function ChatModal({ triggerRef, onClose }) {
 
           <LiquidGlass
             role="button"
+            disable={isPending}
             onClick={(e) => handleSubmit(e)}
-            className="flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
-            hover:bg-[#4a484b17] hover:cursor-pointer
-            dark:bg-[#000000]"
+            className={`flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
+            ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
+            hover:bg-[#4a484b17] 
+            dark:bg-[#000000]`}
           >
-            <Icon name="arrow_upward" className="dark:text-[#E4E2E5]" />
+            <Icon
+              name="arrow_upward"
+              className={`
+              ${
+                isPending
+                  ? `text-black/20
+                  dark:text-white/20`
+                  : `text-black
+                  dark:text-[#E4E2E5]`
+              }`}
+            />
           </LiquidGlass>
         </form>
       </div>

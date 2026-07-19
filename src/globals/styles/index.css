@@ -18,9 +18,14 @@
   --animate-shake: shake 0.35s ease-in;
   --animate-shimmer: shimmer 3s linear infinite;
   --animate-jump: jump 2s infinite;
-  --animate-click-effect: clickEffect .5s cubic-bezier(.37,1.42,.37,1);
+  --animate-click-effect: clickEffect 0.5s cubic-bezier(0.37, 1.42, 0.37, 1);
   --animate-main-orbit: main-orbit 25s linear infinite;
-  --animate-second-orbit: second-orbit 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  --animate-second-orbit: second-orbit 18s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+    infinite;
+  --animate-message-in-left: message-in 0.42s cubic-bezier(.2, .9, .3, 1.15)
+    forwards;
+  --animate-message-in-right: message-in 0.42s cubic-bezier(.2, .9, .3, 1.15)
+    forwards;
 
   @keyframes blur-up {
     0% {
@@ -103,26 +108,64 @@
 
   @keyframes clickEffect {
     0% {
-      transform: scaleX(1) scaleY(1)
+      transform: scaleX(1) scaleY(1);
     }
-    
+
     50% {
-      transform: scaleX(0.95) scaleY(0.9)
+      transform: scaleX(0.95) scaleY(0.9);
     }
 
     100% {
-      transform: scaleX(1)
+      transform: scaleX(1);
     }
   }
 
   @keyframes main-orbit {
-    0% { transform: rotate(0deg) translate(150px) rotate(0deg); }
-    100% { transform: rotate(360deg) translate(150px) rotate(-360deg); }
+    0% {
+      transform: rotate(0deg) translate(150px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translate(150px) rotate(-360deg);
+    }
   }
 
   @keyframes second-orbit {
-    0% { transform: rotate(0deg) translate(150px) rotate(0deg); }
-    100% { transform: rotate(360deg) translate(150px) rotate(-360deg); }
+    0% {
+      transform: rotate(0deg) translate(150px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translate(150px) rotate(-360deg);
+    }
+  }
+
+  @keyframes message-in-left {
+    0% {
+      opacity: 0;
+      transform: scale(0.6) translateY(20px) translateX(-16px);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.03) translateY(-2px) translateX(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0) translateX(0);
+    }
+  }
+
+  @keyframes message-in-right {
+    0% {
+      opacity: 0;
+      transform: scale(0.6) translateY(20px) translateX(16px);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.03) translateY(-2px) translateX(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0) translateX(0);
+    }
   }
 
   --default-font-family: "Inter", sans-serif;
