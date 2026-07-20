@@ -38,9 +38,9 @@ export default function FilterModal({
 
         <LiquidGlass
           onClick={onClose}
-          className="flex items-center justify-center p-2.5 rounded-3xl border border-[#E4E2E5] transition-colors duration-200
+          className="flex items-center justify-center p-2.5 rounded-3xl transition-colors duration-200
           hover:bg-[#49454f21] hover:cursor-pointer
-          dark:border-[#00000003] dark:text-[#7E8088] dark:hover:bg-[#28282bbd]"
+          dark:text-[#7E8088] dark:hover:bg-[#28282bbd]"
         >
           <Icon name={"close"} size={20} />
         </LiquidGlass>
