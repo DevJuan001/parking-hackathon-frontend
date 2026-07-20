@@ -9,8 +9,14 @@ import AnimatedBackground from "@components/ui/AnimatedBackground";
 import Modal from "@modals/Modal";
 
 export default function ChatModal({ triggerRef, onClose }) {
-  const { messages, chatInfo, isPending, handleChange, handleSubmit } =
-    useChat();
+  const {
+    messages,
+    chatInfo,
+    isPending,
+    handleChange,
+    handleSubmit,
+    handleKeyDown,
+  } = useChat();
   const chatRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +36,7 @@ export default function ChatModal({ triggerRef, onClose }) {
     >
       <AnimatedBackground className="rounded-[40px]" />
 
-      <div className="relative w-full h-full rounded-[30px] overflow-hidden">
+      <div className="relative w-full h-full rounded-[50px] overflow-hidden">
         <div className="absolute flex items-center gap-1 m-3 z-50">
           <LiquidGlass
             onClick={onClose}
@@ -100,6 +106,7 @@ export default function ChatModal({ triggerRef, onClose }) {
             name="message"
             value={chatInfo.message}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             placeholder="Escribe un mensaje..."
             className="h-full w-full p-3 text-2xl outline-0
             dark:text-[#E4E2E5]"
@@ -111,6 +118,7 @@ export default function ChatModal({ triggerRef, onClose }) {
             onClick={(e) => handleSubmit(e)}
             className={`flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
             ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
+            active:animate-click-effect
             hover:bg-[#4a484b17] 
             dark:bg-[#000000]`}
           >
