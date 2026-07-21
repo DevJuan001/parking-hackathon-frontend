@@ -15,7 +15,7 @@ export default function ConfirmCancelButtons({
   confirmBtnRef,
 }) {
   return (
-    <section
+    <div
       className={`flex ${flexDirection} items-center self-${itemsPosition} pt-5 gap-2`}
     >
       <button
@@ -37,6 +37,7 @@ export default function ConfirmCancelButtons({
             className={`dark:invert-0 ${confirmImageDisplay ? "block" : "hidden"}`}
           />
         )}
+
         <span>{confirmText}</span>
       </button>
 
@@ -52,6 +53,6 @@ export default function ConfirmCancelButtons({
       >
         <span>{cancelText}</span>
       </button>
-    </section>
+    </div>
   );
 }

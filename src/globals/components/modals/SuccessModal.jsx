@@ -24,11 +24,17 @@ export default function SuccessModal({
     >
       <section className="flex flex-col items-center gap-1">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-20 h-20 flex items-center justify-center bg-green-100 rounded-full dark:bg-green-950">
+          <div
+            className="w-20 h-20 flex items-center justify-center bg-green-100 rounded-full
+            dark:bg-green-950"
+          >
             <Icon name={"check"} size={40} color={"#22c55e"} />
           </div>
 
-          <div className="flex flex-col items-center text-center gap-2 dark:text-white">
+          <div
+            className="flex flex-col items-center text-center gap-2
+            dark:text-white"
+          >
             <span id="confirm-title" className="text-xl font-medium">
               {confirmTitle}
             </span>

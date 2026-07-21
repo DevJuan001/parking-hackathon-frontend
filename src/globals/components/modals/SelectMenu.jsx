@@ -35,10 +35,10 @@ export default function SelectMenu({
 
   return (
     <section
-      className={`relative ${miniVersion ? "w-32" : "w-full"} flex flex-col gap-1`}
+      className={`relative ${miniVersion ? "w-36" : "w-full"} flex flex-col gap-1`}
     >
       <div
-        className={`${miniVersion ? "h-10" : "h-[66px]"} w-full flex items-center gap-1.5`}
+        className={`${miniVersion ? "h-10" : "h-16.5"} w-full flex items-center gap-1.5`}
       >
         <button
           type="button"
@@ -122,12 +122,12 @@ export default function SelectMenu({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar..."
-                className="w-full min-h-[50px] px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] outline-none
+                className="w-full min-h-12.5 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] outline-none
                 dark:border-[#28282ba1] dark:bg-black dark:text-white dark:placeholder:text-[#b4aab4]"
               />
             )}
             {filteredOptions.length === 0 ? (
-              <div className="min-h-[50px] flex items-center justify-center text-[#7E777E] gap-2.5">
+              <div className="min-h-12.5 flex items-center justify-center text-[#7E777E] gap-2.5">
                 <Icon name={"search_off"} />
 
                 <span className="text-center text-sm py-6">
@@ -148,7 +148,7 @@ export default function SelectMenu({
                     onClick={() =>
                       handleSelect(option, name, onChange, closeInnerModal)
                     }
-                    className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
+                    className={`min-h-13 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
                       hover:bg-[#efedf0] hover:font-medium  
                       dark:hover:bg-[#ffffff15]
                       ${isSelected ? "bg-[#efedf0] font-semibold dark:bg-[#ffffff15]" : ""}`}
