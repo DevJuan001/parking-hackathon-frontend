@@ -1,4 +1,4 @@
-export default function ExpensesKpi() {
+export default function ExpensesKpi({ expenses }) {
   return (
     <div
       className="flex flex-col gap-2 p-5 rounded-4xl border border-[#E4E2E5]
@@ -7,9 +7,9 @@ export default function ExpensesKpi() {
       <span className="text-lg">Gastos</span>
 
       <div>
-        <span className="text-5xl font-medium">$4.000</span>
+        <span className="text-5xl font-medium">${expenses}</span>
 
-        <span className="ml-1.5 text-xs">COP</span>
+        <span className="ml-1.5">COP</span>
       </div>
     </div>
   );
