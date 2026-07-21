@@ -1,4 +1,4 @@
-export default function IncomesKpi() {
+export default function IncomesKpi({ incomes }) {
   return (
     <div
       className="flex flex-col gap-2 p-5 rounded-4xl border border-[#E4E2E5]
@@ -7,9 +7,9 @@ export default function IncomesKpi() {
       <span className="text-lg">Ingresos</span>
 
       <div>
-        <span className="text-5xl font-medium">$4.000</span>
+        <span className="text-5xl font-medium">${incomes || 0}</span>
 
-        <span className="ml-1.5 text-xs">COP</span>
+        <span className="ml-1.5">COP</span>
       </div>
     </div>
   );
