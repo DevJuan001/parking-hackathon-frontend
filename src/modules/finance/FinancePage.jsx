@@ -21,7 +21,7 @@ export default function FinancePage() {
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
-      <FinanceSectionsContainer />
+      <FinanceSectionsContainer openModal={openModal} />
 
       {modalType && (
         <Modal
