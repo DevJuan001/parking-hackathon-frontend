@@ -61,9 +61,10 @@ export default function HistorialSection() {
     >
       <span className="text-lg">Historial</span>
 
-      <div className="h-[95%] flex flex-col py-2 gap-2 rounded-2xl overflow-hidden overflow-y-auto">
-        {items?.map((item) => (
+      <div className="h-[95%] flex flex-col py-2 gap-1.5 rounded-2xl overflow-hidden overflow-y-auto">
+        {items?.map((item, index) => (
           <div
+            key={index}
             className="flex items-center justify-between p-2 pr-4 bg-[#F5F3F6] rounded-2xl text-sm
             dark:bg-[#101012]"
           >
