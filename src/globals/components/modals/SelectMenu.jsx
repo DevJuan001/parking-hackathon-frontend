@@ -10,6 +10,7 @@ export default function SelectMenu({
   value,
   spanText,
   options = [],
+  optionOnClick,
   addIconFunction,
   addIconRef,
   seeAddButton = false,
@@ -145,9 +146,10 @@ export default function SelectMenu({
                   <button
                     id={`${id}-${option.value}-option`}
                     key={option.value}
-                    onClick={() =>
-                      handleSelect(option, name, onChange, closeInnerModal)
-                    }
+                    onClick={() => {
+                      handleSelect(option, name, onChange, closeInnerModal);
+                      optionOnClick();
+                    }}
                     className={`min-h-13 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
                       hover:bg-[#efedf0] hover:font-medium  
                       dark:hover:bg-[#ffffff15]
