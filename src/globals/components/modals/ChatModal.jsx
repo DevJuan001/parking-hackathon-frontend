@@ -7,6 +7,7 @@ import LiquidGlass from "@components/ui/LiquidGlass";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
 // Modales
 import Modal from "@modals/Modal";
+import MarkdownConverter from "@components/ui/MarkdownConverter";
 
 export default function ChatModal({ triggerRef, onClose }) {
   const {
@@ -72,7 +73,7 @@ export default function ChatModal({ triggerRef, onClose }) {
           {messages?.map((message) => (
             <LiquidGlass
               key={message.id}
-              className={`max-w-[80%] min-h-fit px-6 py-3.5 rounded-4xl font-medium wrap-break-word
+              className={`max-w-[80%] min-h-fit px-6 py-3.5 rounded-4xl font-medium wrap-break-word whitespace-normal
               ${
                 message.role === "user"
                   ? `self-end bg-[#00000028] text-[#ffffff] animate-message-in-right
@@ -81,7 +82,7 @@ export default function ChatModal({ triggerRef, onClose }) {
                   dark:bg-[#000000d5] dark:text-[#E4E2E5]`
               }`}
             >
-              <p>{message.content}</p>
+              <MarkdownConverter>{message.content}</MarkdownConverter>
             </LiquidGlass>
           ))}
 
