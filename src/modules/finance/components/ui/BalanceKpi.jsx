@@ -33,7 +33,7 @@ export default function BalanceKpi({ incomes, expenses }) {
           weight={500}
         />
 
-        <span>{balancePercentage}% rentabilidad</span>
+        <span>{balancePercentage || 0}% rentabilidad</span>
       </div>
 
       <button
