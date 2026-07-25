@@ -21,7 +21,6 @@ export function useExitsStats() {
       value: query?.data?.this_month_revenue,
       color: "#4f5ff1",
     },
-    {name: ""}
   ];
 
   return {

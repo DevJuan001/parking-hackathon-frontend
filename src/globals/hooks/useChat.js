@@ -18,6 +18,13 @@ export function useChat() {
     }));
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  }
+
   const { data: messages = [] } = useQuery({
     queryKey: ["chat"],
     queryFn: () => [],
@@ -85,6 +92,7 @@ export function useChat() {
     isPending,
     error,
     handleChange,
+    handleKeyDown,
     handleSubmit,
   };
 }

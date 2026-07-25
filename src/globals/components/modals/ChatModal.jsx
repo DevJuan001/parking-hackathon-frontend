@@ -7,10 +7,17 @@ import LiquidGlass from "@components/ui/LiquidGlass";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
 // Modales
 import Modal from "@modals/Modal";
+import MarkdownConverter from "@components/ui/MarkdownConverter";
 
 export default function ChatModal({ triggerRef, onClose }) {
-  const { messages, chatInfo, isPending, handleChange, handleSubmit } =
-    useChat();
+  const {
+    messages,
+    chatInfo,
+    isPending,
+    handleChange,
+    handleSubmit,
+    handleKeyDown,
+  } = useChat();
   const chatRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +37,7 @@ export default function ChatModal({ triggerRef, onClose }) {
     >
       <AnimatedBackground className="rounded-[40px]" />
 
-      <div className="relative w-full h-full rounded-[30px] overflow-hidden">
+      <div className="relative w-full h-full rounded-[50px] overflow-hidden">
         <div className="absolute flex items-center gap-1 m-3 z-50">
           <LiquidGlass
             onClick={onClose}
@@ -66,7 +73,7 @@ export default function ChatModal({ triggerRef, onClose }) {
           {messages?.map((message) => (
             <LiquidGlass
               key={message.id}
-              className={`max-w-[80%] min-h-fit px-6 py-3.5 rounded-4xl font-medium wrap-break-word
+              className={`max-w-[80%] min-h-fit px-6 py-3.5 rounded-4xl font-medium wrap-break-word whitespace-normal
               ${
                 message.role === "user"
                   ? `self-end bg-[#00000028] text-[#ffffff] animate-message-in-right
@@ -75,7 +82,7 @@ export default function ChatModal({ triggerRef, onClose }) {
                   dark:bg-[#000000d5] dark:text-[#E4E2E5]`
               }`}
             >
-              <p>{message.content}</p>
+              <MarkdownConverter>{message.content}</MarkdownConverter>
             </LiquidGlass>
           ))}
 
@@ -100,6 +107,7 @@ export default function ChatModal({ triggerRef, onClose }) {
             name="message"
             value={chatInfo.message}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             placeholder="Escribe un mensaje..."
             className="h-full w-full p-3 text-2xl outline-0
             dark:text-[#E4E2E5]"
@@ -111,6 +119,7 @@ export default function ChatModal({ triggerRef, onClose }) {
             onClick={(e) => handleSubmit(e)}
             className={`flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
             ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
+            active:animate-click-effect
             hover:bg-[#4a484b17] 
             dark:bg-[#000000]`}
           >
