@@ -16,11 +16,14 @@ export default function FinanceSectionsContainer({ openModal }) {
       md:h-[90%] md:grid-cols-3 md:grid-rows-5
       dark:text-[#E4E2E5]"
     >
-      <BalanceKpi incomes={stats?.total_revenue || 0} expenses={80105} />
+      <BalanceKpi
+        incomes={stats?.total_revenue || 0}
+        expenses={stats?.expenses || 0}
+      />
 
       <IncomesKpi incomes={stats?.total_revenue || 0} />
 
-      <ExpensesKpi expenses={4000} />
+      <ExpensesKpi expenses={stats?.expenses || 0} />
 
       <IncomesChart />
 
