@@ -1,9 +1,12 @@
 import { apiRoutes } from "@/config/apiRoutes";
+import { buildQueryParams } from "@/utils/buildQueryParams";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-export async function getExitsStatsService() {
+export async function getExitsStatsService(filters = {}) {
+  const params = buildQueryParams(filters);
+
   const response = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.exits}/stats`,
+    `${apiRoutes.apiUrl}${apiRoutes.exits}/stats/?${params}`,
     {
       method: "GET",
     },
