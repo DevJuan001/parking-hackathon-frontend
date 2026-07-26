@@ -10,6 +10,7 @@ export default function IncomesChart() {
   const { incomesData, form, loading, handleChange, handleSubmit } =
     useIncomesChartData();
   const noIncomes = incomesData.length === 0 && !loading;
+  const isFirstLoad = incomesData.length === 0 && loading;
 
   return (
     <div
@@ -47,7 +48,7 @@ export default function IncomesChart() {
         </div>
       )}
 
-      {loading && (
+      {isFirstLoad && (
         <Skeleton
           width="100%"
           height="100%"
