@@ -16,7 +16,7 @@ export default function FinanceSectionsContainer({
         <div
           className="w-full h-full grid grid-cols-1 grid-rows-[150px_150px_150px_300px] gap-3 font-dmsans
           md:grid-cols-3 md:grid-rows-5
-          dark:text-[#E4E2E5]z"
+          dark:text-[#E4E2E5]"
         >
           <BalanceKpi
             incomes={incomes?.total_revenue || 0}
