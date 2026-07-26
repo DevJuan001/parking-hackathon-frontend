@@ -1,10 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { getExitsStatsService } from "@/modules/exits/services/getExitsStatsService";
+import { useState } from "react";
 
 export function useExitsStats() {
+  const [filters, setFilters] = useState({
+    start_date: "",
+    end_date: "",
+  });
+
   const query = useQuery({
-    queryKey: ["exitsStats"],
-    queryFn: getExitsStatsService,
+    queryKey: ["exitsStats", filters],
+    queryFn: () => getExitsStatsService(filters),
     refetchInterval: 20_000,
     staleTime: 60_000,
   });
@@ -24,10 +30,12 @@ export function useExitsStats() {
   ];
 
   return {
+    filters,
     stats: query.data,
     chartStats,
     loading: query.isLoading,
     error: query.error,
+    setFilters,
     refetch: query.refetch,
   };
 }

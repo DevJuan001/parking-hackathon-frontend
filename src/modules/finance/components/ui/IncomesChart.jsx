@@ -10,6 +10,7 @@ export default function IncomesChart() {
   const { incomesData, form, loading, handleChange, handleSubmit } =
     useIncomesChartData();
   const noIncomes = incomesData.length === 0 && !loading;
+  const isFirstLoad = incomesData.length === 0 && loading;
 
   return (
     <div
@@ -41,13 +42,13 @@ export default function IncomesChart() {
         >
           <Icon name={"border_clear"} size={90} />
 
-          <span className="text-xl font-semibold font-poppins">
+          <span className="text-xl font-medium font-poppins">
             No se encontraron ingresos registrados
           </span>
         </div>
       )}
 
-      {loading ? (
+      {isFirstLoad && (
         <Skeleton
           width="100%"
           height="100%"
@@ -57,7 +58,9 @@ export default function IncomesChart() {
           darkModeShineColor="#1e1e1e"
           borderRadius={"50px"}
         />
-      ) : (
+      )}
+
+      {!noIncomes && (
         <ResponsiveContainer>
           <BarChart responsive data={incomesData}>
             <Bar
