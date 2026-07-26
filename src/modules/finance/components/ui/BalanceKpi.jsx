@@ -4,7 +4,7 @@ import { useInnerModal } from "@hooks/useInnerModal";
 import Icon from "@components/ui/Icon";
 import Calendar from "@components/ui/Calendar";
 
-export default function BalanceKpi({ incomes, expenses }) {
+export default function BalanceKpi({ incomes, expenses, filters, setFilters }) {
   const balancePercentage = Math.round(((incomes - expenses) / incomes) * 100);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
@@ -44,8 +44,8 @@ export default function BalanceKpi({ incomes, expenses }) {
       <button
         onClick={(e) => openInnerModal("calendar", e)}
         className="absolute right-3.5 bottom-3.5 w-12 h-12 flex items-center justify-center rounded-4xl bg-white
-        hover:bg-white/90
-        active:animate-click-effect"
+        active:animate-click-effect
+        hover:bg-white/90"
       >
         <Icon
           name={"calendar_month"}
@@ -57,6 +57,11 @@ export default function BalanceKpi({ incomes, expenses }) {
 
       {innerType === "calendar" && (
         <Calendar
+          value={filters.start_date}
+          onChange={(formatted) => {
+            setFilters({ ...filters, start_date: formatted });
+            closeInnerModal();
+          }}
           growDirection={"anchored"}
           triggerRef={innerTrigger}
           onClose={closeInnerModal}
