@@ -97,7 +97,7 @@ export default function Calendar({
                 type="button"
                 disabled
                 style={{ aspectRatio: 1 }}
-                className="flex items-center justify-center text-[13px] rounded-full text-gray-300 
+                className="flex items-center justify-center text-base rounded-full text-gray-300 
                 dark:text-[#ffffff25]"
               >
                 {day}
@@ -142,7 +142,7 @@ export default function Calendar({
                 type="button"
                 disabled
                 style={{ aspectRatio: 1 }}
-                className="flex items-center justify-center text-[13px] rounded-full text-gray-300
+                className="flex items-center justify-center text-base rounded-full text-gray-300
                 dark:text-[#ffffff25]"
               >
                 {i + 1}
