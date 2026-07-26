@@ -11,7 +11,7 @@ export default function BalanceKpi({ incomes, expenses }) {
 
   return (
     <div
-      className="relative flex flex-col p-5 gap-2 rounded-4xl bg-black text-[#E4E2E5]
+      className="relative flex flex-col px-5 py-4 gap-2 rounded-4xl bg-black text-[#E4E2E5]
       dark:bg-white dark:text-black"
     >
       <span className="text-lg">Balance</span>
@@ -29,11 +29,16 @@ export default function BalanceKpi({ incomes, expenses }) {
 
       <div className="flex items-center">
         <Icon
-          name={balancePercentage ? "arrow_upward_alt" : "arrow_downward_alt"}
+          name={
+            balancePercentage > 0 ? "arrow_upward_alt" : "arrow_downward_alt"
+          }
           weight={500}
         />
 
-        <span>{balancePercentage || 0}% rentabilidad</span>
+        <span>
+          {`${balancePercentage > 0 ? `${balancePercentage}%` : `${balancePercentage}%`}`}{" "}
+          de rentabilidad
+        </span>
       </div>
 
       <button
