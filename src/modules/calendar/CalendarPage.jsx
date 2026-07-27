@@ -21,7 +21,7 @@ export default function CalendarPage() {
   const { reservations, loading } = useReservations();
 
   return (
-    <main className="w-full h-full flex flex-col">
+    <main className="w-full h-full overflow-hidden overflow-y-auto">
       <Calendar
         year={year}
         month={month}
@@ -37,7 +37,7 @@ export default function CalendarPage() {
 
       {modalType && (
         <Modal
-          margin={10}
+          margin={0}
           isOpen={isOpen}
           type={modalType}
           onClose={closeModal}
