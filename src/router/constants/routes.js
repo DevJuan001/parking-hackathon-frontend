@@ -13,6 +13,7 @@ const EntriesPage = lazy(() => import("@/modules/entries/EntriesPage"));
 const ParkingPage = lazy(() => import("@/modules/parking/ParkingPage"));
 const FinancePage = lazy(() => import("@/modules/finance/FinancePage"));
 const CheckInPage = lazy(() => import("@/modules/check-in/CheckInPage"));
+const CalendarPage = lazy(() => import("@/modules/calendar/CalendarPage"));
 const OnBoardingPage = lazy(
   () => import("@/modules/on-boarding/OnBoardingPage"),
 );
@@ -45,6 +46,13 @@ export const layoutRoutes = [
   {
     path: "/parking",
     component: ParkingPage,
+    roles: ["Admin"],
+    loading: ParkingLoading,
+  },
+
+  {
+    path: "/calendar",
+    component: CalendarPage,
     roles: ["Admin"],
     loading: ParkingLoading,
   },
