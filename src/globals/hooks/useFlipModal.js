@@ -960,7 +960,13 @@ export const useFlipModal = ({
       // El borderRadius y el fontSize se interpolan desde los valores del
       // target (modal) hasta los del source (trigger) para que el elemento
       // vaya recuperando su forma y tamaño original mientras se desliza.
-      for (const { phantom, pair, fromBR, fromFontSize, fromColor } of closePhantoms) {
+      for (const {
+        phantom,
+        pair,
+        fromBR,
+        fromFontSize,
+        fromColor,
+      } of closePhantoms) {
         const currentRect = {
           top: parseFloat(phantom.style.top),
           left: parseFloat(phantom.style.left),
