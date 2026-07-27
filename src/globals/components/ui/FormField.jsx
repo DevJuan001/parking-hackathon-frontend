@@ -16,7 +16,7 @@ export default function FormField({
       className={`relative flex w-full border border-[#c3c4c794] pr-2 rounded-2xl bg-[#FBF9FC] overflow-hidden transition-shadow duration-200
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
-      ${className ? className : "shadow-sm"}
+      ${className ? className : disabled ? "opacity-65 shadow-sm" : "shadow-sm"}
       `}
     >
       <input
@@ -29,13 +29,12 @@ export default function FormField({
         id={id}
         disabled={disabled}
         autoComplete={autoComplete}
-        className={`
+        className="
           w-full h-16 pt-7 px-4 pb-2 outline-none
           bg-transparent rounded-xl
           transition-all duration-200
           dark:text-[#E4E2E5] dark:placeholder:text-[#b4aab4]
-          ${disabled ? "text-[#0000007a]" : "text-black"}
-        `}
+        "
       />
 
       {labelText && (
