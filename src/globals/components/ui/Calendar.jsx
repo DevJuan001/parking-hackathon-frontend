@@ -87,10 +87,11 @@ export default function Calendar({
           <div>Vi</div>
 
           <div>Sa</div>
+          
           {/* Mes anterior */}
           {Array.from({ length: firstDow }).map((_, i) => {
             const prevMonthDays = new Date(year, month, 0).getDate();
-            const day = prevMonthDays - firstDow + i;
+            const day = prevMonthDays - firstDow + i + 1;
             return (
               <button
                 key={`prev-${i}`}
