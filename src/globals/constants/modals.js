@@ -94,6 +94,16 @@ export const modals = {
     lg:w-[800px]`,
   },
 
+  dayInfo: {
+    styles: `p-5 h-[calc(100vh-15px)] w-screen
+    md:w-[540px] md:rounded-[40px]`,
+  },
+
+  reservationInfo: {
+    styles: `p-3 w-screen h-screen
+    md:w-[500px] md:rounded-[40px]`,
+  },
+
   default: {
     styles: `p-7 w-[400px] h-auto rounded-[32px]
     md:w-[500px]`,
