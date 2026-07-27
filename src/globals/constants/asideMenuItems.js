@@ -12,6 +12,7 @@ export const firstSectionItems = [
     icon: "home",
     roles: ["Admin"],
   },
+
   {
     itemId: "parking",
     name: "Parking",
@@ -19,6 +20,7 @@ export const firstSectionItems = [
     icon: "parking_sign",
     roles: ["Admin"],
   },
+
   {
     itemId: "users",
     name: "Usuarios",
@@ -26,6 +28,15 @@ export const firstSectionItems = [
     icon: "groups",
     roles: ["Admin"],
   },
+
+  {
+    itemId: "calendar",
+    name: "Calendario",
+    path: "/calendar",
+    icon: "calendar_month",
+    roles: ["Admin"],
+  },
+
   {
     itemId: "entries",
     name: "Entradas",
@@ -33,6 +44,7 @@ export const firstSectionItems = [
     icon: "browse_activity",
     roles: ["Admin"],
   },
+
   {
     itemId: "exits",
     name: "Salidas",
@@ -40,6 +52,7 @@ export const firstSectionItems = [
     icon: "move_group",
     roles: ["Admin"],
   },
+
   {
     itemId: "finance",
     name: "Finanzas",
