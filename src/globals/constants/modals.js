@@ -101,7 +101,7 @@ export const modals = {
 
   reservationInfo: {
     styles: `p-3 w-screen h-screen
-    md:w-[500px] md:rounded-[40px]`,
+    md:w-[500px] md:h-auto md:rounded-[40px]`,
   },
 
   default: {
