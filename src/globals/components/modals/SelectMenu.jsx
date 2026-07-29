@@ -8,6 +8,7 @@ export default function SelectMenu({
   name,
   onChange,
   value,
+  disabled,
   spanText,
   options = [],
   optionOnClick,
@@ -36,13 +37,16 @@ export default function SelectMenu({
 
   return (
     <section
-      className={`relative ${miniVersion ? "w-36" : "w-full"} flex flex-col gap-1`}
+      className={`relative 
+      ${miniVersion ? "w-36" : disabled ? "opacity-50" : "w-full"}
+      flex flex-col gap-1`}
     >
       <div
         className={`${miniVersion ? "h-10" : "h-16.5"} w-full flex items-center gap-1.5`}
       >
         <button
           type="button"
+          disabled={disabled}
           id={id}
           onClick={(e) => {
             setSearch("");

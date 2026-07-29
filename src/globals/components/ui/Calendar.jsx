@@ -87,10 +87,11 @@ export default function Calendar({
           <div>Vi</div>
 
           <div>Sa</div>
+          
           {/* Mes anterior */}
           {Array.from({ length: firstDow }).map((_, i) => {
             const prevMonthDays = new Date(year, month, 0).getDate();
-            const day = prevMonthDays - firstDow + i;
+            const day = prevMonthDays - firstDow + i + 1;
             return (
               <button
                 key={`prev-${i}`}
@@ -119,7 +120,7 @@ export default function Calendar({
                     ? `bg-black text-white font-bold text-lg
                     hover:text-white hover:bg-black/90
                     dark:bg-white dark:text-black`
-                    : isToday(day)
+                    : isToday(day, month, year)
                       ? `bg-gray-100 font-medium 
                       hover:bg-gray-200 hover:font-bold
                       dark:bg-[#101012] dark:hover:text-[#E4E2E5] dark:hover:bg-[#202022]`
