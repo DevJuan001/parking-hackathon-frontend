@@ -42,7 +42,7 @@ export default function TopSection({
         </div>
 
         <div
-          className="h-fit flex py-1.5 px-3.5 gap-1 bg-[#F5F3F6] rounded-3xl
+          className="h-fit flex py-1.5 px-3.5 gap-1 bg-[#F5F3F6] rounded-4xl
           dark:bg-[#101012]"
         >
           <button
