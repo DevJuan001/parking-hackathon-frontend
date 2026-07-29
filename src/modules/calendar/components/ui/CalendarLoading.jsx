@@ -2,7 +2,7 @@ import Skeleton from "@/globals/components/ui/Skeleton";
 
 export default function CalendarLoading() {
   return (
-    <div className="w-full h-[90%] grid grid-cols-7 grid-rows-[50px_repeat(6,1fr)] mt-18 gap-2">
+    <div className="w-full h-[88%] grid grid-cols-7 grid-rows-[50px_repeat(6,1fr)] mt-20 mb-4 gap-2">
       {Array.from({ length: 7 }).map((_, index) => (
         <Skeleton
           key={index}
@@ -16,7 +16,7 @@ export default function CalendarLoading() {
         />
       ))}
 
-      {Array.from({ length: 40 }).map((_, index) => (
+      {Array.from({ length: 42 }).map((_, index) => (
         <Skeleton
           key={index}
           width="100%"
