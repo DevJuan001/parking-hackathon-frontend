@@ -10,4 +10,9 @@ export const modals = {
   createReservation: {
     growDirection: "center",
   },
+
+  share: {
+    title: "Compartir",
+    location: "center",
+  },
 };
