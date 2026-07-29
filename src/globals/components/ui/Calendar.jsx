@@ -120,7 +120,7 @@ export default function Calendar({
                     ? `bg-black text-white font-bold text-lg
                     hover:text-white hover:bg-black/90
                     dark:bg-white dark:text-black`
-                    : isToday(day)
+                    : isToday(day, month, year)
                       ? `bg-gray-100 font-medium 
                       hover:bg-gray-200 hover:font-bold
                       dark:bg-[#101012] dark:hover:text-[#E4E2E5] dark:hover:bg-[#202022]`
