@@ -42,6 +42,7 @@ export default function FinancePage() {
           onClose={closeModal}
           title={modals[modalType]?.title}
           location={modals[modalType]?.location}
+          disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
           margin={5}
         >
