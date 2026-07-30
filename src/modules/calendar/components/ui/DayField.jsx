@@ -13,6 +13,7 @@ export default function DayField({
   isToday,
   openModal,
   setActiveCalendarLayout,
+  goToDate,
 }) {
   return (
     <div
@@ -40,6 +41,7 @@ export default function DayField({
         <div
           onClick={(e) => {
             e.stopPropagation();
+            goToDate(day, month, year);
             setActiveCalendarLayout("dayLayout");
           }}
           className={`w-7 flex items-center justify-center p-1 rounded-full
@@ -123,7 +125,7 @@ export default function DayField({
               miniVersion
               onClick={(e) => {
                 e.stopPropagation();
-                openModal(reservation, "reservationInfo", e.currentTarget);
+                openModal(reservation, "editReservation", e.currentTarget);
               }}
             />
           ))}
