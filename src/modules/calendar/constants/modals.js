@@ -1,13 +1,16 @@
 export const modals = {
   dayInfo: {
     location: "right",
+    disableHeader: true,
   },
 
-  reservationInfo: {
+  editReservation: {
     growDirection: "center",
+    disableHeader: true,
   },
 
   createReservation: {
+    title: "Crear reserva",
     growDirection: "center",
   },
 
@@ -15,4 +18,6 @@ export const modals = {
     title: "Compartir",
     location: "center",
   },
+
+  export: { disableHeader: true },
 };
