@@ -17,6 +17,7 @@ export default function NavbarMenuModal({ isOpen, triggerRef, onClose }) {
 
   return (
     <Modal
+      disableHeader
       isOpen={isOpen}
       type={"menu"}
       onClose={onClose}

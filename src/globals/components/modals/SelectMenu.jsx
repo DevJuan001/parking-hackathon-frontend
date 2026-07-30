@@ -37,9 +37,9 @@ export default function SelectMenu({
 
   return (
     <section
-      className={`relative 
+      className={`relative flex flex-col gap-1
       ${miniVersion ? "w-36" : disabled ? "opacity-50" : "w-full"}
-      flex flex-col gap-1`}
+      `}
     >
       <div
         className={`${miniVersion ? "h-10" : "h-16.5"} w-full flex items-center gap-1.5`}
@@ -52,11 +52,11 @@ export default function SelectMenu({
             setSearch("");
             openInnerModal("select", e);
           }}
-          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
+          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#c3c4c794]
             ${spanText ? "h-full pt-1.5 rounded-2xl" : miniVersion ? "h-9 rounded-xl" : "h-14 rounded-2xl"}
             cursor-pointer text-sm
             dark:bg-black dark:border-[#1e1e20cb]
-            ${className ? className : "shadow-sm"}`}
+            ${className}`}
         >
           {spanText && (
             <div className="absolute top-2 left-3 px-1">
@@ -103,6 +103,7 @@ export default function SelectMenu({
 
       {innerType === "select" && (
         <Modal
+          disableHeader
           isOpen={true}
           onClose={() => {
             setSearch("");
