@@ -1,12 +1,21 @@
+// Utils
+import {
+  filterReservationsByHour,
+  getReservationHeight,
+} from "@/utils/filterReservations";
+import { formatTime } from "@/utils/formatTime";
+// Constantes
+import { reservationField } from "@/modules/calendar/constants/reservationField";
+// Componentes
 import { Fragment } from "react";
 
 export default function WeekCalendarLayout({
   weekDates,
   dayNames,
   hours,
-  reservations,
-  loading,
   isToday,
+  goToDate,
+  reservations,
   openModal,
   setActiveCalendarLayout,
 }) {
@@ -30,7 +39,10 @@ export default function WeekCalendarLayout({
             </span>
 
             <button
-              onClick={() => setActiveCalendarLayout("dayLayout")}
+              onClick={() => {
+                goToDate(date.getDate(), date.getMonth(), date.getFullYear());
+                setActiveCalendarLayout("dayLayout");
+              }}
               className={`w-12 h-12 flex items-center justify-center rounded-full text-2xl
                 ${
                   isToday(date.getDate(), date.getMonth(), date.getFullYear())
@@ -60,12 +72,42 @@ export default function WeekCalendarLayout({
               />
             </div>
 
-            {Array.from({ length: 7 }).map((_, i) => (
+            {weekDates?.map((date, dayIndex) => (
               <div
-                key={i}
-                className="border border-[#E4E2E5]
+                key={dayIndex}
+                className="relative h-full border border-[#E4E2E5]
                 dark:border-[#202022]"
-              ></div>
+              >
+                {filterReservationsByHour(
+                  reservations,
+                  date.getFullYear(),
+                  date.getMonth(),
+                  date.getDate(),
+                  hour,
+                )?.map((reservation) => (
+                  <button
+                    key={reservation?.id}
+                    onClick={(e) =>
+                      openModal(reservation, "editReservation", e.currentTarget)
+                    }
+                    className={`absolute w-full flex flex-col p-2 rounded-xl text-xs
+                      ${reservationField[reservation?.level]?.styles}
+                      `}
+                    style={{
+                      height: `${getReservationHeight(reservation.start_date, reservation.end_date)}px`,
+                    }}
+                  >
+                    <span
+                      data-shared-id="reservation-name"
+                      className="font-medium"
+                    >
+                      {reservation?.name}
+                    </span>
+
+                    <span>{`${formatTime(reservation?.start_date)} - ${formatTime(reservation?.end_date)}`}</span>
+                  </button>
+                ))}
+              </div>
             ))}
           </Fragment>
         ))}
