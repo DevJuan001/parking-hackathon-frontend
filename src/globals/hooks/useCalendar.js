@@ -126,6 +126,10 @@ export function useCalendar(value, onChange, onClose) {
     onClose();
   }
 
+  function goToDate(targetDay, targetMonth, targetYear) {
+    setCurrent({ year: targetYear, month: targetMonth, day: targetDay });
+  }
+
   const isToday = (checkDay, checkMonth, checkYear) =>
     checkDay === today.getDate() &&
     checkMonth === today.getMonth() &&
@@ -146,16 +150,17 @@ export function useCalendar(value, onChange, onClose) {
     currentDayName,
     firstDow,
     daysInMonth,
-    prevMonth,
-    nextMonth,
+    isToday,
+    goToDate,
     prevDay,
     nextDay,
     prevWeek,
     nextWeek,
+    prevMonth,
+    nextMonth,
+    isSelected,
+    handleSelect,
     getWeekDates,
     getWeekRange,
-    handleSelect,
-    isToday,
-    isSelected,
   };
 }
