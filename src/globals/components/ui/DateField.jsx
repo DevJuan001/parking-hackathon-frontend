@@ -7,6 +7,7 @@ export default function DateField({
   spanText,
   value,
   name,
+  placeholder = "yyyy/mm/dd",
   onChange,
   growDirection = "center",
   className,
@@ -17,11 +18,12 @@ export default function DateField({
   return (
     <button
       id={id}
+      type="button"
       onClick={(e) => openInnerModal("calendar", e)}
-      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#E4E2E5] outline-[#00000028] text-center text-sm cursor-pointer
+      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#c3c4c794] outline-[#00000028] text-center text-sm cursor-pointer
       focus:shadow-[0_0_2px_1px_#e5e7eb]
       dark:border-[#1e1e20cb] dark:text-white
-      ${className ? className : "shadow-sm"}`}
+      ${className}`}
     >
       <div className="min-w-full max-w-full flex items-center pr-3">
         <div className="min-w-full max-w-28 flex flex-col items-start">
@@ -32,6 +34,7 @@ export default function DateField({
             className="w-full outline-none cursor-pointer bg-transparent text-base"
             readOnly
             name={name}
+            placeholder={placeholder}
             value={value}
             onChange={onChange}
           />
@@ -41,7 +44,8 @@ export default function DateField({
           name={"calendar_today"}
           size={14}
           fill
-          className="dark:text-[#7e8088]"
+          className="text-[#75777E]
+          dark:text-[#7E8088]"
         />
       </div>
 
