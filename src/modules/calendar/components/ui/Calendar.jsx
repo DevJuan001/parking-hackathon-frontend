@@ -14,6 +14,7 @@ export default function Calendar({
   dayNames,
   daysInMonth,
   isToday,
+  goToDate,
   openModal,
   getWeekDates,
   currentDayName,
@@ -33,6 +34,7 @@ export default function Calendar({
           reservations={reservations}
           loading={loading}
           isToday={isToday}
+          goToDate={goToDate}
           openModal={openModal}
           activeCalendarLayout={activeCalendarLayout}
           setActiveCalendarLayout={setActiveCalendarLayout}
@@ -45,8 +47,8 @@ export default function Calendar({
           dayNames={dayNames}
           weekDates={getWeekDates()}
           reservations={reservations}
-          loading={loading}
           isToday={isToday}
+          goToDate={goToDate}
           openModal={openModal}
           activeCalendarLayout={activeCalendarLayout}
           setActiveCalendarLayout={setActiveCalendarLayout}
@@ -59,6 +61,7 @@ export default function Calendar({
           month={month}
           year={year}
           hours={hours}
+          reservations={reservations}
           weekDates={getWeekDates()}
           currentDayName={currentDayName}
           isToday={isToday}

@@ -21,6 +21,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
 
   return (
     <Modal
+      disableHeader
       isOpen={true}
       type={"user"}
       title={"Configuración"}

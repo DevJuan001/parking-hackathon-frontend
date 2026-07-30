@@ -25,13 +25,13 @@ export default function EntriesPage() {
   } = useEntries();
 
   return (
-    <main
-      className="w-full h-full overflow-hidden"
-    >
+    <main className="w-full h-full overflow-hidden">
       <TopSection
         sectionName={"Ingresos"}
         addButtonText={"Registrar Ingreso"}
-        createButtonOnClick={(e) => openModal(null, "createEntry", e.currentTarget)}
+        createButtonOnClick={(e) =>
+          openModal(null, "createEntry", e.currentTarget)
+        }
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
       />
 
@@ -58,6 +58,7 @@ export default function EntriesPage() {
           onClose={closeModal}
           triggerRef={triggerRef}
           location={modals[modalType]?.location}
+          disableHeader={modals[modalType]?.disableHeader}
         >
           {modalType === "createEntry" && (
             <CreateEntryModal onClose={closeModal} />

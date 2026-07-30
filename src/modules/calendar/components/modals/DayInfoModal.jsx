@@ -7,7 +7,7 @@ import CreateButton from "@components/ui/CreateButton";
 import ReservationField from "@/modules/calendar/components/ui/ReservationField";
 // Modales
 import Modal from "@modals/Modal";
-import ReservationInfoModal from "@/modules/calendar/components/modals/ReservationInfoModal";
+import ReservationInfoModal from "@/modules/calendar/components/modals/EditReservationModal";
 import CreateReservationModal from "@/modules/calendar/components/modals/CreateReservationModal";
 
 export default function DayInfoModal({ dayInfo, onClose }) {
@@ -26,7 +26,10 @@ export default function DayInfoModal({ dayInfo, onClose }) {
             <Icon name={"close"} />
           </button>
 
-          <span className="text-2xl text-nowrap font-medium">
+          <span
+            className="text-2xl text-nowrap font-medium
+            dark:text-white"
+          >
             <span data-shared-id="day-number">{dayInfo?.day} </span>
             de {months[dayInfo?.month]} del {dayInfo?.year}
           </span>
@@ -51,6 +54,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
         <Modal
           isOpen={true}
           triggerRef={innerTrigger}
+          title={"Crear reserva"}
           growDirection="bottom-left"
           onClose={closeInnerModal}
         >

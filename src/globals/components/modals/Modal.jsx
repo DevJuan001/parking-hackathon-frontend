@@ -19,6 +19,7 @@ export default function Modal({
   children,
   onClose,
   disableClose = false,
+  disableHeader,
 }) {
   const modalRef = useRef();
   const contentRef = useRef();
@@ -82,24 +83,7 @@ export default function Modal({
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef} className="overflow-y-auto flex-1 p-0.5">
-          {![
-            "calendar",
-            "select",
-            "menu",
-            "editStatus",
-            "editTariff",
-            "editSpot",
-            "editFloor",
-            "filter",
-            "export",
-            "search",
-            "topSectionMobileOptions",
-            "entryInfo",
-            "user",
-            "chat",
-            "dayInfo",
-            "reservationInfo",
-          ].includes(type) && (
+          {!disableHeader && (
             <header className="flex justify-between items-center mb-2 shrink-0">
               <span
                 className="min-w-56 font-medium text-lg

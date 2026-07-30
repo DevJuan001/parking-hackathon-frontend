@@ -29,6 +29,7 @@ export default function ChatModal({ triggerRef, onClose }) {
 
   return (
     <Modal
+      disableHeader
       isOpen={true}
       type="chat"
       triggerRef={triggerRef}

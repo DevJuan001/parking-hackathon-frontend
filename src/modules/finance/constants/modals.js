@@ -1,1 +1,5 @@
-export const modals = {};
+export const modals = {
+  filter: { disableHeader: true },
+  
+  export: { disableHeader: true },
+};

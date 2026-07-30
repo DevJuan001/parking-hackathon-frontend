@@ -51,6 +51,7 @@ export default function ExitsPage() {
           triggerRef={triggerRef}
           location={modals[modalType]?.location}
           growDirection={modals[modalType]?.growDirection}
+          disableHeader={modals[modalType]?.disableHeader}
         >
           {modalType === "createExit" && (
             <CreateExitModal onClose={closeModal} />

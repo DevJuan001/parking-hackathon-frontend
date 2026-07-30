@@ -1,10 +1,13 @@
+// Hooks
+import { useInnerModal } from "@/globals/hooks/useInnerModal";
+// Componentes
+import Icon from "@components/ui/Icon";
+import SearchButton from "@components/ui/SearchButton";
 import FilterButton from "@components/ui/FilterButton";
 import CreateButton from "@components/ui/CreateButton";
 import ExportButton from "@components/ui/ExportButton";
-import SearchButton from "./SearchButton";
-import Icon from "./Icon";
-import { useInnerModal } from "@/globals/hooks/useInnerModal";
-import Modal from "../modals/Modal";
+// Modales
+import Modal from "@modals/Modal";
 
 export default function TopSection({
   sectionVisible = true,
@@ -64,6 +67,7 @@ export default function TopSection({
 
       {innerType === "topSectionMobileOptions" && (
         <Modal
+          disableHeader
           isOpen={true}
           triggerRef={innerTrigger}
           type={innerType}

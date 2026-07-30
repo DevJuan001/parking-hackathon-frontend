@@ -13,10 +13,10 @@ export default function FormField({
 }) {
   return (
     <div
-      className={`relative flex w-full border border-[#c3c4c794] pr-2 rounded-2xl bg-[#FBF9FC] overflow-hidden transition-shadow duration-200
+      className={`relative flex w-full h-16.5 border border-[#c3c4c794] pr-2 rounded-2xl bg-[#FBF9FC] overflow-hidden transition-shadow duration-200
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
-      ${className ? className : disabled ? "opacity-65 shadow-sm" : "shadow-sm"}
+      ${className ? className : disabled ? "opacity-65" : ""}
       `}
     >
       <input

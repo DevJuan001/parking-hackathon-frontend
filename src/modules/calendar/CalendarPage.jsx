@@ -2,20 +2,20 @@
 import { useState } from "react";
 import { useModal } from "@hooks/useModal";
 import { useCalendar } from "@hooks/useCalendar";
-import { useReservations } from "@/modules/calendar/hooks/useReservations";
+// Utils
+import { months } from "@/utils/months";
 // Constantes
 import { modals } from "@/modules/calendar/constants/modals";
 // Componentes
 import Calendar from "@/modules/calendar/components/ui/Calendar";
+import TopSection from "@/modules/calendar/components/ui/TopSection";
 // Modales
 import Modal from "@modals/Modal";
 import ExportModal from "@modals/ExportModal";
-import TopSection from "@/modules/calendar/components/ui/TopSection";
 import ShareModal from "@/modules/calendar/components/modals/ShareModal";
 import DayInfoModal from "@/modules/calendar/components/modals/DayInfoModal";
-import ReservationInfoModal from "@/modules/calendar/components/modals/ReservationInfoModal";
+import EditReservationModal from "@/modules/calendar/components/modals/EditReservationModal";
 import CreateReservationModal from "@/modules/calendar/components/modals/CreateReservationModal";
-import { months } from "@/utils/months";
 
 export default function CalendarPage() {
   const { isOpen, triggerRef, modalType, modalData, openModal, closeModal } =
@@ -31,15 +31,16 @@ export default function CalendarPage() {
     firstDow,
     currentDayName,
     daysInMonth,
-    prevMonth,
-    nextMonth,
-    prevWeek,
-    nextWeek,
+    isToday,
+    goToDate,
     prevDay,
     nextDay,
+    prevWeek,
+    nextWeek,
+    prevMonth,
+    nextMonth,
     getWeekDates,
     getWeekRange,
-    isToday,
   } = useCalendar();
 
   return (
@@ -81,6 +82,7 @@ export default function CalendarPage() {
         daysInMonth={daysInMonth}
         currentDayName={currentDayName}
         isToday={isToday}
+        goToDate={goToDate}
         openModal={openModal}
         getWeekRange={getWeekRange}
         getWeekDates={getWeekDates}
@@ -97,6 +99,7 @@ export default function CalendarPage() {
           triggerRef={triggerRef}
           title={modals[modalType]?.title}
           location={modals[modalType]?.location}
+          disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
         >
           {modalType === "export" && <ExportModal />}
@@ -107,8 +110,8 @@ export default function CalendarPage() {
             <DayInfoModal dayInfo={modalData} onClose={closeModal} />
           )}
 
-          {modalType === "reservationInfo" && (
-            <ReservationInfoModal
+          {modalType === "editReservation" && (
+            <EditReservationModal
               reservation={modalData}
               onClose={closeModal}
             />

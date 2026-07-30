@@ -1,3 +1,6 @@
+// Utils
+import { filterReservationsByDate } from "@/utils/filterReservations";
+// Componentes
 import DayField from "@/modules/calendar/components/ui/DayField";
 
 export default function MonthCalendarLayout({
@@ -10,6 +13,7 @@ export default function MonthCalendarLayout({
   openModal,
   reservations,
   setActiveCalendarLayout,
+  goToDate,
 }) {
   return (
     <div
@@ -75,15 +79,12 @@ export default function MonthCalendarLayout({
             day={day}
             month={month - 1}
             year={year}
-            reservations={reservations?.filter((reservation) =>
-              reservation.start_date.startsWith(
-                `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
-              ),
-            )}
+            reservations={filterReservationsByDate(reservations, year, month - 1, day)}
             loading={loading}
             isToday={isToday}
             openModal={openModal}
             setActiveCalendarLayout={setActiveCalendarLayout}
+            goToDate={goToDate}
           />
         );
       })}
@@ -96,15 +97,12 @@ export default function MonthCalendarLayout({
           day={day}
           month={month}
           year={year}
-          reservations={reservations?.filter((reservation) =>
-            reservation.start_date.startsWith(
-              `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
-            ),
-          )}
+          reservations={filterReservationsByDate(reservations, year, month, day)}
           loading={loading}
           isToday={isToday}
           openModal={openModal}
           setActiveCalendarLayout={setActiveCalendarLayout}
+          goToDate={goToDate}
         />
       ))}
 
@@ -118,15 +116,12 @@ export default function MonthCalendarLayout({
             day={i + 1}
             month={month + 1}
             year={year}
-            reservations={reservations?.filter((reservation) =>
-              reservation.start_date.startsWith(
-                `${year}-${String(month + 1).padStart(2, "0")}-${String(i + 1).padStart(2, "0")}`,
-              ),
-            )}
+            reservations={filterReservationsByDate(reservations, year, month + 1, i + 1)}
             loading={loading}
             isToday={isToday}
             openModal={openModal}
             setActiveCalendarLayout={setActiveCalendarLayout}
+            goToDate={goToDate}
           />
         ));
       })()}

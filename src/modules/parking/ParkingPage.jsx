@@ -28,6 +28,7 @@ export default function ParkingPage() {
           title={modals[modalType]?.title}
           onClose={closeModal}
           location="anchored"
+          disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
           triggerRef={triggerRef}
           margin={0}

@@ -24,8 +24,9 @@ export default function Calendar({
 
   return (
     <Modal
-      triggerRef={triggerRef}
+      disableHeader
       isOpen={true}
+      triggerRef={triggerRef}
       onClose={onClose}
       type="calendar"
       z_index="250"
@@ -33,7 +34,7 @@ export default function Calendar({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full min-h-96 p-2 bg-white rounded-4xl cursor-default overflow-hidden z-600
+        className="w-full min-h-96 p-2 bg-white rounded-4xl font-dmsans cursor-default overflow-hidden z-600
         dark:bg-black dark:border-[#ffffff15]"
       >
         {/* Header */}
@@ -87,7 +88,7 @@ export default function Calendar({
           <div>Vi</div>
 
           <div>Sa</div>
-          
+
           {/* Mes anterior */}
           {Array.from({ length: firstDow }).map((_, i) => {
             const prevMonthDays = new Date(year, month, 0).getDate();
