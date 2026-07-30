@@ -99,9 +99,13 @@ export const modals = {
     md:w-[540px] md:rounded-[40px]`,
   },
 
-  reservationInfo: {
+  editReservation: {
     styles: `p-3 w-screen h-screen
-    md:w-[500px] md:h-auto md:rounded-[40px]`,
+    md:w-[800px] md:h-auto md:rounded-[42px]`,
+  },
+
+  timePicker: {
+    styles: `p-7 w-[400px] rounded-[32px]`
   },
 
   default: {

@@ -64,14 +64,15 @@ export default function UsersPage() {
 
       {modalType && (
         <Modal
+          margin={5}
           isOpen={isOpen}
           title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
           location={modals[modalType]?.location}
+          disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
-          margin={5}
         >
           {modalType === "createUser" && (
             <CreateUserModal onClose={closeModal} />
@@ -97,13 +98,9 @@ export default function UsersPage() {
             />
           )}
 
-          {modalType === "export" && (
-            <ExportModal />
-          )}
+          {modalType === "export" && <ExportModal />}
 
-          {modalType === "search" && (
-            <SearchModal />
-          )}
+          {modalType === "search" && <SearchModal />}
         </Modal>
       )}
     </main>

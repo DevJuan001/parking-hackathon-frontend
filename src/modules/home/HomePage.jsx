@@ -26,6 +26,7 @@ export default function HomePage() {
           location="anchored"
           growDirection="center"
           triggerRef={triggerRef}
+          disableHeader={modals[modalType]?.disableHeader}
           margin={0}
         >
           {modalType === "editSpot" && (
