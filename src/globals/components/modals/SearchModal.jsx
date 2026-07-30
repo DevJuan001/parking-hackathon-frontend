@@ -11,6 +11,7 @@ export default function SearchModal() {
       />
 
       <input
+        id="search"
         type="text"
         placeholder="Buscar"
         autoFocus
