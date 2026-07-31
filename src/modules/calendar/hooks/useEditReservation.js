@@ -20,7 +20,9 @@ export function useEditReservation(reservation) {
 
   function handleChange(e) {
     const { name, value } = e.target;
+
     setForm((prev) => ({ ...prev, [name]: value }));
+
     clearError(name);
   }
 
