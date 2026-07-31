@@ -24,12 +24,26 @@ export default function EditReservationModal({
     useInnerModal();
 
   return (
-    <div className="h-full w-full flex gap-2">
+    <div className="h-full w-full flex flex-col gap-2">
       <div
-        className="h-full w-full max-w-[50%] flex flex-col p-2 border border-[#E4E2E5] rounded-4xl
+        className="w-full h-full flex flex-col p-2 border border-[#E4E2E5] rounded-4xl
         dark:border-[#202022]"
       >
-        <div className="flex justify-between">
+        <div className="w-full flex justify-between">
+          <LiquidGlass
+            onClick={deleteButtonOnClick}
+            className="flex items-center justify-center p-3 rounded-3xl group
+            active:animate-click-effect
+            hover:cursor-pointer hover:bg-[#ff5b5b41]
+            dark:text-[#7E8088] dark:border-[#202022]"
+          >
+            <Icon
+              name={"delete"}
+              size={20}
+              className={"group-hover:text-red-700"}
+            />
+          </LiquidGlass>
+
           <LiquidGlass
             role="button"
             onClick={onClose}
@@ -44,24 +58,10 @@ export default function EditReservationModal({
             dark:text-[#7E8088]"
             />
           </LiquidGlass>
-
-          <LiquidGlass
-            onClick={deleteButtonOnClick}
-            className="flex items-center justify-center p-3 rounded-3xl group
-            active:animate-click-effect
-            hover:cursor-pointer hover:bg-[#ff5b5b41]
-            dark:text-[#7E8088] dark:border-[#202022]"
-          >
-            <Icon
-              name={"delete"}
-              size={20}
-              className={"group-hover:text-red-700"}
-            />
-          </LiquidGlass>
         </div>
 
         <div
-          className="h-full flex flex-col justify-center pl-2 gap-2
+          className="h-full flex flex-col justify-center py-8 px-3 gap-2
           dark:text-[#E4E2E5]"
         >
           <span
@@ -87,8 +87,47 @@ export default function EditReservationModal({
           id={"client-menu"}
           name={"client"}
           spanText={"Cliente"}
-          value={reservation?.client || "Miguelino"}
+          value={reservation?.client}
+          onChange={handleChange}
         />
+
+        <div className="flex gap-2">
+          <DateField
+            id={"start_date"}
+            name={"start_date"}
+            value={form.start_date}
+            onChange={handleChange}
+            spanText={"Fecha de inicio"}
+            className={fieldError("start_date")}
+          />
+
+          <DateField
+            id={"end_date"}
+            name={"end_date"}
+            value={form.end_date}
+            onChange={handleChange}
+            spanText={"Fecha de fin"}
+            className={fieldError("end_date")}
+          />
+        </div>
+
+        <div className="flex gap-2">
+          <TimeField
+            id={"start_time"}
+            name={"start_time"}
+            onChange={handleChange}
+            value={form.start_time}
+            spanText={"Hora de inicio"}
+          />
+
+          <TimeField
+            id={"end_time"}
+            name={"end_time"}
+            onChange={handleChange}
+            value={form.end_time}
+            spanText={"Hora de fin"}
+          />
+        </div>
 
         <SelectMenu
           spanText={"Nivel de prioridad"}
@@ -111,28 +150,6 @@ export default function EditReservationModal({
             { value: 3, label: "Completada" },
           ]}
         />
-
-        <div className="flex gap-2">
-          <DateField
-            spanText={"Fecha de inicio"}
-            id={"start_date"}
-            name={"start_date"}
-            className={fieldError("start_date")}
-          />
-
-          <DateField
-            spanText={"Fecha de fin"}
-            id={"end_date"}
-            name={"end_date"}
-            className={fieldError("end_date")}
-          />
-        </div>
-
-        <div className="flex gap-2">
-          <TimeField id={"start_time"} spanText={"Hora de inicio"} />
-
-          <TimeField id={"end_time"} spanText={"Hora de fin"} />
-        </div>
 
         <ConfirmCancelButtons
           disabled={loading}
