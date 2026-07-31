@@ -27,8 +27,10 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
 
   const fieldError = (name) =>
     errors[name]
-      ? "shadow-[0_0_2.5px_1px_#f87171] dark:shadow-[0_0_4px_1.5px_#7f1d1d] animate-shake"
-      : "shadow-sm";
+      ? `shadow-[0_0_2.5px_1px_#f87171] animate-shake
+      dark:shadow-[0_0_4px_1.5px_#7f1d1d]`
+      : `shadow-[0_0_2px_0.2px_#E4E2E5]
+      dark:shadow-[0_0_2px_0.2px_#202022]`;
 
   const getChanges = (original, updated) => {
     const changes = {};
