@@ -11,7 +11,7 @@ import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
 
-export default function CreateReservationModal() {
+export default function CreateReservationModal({ onClose }) {
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateReservation();
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -32,18 +32,35 @@ export default function CreateReservationModal() {
         className={fieldError("name")}
       />
 
+      <SelectMenu
+        id={"clients-menu"}
+        name={"client_id"}
+        value={form.client_id}
+        spanText={"Cliente"}
+        onChange={handleChange}
+        options={[
+          { value: 1, label: "Normal" },
+          { value: 2, label: "Importante" },
+        ]}
+        className={fieldError("level")}
+      />
+
       <div className="flex gap-2">
         <DateField
-          spanText={"Fecha de inicio"}
           id={"start_date"}
           name={"start_date"}
+          value={form.start_date}
+          spanText={"Fecha de inicio"}
+          onChange={handleChange}
           className={fieldError("start_date")}
         />
 
         <DateField
-          spanText={"Fecha de fin"}
           id={"end_date"}
           name={"end_date"}
+          value={form.end_date}
+          spanText={"Fecha de fin"}
+          onChange={handleChange}
           className={fieldError("end_date")}
         />
       </div>
@@ -85,7 +102,7 @@ export default function CreateReservationModal() {
 
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
-        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={closeInnerModal}
       />
 

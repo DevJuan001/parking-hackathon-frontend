@@ -1,12 +1,53 @@
-import Modal from "@components/modals/Modal";
+// Hooks
+import { useTimePicker } from "@hooks/useTimePicker";
+// Utils
+import { HOUR_NUMBERS, MINUTE_NUMBERS } from "@/utils/timeUtils";
+// Modales
+import Modal from "@modals/Modal";
 
 export default function TimePickerModal({
   isOpen,
   triggerRef,
   location,
   growDirection,
+  name,
+  value,
+  onChange,
   onClose,
 }) {
+  const {
+    unit,
+    period,
+    hour12,
+    minute,
+    setUnit,
+    setPeriod,
+    selectHour,
+    selectMinute,
+  } = useTimePicker({
+    value,
+    onChange: (stringValue) =>
+      onChange?.({ target: { name, value: stringValue } }),
+  });
+
+  const CENTER = 136;
+
+  const hourPositions = HOUR_NUMBERS.map((_, i) => {
+    const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+    return {
+      x: CENTER + 115 * Math.cos(angle),
+      y: CENTER + 115 * Math.sin(angle),
+    };
+  });
+
+  const minutePositions = MINUTE_NUMBERS.map((_, i) => {
+    const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+    return {
+      x: CENTER + 70 * Math.cos(angle),
+      y: CENTER + 70 * Math.sin(angle),
+    };
+  });
+
   return (
     <Modal
       disableHeader
@@ -20,10 +61,17 @@ export default function TimePickerModal({
       <div className="flex flex-col items-center gap-5 font-dmsans">
         <div className="flex items-center justify-center gap-2 text-[44px] font-medium">
           <button
-            className="px-6.5 rounded-3xl bg-white text-white
-            dark:text-black"
+            onClick={() => setUnit("hour")}
+            className={`px-6.5 rounded-3xl transition-colors duration-300
+              ${
+                unit === "hour"
+                  ? `bg-black text-[#E4E2E5]
+                dark:bg-white dark:text-black`
+                  : `bg-[#F5F3F6] text-[#1B1B1E]
+                  dark:bg-[#101012] dark:text-[#C5C6CE]`
+              }`}
           >
-            08
+            {String(hour12)?.padStart(2, "0")}
           </button>
 
           <span
@@ -33,26 +81,112 @@ export default function TimePickerModal({
             :
           </span>
 
-          <button className="px-6.5 rounded-3xl bg-[#101012] text-[#C5C6CE]">
-            00
+          <button
+            onClick={() => setUnit("minute")}
+            className={`px-6.5 rounded-3xl transition-colors duration-300
+              ${
+                unit === "minute"
+                  ? `bg-black text-[#E4E2E5]
+                dark:bg-white dark:text-black`
+                  : `bg-[#F5F3F6] text-[#1B1B1E]
+                  dark:bg-[#101012] dark:text-[#C5C6CE]`
+              }`}
+          >
+            {String(minute)?.padStart(2, "0")}
           </button>
         </div>
 
         {/* Reloj */}
         <div
-          className="w-64 h-64 rounded-full bg-[#F5F3F6]
+          className="relative w-68 h-68 rounded-full bg-[#F5F3F6]
           dark:bg-[#101012]"
-        ></div>
+        >
+          {hourPositions.map((position, index) => {
+            const number = HOUR_NUMBERS[index];
+            const isSelected = number === hour12;
+
+            return (
+              <button
+                key={index}
+                disabled={unit === "minute"}
+                onClick={() => selectHour(number)}
+                style={{ left: position.x, top: position.y }}
+                className={`absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center
+                ${
+                  isSelected
+                    ? `font-semibold bg-black text-white
+                  dark:bg-white dark:text-black`
+                    : unit === "minute"
+                      ? `text-[#75777E]
+                  dark:text-[#7E8088]`
+                      : `
+                  hover:bg-[#FFFFFF]
+                  dark:text-[#E4E2E5] dark:hover:bg-[#101012]`
+                }`}
+              >
+                {number}
+              </button>
+            );
+          })}
+
+          {minutePositions.map((position, index) => {
+            const number = MINUTE_NUMBERS[index];
+            const isSelected = number === minute;
+
+            return (
+              <button
+                key={index}
+                disabled={unit === "hour"}
+                onClick={() => {
+                  selectMinute(number);
+                  onClose();
+                }}
+                style={{ left: position.x, top: position.y }}
+                className={`absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-xs
+                ${
+                  isSelected
+                    ? `font-semibold bg-black text-white
+                  dark:bg-white dark:text-black`
+                    : unit === "hour"
+                      ? `text-[#75777E]
+                  dark:text-[#7E8088]`
+                      : `
+                  hover:bg-[#F5F3F6]
+                  dark:text-[#E4E2E5] dark:hover:bg-[#101012]`
+                }`}
+              >
+                {number}
+              </button>
+            );
+          })}
+        </div>
 
         <div className="flex gap-2 text-xl font-medium">
           <button
-            className="px-8 py-2 rounded-2xl bg-white text-white
-            dark:text-black"
+            onClick={() => setPeriod("AM")}
+            className={`px-6.5 rounded-2xl transition-colors duration-300
+              ${
+                period === "AM"
+                  ? `bg-black text-[#E4E2E5]
+                dark:bg-white dark:text-black`
+                  : `bg-[#F5F3F6] text-[#1B1B1E]
+                  dark:bg-[#101012] dark:text-[#C5C6CE]`
+              }`}
           >
             AM
           </button>
 
-          <button className="px-8 py-2 rounded-2xl bg-[#101012] text-[#C5C6CE]">
+          <button
+            onClick={() => setPeriod("PM")}
+            className={`px-6.5 py-3 rounded-2xl transition-colors duration-300
+              ${
+                period === "PM"
+                  ? `bg-black text-[#E4E2E5]
+                dark:bg-white dark:text-black`
+                  : `bg-[#F5F3F6] text-[#1B1B1E]
+                  dark:bg-[#101012] dark:text-[#C5C6CE]`
+              }`}
+          >
             PM
           </button>
         </div>

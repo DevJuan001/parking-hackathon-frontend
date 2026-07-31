@@ -1,23 +1,29 @@
+// Hooks
 import { useInnerModal } from "@hooks/useInnerModal";
+// Utils
+import { formatTimeForDisplay } from "@/utils/timeUtils";
+// Componentes
 import Icon from "@components/ui/Icon";
-import TimePickerModal from "../modals/TimePickerModal";
+// Modales
+import TimePickerModal from "@modals/TimePickerModal";
 
 export default function TimeField({
   spanText,
   id,
+  name,
   value,
-  placeholder = "00:00",
   required,
   onChange,
   disabled,
+  placeholder = "00:00",
   className,
 }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
       disabled={disabled}
       onClick={(e) => openInnerModal("timePickerModal", e)}
       className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl
@@ -35,7 +41,8 @@ export default function TimeField({
       <input
         readOnly
         id={id}
-        value={value}
+        name={name}
+        value={formatTimeForDisplay(value)}
         required={required}
         onChange={onChange}
         placeholder={placeholder}
@@ -52,11 +59,14 @@ export default function TimeField({
       {innerType === "timePickerModal" && (
         <TimePickerModal
           isOpen={true}
+          name={name}
+          value={value}
+          onChange={onChange}
           triggerRef={innerTrigger}
           growDirection={"center"}
           onClose={closeInnerModal}
         />
       )}
-    </button>
+    </div>
   );
 }

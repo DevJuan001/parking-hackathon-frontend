@@ -52,7 +52,7 @@ export default function SelectMenu({
             setSearch("");
             openInnerModal("select", e);
           }}
-          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#c3c4c794]
+          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#E4E2E5]
             ${spanText ? "h-full pt-1.5 rounded-2xl" : miniVersion ? "h-9 rounded-xl" : "h-14 rounded-2xl"}
             cursor-pointer text-sm
             dark:bg-black dark:border-[#1e1e20cb]
@@ -153,7 +153,7 @@ export default function SelectMenu({
                     key={option.value}
                     onClick={() => {
                       handleSelect(option, name, onChange, closeInnerModal);
-                      optionOnClick();
+                      if (optionOnClick) optionOnClick();
                     }}
                     className={`min-h-13 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
                       hover:bg-[#efedf0] hover:font-medium  

@@ -7,7 +7,7 @@ import CreateButton from "@components/ui/CreateButton";
 import ReservationField from "@/modules/calendar/components/ui/ReservationField";
 // Modales
 import Modal from "@modals/Modal";
-import ReservationInfoModal from "@/modules/calendar/components/modals/EditReservationModal";
+import EditReservationModal from "@/modules/calendar/components/modals/EditReservationModal";
 import CreateReservationModal from "@/modules/calendar/components/modals/CreateReservationModal";
 
 export default function DayInfoModal({ dayInfo, onClose }) {
@@ -46,7 +46,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
           active
           key={reservation?.id}
           reservation={reservation}
-          onClick={(e) => openInnerModal("reservationInfo", e)}
+          onClick={(e) => openInnerModal("editReservation", e)}
         />
       ))}
 
@@ -62,15 +62,16 @@ export default function DayInfoModal({ dayInfo, onClose }) {
         </Modal>
       )}
 
-      {innerType === "reservationInfo" && (
+      {innerType === "editReservation" && (
         <Modal
+          disableHeader
           isOpen={true}
           type={innerType}
           triggerRef={innerTrigger}
           growDirection="anchored"
           onClose={closeInnerModal}
         >
-          <ReservationInfoModal reservation={dayInfo.reservations[0]} />
+          <EditReservationModal reservation={dayInfo.reservations[0]} />
         </Modal>
       )}
     </div>

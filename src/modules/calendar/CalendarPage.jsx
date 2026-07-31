@@ -92,7 +92,7 @@ export default function CalendarPage() {
 
       {modalType && (
         <Modal
-          margin={5}
+          margin={15}
           isOpen={isOpen}
           type={modalType}
           onClose={closeModal}
@@ -117,7 +117,9 @@ export default function CalendarPage() {
             />
           )}
 
-          {modalType === "createReservation" && <CreateReservationModal />}
+          {modalType === "createReservation" && (
+            <CreateReservationModal onClose={closeModal} />
+          )}
         </Modal>
       )}
     </main>
