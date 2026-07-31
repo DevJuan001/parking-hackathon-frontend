@@ -117,7 +117,9 @@ export default function CalendarPage() {
             />
           )}
 
-          {modalType === "createReservation" && <CreateReservationModal />}
+          {modalType === "createReservation" && (
+            <CreateReservationModal onClose={closeModal} />
+          )}
         </Modal>
       )}
     </main>
