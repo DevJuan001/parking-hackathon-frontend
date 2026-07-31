@@ -8,6 +8,7 @@ export function useCreateReservation() {
   const [form, setForm] = useState({
     name: "",
     level: 1,
+    client_id: "",
     start_date: "",
     end_date: "",
     start_time: "",
@@ -20,11 +21,13 @@ export function useCreateReservation() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    
     setForm((prev) => ({ ...prev, [name]: value }));
+    
     clearError(name);
   }
 
-  async function handleSubmit(e, openInnerModal) {
+  async function handleSubmit(e, openInnerModal, onClose) {
     e.preventDefault();
 
     const triggerButton = getModalTrigger(e);
@@ -43,6 +46,7 @@ export function useCreateReservation() {
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
         openInnerModal("success", triggerButton);
+        onClose();
       } else {
         setError(
           "No se pudo crear la reserva, intentalo nuevamente mas tarde.",
