@@ -92,7 +92,7 @@ export default function CalendarPage() {
 
       {modalType && (
         <Modal
-          margin={5}
+          margin={15}
           isOpen={isOpen}
           type={modalType}
           onClose={closeModal}
