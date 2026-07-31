@@ -52,7 +52,7 @@ export default function SelectMenu({
             setSearch("");
             openInnerModal("select", e);
           }}
-          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#c3c4c794]
+          className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#E4E2E5]
             ${spanText ? "h-full pt-1.5 rounded-2xl" : miniVersion ? "h-9 rounded-xl" : "h-14 rounded-2xl"}
             cursor-pointer text-sm
             dark:bg-black dark:border-[#1e1e20cb]

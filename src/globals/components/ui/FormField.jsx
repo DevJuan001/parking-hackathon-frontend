@@ -13,21 +13,21 @@ export default function FormField({
 }) {
   return (
     <div
-      className={`relative flex w-full h-16.5 border border-[#c3c4c794] pr-2 rounded-2xl bg-[#FBF9FC] overflow-hidden transition-shadow duration-200
+      className={`relative flex w-full h-16.5 pr-2 rounded-2xl bg-[#FBF9FC] border border-[#E4E2E5] overflow-hidden transition-shadow
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
-      ${className ? className : disabled ? "opacity-65" : ""}
+      ${disabled ? "opacity-65" : className}
       `}
     >
       <input
         required
-        placeholder={placeholder}
-        name={name}
-        onChange={onChange}
-        value={value}
-        type={type}
         id={id}
+        type={type}
+        name={name}
+        value={value}
         disabled={disabled}
+        onChange={onChange}
+        placeholder={placeholder}
         autoComplete={autoComplete}
         className="
           w-full h-16 pt-7 px-4 pb-2 outline-none
@@ -41,12 +41,8 @@ export default function FormField({
         <label
           htmlFor={id}
           className="
-          absolute left-3.5 top-5 px-0.5
-          -translate-y-1/2
-          text-xs text-[#7E777E]
-          pointer-events-none
-          transition-all duration-200
-          bg-[#FBF9FC] dark:bg-black dark:text-[#b4aab4]
+          absolute left-3.5 top-5 px-0.5 -translate-y-1/2 bg-[#FBF9FC] text-xs text-[#7E777E] pointer-events-none transition-all duration-200
+          dark:bg-black dark:text-[#b4aab4]
         "
         >
           {labelText}

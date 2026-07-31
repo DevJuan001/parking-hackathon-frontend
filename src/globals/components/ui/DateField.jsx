@@ -20,7 +20,7 @@ export default function DateField({
       id={id}
       type="button"
       onClick={(e) => openInnerModal("calendar", e)}
-      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#c3c4c794] outline-[#00000028] text-center text-sm cursor-pointer
+      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#E4E2E5] text-center text-sm
       focus:shadow-[0_0_2px_1px_#e5e7eb]
       dark:border-[#1e1e20cb] dark:text-white
       ${className}`}
