@@ -11,13 +11,11 @@ import LiquidGlass from "@components/ui/LiquidGlass";
 import SelectMenu from "@components/modals/SelectMenu";
 import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modales
+import Modal from "@modals/Modal";
 import ErrorModal from "@modals/ErrorModal";
+import DeleteReservationModal from "@/modules/calendar/components/modals/DeleteReservationModal";
 
-export default function EditReservationModal({
-  reservation,
-  deleteButtonOnClick,
-  onClose,
-}) {
+export default function EditReservationModal({ reservation, onClose }) {
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditReservation(reservation);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -31,7 +29,7 @@ export default function EditReservationModal({
       >
         <div className="w-full flex justify-between">
           <LiquidGlass
-            onClick={deleteButtonOnClick}
+            onClick={(e) => openInnerModal("delete", e)}
             className="flex items-center justify-center p-3 rounded-3xl group
             active:animate-click-effect
             hover:cursor-pointer hover:bg-[#ff5b5b41]
@@ -65,8 +63,8 @@ export default function EditReservationModal({
           dark:text-[#E4E2E5]"
         >
           <span
-            className="text-2xl text-ellipsis font-medium overflow-hidden"
             data-shared-id="reservation-name"
+            className="text-2xl text-ellipsis font-medium overflow-hidden"
           >
             {form.name}
           </span>
@@ -130,10 +128,11 @@ export default function EditReservationModal({
         </div>
 
         <SelectMenu
-          spanText={"Nivel de prioridad"}
           id={"priority-level-menu"}
           name={"level"}
           value={form.level}
+          onChange={handleChange}
+          spanText={"Nivel de prioridad"}
           options={[
             { value: 1, label: "Normal" },
             { value: 2, label: "Importante" },
@@ -143,7 +142,9 @@ export default function EditReservationModal({
         <SelectMenu
           id={"status-menu"}
           name={"status"}
+          value={form.status}
           spanText={"Estado"}
+          onChange={handleChange}
           options={[
             { value: 1, label: "Cancelada" },
             { value: 2, label: "Activa" },
@@ -155,7 +156,7 @@ export default function EditReservationModal({
           disabled={loading}
           itemsPosition="end"
           confirmText={loading ? <Loader /> : "Guardar"}
-          confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
+          confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
           cancelButtonOnClick={closeInnerModal}
         />
       </form>
@@ -168,6 +169,23 @@ export default function EditReservationModal({
           errorText={error}
           onClose={closeInnerModal}
         />
+      )}
+
+      {innerType === "delete" && (
+        <Modal
+          isOpen={true}
+          title={"Eliminar reserva"}
+          triggerRef={innerTrigger}
+          onClose={closeInnerModal}
+        >
+          <DeleteReservationModal
+            reservation={reservation}
+            onClose={() => {
+              closeInnerModal;
+              onClose();
+            }}
+          />
+        </Modal>
       )}
     </div>
   );
