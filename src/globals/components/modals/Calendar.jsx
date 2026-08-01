@@ -1,6 +1,10 @@
+// Utils
 import { months } from "@/utils/months";
+// Hooks
 import { useCalendar } from "@hooks/useCalendar";
+// Componentes
 import Icon from "@components/ui/Icon";
+// Modales
 import Modal from "@modals/Modal";
 
 export default function Calendar({
