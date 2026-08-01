@@ -1,6 +1,10 @@
 export const HOUR_NUMBERS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 export const MINUTE_NUMBERS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
+export function padZero(value) {
+  return String(value).padStart(2, "0");
+}
+
 export function extractTimeFromValue(value) {
   if (!value) return null;
 
@@ -51,7 +55,7 @@ export function parseTime12h(value) {
 
   if (hour < 0 || hour > 23) return null;
 
-  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  return `${padZero(hour)}:${padZero(minute)}`;
 }
 
 export function parseTime24h(value) {
@@ -71,7 +75,7 @@ export function parseTime24h(value) {
 
   const hour12 = hour % 12 === 0 ? 12 : hour % 12;
 
-  return `${hour12}:${String(minute).padStart(2, "0")} ${period}`;
+  return `${hour12}:${padZero(minute)} ${period}`;
 }
 
 export function formatTimeForDisplay(value) {
@@ -81,7 +85,7 @@ export function formatTimeForDisplay(value) {
 
   if (!time) return "";
 
-  const hhmm = `${String(time.hour).padStart(2, "0")}:${String(time.minute).padStart(2, "0")}`;
+  const hhmm = `${padZero(time.hour)}:${padZero(time.minute)}`;
 
   return parseTime24h(hhmm) ?? "";
 }
@@ -107,5 +111,5 @@ export function to24h({ period, hour12, minute }) {
       : period === "AM"
         ? hour12
         : hour12 + 12;
-  return `${String(hour24).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  return `${padZero(hour24)}:${padZero(minute)}`;
 }

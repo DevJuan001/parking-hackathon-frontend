@@ -11,8 +11,13 @@ import EditReservationModal from "@/modules/calendar/components/modals/EditReser
 import CreateReservationModal from "@/modules/calendar/components/modals/CreateReservationModal";
 
 export default function DayInfoModal({ dayInfo, onClose }) {
-  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
-    useInnerModal();
+  const {
+    innerType,
+    innerTrigger,
+    innerData,
+    openInnerModal,
+    closeInnerModal,
+  } = useInnerModal();
 
   return (
     <div className="w-full h-full flex flex-col gap-2">
@@ -37,7 +42,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
 
         <CreateButton
           miniVersion
-          onClick={(e) => openInnerModal("createReservation", e)}
+          onClick={(e) => openInnerModal("createReservation", e, dayInfo)}
         />
       </div>
 
@@ -46,7 +51,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
           active
           key={reservation?.id}
           reservation={reservation}
-          onClick={(e) => openInnerModal("editReservation", e)}
+          onClick={(e) => openInnerModal("editReservation", e, reservation)}
         />
       ))}
 
@@ -58,7 +63,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
           growDirection="bottom-left"
           onClose={closeInnerModal}
         >
-          <CreateReservationModal />
+          <CreateReservationModal dayInfo={innerData} onClose={onClose} />
         </Modal>
       )}
 
@@ -71,7 +76,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
           growDirection="anchored"
           onClose={closeInnerModal}
         >
-          <EditReservationModal reservation={dayInfo.reservations[0]} />
+          <EditReservationModal reservation={innerData} onClose={closeInnerModal} />
         </Modal>
       )}
     </div>

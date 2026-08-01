@@ -31,6 +31,9 @@ export default function TimePickerModal({
   });
 
   const CENTER = 136;
+  const isHour = unit === "hour";
+  const ringRadius = isHour ? 93 : 48;
+  const tipY = 114 - ringRadius;
 
   const hourPositions = HOUR_NUMBERS.map((_, i) => {
     const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
@@ -47,6 +50,17 @@ export default function TimePickerModal({
       y: CENTER + 70 * Math.sin(angle),
     };
   });
+
+  function getHandAngle(number, array) {
+    const index = array.indexOf(number);
+
+    return (index / 12) * 360;
+  }
+
+  const handleAngle =
+    unit === "hour"
+      ? getHandAngle(hour12, HOUR_NUMBERS)
+      : getHandAngle(minute, MINUTE_NUMBERS);
 
   return (
     <Modal
@@ -109,19 +123,21 @@ export default function TimePickerModal({
               <button
                 key={index}
                 disabled={unit === "minute"}
-                onClick={() => selectHour(number)}
+                onClick={() => {
+                  selectHour(number);
+
+                  setTimeout(() => setUnit("minute"), 700);
+                }}
                 style={{ left: position.x, top: position.y }}
-                className={`absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center
+                className={`absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center z-100 transition-colors duration-500
                 ${
                   isSelected
-                    ? `font-semibold bg-black text-white
-                  dark:bg-white dark:text-black`
+                    ? `font-semibold text-white
+                  dark:text-black`
                     : unit === "minute"
                       ? `text-[#75777E]
                   dark:text-[#7E8088]`
-                      : `
-                  hover:bg-[#FFFFFF]
-                  dark:text-[#E4E2E5] dark:hover:bg-[#101012]`
+                      : `dark:text-[#E4E2E5]`
                 }`}
               >
                 {number}
@@ -139,26 +155,64 @@ export default function TimePickerModal({
                 disabled={unit === "hour"}
                 onClick={() => {
                   selectMinute(number);
-                  onClose();
+
+                  setTimeout(() => {
+                    onClose();
+                  }, 800);
                 }}
                 style={{ left: position.x, top: position.y }}
-                className={`absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-xs
+                className={`absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-xs z-100 transition-colors duration-500
                 ${
                   isSelected
-                    ? `font-semibold bg-black text-white
-                  dark:bg-white dark:text-black`
+                    ? `font-semibold text-white
+                  dark:text-black`
                     : unit === "hour"
                       ? `text-[#75777E]
                   dark:text-[#7E8088]`
-                      : `
-                  hover:bg-[#F5F3F6]
-                  dark:text-[#E4E2E5] dark:hover:bg-[#101012]`
+                      : `dark:text-[#E4E2E5]`
                 }`}
               >
                 {number}
               </button>
             );
           })}
+
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none z-10 text-black"
+            viewBox="0 0 272 272"
+          >
+            <g
+              style={{
+                transform: `rotate(${handleAngle}deg)`,
+                transformOrigin: "136px 136px",
+                transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            >
+              <line
+                x1="136"
+                x2="136"
+                y1="136"
+                y2={tipY}
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                style={{ transition: "y2 300ms cubic-bezier(0.4, 0, 0.2, 1)" }}
+              />
+
+              <circle
+                cx="136"
+                cy={tipY}
+                r={unit === "hour" ? 20 : 15}
+                fill="currentColor"
+                style={{
+                  transition:
+                    "cy 300ms cubic-bezier(0.4, 0, 0.2, 1), r 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
+              />
+            </g>
+
+            <circle cx="136" cy="136" r="4" fill="currentColor" />
+          </svg>
         </div>
 
         <div className="flex gap-2 text-xl font-medium">

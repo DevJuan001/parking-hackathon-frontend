@@ -32,8 +32,6 @@ export function useTimePicker({ value, onChange }) {
 
   function selectHour(number) {
     setHour12(number);
-
-    setUnit("minute");
   }
 
   function selectMinute(number) {

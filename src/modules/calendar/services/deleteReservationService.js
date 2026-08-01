@@ -2,15 +2,11 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { getValueError } from "@/utils/getValueError";
 
-export async function updateReservationService(form, reservation_id) {
+export async function deleteReservationService(reservation_id) {
   const response = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.reservations}/update/${reservation_id}`,
+    `${apiRoutes.apiUrl}${apiRoutes.reservations}/delete/${reservation_id}`,
     {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
+      method: "DELETE",
     },
   );
 

@@ -1,6 +1,9 @@
-import { formatTime } from "@/utils/formatTime";
+// Utils
+import { extractTimeFromValue, padZero, to12h } from "@/utils/timeUtils";
+// Constantes
 import { reservationField } from "@/modules/calendar/constants/reservationField";
-import Icon from "@/globals/components/ui/Icon";
+// Componentes
+import Icon from "@components/ui/Icon";
 
 export default function ReservationField({
   active,
@@ -8,6 +11,9 @@ export default function ReservationField({
   miniVersion,
   onClick,
 }) {
+  const extracted = extractTimeFromValue(reservation?.start_time);
+  const time = extracted ? to12h(extracted.hour, extracted.minute) : null;
+
   return (
     <button
       onClick={onClick}
@@ -15,7 +21,7 @@ export default function ReservationField({
       hover:cursor-pointer
       dark:text-[#E4E2E5]
       ${reservationField[reservation?.level]?.styles}
-      ${miniVersion ? "h-5 flex-row items-center px-2 text-sm rounded-md" : "h-fit p-3 rounded-2xl"}
+      ${miniVersion ? "h-5 flex-row items-center px-2 rounded-md" : "h-fit p-3 rounded-2xl"}
       ${active ? "opacity-100" : "opacity-40"}`}
     >
       <div className="w-full flex items-center justify-between">
@@ -25,20 +31,22 @@ export default function ReservationField({
           )}
 
           <span
-            className={`font-medium text-ellipsis overflow-hidden
-            ${miniVersion ? "" : "text-lg"}
-          `}
+            data-shared-id={`reservation-${reservation?.id}-name`}
+            className={`font-medium
+              ${miniVersion ? "max-w-17 text-xs overflow-hidden" : "max-w-25 overflow-hidden text-lg"}
+            `}
           >
             {reservation?.name}
           </span>
         </div>
 
         <span
-          className={`font-medium text-ellipsis overflow-hidden
-            ${miniVersion ? "text-xs" : "text-lg"}
+          data-shared-id={`reservation-${reservation?.id}-date`}
+          className={`font-medium
+            ${miniVersion ? "text-xs" : "text-base"}
           `}
         >
-          {formatTime(reservation?.start_date)}
+          {time ? `${time.hour12}:${padZero(time.minute)} ${time.period}` : ""}
         </span>
       </div>
 
