@@ -12,6 +12,7 @@ export function useEditReservation(reservation) {
     end_date: reservation?.end_date || "",
     start_time: reservation?.start_time || "",
     end_time: reservation?.end_time || "",
+    status: reservation?.status || 2,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -26,7 +27,7 @@ export function useEditReservation(reservation) {
     clearError(name);
   }
 
-  async function handleSubmit(e, openInnerModal) {
+  async function handleSubmit(e, openInnerModal, onClose) {
     e.preventDefault();
 
     const triggerButton = getModalTrigger(e);
@@ -40,11 +41,12 @@ export function useEditReservation(reservation) {
     setLoading(true);
 
     try {
-      const response = await updateReservationService(form);
+      const response = await updateReservationService(form, reservation?.id);
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
         openInnerModal("success", triggerButton);
+        onClose();
       } else {
         setError(
           "No se pudo editar la reserva, intentalo nuevamente mas tarde.",

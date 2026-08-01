@@ -2,9 +2,9 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { getValueError } from "@/utils/getValueError";
 
-export async function updateReservationService(form) {
+export async function updateReservationService(form, reservation_id) {
   const response = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.reservations}/update`,
+    `${apiRoutes.apiUrl}${apiRoutes.reservations}/update/${reservation_id}`,
     {
       method: "PUT",
       headers: {
