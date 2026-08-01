@@ -11,9 +11,9 @@ import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
 
-export default function CreateReservationModal({ onClose }) {
+export default function CreateReservationModal({ dayInfo, onClose }) {
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
-    useCreateReservation();
+    useCreateReservation(dayInfo);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
 
@@ -68,21 +68,21 @@ export default function CreateReservationModal({ onClose }) {
       <div className="w-full flex gap-2">
         <TimeField
           required
-          spanText={"Hora de inicio"}
           id={"start_time"}
           name={"start_time"}
           value={form.start_time}
           onChange={handleChange}
+          spanText={"Hora de inicio"}
           className={fieldError("start_time")}
         />
 
         <TimeField
           required
-          spanText={"Hora de fin"}
           id={"end_time"}
           name={"end_time"}
           value={form.end_time}
           onChange={handleChange}
+          spanText={"Hora de fin"}
           className={fieldError("end_time")}
         />
       </div>

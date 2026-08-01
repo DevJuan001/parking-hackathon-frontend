@@ -1,17 +1,24 @@
 import { useState } from "react";
+import { padZero } from "@/utils/timeUtils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getModalTrigger } from "@/utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { createReservationService } from "@/modules/calendar/services/createReservationService";
 
-export function useCreateReservation() {
+export function useCreateReservation(dayInfo) {
   const [form, setForm] = useState({
     name: "",
     level: 1,
     client_id: "",
-    start_date: "",
-    end_date: "",
-    start_time: "",
+    start_date:
+      dayInfo?.year && dayInfo?.month && dayInfo?.day
+        ? `${dayInfo.year}-${padZero(dayInfo.month)}-${padZero(dayInfo.day)}`
+        : "",
+    end_date:
+      dayInfo?.year && dayInfo?.month && dayInfo?.day
+        ? `${dayInfo.year}-${padZero(dayInfo.month)}-${padZero(dayInfo.day)}`
+        : "",
+    start_time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     end_time: "",
   });
   const [loading, setLoading] = useState(false);
@@ -21,9 +28,9 @@ export function useCreateReservation() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    
+
     setForm((prev) => ({ ...prev, [name]: value }));
-    
+
     clearError(name);
   }
 
