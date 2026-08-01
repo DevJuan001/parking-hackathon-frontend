@@ -14,10 +14,7 @@ export function useCreateReservation(dayInfo) {
       dayInfo?.year && dayInfo?.month && dayInfo?.day
         ? `${dayInfo.year}-${padZero(dayInfo.month)}-${padZero(dayInfo.day)}`
         : "",
-    end_date:
-      dayInfo?.year && dayInfo?.month && dayInfo?.day
-        ? `${dayInfo.year}-${padZero(dayInfo.month)}-${padZero(dayInfo.day)}`
-        : "",
+    end_date: "",
     start_time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     end_time: "",
   });
@@ -55,9 +52,7 @@ export function useCreateReservation(dayInfo) {
         openInnerModal("success", triggerButton);
         onClose();
       } else {
-        setError(
-          "No se pudo crear la reserva, intentalo nuevamente mas tarde.",
-        );
+        setError(response?.error);
         openInnerModal("error", triggerButton);
       }
     } catch {
