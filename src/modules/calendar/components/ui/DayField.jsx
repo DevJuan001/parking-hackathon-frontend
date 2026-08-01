@@ -62,7 +62,11 @@ export default function DayField({
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              openModal(null, "createReservation", e.currentTarget);
+              openModal(
+                { day, month, year },
+                "createReservation",
+                e.currentTarget,
+              );
             }}
             className="h-6 w-6 flex items-center justify-center p-0.5 rounded-2xl opacity-0
             group-hover:opacity-100
