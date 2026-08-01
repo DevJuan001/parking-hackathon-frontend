@@ -4,10 +4,10 @@ export const useInnerModal = () => {
   const [innerModal, setInnerModal] = useState({
     type: null,
     trigger: { element: null, rect: null },
+    data: null,
   });
 
-  const openInnerModal = useCallback((type, e = null) => {
-    // Si hay un evento, capturamos el elemento y su posición actual
+  const openInnerModal = useCallback((type, e = null, data = null) => {
     const triggerData = e?.currentTarget
       ? {
           element: e.currentTarget,
@@ -15,22 +15,21 @@ export const useInnerModal = () => {
         }
       : { element: null, rect: null };
 
-    setInnerModal({
-      type,
-      trigger: triggerData,
-    });
+    setInnerModal({ type, trigger: triggerData, data });
   }, []);
 
   const closeInnerModal = useCallback(() => {
     setInnerModal({
       type: null,
       trigger: { element: null, rect: null },
+      data: null,
     });
   }, []);
 
   return {
     innerType: innerModal.type,
     innerTrigger: innerModal.trigger,
+    innerData: innerModal.data,
     openInnerModal,
     closeInnerModal,
   };
