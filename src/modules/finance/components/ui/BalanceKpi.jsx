@@ -2,7 +2,8 @@
 import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
-import Calendar from "@components/ui/Calendar";
+// Modales
+import Calendar from "@modals/Calendar";
 
 export default function BalanceKpi({ incomes, expenses, filters, setFilters }) {
   const balancePercentage = Math.round(((incomes - expenses) / incomes) * 100);
