@@ -1,0 +1,141 @@
+// Utils
+import { months } from "@/utils/months";
+// Componentes
+import Icon from "@components/ui/Icon";
+
+export default function CalendarContent({
+  month,
+  year,
+  firstDow,
+  daysInMonth,
+  prevMonth,
+  nextMonth,
+  handleSelect,
+  isSelected,
+  onClose,
+  isToday,
+}) {
+  return (
+    <div
+      onClick={(e) => e.stopPropagation()}
+      className="w-full min-h-full p-2 bg-white rounded-4xl font-dmsans cursor-default overflow-hidden z-600
+      dark:bg-black dark:border-[#ffffff15]"
+    >
+      {/* Header */}
+      <div
+        className="flex items-center justify-between px-4 py-3 border-[#a1a1a13f] 
+        dark:border-[#ffffff15]"
+      >
+        <span
+          className="text-base font-medium
+          dark:text-[#E4E2E5]"
+        >
+          {months[month]} {year}
+        </span>
+
+        <div className="flex">
+          <button
+            onClick={prevMonth}
+            className="w-10 h-10 flex items-center pr-0.5 justify-center text-gray-400 rounded-full
+            hover:bg-gray-100 
+            dark:hover:bg-[#ffffff15]"
+          >
+            <Icon name={"arrow_back_ios_new"} size={18} />
+          </button>
+
+          <button
+            onClick={nextMonth}
+            className="w-10 h-10 flex items-center pl-1 justify-center text-gray-400 rounded-full
+            hover:bg-gray-100 
+            dark:hover:bg-[#ffffff15]"
+          >
+            <Icon name={"arrow_forward_ios"} size={18} />
+          </button>
+        </div>
+      </div>
+
+      {/* Grid */}
+      <div
+        className="grid grid-cols-7 gap-0.5 text-center text-sm 
+          dark:text-[#E4E2E5]"
+      >
+        <div>Do</div>
+
+        <div>Lu</div>
+
+        <div>Ma</div>
+
+        <div>Mi</div>
+
+        <div>Ju</div>
+
+        <div>Vi</div>
+
+        <div>Sa</div>
+
+        {/* Mes anterior */}
+        {Array.from({ length: firstDow }).map((_, i) => {
+          const prevMonthDays = new Date(year, month, 0).getDate();
+          const day = prevMonthDays - firstDow + i + 1;
+          return (
+            <button
+              key={`prev-${i}`}
+              type="button"
+              disabled
+              style={{ aspectRatio: 1 }}
+              className="flex items-center justify-center text-base rounded-full text-gray-300 
+                dark:text-[#ffffff25]"
+            >
+              {day}
+            </button>
+          );
+        })}
+
+        {/* Mes actual */}
+        {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => (
+          <button
+            key={day}
+            type="button"
+            onClick={() => handleSelect(day, onClose)}
+            style={{ aspectRatio: 1 }}
+            className={`flex items-center justify-center text-base rounded-2xl transition-colors 
+                hover:text-black
+                ${
+                  isSelected(day)
+                    ? `bg-black text-white font-bold text-lg
+                    hover:text-white hover:bg-black/90
+                    dark:bg-white dark:text-black`
+                    : isToday(day, month, year)
+                      ? `bg-gray-100 font-medium 
+                      hover:bg-gray-200 hover:font-bold
+                      dark:bg-[#101012] dark:hover:text-[#E4E2E5] dark:hover:bg-[#202022]`
+                      : `text-[#44474e]
+                      hover:bg-gray-200 hover:font-bold
+                      dark:text-[#E4E2E5] dark:hover:text-[#E4E2E5] dark:hover:bg-[#202022]`
+                }`}
+          >
+            {day}
+          </button>
+        ))}
+
+        {/* Mes siguiente */}
+        {(() => {
+          const totalCells = firstDow + daysInMonth;
+          const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+          return Array.from({ length: remaining }).map((_, i) => (
+            <button
+              key={`next-${i}`}
+              type="button"
+              disabled
+              style={{ aspectRatio: 1 }}
+              className="flex items-center justify-center text-base rounded-full text-gray-300
+                dark:text-[#ffffff25]"
+            >
+              {i + 1}
+            </button>
+          ));
+        })()}
+      </div>
+    </div>
+  );
+}

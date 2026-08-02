@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { months } from "@/utils/months";
 
-export function useCalendar(value, onChange, onClose) {
+export function useCalendar(value, onChange) {
   const today = new Date();
   const dayNames = [
     "Domingo",
@@ -120,7 +120,7 @@ export function useCalendar(value, onChange, onClose) {
     return `${startDay} - ${endDay} de ${weekMonth}`;
   }
 
-  function handleSelect(selectedDay) {
+  function handleSelect(selectedDay, onClose) {
     const formatted = `${year}-${String(month + 1).padStart(2, "0")}-${String(selectedDay).padStart(2, "0")}`;
     onChange(formatted);
     onClose();
