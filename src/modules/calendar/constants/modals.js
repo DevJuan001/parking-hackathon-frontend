@@ -11,7 +11,7 @@ export const modals = {
 
   createReservation: {
     title: "Crear reserva",
-    growDirection: "center",
+    growDirection: "right-center",
   },
 
   share: {
