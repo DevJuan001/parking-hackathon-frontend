@@ -44,7 +44,10 @@ export default function CalendarPage() {
   } = useCalendar();
 
   return (
-    <main className="w-full h-[91.8%] flex flex-col gap-2">
+    <main
+      className="w-full h-[87.5%] flex flex-col gap-2
+      md:h-[91.8%]"
+    >
       <TopSection
         text={
           activeCalendarLayout === "monthLayout"
@@ -92,12 +95,12 @@ export default function CalendarPage() {
 
       {modalType && (
         <Modal
-          margin={15}
           isOpen={isOpen}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
           title={modals[modalType]?.title}
+          margin={modals[modalType]?.margin ?? 0}
           location={modals[modalType]?.location}
           disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}

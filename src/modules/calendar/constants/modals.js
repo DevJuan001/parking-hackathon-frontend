@@ -5,11 +5,13 @@ export const modals = {
   },
 
   editReservation: {
-    growDirection: "center",
+    margin: 10,
     disableHeader: true,
+    growDirection: "center",
   },
 
   createReservation: {
+    margin: 10,
     title: "Crear reserva",
     growDirection: "right-center",
   },
