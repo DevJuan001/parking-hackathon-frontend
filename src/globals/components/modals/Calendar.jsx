@@ -38,7 +38,7 @@ export default function Calendar({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full min-h-96 p-2 bg-white rounded-4xl font-dmsans cursor-default overflow-hidden z-600
+        className="w-full min-h-full p-2 bg-white rounded-4xl font-dmsans cursor-default overflow-hidden z-600
         dark:bg-black dark:border-[#ffffff15]"
       >
         {/* Header */}
