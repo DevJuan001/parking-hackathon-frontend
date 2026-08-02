@@ -95,17 +95,18 @@ export const modals = {
   },
 
   dayInfo: {
-    styles: `p-5 h-[calc(100vh-15px)] w-screen
-    md:w-[540px] md:rounded-[40px]`,
+    styles: `p-5 w-screen h-screen
+    md:w-[540px] md:h-[calc(100vh-15px)] md:rounded-[40px]`,
   },
 
   editReservation: {
     styles: `p-4 w-screen h-screen
-    md:w-[450px] md:h-auto md:rounded-[42px]`,
+    md:w-[450px] md:h-auto md:mt-2! md:rounded-[42px]`,
   },
 
   timePicker: {
-    styles: `p-7 w-[400px] rounded-[32px]`
+    styles: `p-7 w-[400px] h-screen rounded-[32px]
+    md:h-auto`,
   },
 
   default: {
