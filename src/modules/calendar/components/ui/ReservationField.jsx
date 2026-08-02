@@ -17,11 +17,11 @@ export default function ReservationField({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col font-dmsans text-[#1b1b1e]
+      className={`w-full flex flex-col font-dmsans text-[#1b1b1e]
       hover:cursor-pointer
       dark:text-[#E4E2E5]
       ${reservationField[reservation?.level]?.styles}
-      ${miniVersion ? "h-5 flex-row items-center px-2 rounded-md" : "h-fit p-3 rounded-2xl"}
+      ${miniVersion ? "h-5 flex-row items-center px-2 rounded-md" : "h-20 p-3 gap-1 rounded-2xl"}
       ${active ? "opacity-100" : "opacity-40"}`}
     >
       <div className="w-full flex items-center justify-between">
@@ -31,9 +31,8 @@ export default function ReservationField({
           )}
 
           <span
-            data-shared-id={`reservation-${reservation?.id}-name`}
-            className={`font-medium
-              ${miniVersion ? "max-w-17 text-xs overflow-hidden" : "max-w-25 overflow-hidden text-lg"}
+            className={`w-full font-medium
+              ${miniVersion ? "text-xs" : "text-lg"}
             `}
           >
             {reservation?.name}
@@ -41,8 +40,7 @@ export default function ReservationField({
         </div>
 
         <span
-          data-shared-id={`reservation-${reservation?.id}-date`}
-          className={`font-medium
+          className={`w-fit text-nowrap font-medium
             ${miniVersion ? "text-xs" : "text-base"}
           `}
         >
@@ -52,11 +50,11 @@ export default function ReservationField({
 
       {!miniVersion && (
         <div className="flex gap-1">
-          <div className="flex items-center py-1 px-3 gap-1 bg-white text-sm text-black rounded-full">
-            <Icon name={"crown"} size={20} />
-
-            <span>Cliente VIP</span>
-          </div>
+          {reservation?.labels?.map((label) => (
+            <div className="flex items-center py-1 px-3 gap-1 bg-white text-sm text-black rounded-full">
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       )}
     </button>
