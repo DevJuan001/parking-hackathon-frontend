@@ -31,21 +31,29 @@ export default function WeekCalendarLayout({
 
         {weekDates?.map((date) => (
           <div
-            key={date.toISOString()}
+            key={date?.toISOString()}
             className="flex flex-col items-center justify-center gap-0.5"
           >
             <span className="text-sm font-medium">
-              {dayNames[date.getDay()]}
+              {dayNames[date?.getDay()]}
             </span>
 
             <button
               onClick={() => {
-                goToDate(date.getDate(), date.getMonth(), date.getFullYear());
+                goToDate(
+                  date?.getDate(),
+                  date?.getMonth(),
+                  date?.getFullYear(),
+                );
                 setActiveCalendarLayout("dayLayout");
               }}
               className={`w-12 h-12 flex items-center justify-center rounded-full text-2xl
                 ${
-                  isToday(date.getDate(), date.getMonth(), date.getFullYear())
+                  isToday(
+                    date?.getDate(),
+                    date?.getMonth(),
+                    date?.getFullYear(),
+                  )
                     ? `bg-black text-white font-semibold
                     dark:bg-white dark:text-black`
                     : `font-medium
@@ -54,7 +62,7 @@ export default function WeekCalendarLayout({
                 }
                 `}
             >
-              {date.getDate()}
+              {date?.getDate()}
             </button>
           </div>
         ))}
@@ -80,9 +88,9 @@ export default function WeekCalendarLayout({
               >
                 {filterReservationsByHour(
                   reservations,
-                  date.getFullYear(),
-                  date.getMonth(),
-                  date.getDate(),
+                  date?.getFullYear(),
+                  date?.getMonth(),
+                  date?.getDate(),
                   hour,
                 )?.map((reservation) => (
                   <button
@@ -94,7 +102,7 @@ export default function WeekCalendarLayout({
                       ${reservationField[reservation?.level]?.styles}
                       `}
                     style={{
-                      height: `${getReservationHeight(reservation.start_date, reservation.end_date)}px`,
+                      height: `${getReservationHeight(reservation?.start_date, reservation?.end_date)}px`,
                     }}
                   >
                     <span
