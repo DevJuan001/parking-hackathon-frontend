@@ -32,7 +32,8 @@ export default function DayInfoModal({ dayInfo, onClose }) {
           </button>
 
           <span
-            className="text-2xl text-nowrap font-medium
+            className="text-xl text-nowrap font-medium
+            md:text-2xl
             dark:text-white"
           >
             <span data-shared-id="day-number">{dayInfo?.day} </span>
@@ -70,13 +71,20 @@ export default function DayInfoModal({ dayInfo, onClose }) {
       {innerType === "editReservation" && (
         <Modal
           disableHeader
+          margin={8}
           isOpen={true}
           type={innerType}
           triggerRef={innerTrigger}
           growDirection="anchored"
           onClose={closeInnerModal}
         >
-          <EditReservationModal reservation={innerData} onClose={closeInnerModal} />
+          <EditReservationModal
+            reservation={innerData}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
+          />
         </Modal>
       )}
     </div>
