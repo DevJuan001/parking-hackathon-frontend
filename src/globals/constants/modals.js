@@ -101,7 +101,7 @@ export const modals = {
 
   editReservation: {
     styles: `p-4 w-screen h-screen
-    md:w-[450px] md:h-auto md:mt-2! md:rounded-[42px]`,
+    md:w-[450px] md:h-auto md:rounded-[42px]`,
   },
 
   timePicker: {
