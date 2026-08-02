@@ -30,6 +30,7 @@ export default function Calendar({
           month={month}
           year={year}
           firstDow={firstDow}
+          dayNames={dayNames}
           daysInMonth={daysInMonth}
           reservations={reservations}
           loading={loading}
