@@ -1,7 +1,7 @@
 // Hooks
 import { useTimePicker } from "@hooks/useTimePicker";
 // Utils
-import { HOUR_NUMBERS, MINUTE_NUMBERS } from "@/utils/timeUtils";
+import { HOUR_NUMBERS, MINUTE_NUMBERS, padZero } from "@/utils/timeUtils";
 // Modales
 import Modal from "@modals/Modal";
 
@@ -32,7 +32,7 @@ export default function TimePickerModal({
 
   const CENTER = 136;
   const isHour = unit === "hour";
-  const ringRadius = isHour ? 93 : 48;
+  const ringRadius = isHour ? 94 : 48;
   const tipY = 114 - ringRadius;
 
   const hourPositions = HOUR_NUMBERS.map((_, i) => {
@@ -85,7 +85,7 @@ export default function TimePickerModal({
                   dark:bg-[#101012] dark:text-[#C5C6CE]`
               }`}
           >
-            {String(hour12)?.padStart(2, "0")}
+            {padZero(hour12)}
           </button>
 
           <span
@@ -106,7 +106,7 @@ export default function TimePickerModal({
                   dark:bg-[#101012] dark:text-[#C5C6CE]`
               }`}
           >
-            {String(minute)?.padStart(2, "0")}
+            {padZero(minute)}
           </button>
         </div>
 
@@ -131,7 +131,7 @@ export default function TimePickerModal({
                 style={{ left: position.x, top: position.y }}
                 className={`absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center z-100 transition-colors duration-500
                 ${
-                  isSelected
+                  isSelected && unit === "hour"
                     ? `font-semibold text-white
                   dark:text-black`
                     : unit === "minute"
@@ -163,7 +163,7 @@ export default function TimePickerModal({
                 style={{ left: position.x, top: position.y }}
                 className={`absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-xs z-100 transition-colors duration-500
                 ${
-                  isSelected
+                  isSelected && unit === "minute"
                     ? `font-semibold text-white
                   dark:text-black`
                     : unit === "hour"
@@ -196,7 +196,7 @@ export default function TimePickerModal({
                 stroke="currentColor"
                 strokeWidth="3"
                 strokeLinecap="round"
-                style={{ transition: "y2 300ms cubic-bezier(0.4, 0, 0.2, 1)" }}
+                style={{ transition: "y2 1000ms cubic-bezier(0.4, 0, 0.2, 1)" }}
               />
 
               <circle
