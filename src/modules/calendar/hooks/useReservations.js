@@ -1,13 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getAllReservationsService } from "../services/getAllReservationsService";
 
 export function useReservations() {
   const [filters, setFilters] = useState({});
 
-  const reservations = useQuery({
+  const reservations = useInfiniteQuery({
     queryKey: ["reservations", filters],
-    queryFn: () => getAllReservationsService(filters),
+    queryFn: ({ pageParam }) =>
+      getAllReservationsService({ pageParam, filters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 3 ? allPages.length + 1 : undefined,
+    select: (data) =>
+      data.pages.flatMap((page) =>
+        page.map((user) => ({
+          ...user,
+        })),
+      ),
     staleTime: 1000 * 60 * 60,
   });
 

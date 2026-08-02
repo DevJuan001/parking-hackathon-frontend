@@ -2,8 +2,11 @@ import { apiRoutes } from "@/config/apiRoutes";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 
-export async function getAllReservationsService(filters) {
-  const params = buildQueryParams(filters);
+export async function getAllReservationsService({
+  pageParam = 1,
+  filters = {},
+}) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.reservations}/?${params}`,
