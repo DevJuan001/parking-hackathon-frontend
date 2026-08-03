@@ -6,6 +6,7 @@ import { months } from "@/utils/months";
 import { filterReservationsByDate } from "@/utils/filterReservations";
 // Componentes
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "@components/ui/LiquidGlass";
 import CreateButton from "@components/ui/CreateButton";
 import ReservationField from "@/modules/calendar/components/ui/ReservationField";
 // Modales
@@ -21,19 +22,24 @@ export default function DayInfoModal({ dayInfo, onClose }) {
     openInnerModal,
     closeInnerModal,
   } = useInnerModal();
-  const { reservations } = useReservations();
+  const { reservations } = useReservations(dayInfo?.year, dayInfo?.month);
 
   return (
     <div className="w-full h-full flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-5">
-          <button
+          <LiquidGlass
+            role="button"
             onClick={onClose}
             className="w-fit h-fit flex items-center justify-center p-3 rounded-full
             hover:bg-[#acaaaa1e] hover:cursor-pointer"
           >
-            <Icon name={"close"} />
-          </button>
+            <Icon
+              name={"close"}
+              className={`text-black
+              dark:text-white`}
+            />
+          </LiquidGlass>
 
           <span
             className="text-xl text-nowrap font-medium
