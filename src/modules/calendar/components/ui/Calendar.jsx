@@ -1,5 +1,3 @@
-// Hooks
-import { useReservations } from "@/modules/calendar/hooks/useReservations";
 // Componentes
 import DayCalendarLayout from "@/modules/calendar/components/ui/DayCalendarLayout";
 import WeekCalendarLayout from "@/modules/calendar/components/ui/WeekCalendarLayout";
@@ -10,19 +8,19 @@ export default function Calendar({
   hours,
   month,
   year,
-  firstDow,
-  dayNames,
-  daysInMonth,
+  loading,
   isToday,
   goToDate,
+  firstDow,
+  dayNames,
   openModal,
+  daysInMonth,
+  reservations,
   getWeekDates,
   currentDayName,
   activeCalendarLayout,
   setActiveCalendarLayout,
 }) {
-  const { reservations, loading } = useReservations();
-
   return (
     <section className="w-full h-[89%] font-dmsans">
       {activeCalendarLayout === "monthLayout" && (
@@ -30,6 +28,7 @@ export default function Calendar({
           month={month}
           year={year}
           firstDow={firstDow}
+          dayNames={dayNames}
           daysInMonth={daysInMonth}
           reservations={reservations}
           loading={loading}

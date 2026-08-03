@@ -1,4 +1,5 @@
 // Hooks
+import { useClients } from "@hooks/useClients";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useEditReservation } from "@/modules/calendar/hooks/useEditReservation";
 // Componentes
@@ -20,6 +21,7 @@ export default function EditReservationModal({ reservation, onClose }) {
     useEditReservation(reservation);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
+  const { clients } = useClients();
 
   return (
     <div className="h-full w-full flex flex-col gap-2">
@@ -29,6 +31,7 @@ export default function EditReservationModal({ reservation, onClose }) {
       >
         <div className="w-full flex justify-between">
           <LiquidGlass
+            role="button"
             onClick={(e) => openInnerModal("delete", e)}
             className="flex items-center justify-center p-3 rounded-3xl group
             active:animate-click-effect
@@ -38,7 +41,9 @@ export default function EditReservationModal({ reservation, onClose }) {
             <Icon
               name={"delete"}
               size={20}
-              className={"group-hover:text-red-700"}
+              className={`text-[#75777E]
+              dark:text-[#7E8088]
+              group-hover:text-red-700`}
             />
           </LiquidGlass>
 
@@ -53,7 +58,7 @@ export default function EditReservationModal({ reservation, onClose }) {
               name={"close"}
               size={20}
               className="text-[#75777E]
-            dark:text-[#7E8088]"
+              dark:text-[#7E8088]"
             />
           </LiquidGlass>
         </div>
@@ -62,31 +67,34 @@ export default function EditReservationModal({ reservation, onClose }) {
           className="h-full flex flex-col justify-center py-8 px-3 gap-2
           dark:text-[#E4E2E5]"
         >
-          <span
-            data-shared-id="reservation-name"
-            className="text-2xl text-ellipsis font-medium overflow-hidden"
-          >
+          <span className="text-2xl text-ellipsis font-medium overflow-hidden">
             {form.name}
           </span>
         </div>
       </div>
 
-      <form className="w-full flex flex-col gap-2">
+      <form
+        onSubmit={(e) => handleSubmit(e, openInnerModal, onClose)}
+        className="w-full flex flex-col gap-2"
+      >
         <FormField
-          labelText={"Titúlo"}
           id={"name"}
           name={"name"}
           value={form.name}
+          labelText={"Titúlo"}
           onChange={handleChange}
         />
 
         <SelectMenu
-          disabled
           id={"client-menu"}
-          name={"client"}
+          name={"client_id"}
           spanText={"Cliente"}
-          value={reservation?.client}
+          value={form.client_id}
           onChange={handleChange}
+          options={clients?.map((client) => ({
+            value: client?.id,
+            label: `${client?.name} ${client?.first_surname} ${client?.second_surname}`,
+          }))}
         />
 
         <div className="flex gap-2">
@@ -113,16 +121,16 @@ export default function EditReservationModal({ reservation, onClose }) {
           <TimeField
             id={"start_time"}
             name={"start_time"}
-            onChange={handleChange}
             value={form.start_time}
+            onChange={handleChange}
             spanText={"Hora de inicio"}
           />
 
           <TimeField
             id={"end_time"}
             name={"end_time"}
-            onChange={handleChange}
             value={form.end_time}
+            onChange={handleChange}
             spanText={"Hora de fin"}
           />
         </div>
@@ -157,7 +165,7 @@ export default function EditReservationModal({ reservation, onClose }) {
           itemsPosition="end"
           confirmText={loading ? <Loader /> : "Guardar"}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
-          cancelButtonOnClick={closeInnerModal}
+          cancelButtonOnClick={onClose}
         />
       </form>
 
@@ -176,12 +184,15 @@ export default function EditReservationModal({ reservation, onClose }) {
           isOpen={true}
           title={"Eliminar reserva"}
           triggerRef={innerTrigger}
-          onClose={closeInnerModal}
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
         >
           <DeleteReservationModal
             reservation={reservation}
             onClose={() => {
-              closeInnerModal;
+              closeInnerModal();
               onClose();
             }}
           />

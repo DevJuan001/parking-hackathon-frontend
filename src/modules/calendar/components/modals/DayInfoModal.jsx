@@ -1,8 +1,12 @@
+// Hooks
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useReservations } from "@/modules/calendar/hooks/useReservations";
 // Utils
 import { months } from "@/utils/months";
-import { useInnerModal } from "@hooks/useInnerModal";
+import { filterReservationsByDate } from "@/utils/filterReservations";
 // Componentes
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "@components/ui/LiquidGlass";
 import CreateButton from "@components/ui/CreateButton";
 import ReservationField from "@/modules/calendar/components/ui/ReservationField";
 // Modales
@@ -18,21 +22,28 @@ export default function DayInfoModal({ dayInfo, onClose }) {
     openInnerModal,
     closeInnerModal,
   } = useInnerModal();
+  const { reservations } = useReservations(dayInfo?.year, dayInfo?.month);
 
   return (
     <div className="w-full h-full flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-5">
-          <button
+          <LiquidGlass
+            role="button"
             onClick={onClose}
             className="w-fit h-fit flex items-center justify-center p-3 rounded-full
             hover:bg-[#acaaaa1e] hover:cursor-pointer"
           >
-            <Icon name={"close"} />
-          </button>
+            <Icon
+              name={"close"}
+              className={`text-black
+              dark:text-white`}
+            />
+          </LiquidGlass>
 
           <span
-            className="text-2xl text-nowrap font-medium
+            className="text-xl text-nowrap font-medium
+            md:text-2xl
             dark:text-white"
           >
             <span data-shared-id="day-number">{dayInfo?.day} </span>
@@ -46,14 +57,21 @@ export default function DayInfoModal({ dayInfo, onClose }) {
         />
       </div>
 
-      {dayInfo?.reservations?.map((reservation) => (
-        <ReservationField
-          active
-          key={reservation?.id}
-          reservation={reservation}
-          onClick={(e) => openInnerModal("editReservation", e, reservation)}
-        />
-      ))}
+      <div className="w-full h-full flex flex-col gap-1 overflow-hidden overflow-y-auto">
+        {filterReservationsByDate(
+          reservations,
+          dayInfo?.year,
+          dayInfo?.month,
+          dayInfo?.day,
+        )?.map((reservation) => (
+          <ReservationField
+            active
+            key={reservation?.id}
+            reservation={reservation}
+            onClick={(e) => openInnerModal("editReservation", e, reservation)}
+          />
+        ))}
+      </div>
 
       {innerType === "createReservation" && (
         <Modal
@@ -70,13 +88,20 @@ export default function DayInfoModal({ dayInfo, onClose }) {
       {innerType === "editReservation" && (
         <Modal
           disableHeader
+          margin={8}
           isOpen={true}
           type={innerType}
           triggerRef={innerTrigger}
           growDirection="anchored"
           onClose={closeInnerModal}
         >
-          <EditReservationModal reservation={innerData} onClose={closeInnerModal} />
+          <EditReservationModal
+            reservation={innerData}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
+          />
         </Modal>
       )}
     </div>

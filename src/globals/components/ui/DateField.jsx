@@ -59,7 +59,6 @@ export default function DateField({
           triggerRef={innerTrigger}
           onChange={(formatted) => {
             onChange({ target: { name, value: formatted } });
-            closeInnerModal();
           }}
           onClose={closeInnerModal}
         />

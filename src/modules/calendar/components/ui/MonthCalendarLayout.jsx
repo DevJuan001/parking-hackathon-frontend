@@ -5,6 +5,7 @@ import DayField from "@/modules/calendar/components/ui/DayField";
 
 export default function MonthCalendarLayout({
   daysInMonth,
+  dayNames,
   month,
   year,
   loading,
@@ -20,54 +21,22 @@ export default function MonthCalendarLayout({
       className="w-full h-full grid grid-cols-7 grid-rows-[50px_repeat(6,1fr)] gap-2
       dark:text-[#E4E2E5]"
     >
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Domingo
-      </div>
+      {dayNames?.map((day, index) => (
+        <div
+          key={index}
+          className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
+          dark:bg-[#101012]"
+        >
+          <span
+            className="hidden
+            md:inline-block"
+          >
+            {day}
+          </span>
 
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Lunes
-      </div>
-
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Martes
-      </div>
-
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Miercoles
-      </div>
-
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Jueves
-      </div>
-
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Viernes
-      </div>
-
-      <div
-        className="p-3 rounded-2xl bg-[#F5F3F6] text-center font-medium
-        dark:bg-[#101012]"
-      >
-        Sábado
-      </div>
+          <span className="md:hidden">{day?.slice(0, 2)}</span>
+        </div>
+      ))}
 
       {/* Mes anterior */}
       {Array.from({ length: firstDow }).map((_, i) => {
@@ -79,7 +48,12 @@ export default function MonthCalendarLayout({
             day={day}
             month={month - 1}
             year={year}
-            reservations={filterReservationsByDate(reservations, year, month - 1, day)}
+            reservations={filterReservationsByDate(
+              reservations,
+              year,
+              month - 1,
+              day,
+            )}
             loading={loading}
             isToday={isToday}
             openModal={openModal}
@@ -97,7 +71,12 @@ export default function MonthCalendarLayout({
           day={day}
           month={month}
           year={year}
-          reservations={filterReservationsByDate(reservations, year, month, day)}
+          reservations={filterReservationsByDate(
+            reservations,
+            year,
+            month,
+            day,
+          )}
           loading={loading}
           isToday={isToday}
           openModal={openModal}
@@ -116,7 +95,12 @@ export default function MonthCalendarLayout({
             day={i + 1}
             month={month + 1}
             year={year}
-            reservations={filterReservationsByDate(reservations, year, month + 1, i + 1)}
+            reservations={filterReservationsByDate(
+              reservations,
+              year,
+              month + 1,
+              i + 1,
+            )}
             loading={loading}
             isToday={isToday}
             openModal={openModal}

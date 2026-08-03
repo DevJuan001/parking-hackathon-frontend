@@ -1,7 +1,8 @@
 // Hooks
-import { useState } from "react";
 import { useModal } from "@hooks/useModal";
+import { useState, useEffect } from "react";
 import { useCalendar } from "@hooks/useCalendar";
+import { useReservations } from "@/modules/calendar/hooks/useReservations";
 // Utils
 import { months } from "@/utils/months";
 // Constantes
@@ -42,9 +43,17 @@ export default function CalendarPage() {
     getWeekDates,
     getWeekRange,
   } = useCalendar();
+  const { reservations, loading, fetchByMonth } = useReservations(year, month);
+
+  useEffect(() => {
+    fetchByMonth(year, month);
+  }, [year, month, fetchByMonth]);
 
   return (
-    <main className="w-full h-[91.8%] flex flex-col gap-2">
+    <main
+      className="w-full h-[87.5%] flex flex-col gap-2
+      md:h-[91.8%]"
+    >
       <TopSection
         text={
           activeCalendarLayout === "monthLayout"
@@ -74,12 +83,14 @@ export default function CalendarPage() {
 
       <Calendar
         day={day}
+        year={year}
         hours={hours}
         month={month}
-        year={year}
+        loading={loading}
         firstDow={firstDow}
         dayNames={dayNames}
         daysInMonth={daysInMonth}
+        reservations={reservations}
         currentDayName={currentDayName}
         isToday={isToday}
         goToDate={goToDate}
@@ -92,12 +103,12 @@ export default function CalendarPage() {
 
       {modalType && (
         <Modal
-          margin={15}
           isOpen={isOpen}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
           title={modals[modalType]?.title}
+          margin={modals[modalType]?.margin ?? 0}
           location={modals[modalType]?.location}
           disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}

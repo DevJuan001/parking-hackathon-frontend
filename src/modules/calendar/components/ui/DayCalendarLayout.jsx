@@ -76,13 +76,13 @@ export default function DayCalendarLayout({
               className="relative flex gap-1 border border-t-0 border-[#E4E2E5]
               dark:border-[#202022]"
             >
-              {filterReservationsByHour(reservations, year, month, day)?.map(
+              {filterReservationsByHour(reservations, year, month, day, hour)?.map(
                 (reservation) => (
                   <button
                     onClick={(e) =>
                       openModal(reservation, "editReservation", e.currentTarget)
                     }
-                    className={`absolute h-10 flex flex-col p-2 text-sm ${reservationField[reservation?.level]?.styles}`}
+                    className={`absolute h-fit flex flex-col p-2 rounded-2xl text-sm ${reservationField[reservation?.level]?.styles}`}
                   >
                     <span className="font-medium">{reservation?.name}</span>
 

@@ -17,23 +17,31 @@ export default function ReservationField({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col font-dmsans text-[#1b1b1e]
+      className={`w-full flex flex-col font-dmsans text-[#1b1b1e]
       hover:cursor-pointer
       dark:text-[#E4E2E5]
       ${reservationField[reservation?.level]?.styles}
-      ${miniVersion ? "h-5 flex-row items-center px-2 rounded-md" : "h-fit p-3 rounded-2xl"}
+      ${
+        miniVersion
+          ? `h-5 flex-row items-center px-1 rounded-md
+        lg:px-2`
+          : "h-20 p-3 gap-0.5 rounded-2xl"
+      }
       ${active ? "opacity-100" : "opacity-40"}`}
     >
-      <div className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-1">
+      <div className="w-full flex items-center justify-between gap-0">
+        <div
+          className="w-[40%] flex items-center gap-0.5
+          xl:w-[70%]"
+        >
           {reservation?.level < 2 && (
             <Icon name={"circle"} size={10} fill className="text-blue-700" />
           )}
 
           <span
-            data-shared-id={`reservation-${reservation?.id}-name`}
-            className={`font-medium
-              ${miniVersion ? "max-w-17 text-xs overflow-hidden" : "max-w-25 overflow-hidden text-lg"}
+            className={`text-nowrap text-ellipsis font-medium overflow-hidden
+              lg:w-full
+              ${miniVersion ? "text-xs" : "text-lg"}
             `}
           >
             {reservation?.name}
@@ -41,8 +49,7 @@ export default function ReservationField({
         </div>
 
         <span
-          data-shared-id={`reservation-${reservation?.id}-date`}
-          className={`font-medium
+          className={`w-fit text-nowrap font-medium overflow-hidden
             ${miniVersion ? "text-xs" : "text-base"}
           `}
         >
@@ -52,11 +59,11 @@ export default function ReservationField({
 
       {!miniVersion && (
         <div className="flex gap-1">
-          <div className="flex items-center py-1 px-3 gap-1 bg-white text-sm text-black rounded-full">
-            <Icon name={"crown"} size={20} />
-
-            <span>Cliente VIP</span>
-          </div>
+          {reservation?.labels?.map((label) => (
+            <div className="flex items-center py-1 px-3 gap-1 bg-white text-sm text-black rounded-full">
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       )}
     </button>

@@ -1,37 +1,88 @@
-import Icon from "@/globals/components/ui/Icon";
+// Hooks
+import { useState } from "react";
+// Componentes
+import Icon from "@components/ui/Icon";
+import { QRCodeSVG } from "qrcode.react";
 
-export default function ShareModal({ link = "aa" }) {
+export default function ShareModal({
+  link = "https://parking-hackathon-frontend.onrender.com/calendar",
+}) {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+
+      setIsCopied(true);
+
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("No se pudo copiar el link", err);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4 font-inter">
+    <div className="flex flex-col items-center gap-5 font-dmsans">
+      <div className="flex items-center gap-2">
+        <Icon data-shared-id="share-icon" name={"event_upcoming"} />
+
+        <span data-shared-id="share-text" className="font-semibold">
+          Compartir
+        </span>
+      </div>
+
       <span
-        className="text-[#75777E]
+        className="text-center text-[#75777E]
         dark:text-[#7E8088]"
       >
-        Invita a tus clientes a que reserven sus plazas antes de llegar a tu
-        parqueadero y tengan un experiencia increible
+        Ofrece a tus clientes la comodidad de reservar su plaza antes de llegar
+        y sorpréndelos con una experiencia de estacionamiento excepcional.
       </span>
 
-      <div></div>
+      <QRCodeSVG
+        value={link}
+        size={256}
+        imageSettings={{
+          src: "parking-logo.svg",
+          height: 64,
+          width: 64,
+          excavate: true,
+        }}
+      />
 
       <div
-        className="h-fit w-full flex gap-2 bg-[#F5F3F6] rounded-4xl
+        className="h-fit w-full flex items-center justify-between bg-[#F5F3F6] rounded-4xl
         dark:bg-[#101012]"
       >
-        <div
-          className="w-full p-5
-          dark:text-[#E4E2E5]"
+        <a
+          href={`${link}`}
+          className="w-full p-5 text-sm text-nowrap text-ellipsis overflow-hidden
+          hover:text-blue-700 hover:underline
+          dark:text-white"
         >
-          <a href={`${link}`}>{link}</a>
-        </div>
+          {link}
+        </a>
 
         <button
-          className="h-full flex items-center gap-2 py-4 p-6 bg-black rounded-4xl text-white
+          onClick={handleCopy}
+          className="h-full w-fit flex items-center gap-2 py-4 p-6 bg-black rounded-4xl text-sm text-white
           active:animate-click-effect
           dark:bg-white dark:text-black"
         >
-          <Icon name={"content_copy"} />
+          <Icon
+            name={isCopied ? "check" : "content_copy"}
+            className={
+              isCopied
+                ? "text-green-600"
+                : `text-white
+              dark:text-black`
+            }
+            size={20}
+          />
 
-          <span className="text-nowrap font-medium">Copiar link</span>
+          <span className="text-nowrap font-medium">
+            {isCopied ? "Copiado" : "Copiar link"}
+          </span>
         </button>
       </div>
     </div>

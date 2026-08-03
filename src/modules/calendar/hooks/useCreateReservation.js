@@ -6,16 +6,17 @@ import { useFormValidation } from "@hooks/useFormValidation";
 import { createReservationService } from "@/modules/calendar/services/createReservationService";
 
 export function useCreateReservation(dayInfo) {
+  const actualDate = new Date();
   const [form, setForm] = useState({
     name: "",
-    level: 1,
+    level: "",
     client_id: "",
     start_date:
       dayInfo?.year && dayInfo?.month && dayInfo?.day
-        ? `${dayInfo.year}-${padZero(dayInfo.month)}-${padZero(dayInfo.day)}`
-        : "",
+        ? `${dayInfo.year}-${padZero(dayInfo.month + 1)}-${padZero(dayInfo.day)}`
+        : `${actualDate.getFullYear()}-${padZero(actualDate.getMonth() + 1)}-${padZero(actualDate.getDate())}`,
+    start_time: `${actualDate.getHours()}:${padZero((Math.round(actualDate.getMinutes() / 5) * 5) % 60)}`,
     end_date: "",
-    start_time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     end_time: "",
   });
   const [loading, setLoading] = useState(false);
@@ -49,7 +50,6 @@ export function useCreateReservation(dayInfo) {
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
-        openInnerModal("success", triggerButton);
         onClose();
       } else {
         setError(response?.error);

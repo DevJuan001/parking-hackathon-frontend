@@ -26,7 +26,7 @@ export default function DayField({
           e.currentTarget,
         );
       }}
-      className={`flex flex-col p-3 gap-1 rounded-2xl group
+      className={`flex flex-col p-2 gap-1 rounded-2xl group
       ${
         active
           ? `font-medium bg-[#F5F3F6]
@@ -35,6 +35,7 @@ export default function DayField({
           : `bg-[#f5f3f649] text-[#75777E]
         dark:bg-[#10101248] dark:text-[#7E8088]`
       }
+      md:p-3
       hover:cursor-pointer`}
     >
       <div className="w-full h-7 flex justify-between">
@@ -57,7 +58,10 @@ export default function DayField({
           <span data-shared-id="day-number">{day}</span>
         </div>
 
-        <div className="h-6 flex items-center gap-1">
+        <div
+          className="hidden h-6 items-center gap-1
+          md:flex"
+        >
           <button
             type="button"
             onClick={(e) => {
@@ -120,8 +124,11 @@ export default function DayField({
             />
           ))}
 
-        <div className="flex flex-col gap-1">
-          {reservations?.slice(0, 3).map((reservation) => (
+        <div
+          className="hidden flex-col gap-0.5
+          md:flex"
+        >
+          {reservations?.slice(0, 2).map((reservation) => (
             <ReservationField
               key={reservation?.id}
               active={active}
@@ -133,7 +140,32 @@ export default function DayField({
               }}
             />
           ))}
+
+          {reservations?.length > 2 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                openModal(
+                  { day, month, year, reservations },
+                  "dayInfo",
+                  e.currentTarget,
+                );
+              }}
+              className="h-5 flex items-center justify-center px-2 rounded-md bg-[#F5F3F6] text-xs text-[#75777E] font-medium
+              hover:bg-[#E2E4E5] hover:cursor-pointer
+              dark:bg-[#101012] dark:text-[#7E8088] dark:hover:bg-[#202022]"
+            >
+              +{reservations.length - 2} más
+            </button>
+          )}
         </div>
+
+        {reservations?.length > 0 && (
+          <div
+            className="w-2 h-2 self-center bg-black rounded-full
+            sm:hidden"
+          />
+        )}
       </div>
     </div>
   );

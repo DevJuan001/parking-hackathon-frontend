@@ -2,7 +2,7 @@ export const reservationField = {
   1: {
     styles: `bg-blue-50 border-cyan-300 text-start
     hover:bg-[#E4E2E5]
-    dark:bg-blue-800/30 dark:hover:bg-[#28282B]`,
+    dark:bg-blue-800/20 dark:hover:bg-[#28282B]`,
   },
 
   2: {

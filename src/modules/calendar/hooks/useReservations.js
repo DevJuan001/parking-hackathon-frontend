@@ -1,15 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getAllReservationsService } from "../services/getAllReservationsService";
+import { useState, useCallback } from "react";
+import { getMonthRange } from "@/utils/timeUtils";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getAllReservationsService } from "@/modules/calendar/services/getAllReservationsService";
 
-export function useReservations() {
-  const [filters, setFilters] = useState({});
+export function useReservations(year, month) {
+  const [filters, setFilters] = useState(() => getMonthRange(year, month));
 
-  const reservations = useQuery({
+  const reservations = useInfiniteQuery({
     queryKey: ["reservations", filters],
-    queryFn: () => getAllReservationsService(filters),
+    queryFn: ({ pageParam }) =>
+      getAllReservationsService({ pageParam, filters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 3 ? allPages.length + 1 : undefined,
+    select: (data) =>
+      data.pages.flatMap((page) =>
+        page.map((user) => ({
+          ...user,
+        })),
+      ),
     staleTime: 1000 * 60 * 60,
   });
+
+  const fetchByMonth = useCallback(() => {
+    setFilters(getMonthRange(year, month));
+  }, [year, month]);
 
   return {
     reservations: reservations.data,
@@ -17,5 +32,6 @@ export function useReservations() {
     error: reservations.error,
     filters,
     setFilters,
+    fetchByMonth,
   };
 }
