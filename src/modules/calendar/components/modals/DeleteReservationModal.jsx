@@ -23,7 +23,7 @@ export default function DeleteReservationModal({ reservation, onClose }) {
         confirmText={loading ? <Loader /> : "Eliminar"}
         confirmBgColor="#D11C00"
         confirmButtonOnClick={(e) => handleDelete(e, openInnerModal, onClose)}
-        cancelButtonOnClick={closeInnerModal}
+        cancelButtonOnClick={onClose}
       />
 
       {innerType === "error" && (
