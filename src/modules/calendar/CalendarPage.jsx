@@ -1,7 +1,8 @@
 // Hooks
-import { useState } from "react";
 import { useModal } from "@hooks/useModal";
+import { useState, useEffect } from "react";
 import { useCalendar } from "@hooks/useCalendar";
+import { useReservations } from "@/modules/calendar/hooks/useReservations";
 // Utils
 import { months } from "@/utils/months";
 // Constantes
@@ -42,6 +43,11 @@ export default function CalendarPage() {
     getWeekDates,
     getWeekRange,
   } = useCalendar();
+  const { reservations, loading, fetchByMonth } = useReservations(year, month);
+
+  useEffect(() => {
+    fetchByMonth(year, month);
+  }, [year, month, fetchByMonth]);
 
   return (
     <main
@@ -77,12 +83,14 @@ export default function CalendarPage() {
 
       <Calendar
         day={day}
+        year={year}
         hours={hours}
         month={month}
-        year={year}
+        loading={loading}
         firstDow={firstDow}
         dayNames={dayNames}
         daysInMonth={daysInMonth}
+        reservations={reservations}
         currentDayName={currentDayName}
         isToday={isToday}
         goToDate={goToDate}
