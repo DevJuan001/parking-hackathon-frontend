@@ -25,12 +25,12 @@ export function useTimePicker({ value, onChange }) {
     if (value) {
       const [hour, minute] = value.split(":").map(Number);
 
-      return to12h(hour, minute);
+      return to12h(hour, (Math.round(minute / 5) * 5) % 60);
     }
 
     const now = new Date();
 
-    return to12h(now.getHours(), now.getMinutes());
+    return to12h(now.getHours(), (Math.round(now.getMinutes() / 5) * 5) % 60);
   }
 
   function selectHour(number) {
