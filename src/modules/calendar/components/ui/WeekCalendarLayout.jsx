@@ -21,10 +21,13 @@ export default function WeekCalendarLayout({
 }) {
   return (
     <div
-      className="w-full h-full overflow-hidden
+      className="w-full h-full overflow-hidden overflow-x-auto
       dark:text-[#E4E2E5]"
     >
-      <div className="w-full h-[10%] grid grid-cols-[50px_repeat(7,1fr)] grid-rows-1 border-collapse">
+      <div
+        className="w-full h-[12%] grid grid-cols-[50px_repeat(7,1fr)] grid-rows-1 gap-5 border-collapse
+        md:h-[10%] md:gap-0"
+      >
         <div className="flex items-end">
           <span className="w-full text-xs">GMT-05</span>
         </div>
@@ -34,8 +37,15 @@ export default function WeekCalendarLayout({
             key={date?.toISOString()}
             className="flex flex-col items-center justify-center gap-0.5"
           >
-            <span className="text-sm font-medium">
+            <span
+              className="hidden font-medium
+              md:inline-block"
+            >
               {dayNames[date?.getDay()]}
+            </span>
+
+            <span className="text-sm md:hidden">
+              {dayNames[date?.getDay()].slice(0, 2)}
             </span>
 
             <button
@@ -47,7 +57,8 @@ export default function WeekCalendarLayout({
                 );
                 setActiveCalendarLayout("dayLayout");
               }}
-              className={`w-12 h-12 flex items-center justify-center rounded-full text-2xl
+              className={`w-8 h-8 flex items-center justify-center rounded-full text-2xl
+                md:w-12 md:h-12
                 ${
                   isToday(
                     date?.getDate(),
@@ -62,13 +73,21 @@ export default function WeekCalendarLayout({
                 }
                 `}
             >
-              {date?.getDate()}
+              <span
+                className="text-sm
+                md:text-2xl"
+              >
+                {date?.getDate()}
+              </span>
             </button>
           </div>
         ))}
       </div>
 
-      <div className="w-full h-full grid grid-cols-[50px_repeat(7,1fr)] grid-rows-[repeat(24,50px)] border-collapse overflow-hidden overflow-y-auto">
+      <div
+        className="w-full h-full grid grid-cols-[50px_repeat(7,1fr)] grid-rows-[repeat(24,50px)] border-collapse
+        md:overflow-hidden md:overflow-y-auto"
+      >
         {hours?.map((hour) => (
           <Fragment key={hour}>
             <div className="relative flex items-center justify-center text-xs font-medium">
@@ -102,7 +121,11 @@ export default function WeekCalendarLayout({
                       ${reservationField[reservation?.level]?.styles}
                       `}
                     style={{
-                      height: `${getReservationHeight(reservation?.start_date, reservation?.end_date)}px`,
+                      height: `${getReservationHeight(
+                        `${reservation?.start_date}` +
+                          `${reservation?.start_time}`,
+                        `${reservation?.end_date}` + `${reservation?.end_time}`,
+                      )}px`,
                     }}
                   >
                     <span
@@ -112,7 +135,9 @@ export default function WeekCalendarLayout({
                       {reservation?.name}
                     </span>
 
-                    <span>{`${formatTime(reservation?.start_date)} - ${formatTime(reservation?.end_date)}`}</span>
+                    <span>{`
+                    ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
+                    ${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`}</span>
                   </button>
                 ))}
               </div>
