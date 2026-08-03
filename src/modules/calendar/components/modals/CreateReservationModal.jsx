@@ -1,4 +1,5 @@
 // Hooks
+import { useClients } from "@hooks/useClients";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useCreateReservation } from "@/modules/calendar/hooks/useCreateReservation";
 // Componentes
@@ -12,6 +13,7 @@ import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 import ErrorModal from "@modals/ErrorModal";
 
 export default function CreateReservationModal({ dayInfo, onClose }) {
+  const { clients } = useClients();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateReservation(dayInfo);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -19,7 +21,7 @@ export default function CreateReservationModal({ dayInfo, onClose }) {
 
   return (
     <form
-      action={(e) => handleSubmit(e, openInnerModal)}
+      action={(e) => handleSubmit(e, openInnerModal, onClose)}
       className="flex flex-col gap-2 px-0.5"
     >
       <FormField
@@ -35,14 +37,14 @@ export default function CreateReservationModal({ dayInfo, onClose }) {
       <SelectMenu
         id={"clients-menu"}
         name={"client_id"}
-        value={form.client_id}
         spanText={"Cliente"}
+        value={form.client_id}
         onChange={handleChange}
-        options={[
-          { value: 1, label: "Normal" },
-          { value: 2, label: "Importante" },
-        ]}
-        className={fieldError("level")}
+        options={clients?.map((client) => ({
+          value: client.id,
+          label: `${client.name} ${client.first_surname} ${client.second_surname}`,
+        }))}
+        className={fieldError("client_id")}
       />
 
       <div className="flex gap-2">
@@ -95,7 +97,7 @@ export default function CreateReservationModal({ dayInfo, onClose }) {
         onChange={handleChange}
         options={[
           { value: 1, label: "Normal" },
-          { value: 2, label: "Importante" },
+          { value: 2, label: "Alto" },
         ]}
         className={fieldError("level")}
       />
@@ -103,7 +105,7 @@ export default function CreateReservationModal({ dayInfo, onClose }) {
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
-        cancelButtonOnClick={closeInnerModal}
+        cancelButtonOnClick={onClose}
       />
 
       {innerType === "error" && (
