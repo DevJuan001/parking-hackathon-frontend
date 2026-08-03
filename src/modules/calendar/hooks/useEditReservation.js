@@ -6,18 +6,19 @@ import { updateReservationService } from "@/modules/calendar/services/updateRese
 
 export function useEditReservation(reservation) {
   const [form, setForm] = useState({
-    name: reservation?.name || "",
-    level: reservation?.level || 1,
-    start_date: reservation?.start_date || "",
-    end_date: reservation?.end_date || "",
-    start_time: reservation?.start_time || "",
-    end_time: reservation?.end_time || "",
-    status: reservation?.status || 2,
+    name: reservation?.name ?? "",
+    level: reservation?.level ?? "",
+    client_id: reservation?.user_id ?? "",
+    start_date: reservation?.start_date ?? "",
+    start_time: reservation?.start_time ?? "",
+    end_date: reservation?.end_date ?? "",
+    end_time: reservation?.end_time ?? "",
+    status: reservation?.status ?? "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate, clearError, fieldError } = useFormValidation();
+  const { validate, getChanges, clearError, fieldError } = useFormValidation();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -38,18 +39,24 @@ export function useEditReservation(reservation) {
       return;
     }
 
+    const changes = getChanges(reservation, form);
+
+    if (Object.keys(changes).length === 0) {
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const response = await updateReservationService(form, reservation?.id);
+      const response = await updateReservationService(changes, reservation?.id);
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
-        openInnerModal("success", triggerButton);
         onClose();
       } else {
         setError(
-          "No se pudo editar la reserva, intentalo nuevamente mas tarde.",
+          response?.error ??
+            "No se pudo editar la reserva, intentalo nuevamente mas tarde.",
         );
         openInnerModal("error", triggerButton);
       }
