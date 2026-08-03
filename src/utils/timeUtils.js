@@ -113,3 +113,13 @@ export function to24h({ period, hour12, minute }) {
         : hour12 + 12;
   return `${padZero(hour24)}:${padZero(minute)}`;
 }
+
+export function getMonthRange(year, month) {
+  const startDate = new Date(year, month - 1, 25);
+  const endDate = new Date(year, month + 1, 3);
+
+  return {
+    start_date: `${startDate.getFullYear()}-${padZero(startDate.getMonth() + 1)}-${padZero(startDate.getDate())}`,
+    end_date: `${endDate.getFullYear()}-${padZero(endDate.getMonth() + 1)}-${padZero(endDate.getDate())}`,
+  };
+}

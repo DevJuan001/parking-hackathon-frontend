@@ -1,9 +1,10 @@
+import { useState, useCallback } from "react";
+import { getMonthRange } from "@/utils/timeUtils";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getAllReservationsService } from "../services/getAllReservationsService";
+import { getAllReservationsService } from "@/modules/calendar/services/getAllReservationsService";
 
-export function useReservations() {
-  const [filters, setFilters] = useState({});
+export function useReservations(year, month) {
+  const [filters, setFilters] = useState(() => getMonthRange(year, month));
 
   const reservations = useInfiniteQuery({
     queryKey: ["reservations", filters],
@@ -21,11 +22,16 @@ export function useReservations() {
     staleTime: 1000 * 60 * 60,
   });
 
+  const fetchByMonth = useCallback(() => {
+    setFilters(getMonthRange(year, month));
+  }, [year, month]);
+
   return {
     reservations: reservations.data,
     loading: reservations.isLoading,
     error: reservations.error,
     filters,
     setFilters,
+    fetchByMonth,
   };
 }
