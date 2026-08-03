@@ -141,7 +141,7 @@ export default function DayField({
             />
           ))}
 
-          {reservations?.length > 3 && (
+          {reservations?.length > 2 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
