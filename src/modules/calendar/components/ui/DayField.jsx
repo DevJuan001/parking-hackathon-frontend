@@ -152,7 +152,7 @@ export default function DayField({
                 );
               }}
               className="h-5 flex items-center justify-center px-2 rounded-md bg-[#F5F3F6] text-xs text-[#75777E] font-medium
-              hover:bg-white hover:cursor-pointer
+              hover:bg-[#E2E4E5] hover:cursor-pointer
               dark:bg-[#101012] dark:text-[#7E8088] dark:hover:bg-[#202022]"
             >
               +{reservations.length - 2} más
