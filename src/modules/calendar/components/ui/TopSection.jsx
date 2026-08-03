@@ -155,9 +155,14 @@ export default function TopSection({
               onClick={(e) => openModal(null, "share", e.currentTarget)}
               className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
             >
-              <Icon name={"event_upcoming"} />
+              <Icon data-shared-id="share-icon" name={"event_upcoming"} />
 
-              <span>Compartir</span>
+              <span
+                data-shared-id="share-text"
+                className="flex flex-col items-center gap-5 font-dmsans"
+              >
+                Compartir
+              </span>
             </button>
 
             <button
