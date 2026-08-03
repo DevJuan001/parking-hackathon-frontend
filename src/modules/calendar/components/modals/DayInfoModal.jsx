@@ -1,6 +1,9 @@
+// Hooks
+import { useInnerModal } from "@hooks/useInnerModal";
+import { useReservations } from "@/modules/calendar/hooks/useReservations";
 // Utils
 import { months } from "@/utils/months";
-import { useInnerModal } from "@hooks/useInnerModal";
+import { filterReservationsByDate } from "@/utils/filterReservations";
 // Componentes
 import Icon from "@components/ui/Icon";
 import CreateButton from "@components/ui/CreateButton";
@@ -18,6 +21,7 @@ export default function DayInfoModal({ dayInfo, onClose }) {
     openInnerModal,
     closeInnerModal,
   } = useInnerModal();
+  const { reservations } = useReservations();
 
   return (
     <div className="w-full h-full flex flex-col gap-2">
@@ -47,14 +51,21 @@ export default function DayInfoModal({ dayInfo, onClose }) {
         />
       </div>
 
-      {dayInfo?.reservations?.map((reservation) => (
-        <ReservationField
-          active
-          key={reservation?.id}
-          reservation={reservation}
-          onClick={(e) => openInnerModal("editReservation", e, reservation)}
-        />
-      ))}
+      <div className="w-full h-full flex flex-col gap-1 overflow-hidden overflow-y-auto">
+        {filterReservationsByDate(
+          reservations,
+          dayInfo?.year,
+          dayInfo?.month,
+          dayInfo?.day,
+        )?.map((reservation) => (
+          <ReservationField
+            active
+            key={reservation?.id}
+            reservation={reservation}
+            onClick={(e) => openInnerModal("editReservation", e, reservation)}
+          />
+        ))}
+      </div>
 
       {innerType === "createReservation" && (
         <Modal
