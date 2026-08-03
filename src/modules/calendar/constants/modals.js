@@ -17,8 +17,8 @@ export const modals = {
   },
 
   share: {
-    title: "Compartir",
     location: "center",
+    disableHeader: true,
   },
 
   export: { disableHeader: true },
