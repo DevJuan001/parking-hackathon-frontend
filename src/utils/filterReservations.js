@@ -11,7 +11,7 @@ export function filterReservationsByDate(reservations, year, month, day) {
 
 export function filterReservationsByHour(reservations, year, month, day, hour) {
   return filterReservationsByDate(reservations, year, month, day)
-    ?.filter((reservation) => new Date(reservation.start_date).getHours() === hour) ?? [];
+    ?.filter((reservation) => new Date(reservation.start_date + " " + reservation.start_time).getHours() === hour) ?? [];
 }
 
 export function getReservationHeight(start_date, end_date) {
