@@ -125,10 +125,10 @@ export default function DayField({
           ))}
 
         <div
-          className="hidden flex-col gap-1
+          className="hidden flex-col gap-0.5
           md:flex"
         >
-          {reservations?.slice(0, 3).map((reservation) => (
+          {reservations?.slice(0, 2).map((reservation) => (
             <ReservationField
               key={reservation?.id}
               active={active}
@@ -140,6 +140,24 @@ export default function DayField({
               }}
             />
           ))}
+
+          {reservations?.length > 3 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                openModal(
+                  { day, month, year, reservations },
+                  "dayInfo",
+                  e.currentTarget,
+                );
+              }}
+              className="h-5 flex items-center justify-center px-2 rounded-md bg-[#F5F3F6] text-xs text-[#75777E] font-medium
+              hover:bg-white hover:cursor-pointer
+              dark:bg-[#101012] dark:text-[#7E8088] dark:hover:bg-[#202022]"
+            >
+              +{reservations.length - 2} más
+            </button>
+          )}
         </div>
 
         {reservations?.length > 0 && (
