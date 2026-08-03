@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export const useFormValidation = (rules = {}, optionalFields = []) => {
+export function useFormValidation(rules = {}, optionalFields = []) {
   const [errors, setErrors] = useState({});
 
-  const validate = (data) => {
+  function validate(data) {
     const newErrors = {};
 
     Object.keys(data).forEach((key) => {
@@ -22,8 +22,9 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
     });
 
     setErrors(newErrors);
+
     return Object.keys(newErrors).length === 0;
-  };
+  }
 
   const fieldError = (name) =>
     errors[name]
@@ -32,7 +33,7 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
       : `shadow-[0_0_2px_0.2px_#E4E2E5]
       dark:shadow-[0_0_2px_0.2px_#202022]`;
 
-  const getChanges = (original, updated) => {
+  function getChanges(original, updated) {
     const changes = {};
 
     Object.keys(updated).forEach((key) => {
@@ -42,13 +43,13 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
     });
 
     return changes;
-  };
+  }
 
-  const clearError = (name) => {
+  function clearError(name) {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
-  };
+  }
 
   const clearErrors = () => setErrors({});
 
@@ -61,4 +62,4 @@ export const useFormValidation = (rules = {}, optionalFields = []) => {
     clearErrors,
     fieldError,
   };
-};
+}
