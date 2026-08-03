@@ -21,5 +21,8 @@ export const modals = {
     disableHeader: true,
   },
 
-  export: { disableHeader: true },
+  export: {
+    disableHeader: true,
+    margin: 12,
+  },
 };
