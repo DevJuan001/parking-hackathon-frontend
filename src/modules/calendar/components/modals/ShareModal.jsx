@@ -7,7 +7,19 @@ import { QRCodeSVG } from "qrcode.react";
 export default function ShareModal({
   link = "https://parking-hackathon-frontend.onrender.com/calendar",
 }) {
-  const [copied, setCopied] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+
+      setIsCopied(true);
+
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("No se pudo copiar el link", err);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center gap-5 font-dmsans">
@@ -46,15 +58,15 @@ export default function ShareModal({
         </a>
 
         <button
-          onClick={() => setCopied(true)}
+          onClick={handleCopy}
           className="h-full w-fit flex items-center gap-2 py-4 p-6 bg-black rounded-4xl text-sm text-white
           active:animate-click-effect
           dark:bg-white dark:text-black"
         >
           <Icon
-            name={copied ? "check" : "content_copy"}
+            name={isCopied ? "check" : "content_copy"}
             className={
-              copied
+              isCopied
                 ? "text-green-600"
                 : `text-white
               dark:text-black`
@@ -63,7 +75,7 @@ export default function ShareModal({
           />
 
           <span className="text-nowrap font-medium">
-            {copied ? "Copiado" : "Copiar link"}
+            {isCopied ? "Copiado" : "Copiar link"}
           </span>
         </button>
       </div>
