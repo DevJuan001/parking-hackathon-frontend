@@ -1,5 +1,7 @@
 // Hooks
+import { useEffect } from "react";
 import { useModal } from "@hooks/useModal";
+import { useGoogleLogin } from "@hooks/useGoogleLogin";
 // Componentes
 import Hero from "@/modules/landing/components/ui/Hero";
 import NavBar from "@/modules/landing/components/ui/Navbar";
@@ -16,6 +18,34 @@ import RegisterModal from "@modals/RegisterModal";
 
 export default function LandingPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
+  const {
+    handleGoogleLogin,
+    loading: googleLoading,
+  } = useGoogleLogin();
+
+  useEffect(() => {
+    if (!window.opener || window.opener.closed) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const state = params.get("state");
+    const error = params.get("error_description") || params.get("error");
+
+    if (!code && !error) return;
+
+    window.opener.postMessage(
+      code
+        ? { type: "google-oauth-code", code, state }
+        : {
+            type: "google-oauth-error",
+            error: error || "Google canceló la autenticación.",
+            state,
+          },
+      window.location.origin,
+    );
+
+    window.close();
+  }, []);
 
   return (
     <div className="relative mt-5 flex flex-col items-center font-dmsans">
@@ -43,9 +73,19 @@ export default function LandingPage() {
           location="center"
           onClose={closeModal}
         >
-          {modalType === "logIn" && <LoginModal />}
+          {modalType === "logIn" && (
+            <LoginModal
+              googleLoading={googleLoading}
+              handleGoogleLogin={handleGoogleLogin}
+            />
+          )}
 
-          {modalType === "register" && <RegisterModal />}
+          {modalType === "register" && (
+            <RegisterModal
+              googleLoading={googleLoading}
+              handleGoogleLogin={handleGoogleLogin}
+            />
+          )}
         </Modal>
       )}
     </div>
