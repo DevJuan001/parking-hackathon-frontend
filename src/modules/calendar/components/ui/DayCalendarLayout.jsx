@@ -1,6 +1,10 @@
 // Utils
 import { formatTime } from "@/utils/formatTime";
-import { filterReservationsByHour } from "@/utils/filterReservations";
+import {
+  assignOverlapColumns,
+  filterReservationsByHour,
+  getReservationHeight,
+} from "@/utils/filterReservations";
 // Constantes
 import { reservationField } from "@/modules/calendar/constants/reservationField";
 // Componentes
@@ -19,7 +23,7 @@ export default function DayCalendarLayout({
   return (
     <div className="w-full h-full overflow-hidden overflow-y-auto font-dmsans">
       <div
-        className="sticky w-full top-0 flex flex-col p-2 pl-0 bg-[#fbf9fc] z-50
+        className="sticky w-full top-0 flex flex-col px-2 pl-0 bg-[#fbf9fc] z-50
         dark:bg-black dark:text-white"
       >
         <div className="w-full h-full grid grid-cols-[50.9px_1fr] gap-2">
@@ -73,23 +77,48 @@ export default function DayCalendarLayout({
 
             <div
               key={index}
-              className="relative flex gap-1 border border-t-0 border-[#E4E2E5]
+              className="relative flex pr-5 gap-1 border border-t-0 border-[#E4E2E5]
               dark:border-[#202022]"
             >
-              {filterReservationsByHour(reservations, year, month, day, hour)?.map(
-                (reservation) => (
+              {assignOverlapColumns(
+                filterReservationsByHour(reservations, year, month, day, hour),
+              )?.map((reservation) => {
+                const column = reservation?.column;
+                const offset = 145;
+                const height = getReservationHeight(
+                  reservation?.start_date + " " + reservation?.start_time,
+                  reservation?.end_date + " " + reservation?.end_time,
+                );
+                const start = new Date(
+                  reservation.start_date + " " + reservation.start_time,
+                );
+                const minutes = start.getMinutes();
+                const topOffset = (minutes / 60) * 50;
+
+                return (
                   <button
+                    key={reservation?.id}
                     onClick={(e) =>
                       openModal(reservation, "editReservation", e.currentTarget)
                     }
-                    className={`absolute h-fit flex flex-col p-2 rounded-2xl text-sm ${reservationField[reservation?.level]?.styles}`}
+                    className={`absolute flex flex-col p-2 rounded-2xl text-sm ${reservationField[reservation?.level]?.styles}`}
+                    style={{
+                      top: `${topOffset}px`,
+                      left: `${column * offset}px`,
+                      width: `calc(100% - ${column * offset}px)`,
+                      minHeight: "fit-content",
+                      height: `${height}px`,
+                      zIndex: column + 1,
+                    }}
                   >
                     <span className="font-medium">{reservation?.name}</span>
 
-                    <span className="text-xs">{`${formatTime(reservation?.start_date)} - ${formatTime(reservation?.end_date)}`}</span>
+                    <span className="text-xs">{`
+                    ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
+                    ${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`}</span>
                   </button>
-                ),
-              )}
+                );
+              })}
             </div>
           </Fragment>
         ))}
