@@ -9,7 +9,10 @@ import LoginAndRegisterButtons from "@components/ui/LoginAndRegisterButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
 
-export default function RegisterModal() {
+export default function RegisterModal({
+  googleLoading,
+  handleGoogleLogin,
+}) {
   const {
     form,
     loading,
@@ -20,8 +23,13 @@ export default function RegisterModal() {
     handleChange,
     handleSubmit,
   } = useRegister();
-  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
-    useInnerModal();
+  const {
+    innerType,
+    innerTrigger,
+    innerData,
+    openInnerModal,
+    closeInnerModal,
+  } = useInnerModal();
 
   return (
     <section
@@ -118,20 +126,35 @@ export default function RegisterModal() {
         </div>
 
         <LoginAndRegisterButtons
-          googleButton
-          githubButton
+          googleButtonOnClick={(e) => handleGoogleLogin(e, openInnerModal)}
+          githubButtonOnClick={() => alert("No disponible")}
+          disabled={loading || googleLoading}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
-          confirmButtonText={loading ? <Loader /> : "Crear cuenta"}
+          confirmButtonText={
+            loading || googleLoading ? <Loader /> : "Crear cuenta"
+          }
         />
       </form>
 
       {innerType === "error" && (
         <ErrorModal
           isOpen={true}
+          location="center"
           triggerRef={innerTrigger}
           errorTitle={"No se pudo crear tu cuenta"}
           errorText={error}
-          location="center"
+          onClose={closeInnerModal}
+        />
+      )}
+
+      {innerType === "googleError" && (
+        <ErrorModal
+          isOpen={true}
+          location="anchored"
+          triggerRef={innerTrigger}
+          errorTitle={"No se pudo realizar el registro mediante Google"}
+          errorText={innerData}
+          confirmButtonText="Volver"
           onClose={closeInnerModal}
         />
       )}
