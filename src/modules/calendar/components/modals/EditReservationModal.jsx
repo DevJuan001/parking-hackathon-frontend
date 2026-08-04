@@ -26,7 +26,7 @@ export default function EditReservationModal({ reservation, onClose }) {
   return (
     <div className="h-full w-full flex flex-col gap-2">
       <div
-        className="w-full h-full flex flex-col p-2 border border-[#E4E2E5] rounded-4xl
+        className="w-full h-fit flex flex-col p-2 border border-[#E4E2E5] rounded-4xl
         dark:border-[#202022]"
       >
         <div className="w-full flex justify-between">
