@@ -946,7 +946,6 @@ export const useFlipModal = ({
         width: triggerRect.width,
         height: triggerRect.height,
         padding: triggerStyles.padding,
-        backgroundColor: triggerStyles.backgroundColor,
         color: triggerStyles.color,
         overflow: "hidden",
         margin: 0,
