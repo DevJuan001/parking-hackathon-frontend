@@ -10,9 +10,9 @@ import Questions from "@/modules/landing/components/ui/Questions";
 import CTASection from "@/modules/landing/components/ui/CTASection";
 import VideoSection from "@/modules/landing/components/ui/VideoSection";
 // Modales
-import LoginModal from "@/modules/landing/components/modals/LoginModal";
 import Modal from "@modals/Modal";
-import RegisterModal from "@/modules/landing/components/modals/RegisterModal";
+import LoginModal from "@modals/LoginModal";
+import RegisterModal from "@modals/RegisterModal";
 
 export default function LandingPage() {
   const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
