@@ -85,13 +85,13 @@ export default function LoginModal() {
         </FormField>
 
         <LoginAndRegisterButtons
+          googleButton
+          githubButton
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           confirmButtonText={loading ? <Loader /> : "Iniciar sesión"}
           recoverPasswordButtonOnClick={(e) =>
             openInnerModal("recoverPassword", e)
           }
-          googleButtonOnClick={() => alert("a")}
-          githubButtonOnClick={() => alert("a")}
         />
       </form>
 

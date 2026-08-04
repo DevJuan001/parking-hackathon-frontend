@@ -118,10 +118,10 @@ export default function RegisterModal() {
         </div>
 
         <LoginAndRegisterButtons
+          googleButton
+          githubButton
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           confirmButtonText={loading ? <Loader /> : "Crear cuenta"}
-          googleButtonOnClick={() => alert("a")}
-          githubButtonOnClick={() => alert("a")}
         />
       </form>
 
