@@ -1,5 +1,5 @@
 // Hooks
-import { useLogin } from "@/globals/hooks/useLogin";
+import { useLogin } from "@hooks/useLogin";
 import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
@@ -12,7 +12,10 @@ import AddInnerModal from "@modals/AddInnerModal";
 import RegisterModal from "@modals/RegisterModal";
 import RecoverPasswordModal from "@modals/RecoverPasswordModal";
 
-export default function LoginModal() {
+export default function LoginModal({
+  googleLoading,
+  handleGoogleLogin,
+}) {
   const {
     form,
     loading,
@@ -23,8 +26,13 @@ export default function LoginModal() {
     showPassword,
     fieldError,
   } = useLogin();
-  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
-    useInnerModal();
+  const {
+    innerType,
+    innerTrigger,
+    innerData,
+    openInnerModal,
+    closeInnerModal,
+  } = useInnerModal();
 
   return (
     <section
@@ -85,10 +93,13 @@ export default function LoginModal() {
         </FormField>
 
         <LoginAndRegisterButtons
-          googleButton
-          githubButton
+          githubButtonOnClick={() => alert("No disponible")}
+          googleButtonOnClick={(e) => handleGoogleLogin(e, openInnerModal)}
+          disabled={loading || googleLoading}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
-          confirmButtonText={loading ? <Loader /> : "Iniciar sesión"}
+          confirmButtonText={
+            loading || googleLoading ? <Loader /> : "Iniciar sesión"
+          }
           recoverPasswordButtonOnClick={(e) =>
             openInnerModal("recoverPassword", e)
           }
@@ -110,7 +121,10 @@ export default function LoginModal() {
           triggerRef={innerTrigger}
           onClose={closeInnerModal}
         >
-          <RegisterModal />
+          <RegisterModal
+            googleLoading={googleLoading}
+            handleGoogleLogin={handleGoogleLogin}
+          />
         </AddInnerModal>
       )}
 
@@ -122,6 +136,18 @@ export default function LoginModal() {
           errorTitle={"Usuario o contraseña incorrectos"}
           errorText={error}
           confirmButtonText={"Volver"}
+          onClose={closeInnerModal}
+        />
+      )}
+
+      {innerType === "googleError" && (
+          <ErrorModal
+            isOpen={true}
+            triggerRef={innerTrigger}
+            location="anchored"
+            errorTitle={"No se pudo iniciar sesión con Google"}
+            errorText={innerData}
+            confirmButtonText="Volver"
           onClose={closeInnerModal}
         />
       )}
