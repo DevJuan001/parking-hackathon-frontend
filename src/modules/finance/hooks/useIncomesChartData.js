@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { formatLabel } from "@/utils/formatLabel";
-import { getIncomesChartData } from "@/modules/finance/services/getincomesChartData";
+import { getIncomesChartData } from "@/modules/finance/services/getIncomesChartData";
 
 export function useIncomesChartData() {
   const [form, setForm] = useState({
