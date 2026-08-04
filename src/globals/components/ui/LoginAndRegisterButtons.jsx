@@ -1,8 +1,9 @@
+// Iconos
 import { icons } from "@/assets/icons";
 
 export default function LoginAndRegisterButtons({
-  googleButton,
-  githubButton,
+  googleButtonOnClick,
+  githubButtonOnClick,
   confirmButtonText,
   confirmButtonOnClick,
   recoverPasswordButtonOnClick,
@@ -29,7 +30,7 @@ export default function LoginAndRegisterButtons({
         type="submit"
         disabled={disabled}
         onClick={confirmButtonOnClick}
-        className="w-full h-15 flex items-center justify-center px-5 py-2.5 gap-2 font-semibold text-sm bg-black text-white rounded-2xl transition duration-300
+        className="w-full h-15 flex items-center justify-center px-5 py-2.5 gap-2 rounded-2xl bg-black font-semibold font-dmsans text-sm text-white transition duration-300
         focus:animate-click-effect
         hover:text-gray-300 hover:cursor-pointer
         dark:bg-white dark:text-black dark:hover:text-gray-800"
@@ -37,7 +38,7 @@ export default function LoginAndRegisterButtons({
         <span className="dark:text-black">{confirmButtonText}</span>
       </button>
 
-      {googleButton && (
+      {googleButtonOnClick && (
         <div className="w-full flex flex-col gap-2">
           <div className="flex items-center justify-center gap-2">
             <div
@@ -59,23 +60,23 @@ export default function LoginAndRegisterButtons({
           </div>
 
           <div className="h-14 flex gap-2">
-            <a
-              disabled
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_REDIRECT_URL}&response_type=code&scope=openid%20email%20profile&access_type=offline`}
-              className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={googleButtonOnClick}
+              className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text- outline-0 transition duration-300
               focus:animate-click-effect
               hover:bg-gray-200 hover:cursor-pointer
               dark:border-[#1e1e20cb] dark:text-white dark:hover:bg-[#28282bbd]"
             >
               <icons.googleIcon className="w-4 h-4" />
-            </a>
+            </button>
 
-            {githubButton && (
-              <a
-                disabled
-                href="http://localhost:8000/api/auth/google-login"
+            {githubButtonOnClick && (
+              <button
+                type="button"
+                disabled={disabled}
+                onClick={githubButtonOnClick}
                 className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
                 focus:animate-click-effect
                 hover:bg-gray-200 hover:cursor-pointer
@@ -85,7 +86,7 @@ export default function LoginAndRegisterButtons({
                   className="w-5 h-5
                   dark:invert"
                 />
-              </a>
+              </button>
             )}
           </div>
         </div>
