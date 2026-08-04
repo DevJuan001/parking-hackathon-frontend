@@ -29,6 +29,7 @@ export default function NavItem({
             name={icon}
             size={25}
             fill={isActive}
+            animateFill
             className={`transition-colors duration-500 ease-in-out
             ${
               isActive
