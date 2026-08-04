@@ -1,11 +1,11 @@
 // Hooks
-import { useRecoverPassword } from "@/modules/landing/hooks/useRecoverPassword";
 import { useInnerModal } from "@hooks/useInnerModal";
+import { useRecoverPassword } from "@hooks/useRecoverPassword";
 // Components
+import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
 import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 // Modals
-import Loader from "@components/ui/Loader";
 import Modal from "@modals/Modal";
 import SuccessModal from "@modals/SuccessModal";
 

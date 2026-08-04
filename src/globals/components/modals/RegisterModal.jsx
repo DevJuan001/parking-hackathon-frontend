@@ -1,11 +1,11 @@
 /// Hooks
-import { useRegister } from "@/modules/landing/hooks/useRegister";
+import { useRegister } from "@hooks/useRegister";
 import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import LoginAndRegisterButtons from "@/modules/landing/components/modals/LoginAndRegisterButtons";
+import LoginAndRegisterButtons from "@components/ui/LoginAndRegisterButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
 
