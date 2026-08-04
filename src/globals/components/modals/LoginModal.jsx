@@ -1,16 +1,16 @@
 // Hooks
-import { useLogin } from "@/modules/landing/hooks/useLogin";
+import { useLogin } from "@/globals/hooks/useLogin";
 import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import Loader from "@components/ui/Loader";
 import FormField from "@components/ui/FormField";
-import LoginAndRegisterButtons from "./LoginAndRegisterButtons";
+import LoginAndRegisterButtons from "@components/ui/LoginAndRegisterButtons";
 // Modales
 import ErrorModal from "@modals/ErrorModal";
-import RegisterModal from "./RegisterModal";
-import RecoverPasswordModal from "./RecoverPasswordModal";
-import AddInnerModal from "@/globals/components/modals/AddInnerModal";
+import AddInnerModal from "@modals/AddInnerModal";
+import RegisterModal from "@modals/RegisterModal";
+import RecoverPasswordModal from "@modals/RecoverPasswordModal";
 
 export default function LoginModal() {
   const {
@@ -85,13 +85,13 @@ export default function LoginModal() {
         </FormField>
 
         <LoginAndRegisterButtons
+          googleButton
+          githubButton
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           confirmButtonText={loading ? <Loader /> : "Iniciar sesión"}
           recoverPasswordButtonOnClick={(e) =>
             openInnerModal("recoverPassword", e)
           }
-          googleButtonOnClick={() => alert("a")}
-          githubButtonOnClick={() => alert("a")}
         />
       </form>
 

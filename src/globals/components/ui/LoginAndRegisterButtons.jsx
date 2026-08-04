@@ -1,10 +1,10 @@
 import { icons } from "@/assets/icons";
 
 export default function LoginAndRegisterButtons({
+  googleButton,
+  githubButton,
   confirmButtonText,
   confirmButtonOnClick,
-  googleButtonOnClick,
-  githubButtonOnClick,
   recoverPasswordButtonOnClick,
   disabled,
 }) {
@@ -37,7 +37,7 @@ export default function LoginAndRegisterButtons({
         <span className="dark:text-black">{confirmButtonText}</span>
       </button>
 
-      {googleButtonOnClick && (
+      {googleButton && (
         <div className="w-full flex flex-col gap-2">
           <div className="flex items-center justify-center gap-2">
             <div
@@ -59,23 +59,23 @@ export default function LoginAndRegisterButtons({
           </div>
 
           <div className="h-14 flex gap-2">
-            <button
-              type="button"
+            <a
               disabled
-              onClick={googleButtonOnClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_REDIRECT_URL}&response_type=code&scope=openid%20email%20profile&access_type=offline`}
               className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
               focus:animate-click-effect
               hover:bg-gray-200 hover:cursor-pointer
               dark:border-[#1e1e20cb] dark:text-white dark:hover:bg-[#28282bbd]"
             >
               <icons.googleIcon className="w-4 h-4" />
-            </button>
+            </a>
 
-            {githubButtonOnClick && (
-              <button
-                type="button"
+            {githubButton && (
+              <a
                 disabled
-                onClick={githubButtonOnClick}
+                href="http://localhost:8000/api/auth/google-login"
                 className="w-full flex items-center justify-center py-3 gap-3 rounded-2xl border border-[#e5e7eb] text-sm outline-0 transition duration-300
                 focus:animate-click-effect
                 hover:bg-gray-200 hover:cursor-pointer
@@ -85,7 +85,7 @@ export default function LoginAndRegisterButtons({
                   className="w-5 h-5
                   dark:invert"
                 />
-              </button>
+              </a>
             )}
           </div>
         </div>
