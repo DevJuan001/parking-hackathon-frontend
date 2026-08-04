@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { recoverPasswordService } from "@/modules/landing/services/recoverPasswordService";
 import { getModalTrigger } from "@/utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
+import { recoverPasswordService } from "@/globals/services/recoverPasswordService";
 
 export function useRecoverPassword() {
   const [form, setForm] = useState({

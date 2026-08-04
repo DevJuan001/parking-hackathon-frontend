@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { registerService } from "@/modules/landing/services/registerService";
-import { useFormValidation } from "@hooks/useFormValidation";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
+import { useQueryClient } from "@tanstack/react-query";
 import { getModalTrigger } from "@/utils/getModalTrigger";
+import { useFormValidation } from "@hooks/useFormValidation";
+import { registerService } from "@/globals/services/registerService";
+import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
 
 export function useRegister() {
   const navigate = useNavigate();
