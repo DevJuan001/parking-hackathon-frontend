@@ -43,36 +43,47 @@ src/
 
 ## Routing
 
-Central config in `src/router/constants/routesConfig.js`. Each entry:
+Central config in `src/router/constants/routes.js`. Two arrays: `layoutRoutes` (wrapped in the global `Layout`, with `Aside` + topbar) and `standAloneRoutes` (rendered bare, no chrome). Each entry:
 
 ```js
 {
   path: "/users",
   component: UsersPage,
-  roles: ["Admin"],         // who can access
+  roles: ["Admin"],            // who can access
+  loading: UsersLoading,       // skeleton shown while the page is being lazy-loaded
 }
 ```
 
+`AppRouter.jsx` does the actual rendering. All page components are `lazy()`-loaded and wrapped in a `<Suspense>` that uses the entry's `loading` component as fallback.
+
 **To add a new route:**
 1. Create the page in `src/modules/<x>/<X>Page.jsx` (default export).
-2. Add entry in `routesConfig.js` with `path`, `component`, `roles`.
-3. If public (no auth), it goes **outside** the `.map()` in `AppRouter.jsx`, next to `LandingPage`.
+2. Add the entry to `layoutRoutes` (inside `Layout`) or `standAloneRoutes` (no chrome) in `routes.js` with `path`, `component`, `roles`, and `loading` (a skeleton component).
+3. If public (no auth, no role), add it directly in `AppRouter.jsx` next to `LandingPage` — the cookie/privacy/terms pages live there.
 
-`ProtectedRoutes` validates against `useCurrentUser().hasRole(roles)`. If the user doesn't have the role → redirect to `/`.
+`ProtectedRoutes` validates against `useCurrentUser().hasRole(roles)`. If the user doesn't have the role, is loading, or the request errors → `<Navigate to="/login" replace />`.
 
 **Existing routes:**
 
-| Path | Role | Module |
-|---|---|---|
-| `/on-boarding` | Admin | on-boarding |
-| `/home` | Admin | home |
-| `/users` | Admin | users |
-| `/entries` | Admin | entries |
-| `/parking` | Admin | parking |
-| `/exits` | Admin | exits |
-| `/finance` | Admin | finance |
-| `/vehicle-payment` | Cliente | vehicle-payment |
-| `/check-in` | Cliente | check-in |
+| Path | Role | Group | Module |
+|---|---|---|---|
+| `/` | public | — | landing |
+| `/login` | public | — | (alias of `/`) |
+| `/privacy-policy` | public | — | privacy-policy |
+| `/terms` | public | — | terms |
+| `/cookies` | public | — | cookies |
+| `/on-boarding` | Admin | standAlone | on-boarding |
+| `/home` | Admin | layout | home |
+| `/users` | Admin | layout | users |
+| `/entries` | Admin | layout | entries |
+| `/parking` | Admin | layout | parking |
+| `/calendar` | Admin | layout | calendar |
+| `/exits` | Admin | layout | exits |
+| `/finance` | Admin | layout | finance |
+| `/vehicle-payment` | Cliente | standAlone | vehicle-payment |
+| `/check-in` | Cliente | standAlone | check-in |
+
+Unknown paths hit the catch-all `<Route path="*" element={<Navigate to="/" />} />`.
 
 ---
 
@@ -113,16 +124,21 @@ const { isOpen, modalType, triggerRef, openModal, closeModal } = useModal();
 
 ### Modal types and their styles
 
-Defined in `src/globals/constants/modalStyles.js`. Each `type` defines layout (width, padding, border-radius). Use the right `type` instead of inventing styles.
+Defined in `src/globals/constants/modals.js` (exported as `modals`). Each key defines layout (width, padding, border-radius), an optional `location`, an optional `growDirection`, and an optional `title`. Use the right key instead of inventing styles. Per-module styles (e.g. users, parking) live in `src/modules/<x>/constants/modals.js` and override the global one.
 
 - `default` — generic modal
-- `createX` / `editX` — centered forms
-- `filter` — anchored filters
+- `createFloor` / `editFloor` / `editSpot` / `editTariff` / `editReservation` — centered forms
+- `filter` — anchored filters (no header, `growDirection: "bottom-center"`)
 - `select` — dropdowns
 - `menu` — user menu
-- `user` — profile/settings modal
+- `user` — profile/settings modal (`location: "center"`)
 - `calendar` — date picker
-- `innerModal` — nested modals
+- `timePicker` — time-only picker
+- `entryInfo` / `dayInfo` — full-screen detail panels on mobile
+- `chat` — chat overlay
+- `logIn` / `register` — full-screen on mobile, large on desktop
+- `export` / `search` — anchored utility modals (no header)
+- `topSectionMobileOptions` — mobile overflow menu
 - `delete` — delete confirmation
 
 ### Errors and success in forms
@@ -220,10 +236,10 @@ async function handleSubmit(e, openInnerModal, onClose) {
 ## API and authentication
 
 - Base URL: `import.meta.env.VITE_API_URL`
-- API routes: `src/config/apiRoutes.js` — each resource is a string (`"/users"`, `"/spots"`, etc.)
+- API routes: `src/config/apiRoutes.js` — each resource is a string (`"/users"`, `"/spots"`, `/auth`, `/countries`, `/chatbot`, etc.). Compose URLs as `${apiRoutes.apiUrl}${apiRoutes.<resource>}/<action>`.
 - Auth: HttpOnly cookies. The frontend **never** touches tokens.
-- Auto refresh: `src/utils/fetchWithAuth.js` intercepts 401, calls `/auth/refresh`, retries. If refresh fails → redirect to `/`.
-- Public endpoints (no auth): `login`, `register`, `recover-password`, `refresh`. Use `fetch` directly in these cases.
+- Auto refresh: `src/utils/fetchWithAuth.js` intercepts 401, calls `/auth/refresh`, retries. If refresh fails → `window.location.href = "/login"` (full page reload — see `auth-flow/SKILL.md` for the known-issue note and proposed fix).
+- Public endpoints (no auth): `login`, `register`, `recover-password`, `refresh`, `google`. Use `fetch` directly for these, or call from `src/globals/services/` only if the whole codebase needs them.
 
 ---
 
