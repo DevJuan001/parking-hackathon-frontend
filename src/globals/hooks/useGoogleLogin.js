@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { googleLoginService } from "@/globals/services/googleLoginService";
 import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
 
 export function useGoogleLogin() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const triggerRef = useRef(null);
   const popupRef = useRef(null);
+  const navigate = useNavigate();
+  const triggerRef = useRef(null);
   const oauthStateRef = useRef(null);
   const exchangingRef = useRef(false);
+  const queryClient = useQueryClient();
   const openInnerModalRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -42,6 +42,7 @@ export function useGoogleLogin() {
       if (!code || exchangingRef.current) return;
 
       exchangingRef.current = true;
+
       setLoading(true);
 
       try {
@@ -66,7 +67,7 @@ export function useGoogleLogin() {
         }
       } catch {
         showError(
-          "No se pudo completar la autenticación con Google. Intentá nuevamente más tarde.",
+          "No se pudo completar la autenticación con Google. Intenta nuevamente más tarde.",
         );
       } finally {
         setLoading(false);
@@ -86,9 +87,7 @@ export function useGoogleLogin() {
     const state = window.crypto.randomUUID();
     oauthStateRef.current = state;
 
-    const googleUrl = new URL(
-      "https://accounts.google.com/o/oauth2/v2/auth",
-    );
+    const googleUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
 
     googleUrl.search = new URLSearchParams({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
@@ -100,10 +99,15 @@ export function useGoogleLogin() {
       state,
     }).toString();
 
+    const width = 500
+    const height = 600
+    const left = window.screenX + (window.outerWidth - width) / 2
+    const top = window.screenY + (window.outerHeight - height) / 2
+
     const popup = window.open(
       googleUrl.toString(),
       "google-oauth",
-      "popup,width=500,height=600",
+      `popup,width=${width},height=${height},top=${top},left=${left}`,
     );
 
     if (!popup) {
