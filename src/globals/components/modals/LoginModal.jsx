@@ -12,10 +12,7 @@ import AddInnerModal from "@modals/AddInnerModal";
 import RegisterModal from "@modals/RegisterModal";
 import RecoverPasswordModal from "@modals/RecoverPasswordModal";
 
-export default function LoginModal({
-  googleLoading,
-  handleGoogleLogin,
-}) {
+export default function LoginModal({ googleLoading, handleGoogleLogin }) {
   const {
     form,
     loading,
@@ -141,13 +138,14 @@ export default function LoginModal({
       )}
 
       {innerType === "googleError" && (
-          <ErrorModal
-            isOpen={true}
-            triggerRef={innerTrigger}
-            location="anchored"
-            errorTitle={"No se pudo iniciar sesión con Google"}
-            errorText={innerData}
-            confirmButtonText="Volver"
+        <ErrorModal
+          isOpen={true}
+          location="center"
+          growDirection={"top"}
+          triggerRef={innerTrigger}
+          errorTitle={"No se pudo iniciar sesión con Google"}
+          errorText={innerData}
+          confirmButtonText="Volver"
           onClose={closeInnerModal}
         />
       )}
