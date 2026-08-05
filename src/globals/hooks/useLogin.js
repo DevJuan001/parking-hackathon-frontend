@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginService } from "@services/loginService";
 import { useQueryClient } from "@tanstack/react-query";
 import { getModalTrigger } from "@utils/getModalTrigger";
+import { redirectAfterAuth } from "@utils/redirectAfterAuth";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { getCurrentUserService } from "@services/getCurrentUserService";
 
@@ -45,13 +46,7 @@ export function useLogin() {
           queryFn: getCurrentUserService,
         });
 
-        if (freshData.onboarding_completed === false) {
-          navigate("/on-boarding");
-        } else if (freshData.data?.[0]?.role === "Cliente") {
-          navigate("/check-in");
-        } else {
-          navigate("/home");
-        }
+        redirectAfterAuth(navigate, freshData);
       } else {
         setError(
           response.error ??
