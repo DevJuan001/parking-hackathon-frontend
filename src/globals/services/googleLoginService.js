@@ -1,5 +1,5 @@
 import { apiRoutes } from "@/config/apiRoutes";
-import { getValueError } from "@/utils/getValueError";
+import { getValueError } from "@utils/getValueError";
 
 export async function googleLoginService(code) {
   const response = await fetch(

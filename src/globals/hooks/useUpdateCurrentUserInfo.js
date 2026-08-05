@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "@utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
-import { getModalTrigger } from "@/utils/getModalTrigger";
-import { updateCurrentUserInfoService } from "@/globals/services/updateCurrentUserInfoService";
+import { updateCurrentUserInfoService } from "@services/updateCurrentUserInfoService";
 
 export function useUpdateCurrentUserInfo(user) {
   const [userData, setUserData] = useState({

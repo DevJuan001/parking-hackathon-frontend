@@ -1,5 +1,5 @@
 import { apiRoutes } from "@/config/apiRoutes";
-import { getValueError } from "@/utils/getValueError";
+import { getValueError } from "@utils/getValueError";
 
 export async function loginService(form) {
   const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.auth}/login`, {

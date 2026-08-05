@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { updateCurrentUserPasswordService } from "@/globals/services/updateCurrentUserPasswordService";
+import { getModalTrigger } from "@utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
-import { getModalTrigger } from "@/utils/getModalTrigger";
+import { updateCurrentUserPasswordService } from "@services/updateCurrentUserPasswordService";
 
 export function useUpdateCurrentUserPassword() {
   const [passwordData, setPasswordData] = useState({

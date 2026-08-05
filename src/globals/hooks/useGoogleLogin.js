@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { googleLoginService } from "@/globals/services/googleLoginService";
-import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
+import { googleLoginService } from "@services/googleLoginService";
+import { getCurrentUserService } from "@services/getCurrentUserService";
 
 export function useGoogleLogin() {
   const popupRef = useRef(null);

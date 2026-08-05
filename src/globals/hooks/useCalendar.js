@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { months } from "@/utils/months";
+import { months } from "@utils/months";
 
 export function useCalendar(value, onChange) {
   const today = new Date();

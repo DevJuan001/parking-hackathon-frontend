@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginService } from "@services/loginService";
 import { useQueryClient } from "@tanstack/react-query";
-import { getModalTrigger } from "@/utils/getModalTrigger";
+import { getModalTrigger } from "@utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
-import { loginService } from "@/globals/services/loginService";
-import { getCurrentUserService } from "@/globals/services/getCurrentUserService";
+import { getCurrentUserService } from "@services/getCurrentUserService";
 
 export function useLogin() {
   const navigate = useNavigate();

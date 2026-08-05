@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormValidation } from "@hooks/useFormValidation";
-import { sendMessageService } from "../services/sendMessageService";
+import { sendMessageService } from "@services/sendMessageService";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useChat() {
