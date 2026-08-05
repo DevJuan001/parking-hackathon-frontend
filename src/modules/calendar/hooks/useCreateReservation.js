@@ -15,7 +15,7 @@ export function useCreateReservation(dayInfo) {
       dayInfo?.year && dayInfo?.month && dayInfo?.day
         ? `${dayInfo.year}-${padZero(dayInfo.month + 1)}-${padZero(dayInfo.day)}`
         : `${actualDate.getFullYear()}-${padZero(actualDate.getMonth() + 1)}-${padZero(actualDate.getDate())}`,
-    start_time: `${actualDate.getHours()}:${padZero((Math.round(actualDate.getMinutes() / 5) * 5) % 60)}`,
+    start_time: `${padZero(actualDate.getHours())}:${padZero((Math.round(actualDate.getMinutes() / 5) * 5) % 60)}`,
     end_date: "",
     end_time: "",
   });
