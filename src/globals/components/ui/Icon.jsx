@@ -3,7 +3,7 @@ import "material-symbols/rounded.css";
 export default function Icon({
   name,
   animateFill = false,
-  fillDuration = 100,
+  fillDuration = 125,
   fill = false,
   weight = 400,
   size = 24,
@@ -20,7 +20,7 @@ export default function Icon({
         fontSize: size,
         color,
         transition: animateFill
-          ? `font-variation-settings ${fillDuration}ms ease-in-out`
+          ? `font-variation-settings ${fillDuration}ms cubic-bezier(.48, 0, 0, 1);`
           : undefined,
       }}
     >

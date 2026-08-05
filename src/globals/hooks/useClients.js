@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getAllClientsService } from "@/globals/services/getAllClientsService";
+import { getAllClientsService } from "@services/getAllClientsService";
 
 export function useClients() {
   const [filters, setFilters] = useState({
-    role_order: 2,
+    role_order: 3
   });
 
   const clients = useInfiniteQuery({

@@ -1,6 +1,6 @@
 import { apiRoutes } from "@/config/apiRoutes";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { getValueError } from "@/utils/getValueError";
+import { fetchWithAuth } from "@utils/fetchWithAuth";
+import { getValueError } from "@utils/getValueError";
 
 export async function updateCurrentUserPasswordService(password_data) {
   const response = await fetchWithAuth(

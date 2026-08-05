@@ -33,8 +33,7 @@ export default function NavItem({
             className={`transition-colors duration-500 ease-in-out
             ${
               isActive
-                ? `group-hover:scale-105
-                dark:fill-black`
+                ? `dark:fill-black`
                 : `text-[#75777eb7]
                 group-hover:text-black group-hover:[--icon-weight:500] dark:group-hover:text-white`
             }`}
@@ -45,13 +44,13 @@ export default function NavItem({
             md:block
             ${
               showName
-                ? `max-w-[200px] opacity-100`
+                ? `max-w-50 opacity-100`
                 : `max-w-0 opacity-0
-                group-hover:max-w-[200px] group-hover:opacity-100`
+                group-hover:max-w-50 group-hover:opacity-100`
             }
             ${
               isActive
-                ? `font-semibold max-w-[200px] opacity-100`
+                ? `font-semibold max-w-50 opacity-100`
                 : `group-hover:text-black
                 dark:group-hover:text-white`
             }`}

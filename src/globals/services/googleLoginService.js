@@ -1,15 +1,16 @@
 import { apiRoutes } from "@/config/apiRoutes";
 import { getValueError } from "@utils/getValueError";
 
-export async function recoverPasswordService(email) {
+export async function googleLoginService(code) {
   const response = await fetch(
-    `${apiRoutes.apiUrl}${apiRoutes.auth}/recover-password`,
+    `${apiRoutes.apiUrl}${apiRoutes.auth}/google-login`,
     {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(email),
+      body: JSON.stringify({ code }),
     },
   );
 
