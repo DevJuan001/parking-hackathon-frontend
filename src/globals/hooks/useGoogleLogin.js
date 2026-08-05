@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { redirectAfterAuth } from "@utils/redirectAfterAuth";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { googleLoginService } from "@services/googleLoginService";
 import { getCurrentUserService } from "@services/getCurrentUserService";
@@ -58,13 +59,7 @@ export function useGoogleLogin() {
           queryFn: getCurrentUserService,
         });
 
-        if (freshData.onboarding_completed === false) {
-          navigate("/on-boarding");
-        } else if (freshData.data?.[0]?.role === "Cliente") {
-          navigate("/check-in");
-        } else {
-          navigate("/home");
-        }
+        redirectAfterAuth(navigate, freshData);
       } catch {
         showError(
           "No se pudo completar la autenticación con Google. Intenta nuevamente más tarde.",
@@ -100,10 +95,10 @@ export function useGoogleLogin() {
       state,
     }).toString();
 
-    const width = 500
-    const height = 600
-    const left = window.screenX + (window.outerWidth - width) / 2
-    const top = window.screenY + (window.outerHeight - height) / 2
+    const width = 500;
+    const height = 600;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
 
     // Abrimos la ventana para que el usuario pueda autenticarse con Google
     const popup = window.open(

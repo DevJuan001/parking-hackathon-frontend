@@ -6,9 +6,13 @@ Env vars, `.env` handling, Vite config, and the small things you need to know to
 
 ## Env vars
 
-The project reads **one** env var at build/runtime:
+The project reads **three** env vars at build/runtime:
 
-- **`VITE_API_URL`** — base URL of the backend API.
+| Var | Purpose | Required? |
+|---|---|---|
+| `VITE_API_URL` | Base URL of the backend API. | Yes |
+| `VITE_GOOGLE_CLIENT_ID` | OAuth client ID for Google sign-in. | Only if Google login is enabled |
+| `VITE_GOOGLE_REDIRECT_URL` | OAuth redirect URL — must match a URI registered for the client in Google Cloud Console. | Only if Google login is enabled |
 
 Defined in:
 - `.env.example` — template, committed to the repo.
@@ -24,12 +28,26 @@ export const apiRoutes = {
 };
 ```
 
+```js
+// src/globals/hooks/useGoogleLogin.js
+googleUrl.search = new URLSearchParams({
+  client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+  redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URL,
+  // ...
+}).toString();
+```
+
 ### Adding a new env var
 
 1. Add to `.env.example` with a fake value: `VITE_NEW_THING=changeme`.
 2. Add to your local `.env` with the real value.
 3. Read via `import.meta.env.VITE_NEW_THING`.
 4. **Never commit `.env`.** The `.gitignore` already excludes it.
+5. If the value must be set at build time in Docker, pass it as a build arg — see the Deployment section.
+
+### ⚠️ Google env vars in `.env`
+
+Your `.env` is **already committed with real-looking credentials** (`VITE_GOOGLE_CLIENT_ID`, `VITE_GOOGLE_REDIRECT_URL`). The `.gitignore` excludes `.env`, but if you have a `.env` that was committed in the past, treat those values as **public** and rotate them in Google Cloud Console.
 
 ---
 
@@ -81,7 +99,21 @@ export default defineConfig({
 
 ### Aliases
 
-See `.agents/architecture/SKILL.md` for the alias contract. To add a new alias:
+The aliases are configured in two places that **must stay in sync**. As of now, they are slightly out of sync — see the table below.
+
+| Alias | Resolves to | In `vite.config.js`? | In `jsconfig.json`? |
+|---|---|---|---|
+| `@` | `src/` | yes | yes |
+| `@components` | `src/globals/components` | yes | yes |
+| `@modals` | `src/globals/components/modals` | yes | yes |
+| `@hooks` | `src/globals/hooks` | yes | yes |
+| `@constants` | `src/globals/constants` | yes | **NO** |
+| `@services` | `src/globals/services` | **NO** | yes |
+| `@utils` | `src/utils` | **NO** | yes |
+
+> **TODO:** align both files so the same aliases exist in both. The runtime imports `@services/...` and `@utils/...` (see `useGoogleLogin.js`, `fetchWithAuth.js`) and they work because Vite resolves them via `node_modules` resolution, but IntelliSense will not.
+
+To add a new alias:
 
 1. Add to `vite.config.js` (the `resolve.alias` object).
 2. Mirror in `jsconfig.json` under `compilerOptions.paths` (for IDE IntelliSense).

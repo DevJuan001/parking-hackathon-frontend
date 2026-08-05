@@ -83,12 +83,12 @@ export const standAloneRoutes = [
   {
     path: "/vehicle-payment",
     component: VehiclePayment,
-    roles: ["Cliente"],
+    roles: ["Maquina"],
   },
 
   {
     path: "/check-in",
     component: CheckInPage,
-    roles: ["Cliente"],
+    roles: ["Maquina"],
   },
 ];
