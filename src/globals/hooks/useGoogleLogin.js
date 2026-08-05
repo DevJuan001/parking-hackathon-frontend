@@ -89,6 +89,7 @@ export function useGoogleLogin() {
 
     const googleUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
 
+    // Agregamos parametros a la googleUrl
     googleUrl.search = new URLSearchParams({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URL,
@@ -104,6 +105,7 @@ export function useGoogleLogin() {
     const left = window.screenX + (window.outerWidth - width) / 2
     const top = window.screenY + (window.outerHeight - height) / 2
 
+    // Abrimos la ventana para que el usuario pueda autenticarse con Google
     const popup = window.open(
       googleUrl.toString(),
       "google-oauth",
