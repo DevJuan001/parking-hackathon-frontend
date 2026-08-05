@@ -13,8 +13,11 @@
       "@hooks/*": [
         "./src/globals/hooks/*"
       ],
-      "@services/": [
+      "@services/*": [
         "./src/globals/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     },
     "jsx": "preserve",
