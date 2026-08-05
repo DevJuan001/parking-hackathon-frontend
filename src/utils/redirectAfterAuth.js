@@ -3,9 +3,11 @@ export function redirectAfterAuth(navigate, freshData) {
     navigate("/on-boarding");
     return;
   }
+
   if (freshData.data?.[0]?.role === "Maquina") {
     navigate("/check-in");
     return;
   }
+
   navigate("/home");
 }
