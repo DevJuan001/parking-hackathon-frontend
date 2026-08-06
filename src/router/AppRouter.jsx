@@ -8,7 +8,7 @@ import ProtectedRoutes from "@/router/ProtectedRoutes";
 import LandingPage from "@/modules/landing/LandingPage";
 import Layout from "@/globals/components/Layout/Layout";
 import CookiesPage from "@/modules/cookies/CookiesPage";
-import ReservationPage from "@/modules/reservations/ReservationsPage";
+import BookingPage from "@/modules/booking/BookingPage";
 import PrivacyPolicyPage from "@/modules/privacy-policy/PrivacyPolicyPage";
 
 export default function AppRouter() {
@@ -24,7 +24,7 @@ export default function AppRouter() {
 
       <Route path="/cookies" element={<CookiesPage />} />
 
-      <Route path="/booking/:parkingId" element={<ReservationPage />} />
+      <Route path="/booking/:parkingId" element={<BookingPage />} />
 
       <Route element={<Layout />}>
         {layoutRoutes.map(
