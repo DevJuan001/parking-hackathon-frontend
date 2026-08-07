@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function useOnboardingSections(validateSection) {
   const [activeSection, setActiveSection] = useState("userInfo");
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(33);
 
   function handleContinue(sectionName, nextSection, nextProgress) {
     return function () {

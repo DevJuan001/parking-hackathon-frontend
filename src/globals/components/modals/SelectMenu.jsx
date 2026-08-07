@@ -49,9 +49,9 @@ export default function SelectMenu({
         className={`${miniVersion ? "h-10" : "h-16.5"} w-full flex items-center gap-1.5`}
       >
         <button
+          id={id}
           type="button"
           disabled={disabled}
-          id={id}
           onClick={(e) => {
             setSearch("");
             openInnerModal("select", e);

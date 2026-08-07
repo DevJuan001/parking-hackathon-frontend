@@ -1,4 +1,5 @@
 // Hooks
+import { useCurrentUser } from "@hooks/useCurrentUser";
 import { useCompleteOnBoarding } from "@/modules/on-boarding/hooks/useCompleteOnBoarding";
 import { useOnboardingSections } from "@/modules/on-boarding/hooks/useOnboardingSections";
 // Componentes
@@ -8,6 +9,7 @@ import ParkingNameSection from "@/modules/on-boarding/components/ui/ParkingNameS
 import ParkingLocationSection from "@/modules/on-boarding/components/ui/ParkingLocationSection";
 
 export default function OnBoardingPage() {
+  const { user } = useCurrentUser();
   const {
     form,
     loading,
@@ -16,7 +18,7 @@ export default function OnBoardingPage() {
     handleChange,
     handleSubmit,
     validateSection,
-  } = useCompleteOnBoarding();
+  } = useCompleteOnBoarding(user);
 
   const { activeSection, progress, handleContinue, handleReturn } =
     useOnboardingSections(validateSection);
@@ -25,37 +27,40 @@ export default function OnBoardingPage() {
     <section className="w-screen h-screen flex flex-col items-center font-dmsans">
       <ProgressBar progress={progress} />
 
-      <UserInfoSection
-        activeSection={activeSection}
-        form={form}
-        handleChange={handleChange}
-        fieldError={fieldError}
-        continueButtonOnClick={handleContinue("userInfo", "parkingName", 200)}
-      />
+      {activeSection === "userInfo" && (
+        <UserInfoSection
+          form={form}
+          handleChange={handleChange}
+          fieldError={fieldError}
+          continueButtonOnClick={handleContinue("userInfo", "parkingName", 66)}
+        />
+      )}
 
-      <ParkingNameSection
-        activeSection={activeSection}
-        form={form}
-        handleChange={handleChange}
-        fieldError={fieldError}
-        continueButtonOnClick={handleContinue(
-          "parkingName",
-          "parkingLocation",
-          300,
-        )}
-        returnButtonOnClick={handleReturn("userInfo", 100)}
-      />
+      {activeSection === "parkingName" && (
+        <ParkingNameSection
+          form={form}
+          handleChange={handleChange}
+          fieldError={fieldError}
+          continueButtonOnClick={handleContinue(
+            "parkingName",
+            "parkingLocation",
+            100,
+          )}
+          returnButtonOnClick={handleReturn("userInfo", 33)}
+        />
+      )}
 
-      <ParkingLocationSection
-        activeSection={activeSection}
-        form={form}
-        loading={loading}
-        error={error}
-        handleChange={handleChange}
-        fieldError={fieldError}
-        handleSubmit={handleSubmit}
-        returnButtonOnClick={handleReturn("parkingName", 200)}
-      />
+      {activeSection === "parkingLocation" && (
+        <ParkingLocationSection
+          form={form}
+          loading={loading}
+          error={error}
+          handleChange={handleChange}
+          fieldError={fieldError}
+          handleSubmit={handleSubmit}
+          returnButtonOnClick={handleReturn("parkingName", 66)}
+        />
+      )}
     </section>
   );
 }
