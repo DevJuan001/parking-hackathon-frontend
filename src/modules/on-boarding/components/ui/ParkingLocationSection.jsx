@@ -9,7 +9,6 @@ import SelectMenu from "@modals/SelectMenu";
 import ErrorModal from "@modals/ErrorModal";
 
 export default function ParkingLocationSection({
-  activeSection,
   form,
   loading,
   error,
@@ -23,30 +22,29 @@ export default function ParkingLocationSection({
   const { countries } = useCountries();
 
   return (
-    <section
-      className={`${
-        activeSection === "parkingLocation"
-          ? "h-full w-full flex flex-col items-center justify-center gap-5 animate-blur-down"
-          : "hidden"
-      }`}
-    >
-      <div className="w-5xl flex flex-col items-center gap-1">
+    <section className="h-full w-full flex flex-col items-center justify-center p-4 gap-5 animate-blur-down">
+      <div className="w-full flex flex-col items-center gap-1">
         <span
-          className="text-xl text-nowrap font-medium text-[#75777e]
+          className="text-sm text-nowrap font-medium text-[#75777e]
+          lg:text-xl
           dark:text-[#7E8088]"
         >
           Un último paso para completar la configuración inicial.
         </span>
 
         <span
-          className="text-5xl font-semibold
+          className="text-3xl font-semibold tracking-tighter
+          lg:text-5xl lg:tracking-normal
           dark:text-[#E4E2E5]"
         >
           ¿En qué país te encuentras?
         </span>
       </div>
 
-      <form className="w-lg flex flex-col gap-2">
+      <form
+        className="w-full flex flex-col gap-2
+        lg:w-lg"
+      >
         <SelectMenu
           searchable
           id={"countries-menu"}
