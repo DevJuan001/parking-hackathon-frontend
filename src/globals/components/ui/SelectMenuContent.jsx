@@ -19,16 +19,28 @@ export default function SelectMenuContent({
       dark:bg-black dark:text-white"
     >
       {searchable && (
-        <input
-          id="search-menu-bar"
-          autoFocus
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Buscar..."
-          className="w-full min-h-12.5 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] outline-none
-          dark:border-[#28282ba1] dark:bg-black dark:text-white dark:placeholder:text-[#b4aab4]"
-        />
+        <div
+          className="sticky top-0.5 w-full min-h-13 flex items-center rounded-full border border-[#E4E2E5] bg-[#FBF9FC]
+          dark:border-[#28282ba1] dark:bg-black"
+        >
+          <input
+            id="search-menu-bar"
+            autoFocus
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar..."
+            className="w-full h-12.5 px-5 text-sm outline-none
+            dark:text-white dark:placeholder:text-[#b4aab4]"
+          />
+
+          <Icon
+            name={"search"}
+            size={20}
+            className="pr-5 text-[#75777E]
+            dark:text-[#7E8088]"
+          />
+        </div>
       )}
 
       {filteredOptions.length === 0 ? (
@@ -55,9 +67,13 @@ export default function SelectMenuContent({
                 if (optionOnClick) optionOnClick();
               }}
               className={`min-h-13 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors 
-             hover:bg-[#efedf0] hover:font-medium  
-             dark:hover:bg-[#ffffff15]
-             ${isSelected ? "bg-[#efedf0] font-semibold dark:bg-[#ffffff15]" : ""}`}
+              ${
+                isSelected
+                  ? `bg-[#efedf0] font-semibold
+                  dark:bg-[#ffffff15]`
+                  : `hover:bg-[#efedf0] hover:font-medium
+                  dark:hover:bg-[#ffffff15]`
+              }`}
             >
               <span>{option.label}</span>
             </button>
