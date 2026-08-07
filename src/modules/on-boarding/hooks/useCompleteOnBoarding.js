@@ -12,11 +12,11 @@ const SECTION_FIELDS = {
   parkingLocation: ["parking_address", "parking_deparment"],
 };
 
-export function useCompleteOnBoarding() {
+export function useCompleteOnBoarding(user) {
   const [form, setForm] = useState({
-    name: "",
-    first_surname: "",
-    second_surname: "",
+    name: user?.name || "",
+    first_surname: user?.first_surname || "",
+    second_surname: user?.second_surname || "",
     parking_name: "",
     parking_country: "",
   });
