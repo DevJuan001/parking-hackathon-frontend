@@ -2,7 +2,7 @@ export default function ProgressBar({ progress }) {
   return (
     <div
       className="relative mt-5 h-2 w-[50%] rounded-3xl bg-[#E4E2E5]
-      lg:w-[22%]
+      lg:w-[25%]
       dark:bg-[#28282B]"
     >
       <div
