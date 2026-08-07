@@ -15,7 +15,7 @@ export default function UserInfoSection({
     >
       <div className="w-full flex flex-col">
         <span
-          className="text-sm font-medium text-[#75777e]
+          className="text-sm text-center font-medium text-[#75777e]
           lg:text-lg lg:text-nowrap
           dark:text-[#7E8088]"
         >
@@ -23,7 +23,7 @@ export default function UserInfoSection({
         </span>
 
         <span
-          className="text-4xl font-semibold
+          className="text-4xl text-center font-semibold
           md:text-6xl
           dark:text-[#E4E2E5]"
         >

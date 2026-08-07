@@ -25,7 +25,7 @@ export default function ParkingLocationSection({
     <section className="h-full w-full flex flex-col items-center justify-center p-4 gap-5 animate-blur-down">
       <div className="w-full flex flex-col items-center gap-1">
         <span
-          className="text-sm text-nowrap font-medium text-[#75777e]
+          className="text-sm text-nowrap text-center font-medium text-[#75777e]
           lg:text-xl
           dark:text-[#7E8088]"
         >
@@ -33,7 +33,7 @@ export default function ParkingLocationSection({
         </span>
 
         <span
-          className="text-3xl font-semibold tracking-tighter
+          className="text-3xl text-center font-semibold tracking-tighter
           lg:text-5xl lg:tracking-normal
           dark:text-[#E4E2E5]"
         >
