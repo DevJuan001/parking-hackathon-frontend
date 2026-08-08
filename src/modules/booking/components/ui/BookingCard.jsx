@@ -23,7 +23,6 @@ export default function BookingCard({
 }) {
   const [activeSection, setActiveSection] = useState("calendar");
   const {
-    day,
     year,
     month,
     dayNames,
@@ -146,9 +145,7 @@ export default function BookingCard({
 
       {activeSection === "time" && (
         <BookingTimeSection
-          day={day}
           form={form}
-          month={month}
           dayNames={dayNames}
           setForm={setForm}
           prevDay={prevDay}
