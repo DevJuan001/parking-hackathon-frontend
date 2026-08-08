@@ -17,6 +17,7 @@ export default function BookingPage() {
   const [activeSection, setActiveSection] = useState("card");
   const {
     form,
+    parkingId,
     loading,
     error,
     setForm,
@@ -24,7 +25,7 @@ export default function BookingPage() {
     handleSubmit,
     fieldError,
   } = useCreateReservation(setActiveSection);
-  const { parkingInfo } = useParkingInfo();
+  const { parkingInfo } = useParkingInfo(parkingId);
 
   return (
     <section
