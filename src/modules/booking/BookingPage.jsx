@@ -29,7 +29,7 @@ export default function BookingPage() {
 
   return (
     <section
-      className="w-screen h-screen flex items-center justify-center font-dmsans
+      className="w-screen h-screen flex items-center justify-center font-dmsans animate-blur-up
       md:p-10"
     >
       {activeSection === "card" && (
