@@ -49,7 +49,7 @@ export default function BookingCard({
       dark:border-[#202022] dark:text-[#E4E2E5]"
     >
       <div
-        className="w-full h-fit flex items-center justify-between p-5 border-b border[#E42E2E5]
+        className="w-full h-fit flex items-center justify-between p-5 border-b border-[#E4E2E5]
         md:p-10
         lg:h-full lg:w-fit lg:flex-col lg:border-r lg:border-b-0
         dark:border-[#202022]"
