@@ -1,12 +1,9 @@
 export function formatDateTime(dateString) {
-  const date = new Date(dateString);
+  const [y, m, d] = dateString.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
 
   const day = date.getDate();
-
-  const month = date.toLocaleDateString("es-AR", {
-    month: "long",
-  });
-
+  const month = date.toLocaleDateString("es-AR", { month: "long" });
   const year = date.getFullYear();
 
   return `${day} de ${month} del ${year}`;
