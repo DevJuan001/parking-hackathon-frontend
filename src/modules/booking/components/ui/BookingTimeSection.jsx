@@ -5,15 +5,18 @@ import { formatTimeForDisplay, padZero } from "@utils/timeUtils";
 import Icon from "@components/ui/Icon";
 
 export default function BookingTimeSection({
-  day,
-  month,
   form,
   setForm,
   dayNames,
-  prevDay,
-  nextDay,
   setActiveSection,
 }) {
+  const [year, month, day] = form?.start_date?.split("-").map(Number) ?? [];
+
+  const displayDate =
+    year && month && day
+      ? `${dayNames[new Date(year, month - 1, day).getDay()]}, ${day} de ${months[month - 1]}`
+      : "...";
+
   return (
     <div
       className="w-full h-full flex flex-col p-5 gap-1 animate-blur-up
@@ -41,49 +44,17 @@ export default function BookingTimeSection({
         Elige una hora
       </span>
 
-      <div className="flex items-center justify-between">
-        <span
-          className="text-sm 
-          md:text-lg"
-        >
-          {`${dayNames[day]}, ${day} de ${months[month]}`}
-        </span>
-
-        <div className="flex gap-1">
-          <button
-            onClick={prevDay}
-            className="w-10 h-10 flex items-center justify-center rounded-full
-            hover:bg-[#F5F3F6]
-            dark:hover:bg-[#202022]"
-          >
-            <Icon
-              name={"arrow_back"}
-              size={22}
-              className="w-fit text-[#75777E]
-              dark:text-[#7E8088]"
-            />
-          </button>
-
-          <button
-            onClick={nextDay}
-            className="w-10 h-10 flex items-center justify-center rounded-full
-            hover:bg-[#F5F3F6]
-            dark:hover:bg-[#202022]"
-          >
-            <Icon
-              name={"arrow_forward"}
-              size={22}
-              className="text-[#75777E]
-              dark:text-[#7E8088]"
-            />
-          </button>
-        </div>
-      </div>
+      <span
+        className="text-sm 
+        md:text-lg"
+      >
+        {displayDate}
+      </span>
 
       <div className="w-full flex flex-col items-center gap-2 overflow-hidden overflow-y-auto">
         {Array.from({ length: 24 }, (_, index) => index).map((value, index) => {
           const hour = formatTimeForDisplay(padZero(`${value}:00`));
-          const formatHour = `${padZero(value)}:00:00`
+          const formatHour = `${padZero(value)}:00:00`;
 
           return (
             <button
