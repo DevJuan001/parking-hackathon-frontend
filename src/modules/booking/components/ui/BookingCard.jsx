@@ -32,8 +32,6 @@ export default function BookingCard({
     isToday,
     prevDay,
     nextDay,
-    prevMonth,
-    nextMonth,
     isSelected,
     getWeekDates,
     handleSelect,
@@ -140,8 +138,6 @@ export default function BookingCard({
           isToday={isToday}
           openModal={openModal}
           isSelected={isSelected}
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
           weekDates={getWeekDates()}
           handleSelect={handleSelect}
           setActiveSection={setActiveSection}
