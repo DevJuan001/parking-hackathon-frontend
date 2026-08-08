@@ -1,9 +1,8 @@
 import { apiRoutes } from "@/config/apiRoutes";
-import { fetchWithAuth } from "@utils/fetchWithAuth";
 import { getValueError } from "@utils/getValueError";
 
 export async function createReservationService(form) {
-  const response = await fetchWithAuth(
+  const response = await fetch(
     `${apiRoutes.apiUrl}${apiRoutes.reservations}/create-self`,
     {
       method: "POST",
