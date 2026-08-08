@@ -27,11 +27,19 @@ export default function SuccessReservation({
           className="text-[#75777E]
           dark:text-[#7E8088]"
         >
-          Hemos enviado un correo de confirmación a{" "}
-          <strong className="text-[#E4E2E5]">{form?.email}</strong> con toda la
-          información de la reserva. <br />
-          Dentro estará el QR para poder entrada, si no lo recibiste, revisa en
-          el apartado de spam
+          Hemos enviado los detalles de tu reserva a{" "}
+          <strong
+            className="text-black
+            dark:text-[#E4E2E5]"
+          >
+            {form?.email}
+          </strong>
+          <br />
+          En el correo encontrarás toda la información y el código QR que
+          necesitarás para ingresar al parqueadero.
+          <br />
+          Si no lo ves en tu bandeja de entrada, no te preocupes, revisa también
+          la carpeta de spam.
         </span>
 
         <div className="flex gap-2">
