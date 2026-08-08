@@ -20,7 +20,7 @@ export default function Icon({
         fontSize: size,
         color,
         transition: animateFill
-          ? `font-variation-settings ${fillDuration}ms cubic-bezier(.48, 0, 0, 1);`
+          ? `font-variation-settings ${fillDuration}ms cubic-bezier(.48, 0, 0, 1)`
           : undefined,
       }}
     >

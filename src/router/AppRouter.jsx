@@ -3,10 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // Constantes
 import { layoutRoutes, standAloneRoutes } from "@/router/constants/routes";
 // Componentes
+import TermsPage from "@/modules/terms/TermsPage";
 import ProtectedRoutes from "@/router/ProtectedRoutes";
 import LandingPage from "@/modules/landing/LandingPage";
 import Layout from "@/globals/components/Layout/Layout";
 import CookiesPage from "@/modules/cookies/CookiesPage";
+import BookingPage from "@/modules/booking/BookingPage";
 import PrivacyPolicyPage from "@/modules/privacy-policy/PrivacyPolicyPage";
 
 export default function AppRouter() {
@@ -18,9 +20,11 @@ export default function AppRouter() {
 
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
 
-      <Route path="/terms" element={<CookiesPage />} />
+      <Route path="/terms" element={<TermsPage />} />
 
       <Route path="/cookies" element={<CookiesPage />} />
+
+      <Route path="/booking" element={<BookingPage />} />
 
       <Route element={<Layout />}>
         {layoutRoutes.map(
