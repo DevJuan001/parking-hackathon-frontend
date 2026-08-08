@@ -24,7 +24,7 @@ export default function AppRouter() {
 
       <Route path="/cookies" element={<CookiesPage />} />
 
-      <Route path="/booking/parking" element={<BookingPage />} />
+      <Route path="/booking" element={<BookingPage />} />
 
       <Route element={<Layout />}>
         {layoutRoutes.map(
