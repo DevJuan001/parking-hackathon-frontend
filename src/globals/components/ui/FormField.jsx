@@ -1,15 +1,17 @@
 export default function FormField({
-  value,
-  labelText,
   id,
+  name,
+  value,
+  disabled,
+  children,
+  onChange,
+  className,
+  labelText,
+  minLength,
+  maxLength,
   type = "text",
   placeholder,
-  onChange,
-  name,
   autoComplete = "off",
-  children,
-  className,
-  disabled,
 }) {
   return (
     <div
@@ -27,6 +29,8 @@ export default function FormField({
         value={value}
         disabled={disabled}
         onChange={onChange}
+        minLength={minLength}
+        maxLength={maxLength}
         placeholder={placeholder}
         autoComplete={autoComplete}
         className="

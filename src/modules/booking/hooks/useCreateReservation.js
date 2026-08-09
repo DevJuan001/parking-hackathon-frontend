@@ -9,7 +9,7 @@ export function useCreateReservation(setActiveSection) {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    level: 1,
+    plate: "",
     start_date: "",
     start_time: "",
     note: "",
@@ -43,6 +43,7 @@ export function useCreateReservation(setActiveSection) {
       const response = await createReservationService({
         ...form,
         parking_id: searchParams.get("parkingId") ?? "",
+        level: 1,
       });
 
       if (response.success === true) {

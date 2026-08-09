@@ -57,15 +57,16 @@ export default function BookingCard({
         >
           <div className="flex flex-col">
             <span
-              className="text-sm text-nowrap font-medium
+              className="max-w-16 text-ellipsis text-sm text-nowrap font-medium overflow-hidden
               md:text-lg
-              lg:text-xl"
+              lg:text-xl lg:max-w-52"
             >
               {parkingInfo?.name ?? "..."}
             </span>
 
             <span
-              className="text-sm text-[#75777E]
+              className="text-xs text-[#75777E]
+              sm:text-sm
               md:text-base
               dark:text-[#7E8088]"
             >

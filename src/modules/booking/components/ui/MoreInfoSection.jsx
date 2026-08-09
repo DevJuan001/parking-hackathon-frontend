@@ -22,7 +22,8 @@ export default function MoreInfoSection({
 
   return (
     <div
-      className="w-full h-full flex flex-col p-5 gap-5 animate-blur-up overflow-hidden
+      className="w-full h-full flex flex-col p-5 gap-2 animate-blur-up overflow-hidden overflow-y-auto
+      sm:gap-5
       lg:p-10
       dark:text-[#E4E2E5]"
     >
@@ -41,7 +42,12 @@ export default function MoreInfoSection({
       </button>
 
       <div className="flex flex-col">
-        <span className="text-2xl font-semibold">Más información</span>
+        <span
+          className="text-xl font-semibold
+          md:text-2xl"
+        >
+          Más información
+        </span>
 
         <span
           className="text-sm text-[#75777E]
@@ -73,6 +79,18 @@ export default function MoreInfoSection({
           className={fieldError("email")}
         />
 
+        <FormField
+          id={"plate"}
+          minLength={6}
+          maxLength={6}
+          name={"plate"}
+          value={form.plate}
+          onChange={handleChange}
+          labelText={"Placa del vehiculo"}
+          placeholder={"ABC123"}
+          className={fieldError("name")}
+        />
+
         <TextArea
           id={"note"}
           name={"note"}
@@ -80,7 +98,8 @@ export default function MoreInfoSection({
           labelText={"Nota"}
           onChange={handleChange}
           placeholder={"Escribe aquí tu mensaje..."}
-          className={"h-[50%]"}
+          className={`h-[30%]
+          md:h-[50%]`}
         />
 
         <button
