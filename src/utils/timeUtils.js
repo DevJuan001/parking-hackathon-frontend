@@ -1,8 +1,22 @@
+export const actualDate = new Date();
 export const HOUR_NUMBERS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 export const MINUTE_NUMBERS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
 export function padZero(value) {
   return String(value).padStart(2, "0");
+}
+
+export function isBeforeToday(year, month, day) {
+  const today = new Date();
+  const candidate = new Date(year, month, day);
+  return (
+    candidate.getFullYear() < today.getFullYear() ||
+    (candidate.getFullYear() === today.getFullYear() &&
+      candidate.getMonth() < today.getMonth()) ||
+    (candidate.getFullYear() === today.getFullYear() &&
+      candidate.getMonth() === today.getMonth() &&
+      candidate.getDate() < today.getDate())
+  );
 }
 
 export function extractTimeFromValue(value) {
