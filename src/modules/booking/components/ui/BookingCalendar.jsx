@@ -40,7 +40,7 @@ export default function BookingCalendar({
               className="w-10 h-10 flex items-center justify-center rounded-full
               active:bg-[#E4E2E5]
               hover:bg-[#F5F3F6]
-              dark:hover:bg-[#202022]"
+              dark:hover:bg-[#202022] dark:active:bg-[#303033]"
             >
               <Icon
                 name={"arrow_back"}
