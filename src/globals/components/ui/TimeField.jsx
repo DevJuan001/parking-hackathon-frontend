@@ -8,10 +8,10 @@ import Icon from "@components/ui/Icon";
 import TimePickerModal from "@modals/TimePickerModal";
 
 export default function TimeField({
-  spanText,
   id,
   name,
   value,
+  spanText,
   required,
   onChange,
   disabled,
@@ -25,10 +25,10 @@ export default function TimeField({
     <div
       role="button"
       disabled={disabled}
-      onClick={(e) => openInnerModal("timePickerModal", e)}
+      onClick={disabled ? null : (e) => openInnerModal("timePickerModal", e)}
       className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl
       hover:cursor-pointer
-      ${disabled ? "opacity-70" : className}
+      ${disabled ? "opacity-60" : className}
       dark:border-[#202022] dark:text-[#E4E2E5]`}
     >
       <span

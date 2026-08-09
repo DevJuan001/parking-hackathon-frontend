@@ -1,5 +1,6 @@
 // Utils
 import { months } from "@utils/months";
+import { actualDate, isBeforeToday } from "@/utils/timeUtils";
 // Componentes
 import Icon from "@components/ui/Icon";
 
@@ -33,25 +34,29 @@ export default function BookingCalendar({
         <span>{`${months[month]} ${year}`}</span>
 
         <div className="flex gap-1">
-          <button
-            onClick={prevMonth}
-            className="w-10 h-10 flex items-center justify-center rounded-full
-            hover:bg-[#F5F3F6]
-            dark:hover:bg-[#202022]"
-          >
-            <Icon
-              name={"arrow_back"}
-              size={22}
-              className="w-fit text-[#75777E]
-              dark:text-[#7E8088]"
-            />
-          </button>
+          {month !== actualDate.getMonth && (
+            <button
+              onClick={prevMonth}
+              className="w-10 h-10 flex items-center justify-center rounded-full
+              active:bg-[#E4E2E5]
+              hover:bg-[#F5F3F6]
+              dark:hover:bg-[#202022] dark:active:bg-[#303033]"
+            >
+              <Icon
+                name={"arrow_back"}
+                size={22}
+                className="w-fit text-[#75777E]
+                dark:text-[#7E8088]"
+              />
+            </button>
+          )}
 
           <button
             onClick={nextMonth}
             className="w-10 h-10 flex items-center justify-center rounded-full
+            active:bg-[#E4E2E5]
             hover:bg-[#F5F3F6]
-            dark:hover:bg-[#202022]"
+            dark:hover:bg-[#202022] dark:active:bg-[#303033]"
           >
             <Icon
               name={"arrow_forward"}
@@ -104,6 +109,7 @@ export default function BookingCalendar({
           <button
             key={day}
             type="button"
+            disabled={isBeforeToday(year, month, day)}
             onClick={() =>
               handleSelect(day, () =>
                 setTimeout(() => setActiveSection("time"), 500),
@@ -111,7 +117,6 @@ export default function BookingCalendar({
             }
             className={`flex items-center justify-center rounded-2xl transition-all duration-200 subpixel-antialiased
               active:animate-click-effect
-              hover:text-black
                 ${
                   isSelected(day)
                     ? `bg-black text-xl text-white font-bold
@@ -121,8 +126,11 @@ export default function BookingCalendar({
                       ? `bg-[#efedf0] text-lg font-semibold
                       hover:text-xl hover:font-bold
                       dark:bg-[#202022] dark:hover:text-[#E4E2E5]`
-                      : `bg-[#F5F3F6] text-[#44474e]
-                      hover:bg-[#efedf0] hover:font-bold hover:text-xl
+                      : isBeforeToday(year, month, day)
+                        ? `text-gray-300
+                        dark:text-[#ffffff25]`
+                        : `bg-[#F5F3F6] text-black
+                      hover:bg-[#efedf0] hover:text-black hover:text-xl hover:font-bold
                       dark:bg-[#101012] dark:text-[#E4E2E5] dark:hover:text-[#E4E2E5] dark:hover:bg-[#202022]`
                 }`}
           >

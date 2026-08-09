@@ -7,6 +7,7 @@ import Calendar from "@modals/Calendar";
 
 export default function DateField({
   id,
+  disabled,
   spanText,
   value,
   name,
@@ -22,11 +23,12 @@ export default function DateField({
     <button
       id={id}
       type="button"
+      disabled={disabled}
       onClick={(e) => openInnerModal("calendar", e)}
       className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#E4E2E5] text-center text-sm
       focus:shadow-[0_0_2px_1px_#e5e7eb]
       dark:border-[#1e1e20cb] dark:text-white
-      ${className}`}
+      ${disabled ? "opacity-60" : className}`}
     >
       <div className="min-w-full max-w-full flex items-center pr-3">
         <div className="min-w-full max-w-28 flex flex-col items-start">

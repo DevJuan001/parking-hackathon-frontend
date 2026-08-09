@@ -29,8 +29,8 @@ export default function BookingCard({
     firstDow,
     daysInMonth,
     isToday,
-    prevDay,
-    nextDay,
+    prevMonth,
+    nextMonth,
     isSelected,
     getWeekDates,
     handleSelect,
@@ -113,19 +113,16 @@ export default function BookingCard({
           </div>
         </div>
 
-        <a
-          href="/"
+        <div
           className="hidden w-full items-center px-4 py-3 gap-2 rounded-full
-          lg:flex
-          hover:bg-[#F5F3F6]
-          dark:text-[#E4E2E5] dark:hover:bg-[#101012]"
+          lg:flex"
         >
           <Icon name={"parking_sign"} fill />
 
           <span className="text-lg text-nowrap tracking-tighter font-semibold">
             Parking hackathon
           </span>
-        </a>
+        </div>
       </div>
 
       {activeSection === "calendar" && (
@@ -137,6 +134,8 @@ export default function BookingCard({
           daysInMonth={daysInMonth}
           isToday={isToday}
           openModal={openModal}
+          prevMonth={prevMonth}
+          nextMonth={nextMonth}
           isSelected={isSelected}
           weekDates={getWeekDates()}
           handleSelect={handleSelect}
@@ -149,8 +148,6 @@ export default function BookingCard({
           form={form}
           dayNames={dayNames}
           setForm={setForm}
-          prevDay={prevDay}
-          nextDay={nextDay}
           setActiveSection={setActiveSection}
         />
       )}
