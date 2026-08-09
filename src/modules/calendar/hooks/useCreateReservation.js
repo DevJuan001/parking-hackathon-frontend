@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { padZero } from "@/utils/timeUtils";
 import { useQueryClient } from "@tanstack/react-query";
+import { actualDate, padZero } from "@/utils/timeUtils";
 import { getModalTrigger } from "@/utils/getModalTrigger";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { createReservationService } from "@/modules/calendar/services/createReservationService";
 
 export function useCreateReservation(dayInfo) {
-  const actualDate = new Date();
   const [form, setForm] = useState({
     name: "",
     level: "",
