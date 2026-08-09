@@ -18,7 +18,7 @@ export default function FormField({
       className={`relative flex w-full h-16.5 pr-2 rounded-2xl bg-[#FBF9FC] border border-[#E4E2E5] overflow-hidden transition-shadow
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
-      ${disabled ? "opacity-65" : className}
+      ${disabled ? "opacity-60" : className}
       `}
     >
       <input
