@@ -32,6 +32,7 @@ export default function ParkingNameSection({
       </div>
 
       <form
+        onSubmit={continueButtonOnClick}
         className="w-full flex flex-col gap-2
         md:w-lg"
       >
