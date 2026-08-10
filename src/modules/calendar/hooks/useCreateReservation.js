@@ -9,19 +9,22 @@ export function useCreateReservation(dayInfo) {
   const [form, setForm] = useState({
     name: "",
     level: "",
-    client_id: "",
+    email: "",
     start_date:
       dayInfo?.year && dayInfo?.month && dayInfo?.day
         ? `${dayInfo.year}-${padZero(dayInfo.month + 1)}-${padZero(dayInfo.day)}`
         : `${actualDate.getFullYear()}-${padZero(actualDate.getMonth() + 1)}-${padZero(actualDate.getDate())}`,
     start_time: `${padZero(actualDate.getHours())}:${padZero((Math.round(actualDate.getMinutes() / 5) * 5) % 60)}`,
-    end_date: "",
-    end_time: "",
+    end_date: null,
+    end_time: null,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate, clearError, fieldError } = useFormValidation();
+  const { validate, clearError, fieldError } = useFormValidation({}, [
+    "end_date",
+    "end_time",
+  ]);
 
   function handleChange(e) {
     const { name, value } = e.target;
