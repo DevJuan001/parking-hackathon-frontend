@@ -2,8 +2,6 @@
 import { extractTimeFromValue, padZero, to12h } from "@/utils/timeUtils";
 // Constantes
 import { reservationField } from "@/modules/calendar/constants/reservationField";
-// Componentes
-import Icon from "@components/ui/Icon";
 
 export default function ReservationField({
   active,
@@ -17,10 +15,9 @@ export default function ReservationField({
   return (
     <button
       onClick={onClick}
-      className={`w-full flex flex-col font-dmsans text-[#1b1b1e]
+      className={`w-full flex flex-col font-dmsans
       hover:cursor-pointer
-      dark:text-[#E4E2E5]
-      ${reservationField[reservation?.level]?.styles}
+      ${reservationField[reservation?.status]?.styles}
       ${
         miniVersion
           ? `h-5 flex-row items-center px-1 rounded-md
@@ -34,12 +31,8 @@ export default function ReservationField({
           className="w-[40%] flex items-center gap-0.5
           xl:w-[70%]"
         >
-          {reservation?.level < 2 && (
-            <Icon name={"circle"} size={10} fill className="text-blue-700" />
-          )}
-
           <span
-            className={`text-nowrap text-ellipsis font-medium overflow-hidden
+            className={`text-nowrap text-ellipsis overflow-hidden
               lg:w-full
               ${miniVersion ? "text-xs" : "text-lg"}
             `}
@@ -49,7 +42,7 @@ export default function ReservationField({
         </div>
 
         <span
-          className={`w-fit text-nowrap font-medium overflow-hidden
+          className={`w-fit text-nowrap overflow-hidden
             ${miniVersion ? "text-xs" : "text-base"}
           `}
         >
