@@ -102,8 +102,9 @@ export default function TopSection({
           onClick={(e) => openInnerModal("topSectionMobileOptions", e)}
           className="flex items-center justify-center p-4.5 rounded-4xl border border-[#E4E2E5]
           focus:animate-click-effect
+          md:hidden
           hover:bg-[#F5F3F6]
-          md:hidden"
+          dark:border-[#101012] dark:hover:bg-[#101012]"
         >
           <Icon
             name={"more_horiz"}
@@ -144,7 +145,8 @@ export default function TopSection({
               onClick={(e) =>
                 openModal(null, "createReservation", e.currentTarget)
               }
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon name={"add"} />
 
@@ -153,7 +155,8 @@ export default function TopSection({
 
             <button
               onClick={(e) => openModal(null, "share", e.currentTarget)}
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon data-shared-id="share-icon" name={"event_upcoming"} />
 
@@ -167,7 +170,8 @@ export default function TopSection({
 
             <button
               onClick={(e) => openModal(null, "export", e.currentTarget)}
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon data-shared-id="export-icon" name={"download"} />
 
