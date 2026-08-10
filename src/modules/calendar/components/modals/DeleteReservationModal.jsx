@@ -13,7 +13,10 @@ export default function DeleteReservationModal({ reservation, onClose }) {
     useInnerModal();
 
   return (
-    <div className="flex flex-col gap-2 text-nowrap font-dmsans">
+    <div
+      className="flex flex-col gap-2 text-nowrap font-dmsans
+      dark:text-[#E4E2E5]"
+    >
       <span>
         ¿Estás seguro/a de eliminar la reserva{" "}
         <strong>{reservation?.name}</strong>?
