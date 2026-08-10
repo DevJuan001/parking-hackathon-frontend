@@ -24,9 +24,18 @@ export default function ShareModal({
   return (
     <div className="flex flex-col items-center gap-5 font-dmsans">
       <div className="flex items-center gap-2">
-        <Icon data-shared-id="share-icon" name={"event_upcoming"} />
+        <Icon
+          data-shared-id="share-icon"
+          name={"event_upcoming"}
+          className="text-black
+          dark:text-[#E4E2E5]"
+        />
 
-        <span data-shared-id="share-text" className="font-semibold">
+        <span
+          data-shared-id="share-text"
+          className="font-semibold
+          dark:text-[#E4E2E5]"
+        >
           Compartir
         </span>
       </div>
