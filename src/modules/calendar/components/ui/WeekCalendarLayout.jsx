@@ -118,8 +118,8 @@ export default function WeekCalendarLayout({
                       openModal(reservation, "editReservation", e.currentTarget)
                     }
                     className={`absolute w-full flex flex-col p-2 rounded-xl text-xs
-                      ${reservationField[reservation?.level]?.styles}
-                      `}
+                      ${reservationField[reservation?.status]?.styles}
+                    `}
                     style={{
                       height: `${getReservationHeight(
                         `${reservation?.start_date}` +
@@ -128,16 +128,20 @@ export default function WeekCalendarLayout({
                       )}px`,
                     }}
                   >
-                    <span
-                      data-shared-id="reservation-name"
-                      className="font-medium"
-                    >
+                    <span data-shared-id="reservation-name">
                       {reservation?.name}
                     </span>
 
-                    <span>{`
-                    ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
-                    ${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`}</span>
+                    <span>
+                      {`
+                        ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
+                        ${
+                          reservation?.end_date
+                            ? `${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`
+                            : "N/A"
+                        }
+                      `}
+                    </span>
                   </button>
                 ))}
               </div>
