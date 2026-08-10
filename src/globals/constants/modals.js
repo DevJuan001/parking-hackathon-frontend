@@ -105,12 +105,11 @@ export const modals = {
   },
 
   timePicker: {
-    styles: `p-7 w-[400px] h-screen rounded-[32px]
-    md:h-auto`,
+    styles: `p-7 w-[400px] rounded-[32px]`,
   },
 
   default: {
-    styles: `p-7 w-[400px] h-auto rounded-[32px]
+    styles: `p-7 w-[400px] rounded-[32px]
     md:w-[500px]`,
   },
 };
