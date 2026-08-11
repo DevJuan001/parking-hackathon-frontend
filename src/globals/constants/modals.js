@@ -108,6 +108,10 @@ export const modals = {
     styles: `p-7 w-[400px] rounded-[32px]`,
   },
 
+  plans: {
+    styles: `w-screen h-screen`
+  },
+
   default: {
     styles: `p-7 w-[400px] rounded-[32px]
     md:w-[500px]`,
