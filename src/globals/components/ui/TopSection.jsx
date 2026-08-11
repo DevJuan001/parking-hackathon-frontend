@@ -60,7 +60,8 @@ export default function TopSection({
         className="flex items-center justify-center p-4.5 rounded-4xl border border-[#E4E2E5]
         focus:animate-click-effect
         hover:bg-[#F5F3F6]
-        md:hidden"
+        md:hidden
+        dark:border-[#202022] dark:text-[#E4E2E5] dark:hover:bg-[#202022]"
       >
         <Icon name={"more_horiz"} />
       </button>
