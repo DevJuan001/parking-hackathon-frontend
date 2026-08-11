@@ -104,13 +104,9 @@ export default function TopSection({
           focus:animate-click-effect
           md:hidden
           hover:bg-[#F5F3F6]
-          dark:border-[#101012] dark:hover:bg-[#101012]"
+          dark:border-[#202022] dark:text-[#E4E2E5] dark:hover:bg-[#202022]"
         >
-          <Icon
-            name={"more_horiz"}
-            className="text-[#75777E]
-            dark:text-[#7E8088]"
-          />
+          <Icon name={"more_horiz"} />
         </button>
       </div>
 
