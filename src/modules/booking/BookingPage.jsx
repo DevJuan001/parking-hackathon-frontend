@@ -1,6 +1,7 @@
 // Hooks
 import { useState } from "react";
 import { useModal } from "@hooks/useModal";
+import { useParkingInfo } from "@hooks/useParkingInfo";
 import { useCreateReservation } from "@/modules/booking/hooks/useCreateReservation";
 // Constantes
 import { modals } from "@/modules/booking/constants/modals";
@@ -8,9 +9,8 @@ import { modals } from "@/modules/booking/constants/modals";
 import BookingCard from "@/modules/booking/components/ui/BookingCard";
 import SuccessReservation from "@/modules/booking/components/ui/SuccessReservation";
 // Modales
+import Modal from "@modals/Modal";
 import LoginModal from "@modals/LoginModal";
-import Modal from "@components/modals/Modal";
-import { useParkingInfo } from "./hooks/useParkingInfo";
 
 export default function BookingPage() {
   const { isOpen, triggerRef, modalType, openModal, closeModal } = useModal();
