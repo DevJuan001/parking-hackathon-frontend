@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getParkingInfoService } from "@services/getParkingInfoService";
 
-export function useParkingInfo(parking_id) {
+export function useParkingInfo() {
   const parkingInfo = useQuery({
     queryKey: ["parkingInfo"],
-    queryFn: () => getParkingInfoService(parking_id),
+    queryFn: () => getParkingInfoService(),
     staleTime: 60 * 1000 * 60,
   });
 

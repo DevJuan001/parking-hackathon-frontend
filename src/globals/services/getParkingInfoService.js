@@ -1,8 +1,9 @@
 import { apiRoutes } from "@/config/apiRoutes";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-export async function getParkingInfoService(parking_id) {
-  const response = await fetch(
-    `${apiRoutes.apiUrl}${apiRoutes.parking}/${parking_id}`,
+export async function getParkingInfoService() {
+  const response = await fetchWithAuth(
+    `${apiRoutes.apiUrl}${apiRoutes.parking}/me/private-info`,
     {
       method: "GET",
     },
