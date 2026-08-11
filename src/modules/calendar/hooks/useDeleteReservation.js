@@ -14,7 +14,7 @@ export function useDeleteReservation(reservation) {
     const triggerButton = getModalTrigger(e);
 
     try {
-      const response = await deleteReservationService(reservation?.id);
+      const response = await deleteReservationService(reservation?.uuid);
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
