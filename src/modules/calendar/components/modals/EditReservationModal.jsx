@@ -1,5 +1,4 @@
 // Hooks
-import { useClients } from "@hooks/useClients";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useEditReservation } from "@/modules/calendar/hooks/useEditReservation";
 // Componentes
@@ -21,7 +20,6 @@ export default function EditReservationModal({ reservation, onClose }) {
     useEditReservation(reservation);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
-  const { clients } = useClients();
 
   return (
     <div className="h-full w-full flex flex-col gap-2">
@@ -68,7 +66,7 @@ export default function EditReservationModal({ reservation, onClose }) {
           dark:text-[#E4E2E5]"
         >
           <span className="text-2xl text-ellipsis font-medium overflow-hidden">
-            {form.name}
+            {reservation?.name}
           </span>
         </div>
       </div>
@@ -78,39 +76,39 @@ export default function EditReservationModal({ reservation, onClose }) {
         className="w-full flex flex-col gap-2"
       >
         <FormField
+          disabled
           id={"name"}
           name={"name"}
-          value={form.name}
+          value={reservation?.name}
           labelText={"Titúlo"}
           onChange={handleChange}
         />
 
-        <SelectMenu
-          id={"client-menu"}
-          name={"client_id"}
-          spanText={"Cliente"}
-          value={form.client_id}
+        <FormField
+          disabled
+          id={"email"}
+          name={"email"}
+          value={reservation?.email}
+          labelText={"Correo"}
           onChange={handleChange}
-          options={clients?.map((client) => ({
-            value: client?.id,
-            label: `${client?.name} ${client?.first_surname} ${client?.second_surname}`,
-          }))}
         />
 
         <div className="flex gap-2">
           <DateField
+            disabled
             id={"start_date"}
             name={"start_date"}
-            value={form.start_date}
+            value={reservation?.start_date}
             onChange={handleChange}
             spanText={"Fecha de inicio"}
             className={fieldError("start_date")}
           />
 
           <DateField
+            disabled
             id={"end_date"}
             name={"end_date"}
-            value={form.end_date}
+            value={reservation?.end_date}
             onChange={handleChange}
             spanText={"Fecha de fin"}
             className={fieldError("end_date")}
@@ -119,33 +117,23 @@ export default function EditReservationModal({ reservation, onClose }) {
 
         <div className="flex gap-2">
           <TimeField
+            disabled
             id={"start_time"}
             name={"start_time"}
-            value={form.start_time}
+            value={reservation?.start_time}
             onChange={handleChange}
             spanText={"Hora de inicio"}
           />
 
           <TimeField
+            disabled
             id={"end_time"}
             name={"end_time"}
-            value={form.end_time}
+            value={reservation?.end_time}
             onChange={handleChange}
             spanText={"Hora de fin"}
           />
         </div>
-
-        <SelectMenu
-          id={"priority-level-menu"}
-          name={"level"}
-          value={form.level}
-          onChange={handleChange}
-          spanText={"Nivel de prioridad"}
-          options={[
-            { value: 1, label: "Normal" },
-            { value: 2, label: "Importante" },
-          ]}
-        />
 
         <SelectMenu
           id={"status-menu"}
@@ -156,7 +144,8 @@ export default function EditReservationModal({ reservation, onClose }) {
           options={[
             { value: 1, label: "Cancelada" },
             { value: 2, label: "Activa" },
-            { value: 3, label: "Completada" },
+            { value: 3, label: "En proceso" },
+            { value: 4, label: "Completada" },
           ]}
         />
 

@@ -93,7 +93,7 @@ export default function DayCalendarLayout({
                   reservation.start_date + " " + reservation.start_time,
                 );
                 const minutes = start.getMinutes();
-                const topOffset = (minutes / 60) * 50;
+                const topOffset = (minutes / 60) * 90;
 
                 return (
                   <button
@@ -101,7 +101,7 @@ export default function DayCalendarLayout({
                     onClick={(e) =>
                       openModal(reservation, "editReservation", e.currentTarget)
                     }
-                    className={`absolute flex flex-col p-2 rounded-2xl text-sm ${reservationField[reservation?.level]?.styles}`}
+                    className={`absolute flex flex-col p-2 rounded-xl text-sm ${reservationField[reservation?.status]?.styles}`}
                     style={{
                       top: `${topOffset}px`,
                       left: `${column * offset}px`,
@@ -113,9 +113,16 @@ export default function DayCalendarLayout({
                   >
                     <span className="font-medium">{reservation?.name}</span>
 
-                    <span className="text-xs">{`
-                    ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
-                    ${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`}</span>
+                    <span className="text-xs">
+                      {`
+                        ${formatTime(`${reservation?.start_date}` + " " + `${reservation?.start_time}`)} - 
+                        ${
+                          reservation?.end_date
+                            ? `${formatTime(`${reservation?.end_date}` + " " + `${reservation?.end_time}`)}`
+                            : "N/A"
+                        }
+                      `}
+                    </span>
                   </button>
                 );
               })}

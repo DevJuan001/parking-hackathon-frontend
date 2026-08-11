@@ -34,7 +34,7 @@ export default function BookingCalendar({
         <span>{`${months[month]} ${year}`}</span>
 
         <div className="flex gap-1">
-          {month !== actualDate.getMonth && (
+          {month !== actualDate.getMonth() && (
             <button
               onClick={prevMonth}
               className="w-10 h-10 flex items-center justify-center rounded-full

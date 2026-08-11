@@ -102,14 +102,11 @@ export default function TopSection({
           onClick={(e) => openInnerModal("topSectionMobileOptions", e)}
           className="flex items-center justify-center p-4.5 rounded-4xl border border-[#E4E2E5]
           focus:animate-click-effect
+          md:hidden
           hover:bg-[#F5F3F6]
-          md:hidden"
+          dark:border-[#202022] dark:text-[#E4E2E5] dark:hover:bg-[#202022]"
         >
-          <Icon
-            name={"more_horiz"}
-            className="text-[#75777E]
-            dark:text-[#7E8088]"
-          />
+          <Icon name={"more_horiz"} />
         </button>
       </div>
 
@@ -144,7 +141,8 @@ export default function TopSection({
               onClick={(e) =>
                 openModal(null, "createReservation", e.currentTarget)
               }
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon name={"add"} />
 
@@ -153,7 +151,8 @@ export default function TopSection({
 
             <button
               onClick={(e) => openModal(null, "share", e.currentTarget)}
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon data-shared-id="share-icon" name={"event_upcoming"} />
 
@@ -167,7 +166,8 @@ export default function TopSection({
 
             <button
               onClick={(e) => openModal(null, "export", e.currentTarget)}
-              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+              className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+              dark:bg-[#101012] dark:text-[#E4E2E5]"
             >
               <Icon data-shared-id="export-icon" name={"download"} />
 

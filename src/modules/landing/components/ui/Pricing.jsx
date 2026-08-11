@@ -1,5 +1,5 @@
 import Icon from "@components/ui/Icon";
-import { pricingPlans } from "@/modules/landing/data/pricingPlans";
+import { pricingPlans } from "@constants/pricingPlans";
 
 export default function Pricing({ openModal }) {
   return (
@@ -37,7 +37,7 @@ export default function Pricing({ openModal }) {
           <div
             key={plan.title}
             className="w-full h-full flex flex-col p-7 gap-2 border border-[#e5e7eb] rounded-3xl transition-all duration-500
-            md:h-[680px]
+            md:h-170
             dark:border-[#202022]"
           >
             <span className="text-5xl font-medium dark:text-[#e4e2e5]">

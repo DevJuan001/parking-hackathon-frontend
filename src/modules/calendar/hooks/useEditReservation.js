@@ -6,19 +6,12 @@ import { updateReservationService } from "@/modules/calendar/services/updateRese
 
 export function useEditReservation(reservation) {
   const [form, setForm] = useState({
-    name: reservation?.name ?? "",
-    level: reservation?.level ?? "",
-    client_id: reservation?.user_id ?? "",
-    start_date: reservation?.start_date ?? "",
-    start_time: reservation?.start_time ?? "",
-    end_date: reservation?.end_date ?? "",
-    end_time: reservation?.end_time ?? "",
-    status: reservation?.status ?? "",
+    status: reservation?.status,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate, getChanges, clearError, fieldError } = useFormValidation();
+  const { getChanges, clearError, fieldError } = useFormValidation();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -33,12 +26,6 @@ export function useEditReservation(reservation) {
 
     const triggerButton = getModalTrigger(e);
 
-    const isValid = validate(form);
-
-    if (!isValid) {
-      return;
-    }
-
     const changes = getChanges(reservation, form);
 
     if (Object.keys(changes).length === 0) {
@@ -48,7 +35,7 @@ export function useEditReservation(reservation) {
     setLoading(true);
 
     try {
-      const response = await updateReservationService(changes, reservation?.id);
+      const response = await updateReservationService(changes, reservation?.uuid);
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });

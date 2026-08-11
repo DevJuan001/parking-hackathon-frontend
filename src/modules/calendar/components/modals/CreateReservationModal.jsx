@@ -1,5 +1,4 @@
 // Hooks
-import { useClients } from "@hooks/useClients";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useCreateReservation } from "@/modules/calendar/hooks/useCreateReservation";
 // Componentes
@@ -13,7 +12,6 @@ import ConfirmCancelButtons from "@components/modals/ConfirmCancelButtons";
 import ErrorModal from "@modals/ErrorModal";
 
 export default function CreateReservationModal({ dayInfo, onClose }) {
-  const { clients } = useClients();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateReservation(dayInfo);
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -25,26 +23,35 @@ export default function CreateReservationModal({ dayInfo, onClose }) {
       className="flex flex-col gap-2 px-0.5"
     >
       <FormField
-        labelText={"Titúlo"}
         id={"name"}
         name={"name"}
         value={form.name}
+        labelText={"Titúlo"}
         onChange={handleChange}
-        placeholder={"Escribe un nombre para la reserva"}
+        placeholder={"Reserva nueva"}
         className={fieldError("name")}
       />
 
-      <SelectMenu
-        id={"clients-menu"}
-        name={"client_id"}
-        spanText={"Cliente"}
-        value={form.client_id}
+      <FormField
+        id={"email"}
+        name={"email"}
+        value={form.email}
+        labelText={"Correo"}
         onChange={handleChange}
-        options={clients?.map((client) => ({
-          value: client.id,
-          label: `${client.name} ${client.first_surname} ${client.second_surname}`,
-        }))}
-        className={fieldError("client_id")}
+        placeholder={"miguel@gmail.com"}
+        className={fieldError("email")}
+      />
+
+      <FormField
+        id={"plate"}
+        maxLength={6}
+        minLength={6}
+        name={"plate"}
+        value={form.plate}
+        labelText={"Placa"}
+        placeholder={"ABC123"}
+        onChange={handleChange}
+        className={fieldError("plate")}
       />
 
       <div className="flex gap-2">
