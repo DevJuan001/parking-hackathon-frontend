@@ -1,7 +1,7 @@
 export function formatDateTime(dateString) {
   const date = new Date(dateString);
   
-  const day = date.getDate();
+  const day = date.getDate() + 1;
   
   const month = date.toLocaleDateString("es-AR", { month: "long" });
   
