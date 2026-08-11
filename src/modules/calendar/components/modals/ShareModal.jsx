@@ -1,12 +1,13 @@
 // Hooks
 import { useState } from "react";
+import { useParkingInfo } from "@hooks/useParkingInfo";
 // Componentes
 import Icon from "@components/ui/Icon";
 import { QRCodeSVG } from "qrcode.react";
 
-export default function ShareModal({
-  link = "https://parking-hackathon-frontend.onrender.com/calendar",
-}) {
+export default function ShareModal() {
+  const { parkingInfo } = useParkingInfo();
+  const link = `https://parking-hackathon-frontend.onrender.com/booking?parkingId=${parkingInfo?.uuid}`;
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -64,7 +65,8 @@ export default function ShareModal({
         dark:bg-[#101012]"
       >
         <a
-          href={`${link}`}
+          target="_blank"
+          href={link}
           className="w-full p-5 text-sm text-nowrap text-ellipsis overflow-hidden
           hover:text-blue-700 hover:underline
           dark:text-white"
