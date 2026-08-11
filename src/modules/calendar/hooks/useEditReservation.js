@@ -35,7 +35,7 @@ export function useEditReservation(reservation) {
     setLoading(true);
 
     try {
-      const response = await updateReservationService(changes, reservation?.id);
+      const response = await updateReservationService(changes, reservation?.uuid);
 
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["reservations"] });
