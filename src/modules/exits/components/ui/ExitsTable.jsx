@@ -15,10 +15,10 @@ export default function ExitsTable({ exits, loading }) {
     >
       {noExits && (
         <div
-          className="h-[700px] flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
-          dark:text-[#E4E2E5] dark:bg-black"
+          className="h-full flex flex-col items-center justify-center gap-1 rounded-2xl text-[#7E8088] bg-[#f5f3f6]
+          dark:text-[#E4E2E5] dark:bg-[#101012]"
         >
-          <Icon name={"border_clear"} size={64} />
+          <Icon name={"border_clear"} size={72} />
 
           <span
             className="text-xl font-medium text-center
