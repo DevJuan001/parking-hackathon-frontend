@@ -1,7 +1,7 @@
 // Hooks
 import { useState } from "react";
 import { useModal } from "@hooks/useModal";
-import { useParkingInfo } from "@hooks/useParkingInfo";
+import { useParkingInfo } from "@/modules/booking/hooks/useParkingInfo";
 import { useCreateReservation } from "@/modules/booking/hooks/useCreateReservation";
 // Constantes
 import { modals } from "@/modules/booking/constants/modals";
