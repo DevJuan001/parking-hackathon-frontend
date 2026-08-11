@@ -18,7 +18,10 @@
       ],
       "@utils/*": [
         "./src/utils/*"
-      ]
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
     },
     "jsx": "preserve",
     "module": "ESNext",
