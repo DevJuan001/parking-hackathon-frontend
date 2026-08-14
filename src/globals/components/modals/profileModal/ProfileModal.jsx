@@ -120,13 +120,13 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
         </aside>
 
         <section
-          className="relative h-[85%] w-full flex flex-col px-2 gap-2 animate-blur-up
+          className="relative h-full w-full flex flex-col px-2 gap-2 animate-blur-up
           md:h-full
           dark:text-white"
         >
           <LiquidGlass
             onClick={onCloseModal}
-            className="absolute w-10 max-h-10 mt-3 mr-1 self-end p-2 rounded-full
+            className="absolute h-11.5 mt-3 mr-1 self-end p-2.5 rounded-full
             hover:cursor-pointer hover:bg-[#49454f21]"
           >
             <Icon name={"close"} />
