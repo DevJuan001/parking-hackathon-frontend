@@ -109,7 +109,7 @@ export const modals = {
   },
 
   plans: {
-    styles: `w-screen h-screen`
+    styles: `w-screen h-screen p-7`
   },
 
   default: {
