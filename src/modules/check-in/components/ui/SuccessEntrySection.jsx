@@ -11,11 +11,18 @@ export default function SuccessEntrySection({
   }, 6000);
 
   return (
-    <section className="w-full h-full flex flex-col animate-blur-down">
+    <section
+      className="w-full h-full flex flex-col animate-blur-down
+      dark:text-[#E4E2E5]"
+    >
       <div className="self-center h-full flex flex-col justify-center gap-2">
-        <div className="w-20 h-20 flex items-center justify-center bg-green-200 rounded-full">
+        <div
+          className="w-20 h-20 flex items-center justify-center bg-green-200 rounded-full
+          dark:bg-green-950"
+        >
           <Icon name={"check"} size={50} color={"#008236"} />
         </div>
+
         <span className="text-3xl text-[#75777E]">¡Gracias por elegirnos!</span>
 
         <span className="text-6xl font-semibold">{message}</span>
