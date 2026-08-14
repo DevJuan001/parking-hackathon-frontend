@@ -2,7 +2,7 @@ export const pricingPlans = [
   {
     title: "Gratuito",
     description: "Ideal para parqueaderos pequeños.",
-    price: "$17.900",
+    price: "$0",
     items: [
       {
         icon: "car_tag",
@@ -23,10 +23,6 @@ export const pricingPlans = [
       {
         icon: "parking_meter",
         text: "Gestión de plazas",
-      },
-      {
-        icon: "bar_chart",
-        text: "Dashboard básico",
       },
       {
         icon: "table",
