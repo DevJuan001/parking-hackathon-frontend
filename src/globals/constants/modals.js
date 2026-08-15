@@ -51,7 +51,7 @@ export const modals = {
   },
 
   search: {
-    styles: `h-18 w-[350px] border-2 border-[#E4E2E5] rounded-2xl`,
+    styles: `h-18 w-[350px] border-2 border-[#E4E2E5] rounded-3xl`,
     growDirection: "left",
   },
 
