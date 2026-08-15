@@ -14,7 +14,32 @@ export default function Navbar({ hasRole }) {
   return (
     <section className="relative w-screen flex items-center justify-center gap-5 pb-1 pl-1 pr-2 transition-all duration-700">
       <ul
-        className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[0px_0px_20px_-2px_#EBE6E7] bg-white transition-all duration-700 
+        className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[0px_0px_20px_-2px_#EBE6E7] bg-white transition-all duration-500
+        md:hidden
+        dark:bg-black dark:shadow-[0px_0px_10px_5px_#ffffff14]"
+      >
+        {firstSectionItems
+          .slice(0, 4)
+          .filter((item) => hasRole(item.roles))
+          .map((item) => (
+            <li
+              key={item.name}
+              className="py-1.5 rounded-full transition-all duration-600"
+            >
+              <NavItem
+                disableText
+                itemId={`${item.itemId}`}
+                path={item.path}
+                name={item.name}
+                icon={item.icon}
+              />
+            </li>
+          ))}
+      </ul>
+
+      <ul
+        className="hidden w-auto h-full px-1 gap-0.5 rounded-full shadow-[0px_0px_20px_-2px_#EBE6E7] bg-white transition-all duration-500
+        md:flex
         dark:bg-black dark:shadow-[0px_0px_10px_5px_#ffffff14]"
       >
         {firstSectionItems
@@ -22,7 +47,7 @@ export default function Navbar({ hasRole }) {
           .map((item) => (
             <li
               key={item.name}
-              className="py-1.5 rounded-full transition-all duration-700"
+              className="py-1.5 rounded-full transition-all duration-600"
             >
               <NavItem
                 itemId={`${item.itemId}`}
