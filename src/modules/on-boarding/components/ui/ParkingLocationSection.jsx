@@ -1,5 +1,5 @@
 // Hooks
-import { useCountries } from "@/modules/on-boarding/hooks/useCountries";
+import { useCountries } from "@hooks/useCountries";
 import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import SectionButtons from "@/modules/on-boarding/components/ui/SectionButtons";
