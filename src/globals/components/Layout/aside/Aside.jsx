@@ -13,7 +13,7 @@ export default function Aside() {
     useInnerModal();
 
   return (
-    <aside className="sticky flex items-center order-2 h-[80px] py-1 z-10 transition-all duration-500">
+    <aside className="sticky bottom-3 h-20 flex items-center order-2 py-1 z-10 transition-all duration-500">
       <Navbar hasRole={hasRole} />
 
       <button
