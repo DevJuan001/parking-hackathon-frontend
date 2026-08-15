@@ -49,7 +49,7 @@ export const firstSectionItems = [
     itemId: "exits",
     name: "Salidas",
     path: "/exits",
-    icon: "move_group",
+    icon: "garage_money",
     roles: ["Admin"],
   },
 
