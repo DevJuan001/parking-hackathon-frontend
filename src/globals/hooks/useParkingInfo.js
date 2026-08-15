@@ -10,7 +10,7 @@ export function useParkingInfo() {
 
   return {
     parkingInfo: parkingInfo.data,
-    loading: parkingInfo.isLoading,
+    parkingInfoLoading: parkingInfo.isLoading,
     error: parkingInfo.error,
   };
 }
