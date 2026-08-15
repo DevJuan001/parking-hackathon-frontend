@@ -7,7 +7,7 @@ export default function AnimatedBackground({ className }) {
       {/* Orb secundario — movimiento circular uniforme */}
       <div className="absolute top-1/2 left-1/2">
         <div
-          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-25 animate-main-orbit
+          className="w-200 h-200 -mt-100 -ml-100 rounded-full opacity-25 animate-main-orbit
           bg-[radial-gradient(circle,#000000_0%,transparent_70%)]
           dark:bg-[radial-gradient(circle_at_center,#FFFFFF_0%,transparent_70%)] dark:opacity-70"
         />
@@ -16,7 +16,7 @@ export default function AnimatedBackground({ className }) {
       {/* Orb morado — misma ruta, distinto ritmo */}
       <div className="absolute top-1/2 left-1/2">
         <div
-          className="w-[800px] h-[800px] mt-[-400px] ml-[-400px] rounded-full opacity-70 animate-second-orbit
+          className="w-200 h-200 -mt-100 -ml-100 rounded-full opacity-70 animate-second-orbit
           bg-[radial-gradient(circle_at_center,#A235C6_0%,transparent_70%)] dark:opacity-100"
         />
       </div>
@@ -24,7 +24,7 @@ export default function AnimatedBackground({ className }) {
       {/* Textura SVG noise/grain overlay */}
       <svg
         fill="currentColor"
-        className="absolute inset-0 w-full h-full opacity-8
+        className="absolute inset-0 w-full h-full opacity-12
         dark:opacity-45"
       >
         <filter id="noise">
