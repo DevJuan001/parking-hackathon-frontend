@@ -89,10 +89,14 @@ export default function ChatModal({ triggerRef, onClose }) {
 
           {isPending && (
             <LiquidGlass
-              className="max-w-[80%] min-h-fit self-start px-6 py-4 rounded-4xl bg-[#ffffffc7] wrap-break-word animate-message-in-left
+              className="max-w-[80%] min-h-fit self-start flex items-center gap-2 px-6 py-4 rounded-4xl bg-[#ffffffc7] wrap-break-word animate-message-in-left
               dark:bg-[#000000a2] dark:text-[#E4E2E5]"
             >
-              <p className="animate-pulse">Pensando...</p>
+              <div className="flex items-center gap-2 animate-pulse">
+                <Icon name="cognition_2" size={22} />
+
+                <p>Pensando...</p>
+              </div>
             </LiquidGlass>
           )}
         </div>
@@ -108,9 +112,9 @@ export default function ChatModal({ triggerRef, onClose }) {
             name="message"
             value={chatInfo.message}
             onChange={handleChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={isPending ? null : handleKeyDown}
             placeholder="Escribe un mensaje..."
-            className="h-full w-full p-3 text-2xl outline-0
+            className="h-full w-full p-3 text-2xl outline-0 resize-none
             dark:text-[#E4E2E5]"
           />
 
