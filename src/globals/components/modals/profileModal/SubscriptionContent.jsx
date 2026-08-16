@@ -21,7 +21,7 @@ export default function SubscriptionContent() {
       <AnimatedBackground className="rounded-3xl" />
 
       <div
-        className="w-full flex flex-col px-4 gap-6 text-[#1b1b1eef] font-dmsans animate-blur-up
+        className="w-full flex flex-col px-6 py-8 gap-6 text-[#1b1b1eef] font-dmsans animate-blur-up
         dark:text-[#E4E2E5]"
       >
         <div className="w-full flex flex-col">
@@ -32,21 +32,25 @@ export default function SubscriptionContent() {
             Plan
           </span>
 
-          <span>{parkingInfo?.plan}</span>
+          <span>{parkingInfo?.plan ?? ""}</span>
         </div>
 
         <div className="w-full flex flex-col">
           <span className="text-2xl font-semibold">Precio</span>
 
           <span>
-            $<span>{parkingInfo?.plan_value}</span> / mes
+            $<span>{parkingInfo?.plan_value ?? ""}</span> / mes
           </span>
         </div>
 
         <div className="flex flex-col">
           <span className="text-2xl font-semibold">Proximo Pago</span>
 
-          <span>{formatDateTime(parkingInfo?.next_payment_at)}</span>
+          <span>
+            {parkingInfo?.next_payment_at
+              ? formatDateTime(parkingInfo?.next_payment_at)
+              : ""}
+          </span>
         </div>
 
         <div className="flex flex-col gap-2">
