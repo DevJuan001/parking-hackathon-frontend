@@ -26,7 +26,7 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
           <Icon
             name={"close"}
             className="text-[#1B1B1E]
-            dark:text-[#E4E2E5]"
+            dark:text-white"
           />
         </LiquidGlass>
 
