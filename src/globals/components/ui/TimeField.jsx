@@ -26,10 +26,10 @@ export default function TimeField({
       role="button"
       disabled={disabled}
       onClick={disabled ? null : (e) => openInnerModal("timePickerModal", e)}
-      className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl
+      className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl bg-[#FBF9FC]
       hover:cursor-pointer
       ${disabled ? "opacity-60" : className}
-      dark:border-[#202022] dark:text-[#E4E2E5]`}
+      dark:bg-black dark:border-[#1e1e20cb] dark:text-[#E4E2E5]`}
     >
       <span
         className="absolute top-3 left-4 text-xs text-[#75777E]
