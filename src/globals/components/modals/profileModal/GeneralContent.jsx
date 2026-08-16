@@ -8,7 +8,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
 
   return (
     <div
-      className="h-full w-full flex flex-col gap-7 animate-blur-up
+      className="h-full w-full flex flex-col gap-7 px-2 mt-5 animate-blur-up
       dark:text-white"
     >
       {/* Información general del usuario */}
