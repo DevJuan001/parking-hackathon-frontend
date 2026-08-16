@@ -66,7 +66,7 @@ export const modals = {
 
   user: {
     styles: `p-3 w-screen h-screen
-    md:w-[750px] md:h-[calc(100vh-30%)] md:rounded-[32px]`,
+    md:w-[750px] md:h-[calc(100vh-30%)] md:rounded-[40px]`,
     location: "center",
   },
 
