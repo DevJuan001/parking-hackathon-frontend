@@ -5,22 +5,23 @@ import { useFormValidation } from "@hooks/useFormValidation";
 import { updateParkingInfoService } from "@services/updateParkingInfoService";
 
 export function useUpdateParkingInfo(parkingInfo) {
-  const [form, setForm] = useState({
-    name: parkingInfo?.name ?? "",
-    address: parkingInfo?.address ?? "",
-    start_day: parkingInfo?.start_day ?? "",
-    start_time: parkingInfo?.start_time ?? "",
-    end_day: parkingInfo?.end_day ?? "",
-    end_time: parkingInfo?.end_time ?? "",
-  });
+  const [edits, setEdits] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
   const { validate, getChanges, fieldError, clearError } = useFormValidation();
+  const form = {
+    name: edits.name ?? parkingInfo?.name ?? "",
+    address: edits.address ?? parkingInfo?.address ?? "",
+    start_day: edits.start_day ?? parkingInfo?.start_day ?? "",
+    start_time: edits.start_time ?? parkingInfo?.start_time ?? "",
+    end_day: edits.end_day ?? parkingInfo?.end_day ?? "",
+    end_time: edits.end_time ?? parkingInfo?.end_time ?? "",
+  };
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setEdits((prev) => ({ ...prev, [name]: value }));
     clearError(name);
   }
 
