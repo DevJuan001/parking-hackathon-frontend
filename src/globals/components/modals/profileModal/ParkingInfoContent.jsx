@@ -1,4 +1,5 @@
 // Hooks
+import { useCountries } from "@hooks/useCountries";
 import { useInnerModal } from "@hooks/useInnerModal";
 import { useParkingInfo } from "@hooks/useParkingInfo";
 import { useUpdateParkingInfo } from "@hooks/useUpdateParkingInfo";
@@ -21,11 +22,13 @@ export default function ParkingInfoContent() {
     useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useUpdateParkingInfo(parkingInfo);
+  const { countries } = useCountries();
 
   return (
     <form
       onSubmit={(e) => handleSubmit(e, openInnerModal)}
-      className="w-full flex flex-col gap-2 font-dmsans
+      className="w-full flex flex-col p-3 pt-0 gap-2 font-dmsans overflow-y-auto animate-blur-up
+      md:pt-3
       dark:text-[#E4E2E5]"
     >
       <div
@@ -48,6 +51,7 @@ export default function ParkingInfoContent() {
         </div>
 
         {(form?.name !== parkingInfo?.name ||
+          form?.country_id !== parkingInfo?.country_id ||
           form?.address !== parkingInfo?.address) && (
           <button
             type="submit"
@@ -71,6 +75,21 @@ export default function ParkingInfoContent() {
             disabled={parkingInfoLoading ?? loading}
             placeholder={parkingInfo?.name ?? "Parking hackathon"}
             className={fieldError("name")}
+          />
+
+          <SelectMenu
+            searchable
+            id={"country_id"}
+            name="country_id"
+            spanText="País"
+            value={form.country_id}
+            onChange={handleChange}
+            disabled={parkingInfoLoading ?? loading}
+            options={countries.map((country) => ({
+              value: country.id,
+              label: country.name,
+            }))}
+            className={fieldError("country_id")}
           />
 
           <MapsField
