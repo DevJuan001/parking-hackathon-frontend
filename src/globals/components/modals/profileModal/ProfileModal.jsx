@@ -33,13 +33,12 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
       onClose={onCloseModal}
     >
       <section
-        className="h-full flex flex-col-reverse items-center justify-between gap-4
-        md:grid md:grid-cols-[180px_1fr]"
+        className="relative h-full flex flex-col-reverse items-center justify-between gap-3
+        md:grid md:grid-cols-[200px_1fr]"
       >
         <aside
-          className="h-[15%] w-full justify-self-end p-1 font-dmsans border-gray-300
-          md:h-full md:justify-self-start md:self-start
-          dark:border-[#3a3d43]"
+          className="absolute bottom-2 w-full justify-self-end p-2 backdrop-blur-sm rounded-full font-dmsans z-10
+          md:static md:h-full md:justify-self-start md:self-start md:p-3"
         >
           <ul
             className="flex justify-center gap-1
@@ -51,16 +50,16 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
                 <li
                   key={index}
                   onClick={() => setActiveSection(item?.name)}
-                  className={`w-full flex flex-col items-center py-2.5 px-3 rounded-2xl gap-2 text-xs transition
-                hover:cursor-pointer
-                md:flex-row md:w-full md:text-sm
-                ${
-                  activeSection === item?.name
-                    ? `bg-[#F5F3F6] font-medium text-[#44474e]
+                  className={`w-full flex flex-col items-center py-2.5 px-3 gap-1 rounded-full text-xs transition
+                  hover:cursor-pointer
+                  md:flex-row md:w-full md:gap-2 md:rounded-2xl md:text-sm
+                  ${
+                    activeSection === item?.name
+                      ? `bg-[#F5F3F6] font-medium text-[#44474e]
                       dark:text-white dark:bg-[#202022] dark:hover:bg-[#28282b]`
-                    : `text-[#68676786] hover:bg-[#efedf0]
+                      : `text-[#68676786] hover:bg-[#efedf0]
                       dark:hover:bg-[#101012] dark:hover:text-[#ffffff8a]`
-                }`}
+                  }`}
                 >
                   <Icon
                     name={item?.icon}
@@ -76,13 +75,13 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
         </aside>
 
         <section
-          className="relative h-full w-full flex flex-col gap-2 animate-blur-up overflow-hidden overflow-y-auto
-          md:h-full
+          className="relative h-full w-full flex flex-col animate-blur-up overflow-y-auto
+          md:h-full md:gap-2
           dark:text-white"
         >
           {activeSection !== "Suscripción" && (
             <div
-              className="h-fit flex items-center justify-between p-2
+              className="h-fit flex items-center justify-between px-3 py-2
               md:hidden"
             >
               <span className="text-lg font-medium font-dmsans">
