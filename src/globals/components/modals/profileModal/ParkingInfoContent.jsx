@@ -49,7 +49,6 @@ export default function ParkingInfoContent() {
         </div>
 
         {(form?.name !== parkingInfo?.name ||
-          form?.country_id !== parkingInfo?.country_id ||
           form?.address !== parkingInfo?.address) && (
           <button
             type="submit"
