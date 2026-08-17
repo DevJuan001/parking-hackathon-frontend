@@ -9,7 +9,7 @@ import { completeOnBoardingService } from "@/modules/on-boarding/service/complet
 const SECTION_FIELDS = {
   userInfo: ["name", "first_surname"],
   parkingName: ["parking_name"],
-  parkingLocation: ["parking_address", "parking_deparment"],
+  parkingLocation: ["address"],
 };
 
 export function useCompleteOnBoarding(user) {
@@ -18,13 +18,17 @@ export function useCompleteOnBoarding(user) {
     first_surname: user?.first_surname || "",
     second_surname: user?.second_surname || "",
     parking_name: "",
-    parking_country: "",
+    address: "",
+    start_day: 1,
+    start_time: "",
+    end_day: 5,
+    end_time: "",
   });
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { validate, fieldError, clearError } = useFormValidation();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
     const { name, value } = e.target;
