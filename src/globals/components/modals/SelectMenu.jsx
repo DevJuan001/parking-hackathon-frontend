@@ -59,7 +59,7 @@ export default function SelectMenu({
           className={`relative w-full pr-2 flex items-center bg-[#FBF9FC] border border-[#E4E2E5]
             ${spanText ? "h-full pt-1.5 rounded-2xl" : miniVersion ? "h-9 rounded-xl" : "h-14 rounded-2xl"}
             cursor-pointer text-sm
-            dark:bg-black dark:border-[#1e1e20cb]
+            dark:bg-black dark:border-[#202022]
             ${className}`}
         >
           {spanText && (
@@ -110,7 +110,7 @@ export default function SelectMenu({
             className={`h-16 flex items-center justify-center px-5 border border-[#E4E2E5] rounded-2xl bg-[#FBF9FC] transition-colors duration-200
             active:animate-click-effect
             hover:bg-gray-200 hover:cursor-pointer
-            dark:bg-black dark:border-[#1e1e20cb] dark:hover:bg-[#28282bbd]`}
+            dark:bg-black dark:border-[#202022] dark:hover:bg-[#28282bbd]`}
           >
             <Icon name={"add"} size={22} className="dark:text-[#E4E2E5]" />
           </button>
