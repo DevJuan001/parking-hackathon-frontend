@@ -43,15 +43,27 @@ export default function SubscriptionContent() {
           </span>
         </div>
 
-        <div className="flex flex-col">
-          <span className="text-2xl font-semibold">Proximo Pago</span>
+        {parkingInfo?.next_payment_at ? (
+          <div className="flex flex-col">
+            <span className="text-2xl font-semibold">Proximo Pago</span>
 
-          <span>
-            {parkingInfo?.next_payment_at
-              ? formatDateTime(parkingInfo?.next_payment_at)
-              : ""}
-          </span>
-        </div>
+            <span>
+              {parkingInfo?.next_payment_at
+                ? formatDateTime(parkingInfo?.next_payment_at)
+                : "No registrado"}
+            </span>
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            <span className="text-2xl font-semibold">Tiempo restante</span>
+
+            <span>
+              {parkingInfo?.time_remaining
+                ? parkingInfo?.time_remaining
+                : "No registrado"}
+            </span>
+          </div>
+        )}
 
         <div className="flex flex-col gap-2">
           <button
@@ -62,14 +74,19 @@ export default function SubscriptionContent() {
             dark:bg-[#F5F3F6] dark:text-black dark:hover:text-black/80"
           >
             <Icon name="bolt_boost" fill />
-            Cambiar plan
+
+            <span>Cambiar plan</span>
           </button>
 
           <div
             className="flex flex-col text-xs text-[#1b1b1ee5]
             dark:text-[#e4e2e5ab]"
           >
-            <span>Tu suscripción se renovara automaticamente.</span>
+            <span>
+              {parkingInfo?.next_payment_at
+                ? "Tu suscripción se renovara automaticamente."
+                : "Cambia tu plan y disfruta de mejores características"}
+            </span>
 
             <span>Puedes cambiar o cancelar tu plan en cualquier momento</span>
           </div>
