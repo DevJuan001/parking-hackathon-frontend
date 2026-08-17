@@ -12,7 +12,6 @@ export function useUpdateParkingInfo(parkingInfo) {
   const { validate, getChanges, fieldError, clearError } = useFormValidation();
   const form = {
     name: edits.name ?? parkingInfo?.name ?? "",
-    country_id: edits.country_id ?? parkingInfo?.country_id ?? "",
     address: edits.address ?? parkingInfo?.address ?? "",
     start_day: edits.start_day ?? parkingInfo?.start_day ?? "",
     start_time: edits.start_time ?? parkingInfo?.start_time ?? "",
