@@ -1,6 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
+import "@components/ui/Icon";
+import "@/globals/styles/index.css";
+import "@/globals/hooks/useFlipModal";
 import AppRouter from "@/router/AppRouter";
 import { useTheme } from "@hooks/useTheme";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   useTheme();

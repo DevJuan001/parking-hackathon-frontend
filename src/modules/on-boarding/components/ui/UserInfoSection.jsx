@@ -33,32 +33,35 @@ export default function UserInfoSection({
 
       <form className="w-full flex flex-col gap-2">
         <FormField
-          labelText={"Nombre *"}
-          placeholder={"Escribe tu nombre aquí"}
+          id="name"
           name="name"
-          autoComplete="name"
           value={form.name}
+          autoComplete="name"
+          labelText={"Nombre *"}
           onChange={handleChange}
           className={fieldError("name")}
+          placeholder={"Escribe tu nombre aquí"}
         />
 
         <FormField
-          labelText={"Primer apellido *"}
-          placeholder={"Escribe tu apellido aqui"}
+          id="first_surname"
           name="first_surname"
-          value={form.first_surname}
           onChange={handleChange}
+          value={form.first_surname}
           autoComplete="family-name"
+          labelText={"Primer apellido *"}
           className={fieldError("first_surname")}
+          placeholder={"Escribe tu apellido aqui"}
         />
 
         <FormField
-          labelText={"Segundo apellido"}
-          placeholder={"Opcional"}
+          id="second_surname"
           name="second_surname"
-          value={form.second_surname}
+          placeholder={"Opcional"}
           onChange={handleChange}
           autoComplete="family-name"
+          value={form.second_surname}
+          labelText={"Segundo apellido"}
           className={fieldError("second_surname")}
         />
 

@@ -61,7 +61,6 @@ export function useUpdateCurrentUserInfo(user) {
         "Verfica que todos los campos esten completos y que el correo electronico es el correcto",
       );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }

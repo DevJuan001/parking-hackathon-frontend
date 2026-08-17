@@ -51,7 +51,7 @@ export const modals = {
   },
 
   search: {
-    styles: `h-18 w-[350px] border-2 border-[#E4E2E5] rounded-2xl`,
+    styles: `h-18 w-[350px] border-2 border-[#E4E2E5] rounded-3xl`,
     growDirection: "left",
   },
 
@@ -65,8 +65,8 @@ export const modals = {
   },
 
   user: {
-    styles: `p-3 w-screen h-screen
-    md:w-[750px] md:h-[calc(100vh-30%)] md:rounded-[32px]`,
+    styles: `w-screen h-screen
+    md:w-[800px] md:h-[calc(100vh-20%)] md:rounded-[40px]`,
     location: "center",
   },
 
@@ -109,7 +109,7 @@ export const modals = {
   },
 
   plans: {
-    styles: `w-screen h-screen`
+    styles: `w-screen h-screen p-7`
   },
 
   default: {

@@ -7,6 +7,7 @@ export default function NavItem({
   name,
   icon,
   showName,
+  disableText,
   onClick,
 }) {
   return (
@@ -35,13 +36,14 @@ export default function NavItem({
               isActive
                 ? `dark:fill-black`
                 : `text-[#75777eb7]
-                group-hover:text-black group-hover:[--icon-weight:500] dark:group-hover:text-white`
+                group-hover:text-black group-hover:[--icon-weight:500]
+                dark:group-hover:text-white`
             }`}
           />
 
           <div
-            className={`hidden text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
-            md:block
+            className={`text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
+            ${disableText ? "hidden": "inline-block"}
             ${
               showName
                 ? `max-w-50 opacity-100`
@@ -51,15 +53,12 @@ export default function NavItem({
             ${
               isActive
                 ? `font-semibold max-w-50 opacity-100`
-                : `group-hover:text-black
+                : `font-medium
+                group-hover:text-black
                 dark:group-hover:text-white`
             }`}
           >
-            <span
-              className={`inline-block text-nowrap whitespace-nowrap origin-left`}
-            >
-              {name}
-            </span>
+            <span className="text-nowrap">{name}</span>
           </div>
         </div>
       )}

@@ -50,10 +50,7 @@ export default function CalendarPage() {
   }, [year, month, fetchByMonth]);
 
   return (
-    <main
-      className="w-full h-[87.5%] flex flex-col gap-2
-      md:h-[91.8%]"
-    >
+    <main className="w-full h-full flex flex-col gap-2">
       <TopSection
         text={
           activeCalendarLayout === "monthLayout"

@@ -13,17 +13,17 @@ export default function ParkingNameSection({
       className="h-full w-full flex flex-col items-center justify-center p-4 gap-5 animate-blur-down
       lg:w-5xl"
     >
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center gap-1.5">
         <span
           className="text-sm text-nowrap font-medium text-[#75777e]
           lg:text-xl
           dark:text-[#7E8088]"
         >
-          Ahora configuremos la información de tu parqueadero.
+          Ahora cuéntanos un poco sobre tu parqueadero.
         </span>
 
         <span
-          className="text-[25px] font-semibold tracking-tighter
+          className="text-center text-4xl font-semibold tracking-tighter
           lg:text-5xl lg:tracking-normal
           dark:text-[#E4E2E5]"
         >
@@ -37,11 +37,12 @@ export default function ParkingNameSection({
         md:w-lg"
       >
         <FormField
-          name={"parking_name"}
-          labelText={"Nombre *"}
-          placeholder={"Escribe el nombre aquí"}
-          value={form.parking_name}
+          id="parking_name"
+          name="parking_name"
+          labelText="Nombre *"
           onChange={handleChange}
+          value={form.parking_name}
+          placeholder={"Escribe el nombre aquí"}
           className={fieldError("parking_name")}
         />
 

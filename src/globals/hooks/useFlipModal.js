@@ -168,15 +168,15 @@ function createPhantom(element, rect, targetEl = null) {
 
 /**
  * Anima un phantom desde su rect actual hasta un rect destino, interpolando
- * ADEMÁS el borderRadius y, opcionalmente, el fontSize desde el valor del
- * source hasta el del target. Animar fontSize (en lugar de transform: scale)
- * hace que el texto CREZCA de forma nativa — el browser re-rasteriza en
- * cada frame, evitando el blur que produce scale.
+ * posición, tamaño, borderRadius, fontSize y color. El box se anima con
+ * top/left/width/height (un único cambio de layout por frame) y el
+ * borderRadius con la propiedad nativa (paint por frame). Es el approach
+ * original del repo: prioriza visual fidelity sobre GPU-compositing.
  *
- * El roundProps redondea el fontSize a enteros en cada frame para que el
- * text rendering no fluctúe en valores subpixel (eso causa el "temblor"
- * que se ve en textos de una sola palabra). El crecimiento se ve en pasos
- * de 1px que son imperceptibles a 60fps.
+ * Cost por frame por shared element: 4 layouts (top/left/w/h) + 1 paint
+ * (borderRadius) + 1 layout (fontSize) + 1 paint (color) ≈ 7 ops. Para
+ * 1-2 shared elements por modal es aceptable en iPhone moderno; en devices
+ * muy débiles se puede sumar prefers-reduced-motion como fallback.
  *
  * Usa MODAL_OPEN_EASE (la misma curva que el FLIP de apertura) para que el
  * deslizamiento vaya al mismo ritmo que la apertura del modal.
@@ -331,9 +331,9 @@ export const useFlipModal = ({
       // con animaciones anteriores que no hayan terminado (ej: re-apertura rápida).
       gsap.killTweensOf([modal, content, element, overlay]);
 
-      // Activamos aceleración por GPU en ambos elementos para suavizar la animación.
+      // Activamos aceleración por GPU solo en el modal. El `content` solo hace
+      // scroll, no se transforma, así que promoverlo a capa GPU es desperdicio
       gsap.set(modal, { force3D: true, willChange: "transform" });
-      gsap.set(content, { force3D: true });
 
       // Medimos el tamaño final real del modal en su estado expandido.
       // Es importante hacerlo ANTES de modificar cualquier estilo para obtener valores correctos.
@@ -379,10 +379,12 @@ export const useFlipModal = ({
         return closestModal === modal;
       });
 
-      // FLIP — paso "First": capturamos el estado actual del trigger (posición, tamaño,
-      // borderRadius, colores). Este será el punto de inicio de la animación.
+      // FLIP — paso "First": capturamos el estado actual del trigger (posición,
+      // tamaño, colores, padding). borderRadius se interpola vía clip-path en
+      // un tween separado (ver más abajo), no por FLIP, así que no lo
+      // incluimos en props.
       const state = Flip.getState([element, ...triggerShared], {
-        props: "borderRadius,backgroundColor,color,padding",
+        props: "backgroundColor,color,padding",
       });
 
       // Ocultamos el trigger mientras el modal está visible para que no se vea doble.
@@ -503,7 +505,8 @@ export const useFlipModal = ({
         height: fullHeight,
         margin: 0,
         backgroundColor: window.getComputedStyle(element).backgroundColor,
-        borderRadius: finalBorderRadius,
+        // clip-path en lugar de borderRadius: GPU-compositable, sin paint.
+        clipPath: `inset(0 round ${finalBorderRadius})`,
         overflow: "hidden",
         clearProps: "transform,x,y,scale,xPercent,yPercent",
       });
@@ -521,8 +524,10 @@ export const useFlipModal = ({
         const targetRect = pair.target.getBoundingClientRect();
         const fromBR = radiusAsFourCorners(pair.source);
         const toBR = radiusAsFourCorners(pair.target);
-        // Font-size del source y del target para interpolarlo durante el
-        // vuelo. Solo aplicable a texto/iconos (no a imágenes).
+        // Font-size: animamos para que el texto crezca nativo (re-raster en
+        // cada frame) en paralelo al transform: scale del phantom. Sin esto,
+        // el transform escala el texto y queda borroso durante el vuelo.
+        // Solo aplicable a texto (no img).
         const isImage = pair.source.tagName === "IMG";
         const fromFontSize = isImage
           ? null
@@ -530,8 +535,8 @@ export const useFlipModal = ({
         const toFontSize = isImage
           ? null
           : window.getComputedStyle(pair.target).fontSize;
-        // Color del texto: idem, interpolamos el del source al del target
-        // para que la transición de color sea gradual y no salte al final.
+        // Color del texto: interpolamos del source al target para que la
+        // transición de color sea gradual. Solo aplicable a texto (no img).
         const fromColor = isImage
           ? null
           : window.getComputedStyle(pair.source).color;
@@ -556,12 +561,13 @@ export const useFlipModal = ({
         pair.target.style.setProperty("opacity", "0", "important");
 
         // Animamos el phantom desde la posición/forma/tamaño del source hasta
-        // los del target. El borderRadius, el fontSize y el color se interpolan
-        // para que el elemento vaya tomando poco a poco la forma, tamaño y
-        // estilo del destino mientras se desliza, evitando el brinco al hacer
-        // el swap. Usamos la MISMA duración y la MISMA curva (MODAL_OPEN_EASE)
-        // que el FLIP de apertura del modal, así el deslizamiento va al mismo
-        // ritmo que la apertura y no se siente rezagado/lento.
+        // los del target. Animamos top/left/width/height (box) + borderRadius
+        // + fontSize + color en paralelo para que el box crezca y el texto
+        // se re-rasterice nativamente en cada frame (crisp, sin blur). Costo
+        // por frame: 1 layout (box) + 1 paint (borderRadius) + 1 layout
+        // (fontSize) + 1 paint (color). Usamos la MISMA duración y la MISMA
+        // curva (MODAL_OPEN_EASE) que el FLIP de apertura del modal, así el
+        // deslizamiento va al mismo ritmo que la apertura.
         animatePhantom(phantom, sourceRect, targetRect, fromBR, toBR, {
           duration: MODAL_OPEN_DURATION,
           ease: MODAL_OPEN_EASE,
@@ -707,10 +713,15 @@ export const useFlipModal = ({
       // que también la anima con un tween propio. Usamos sine.in para que
       // el borde empiece a cambiar pronto en el vuelo y se asiente antes
       // de terminar, sin el delay marcado de power2.in.
+      // clip-path con round() en vez de borderRadius: GPU-compositable.
       tl.fromTo(
         modal,
-        { borderRadius: triggerBorderRadius },
-        { borderRadius: finalBorderRadius, duration: 0.3, ease: "sine.in" },
+        { clipPath: `inset(0 round ${triggerBorderRadius})` },
+        {
+          clipPath: `inset(0 round ${finalBorderRadius})`,
+          duration: 0.3,
+          ease: "sine.in",
+        },
         0,
       );
 
@@ -951,21 +962,14 @@ export const useFlipModal = ({
         margin: 0,
       });
 
-      // Reactivamos aceleración GPU para la animación de cierre
+      // Reactivamos aceleración GPU solo en el modal para la animación de cierre.
       gsap.set(modal, { force3D: true, willChange: "transform" });
-      gsap.set(content, { force3D: true });
 
       // Ahora que calculamos las posiciones finales del trigger, animamos los phantoms de vuelta.
-      // El borderRadius y el fontSize se interpolan desde los valores del
-      // target (modal) hasta los del source (trigger) para que el elemento
-      // vaya recuperando su forma y tamaño original mientras se desliza.
-      for (const {
-        phantom,
-        pair,
-        fromBR,
-        fromFontSize,
-        fromColor,
-      } of closePhantoms) {
+      // Animamos top/left/width/height (box) + borderRadius + fontSize + color
+      // en paralelo para que el box se encoja y el texto se re-rasterice
+      // nativamente en cada frame (crisp, sin blur).
+      for (const { phantom, pair, fromBR, fromFontSize, fromColor } of closePhantoms) {
         const currentRect = {
           top: parseFloat(phantom.style.top),
           left: parseFloat(phantom.style.left),
@@ -1171,11 +1175,12 @@ export const useFlipModal = ({
         0.1,
       );
 
-      // Ajustamos el borderRadius gradualmente para que al final coincida con el del trigger
+      // Ajustamos el borderRadius gradualmente para que al final coincida con el del trigger.
+      // clip-path en vez de borderRadius: GPU-compositable, sin paint.
       tl.to(
         modal,
         {
-          borderRadius: triggerStyles.borderRadius,
+          clipPath: `inset(0 round ${triggerStyles.borderRadius})`,
           duration: 0.26,
           ease: "power2.inOut",
         },

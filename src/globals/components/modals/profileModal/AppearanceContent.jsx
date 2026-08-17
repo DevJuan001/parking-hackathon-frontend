@@ -9,7 +9,8 @@ export default function AppearanceContent() {
 
   return (
     <section
-      className="h-full w-full flex flex-col pb-10 gap-2 font-dmsans animate-blur-up
+      className="h-full w-full flex flex-col p-2 pb-10 gap-2 font-dmsans animate-blur-up
+      md:p-3
       dark:text-[#E2E4E5]"
     >
       {/* Opciones de apariencia */}
@@ -34,7 +35,7 @@ export default function AppearanceContent() {
           {/* Sistema */}
           <button
             onClick={() => setTheme("system")}
-            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl bg-[#FBF9FC]
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             `}
@@ -63,7 +64,7 @@ export default function AppearanceContent() {
           {/* Claro */}
           <button
             onClick={() => setTheme("light")}
-            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl bg-[#FBF9FC]
             focus-within:shadow-[0_0_3px_2px_#e5e7eb]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}
@@ -82,7 +83,7 @@ export default function AppearanceContent() {
           {/* Oscuro */}
           <button
             onClick={() => setTheme("dark")}
-            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl
+            className={`w-full h-full flex flex-col items-start justify-between gap-2 py-2.5 pl-3 border border-[#e5e7eb] rounded-2xl bg-[#FBF9FC]
             dark:focus-within:shadow-[0_0_3px_3px_#28282b]
             dark:bg-[#2020226c] dark:border-[#202022]
             `}

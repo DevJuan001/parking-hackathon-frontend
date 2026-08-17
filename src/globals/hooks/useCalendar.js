@@ -1,17 +1,9 @@
 import { useState } from "react";
 import { months } from "@utils/months";
+import { dayNames } from "@utils/timeUtils";
 
 export function useCalendar(value, onChange) {
   const today = new Date();
-  const dayNames = [
-    "Domingo",
-    "Lunes",
-    "Martes",
-    "Miércoles",
-    "Jueves",
-    "Viernes",
-    "Sábado",
-  ];
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
   function getInitialCurrent() {

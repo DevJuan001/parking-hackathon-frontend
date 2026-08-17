@@ -15,7 +15,7 @@ export default function SelectMenuContent({
 }) {
   return (
     <div
-      className="w-full h-fit max-h-96 flex flex-col gap-1 px-1 py-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
+      className="w-full h-fit max-h-100 flex flex-col gap-1 px-1 py-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
       dark:bg-black dark:text-white"
     >
       {searchable && (
