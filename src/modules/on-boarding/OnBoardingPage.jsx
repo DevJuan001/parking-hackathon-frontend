@@ -6,6 +6,7 @@ import { useOnboardingSections } from "@/modules/on-boarding/hooks/useOnboarding
 import ProgressBar from "@/modules/on-boarding/components/ui/ProgressBar";
 import UserInfoSection from "@/modules/on-boarding/components/ui/UserInfoSection";
 import ParkingNameSection from "@/modules/on-boarding/components/ui/ParkingNameSection";
+import ParkingScheduleInfo from "@/modules/on-boarding/components/ui/ParkingScheduleInfo";
 import ParkingLocationSection from "@/modules/on-boarding/components/ui/ParkingLocationSection";
 
 export default function OnBoardingPage() {
@@ -30,35 +31,49 @@ export default function OnBoardingPage() {
       {activeSection === "userInfo" && (
         <UserInfoSection
           form={form}
-          handleChange={handleChange}
           fieldError={fieldError}
-          continueButtonOnClick={handleContinue("userInfo", "parkingName", 66)}
+          handleChange={handleChange}
+          continueButtonOnClick={handleContinue("userInfo", "parkingName", 50)}
         />
       )}
 
       {activeSection === "parkingName" && (
         <ParkingNameSection
           form={form}
-          handleChange={handleChange}
           fieldError={fieldError}
+          handleChange={handleChange}
           continueButtonOnClick={handleContinue(
             "parkingName",
             "parkingLocation",
-            100,
+            75,
           )}
-          returnButtonOnClick={handleReturn("userInfo", 33)}
+          returnButtonOnClick={handleReturn("userInfo", 25)}
         />
       )}
 
       {activeSection === "parkingLocation" && (
         <ParkingLocationSection
           form={form}
-          loading={loading}
-          error={error}
-          handleChange={handleChange}
           fieldError={fieldError}
+          handleChange={handleChange}
+          continueButtonOnClick={handleContinue(
+            "parkingLocation",
+            "parkingSchedule",
+            100,
+          )}
+          returnButtonOnClick={handleReturn("parkingName", 50)}
+        />
+      )}
+
+      {activeSection === "parkingSchedule" && (
+        <ParkingScheduleInfo
+          form={form}
+          error={error}
+          loading={loading}
+          fieldError={fieldError}
+          handleChange={handleChange}
           handleSubmit={handleSubmit}
-          returnButtonOnClick={handleReturn("parkingName", 66)}
+          returnButtonOnClick={handleReturn("parkingLocation", 75)}
         />
       )}
     </section>
