@@ -32,7 +32,12 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
 
         <div className="flex flex-col items-center gap-10 font-dmsans">
           <div className="flex flex-col items-center gap-2">
-            <Icon name={"local_florist"} size={64} />
+            <Icon
+              name={"local_florist"}
+              size={64}
+              className="text-[#1B1B1E]
+              dark:text-white"
+            />
 
             <h1
               className="text-2xl font-semibold
