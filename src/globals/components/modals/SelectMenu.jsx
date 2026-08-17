@@ -40,7 +40,7 @@ export default function SelectMenu({
     : allOptions;
 
   return (
-    <section
+    <div
       className={`relative flex flex-col gap-1
       ${miniVersion ? "w-36" : disabled ? "opacity-50" : "w-full"}
       `}
@@ -64,17 +64,24 @@ export default function SelectMenu({
         >
           {spanText && (
             <div className="absolute top-2 left-3 px-1">
-              <span className="text-xs bg-[#FBF9FC] text-[#7E777E] dark:bg-black dark:text-[#7E8088]">
+              <span
+                className="text-xs bg-[#FBF9FC] text-[#7E777E]
+                dark:bg-black dark:text-[#7E8088]"
+              >
                 {spanText}
               </span>
             </div>
           )}
 
           <div
-            className={`w-full flex pl-4 ${spanText ? "pt-3" : "pt-0"} dark:text-[#E4E2E5]`}
+            className={`w-full flex pl-4
+            ${spanText ? "pt-3" : "pt-0"} 
+            dark:text-[#E4E2E5]`}
           >
             <div
-              className={`w-full flex items-center ${miniVersion ? "text-sm" : "text-base"}`}
+              className={`w-full flex items-center
+              ${miniVersion ? "text-sm" : "text-base"}
+              `}
             >
               {allOptions.find((opt) => {
                 if (opt.value !== "" && !isNaN(opt.value)) {
@@ -85,7 +92,11 @@ export default function SelectMenu({
             </div>
           </div>
 
-          <Icon name={"arrow_drop_down"} className={`dark:text-[#7e8088]`} />
+          <Icon
+            name={"arrow_drop_down"}
+            className={`text-black
+            dark:text-[#7e8088]`}
+          />
         </button>
 
         {seeAddButton && (
@@ -96,7 +107,8 @@ export default function SelectMenu({
               if (addIconFunction) addIconFunction(e);
             }}
             type="button"
-            className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
+            className={`h-16 flex items-center justify-center px-5 border border-[#E4E2E5] rounded-2xl bg-[#FBF9FC] transition-colors duration-200
+            active:animate-click-effect
             hover:bg-gray-200 hover:cursor-pointer
             dark:bg-black dark:border-[#1e1e20cb] dark:hover:bg-[#28282bbd]`}
           >
@@ -132,6 +144,6 @@ export default function SelectMenu({
           />
         </Modal>
       )}
-    </section>
+    </div>
   );
 }
