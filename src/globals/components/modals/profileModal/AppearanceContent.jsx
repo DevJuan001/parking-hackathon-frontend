@@ -9,7 +9,8 @@ export default function AppearanceContent() {
 
   return (
     <section
-      className="h-full w-full flex flex-col pb-10 gap-2 font-dmsans animate-blur-up
+      className="h-full w-full flex flex-col p-2 pb-10 gap-2 font-dmsans animate-blur-up
+      md:p-3
       dark:text-[#E2E4E5]"
     >
       {/* Opciones de apariencia */}
