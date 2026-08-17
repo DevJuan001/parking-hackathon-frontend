@@ -17,8 +17,8 @@ export default function SubscriptionContent() {
     useInnerModal();
 
   return (
-    <div className="w-full h-full rounded-2xl">
-      <AnimatedBackground className="rounded-3xl" />
+    <div className="w-full h-full p-3 rounded-2xl">
+      <AnimatedBackground className="m-3 rounded-3xl" />
 
       <div
         className="w-full flex flex-col px-6 py-8 gap-6 text-[#1b1b1eef] font-dmsans animate-blur-up
