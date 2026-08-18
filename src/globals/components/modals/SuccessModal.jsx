@@ -1,6 +1,6 @@
 import Modal from "@modals/Modal";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 import Icon from "@components/ui/Icon";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 
 export default function SuccessModal({
   isOpen,
