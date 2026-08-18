@@ -15,6 +15,7 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
       type={"plans"}
       onClose={onClose}
       triggerRef={triggerRef}
+      styles={"w-screen h-screen p-7"}
     >
       <div className="w-full flex flex-col gap-2">
         <LiquidGlass
