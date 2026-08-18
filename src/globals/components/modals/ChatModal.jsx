@@ -33,6 +33,9 @@ export default function ChatModal({ triggerRef, onClose }) {
       isOpen={true}
       type="chat"
       triggerRef={triggerRef}
+      styles={`p-2 w-screen h-screen
+      md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
+      lg:w-[800px]`}
       location="center"
       onClose={onClose}
     >
