@@ -38,13 +38,14 @@ export default function FinancePage() {
         <Modal
           isOpen={isOpen}
           type={modalType}
-          triggerRef={triggerRef}
           onClose={closeModal}
+          triggerRef={triggerRef}
           title={modals[modalType]?.title}
+          styles={modals[modalType]?.styles}
           location={modals[modalType]?.location}
+          margin={modals[modalType]?.margin ?? 5}
           disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
-          margin={5}
         >
           {modalType === "export" && <ExportModal />}
 
