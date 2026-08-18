@@ -1,7 +1,7 @@
 // Hooks
 import { useCalendar } from "@hooks/useCalendar";
 // Componentes
-import CalendarContent from "@/globals/components/ui/CalendarContent";
+import CalendarContent from "@components/ui/CalendarContent";
 // Modales
 import Modal from "@modals/Modal";
 
