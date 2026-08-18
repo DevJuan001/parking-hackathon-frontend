@@ -2,6 +2,8 @@
 import { useEffect } from "react";
 import { useModal } from "@hooks/useModal";
 import { useGoogleLogin } from "@hooks/useGoogleLogin";
+// Constantes
+import { modals } from "@/modules/landing/data/modals";
 // Componentes
 import Hero from "@/modules/landing/components/ui/Hero";
 import NavBar from "@/modules/landing/components/ui/Navbar";
@@ -69,9 +71,10 @@ export default function LandingPage() {
         <Modal
           isOpen={isOpen}
           type={modalType}
-          triggerRef={triggerRef}
           location="center"
           onClose={closeModal}
+          triggerRef={triggerRef}
+          styles={modals[modalType]?.styles}
         >
           {modalType === "logIn" && (
             <LoginModal
