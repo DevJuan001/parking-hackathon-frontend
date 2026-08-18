@@ -135,6 +135,7 @@ export default function TopSection({
           type={innerType}
           triggerRef={innerTrigger}
           onClose={closeInnerModal}
+          styles={"w-[300px] p-1.5 rounded-4xl"}
         >
           <div className="flex flex-col gap-1">
             <button
