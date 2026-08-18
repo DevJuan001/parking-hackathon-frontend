@@ -1,15 +1,13 @@
 // Hooks
 import React, { useRef, useId } from "react";
 import { useFlipModal } from "@hooks/useFlipModal";
-// Constantes
-import { modals } from "@/globals/constants/modals";
 // Componentes
 import Icon from "@components/ui/Icon";
 import { createPortal } from "react-dom";
 
 export default function Modal({
   isOpen,
-  type,
+  styles,
   triggerRef,
   z_index = "50",
   location = "anchored",
@@ -46,8 +44,8 @@ export default function Modal({
     triggerRef,
     overlayRef,
     onClose,
-    location: modals[type]?.location || location,
-    growDirection: modals[type]?.growDirection || growDirection,
+    location: location,
+    growDirection: growDirection,
     margin,
     id: modalId,
   });
@@ -79,7 +77,11 @@ export default function Modal({
           maxHeight: "100vh",
         }}
         ref={modalRef}
-        className={`${modals[type]?.styles ?? modals.default.styles} flex flex-col bg-[#fbf9fc] font-poppins shadow-lg
+        className={`flex flex-col bg-[#fbf9fc] font-poppins shadow-lg ${
+          styles ??
+          `p-7 w-100 rounded-4xl
+          md:w-125`
+        }
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef} className="overflow-y-auto flex-1 p-0.5">
@@ -89,7 +91,7 @@ export default function Modal({
                 className="min-w-56 font-medium text-lg
                 dark:text-[#e4e2e5]"
               >
-                {modals[type]?.title || title}
+                {title}
               </span>
 
               <button
