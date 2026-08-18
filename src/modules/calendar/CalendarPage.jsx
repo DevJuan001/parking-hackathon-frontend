@@ -105,8 +105,9 @@ export default function CalendarPage() {
           onClose={closeModal}
           triggerRef={triggerRef}
           title={modals[modalType]?.title}
-          margin={modals[modalType]?.margin ?? 0}
+          styles={modals[modalType]?.styles}
           location={modals[modalType]?.location}
+          margin={modals[modalType]?.margin ?? 0}
           disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
         >
