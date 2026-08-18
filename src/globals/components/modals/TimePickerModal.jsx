@@ -1,7 +1,7 @@
 // Hooks
 import { useTimePicker } from "@hooks/useTimePicker";
 // Utils
-import { HOUR_NUMBERS, MINUTE_NUMBERS, padZero } from "@/utils/timeUtils";
+import { HOUR_NUMBERS, MINUTE_NUMBERS, padZero } from "@utils/timeUtils";
 // Modales
 import Modal from "@modals/Modal";
 
@@ -43,6 +43,7 @@ export default function TimePickerModal({
       type={"timePicker"}
       triggerRef={triggerRef}
       growDirection={growDirection}
+      styles={`p-7 w-[400px] rounded-4xl`}
     >
       <div className="flex flex-col items-center gap-5 font-dmsans">
         <div className="flex items-center justify-center gap-2 text-[44px] font-medium">
