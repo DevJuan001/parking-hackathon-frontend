@@ -20,14 +20,15 @@ export default function HomePage() {
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={modals[modalType]?.title}
           type={modalType}
-          onClose={closeModal}
           location="anchored"
+          onClose={closeModal}
           growDirection="center"
           triggerRef={triggerRef}
+          title={modals[modalType]?.title}
+          styles={modals[modalType]?.styles}
+          margin={modals[modalType]?.margin ?? 0}
           disableHeader={modals[modalType]?.disableHeader}
-          margin={0}
         >
           {modalType === "editSpot" && (
             <EditSpotModal onClose={closeModal} spot={modalData} />
