@@ -1,12 +1,14 @@
 // Hooks
-import { useRef, useEffect } from "react";
 import { useChat } from "@hooks/useChat";
+import { useRef, useEffect } from "react";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import LiquidGlass from "@components/ui/LiquidGlass";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
 // Modales
 import Modal from "@modals/Modal";
+import DeleteChatModal from "@modals/DeleteChatModal";
 import MarkdownConverter from "@components/ui/MarkdownConverter";
 
 export default function ChatModal({ triggerRef, onClose }) {
@@ -19,6 +21,8 @@ export default function ChatModal({ triggerRef, onClose }) {
     handleKeyDown,
   } = useChat();
   const chatRef = useRef(null);
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   useEffect(() => {
     chatRef.current?.scrollTo({
@@ -39,13 +43,14 @@ export default function ChatModal({ triggerRef, onClose }) {
       md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
       lg:w-[800px]`}
     >
-      <AnimatedBackground className="rounded-[40px]" />
+      <AnimatedBackground className="m-2 rounded-[45px]" />
 
       <div className="relative w-full h-full rounded-[50px] overflow-hidden">
         <div className="absolute flex items-center gap-1 m-3 z-50">
           <LiquidGlass
             onClick={onClose}
             className="w-10 h-10 flex items-center justify-center rounded-full
+            active:animate-click-effect
             hover:bg-[#49454f21] hover:cursor-pointer"
           >
             <Icon
@@ -57,8 +62,9 @@ export default function ChatModal({ triggerRef, onClose }) {
           </LiquidGlass>
 
           <LiquidGlass
-            onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center rounded-full
+            onClick={(e) => openInnerModal("deleteChat", e)}
+            className="w-10 h-10 flex items-center justify-center rounded-4xl
+            active:animate-click-effect
             hover:bg-[#49454f21] hover:cursor-pointer"
           >
             <Icon
@@ -145,6 +151,10 @@ export default function ChatModal({ triggerRef, onClose }) {
           </LiquidGlass>
         </form>
       </div>
+
+      {innerType === "deleteChat" && (
+        <DeleteChatModal triggerRef={innerTrigger} onClose={closeInnerModal} />
+      )}
     </Modal>
   );
 }
