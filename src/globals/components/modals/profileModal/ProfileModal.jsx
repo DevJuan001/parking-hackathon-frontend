@@ -27,10 +27,12 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
       disableHeader
       isOpen={true}
       type={"user"}
-      title={"Configuración"}
       location="center"
-      triggerRef={triggerRef}
       onClose={onCloseModal}
+      title={"Configuración"}
+      triggerRef={triggerRef}
+      styles={`w-screen h-screen
+      md:w-[800px] md:h-[calc(100vh-20%)] md:rounded-[40px]`}
     >
       <section
         className="relative h-full flex flex-col-reverse items-center justify-between gap-3

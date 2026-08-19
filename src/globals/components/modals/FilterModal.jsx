@@ -1,7 +1,7 @@
 import Icon from "@components/ui/Icon";
 import DateField from "@components/ui/DateField";
-import LiquidGlass from "../ui/LiquidGlass";
-import ConfirmCancelButtons from "./ConfirmCancelButtons";
+import LiquidGlass from "@components/ui/LiquidGlass";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 
 export default function FilterModal({
   applyButtonOnClick,

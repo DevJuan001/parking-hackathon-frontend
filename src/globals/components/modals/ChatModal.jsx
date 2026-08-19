@@ -29,12 +29,15 @@ export default function ChatModal({ triggerRef, onClose }) {
 
   return (
     <Modal
+      type="chat"
       disableHeader
       isOpen={true}
-      type="chat"
-      triggerRef={triggerRef}
       location="center"
       onClose={onClose}
+      triggerRef={triggerRef}
+      styles={`p-2 w-screen h-screen
+      md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
+      lg:w-[800px]`}
     >
       <AnimatedBackground className="rounded-[40px]" />
 
@@ -112,8 +115,8 @@ export default function ChatModal({ triggerRef, onClose }) {
             name="message"
             value={chatInfo.message}
             onChange={handleChange}
-            onKeyDown={isPending ? null : handleKeyDown}
             placeholder="Escribe un mensaje..."
+            onKeyDown={isPending ? null : handleKeyDown}
             className="h-full w-full p-3 text-2xl outline-0 resize-none
             dark:text-[#E4E2E5]"
           />

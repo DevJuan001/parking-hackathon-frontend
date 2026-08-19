@@ -1,6 +1,6 @@
 import Modal from "@modals/Modal";
-import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 import Icon from "@components/ui/Icon";
+import ConfirmCancelButtons from "@modals/ConfirmCancelButtons";
 
 export default function ErrorModal({
   triggerRef,
@@ -24,11 +24,17 @@ export default function ErrorModal({
       growDirection={growDirection}
     >
       <section className="flex flex-col items-center gap-1 animate-blur-up">
-        <div className="w-20 h-20 flex items-center justify-center bg-red-200 rounded-full dark:bg-red-950">
+        <div
+          className="w-20 h-20 flex items-center justify-center bg-red-200 rounded-full
+          dark:bg-red-950"
+        >
           <Icon name={"close"} size={40} color={"#dc2626"} />
         </div>
 
-        <section className="flex flex-col items-center text-center gap-2 dark:text-white">
+        <section
+          className="flex flex-col items-center text-center gap-2
+          dark:text-white"
+        >
           <span className="text-lg font-medium">{errorTitle}</span>
 
           <span className="text-sm">{errorText}</span>

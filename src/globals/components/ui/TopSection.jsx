@@ -70,10 +70,11 @@ export default function TopSection({
         <Modal
           disableHeader
           isOpen={true}
-          triggerRef={innerTrigger}
           type={innerType}
-          onClose={closeInnerModal}
           growDirection="left"
+          onClose={closeInnerModal}
+          triggerRef={innerTrigger}
+          styles={"w-[300px] p-1.5 rounded-4xl"}
         >
           <div className="flex flex-col gap-1">
             {createButtonOnClick && (

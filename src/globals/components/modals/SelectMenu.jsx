@@ -129,6 +129,8 @@ export default function SelectMenu({
           }}
           triggerRef={innerTrigger}
           growDirection={growDirection}
+          styles={`p-1 w-[350px] h-auto rounded-4xl
+          md:w-[400px]`}
         >
           <SelectMenuContent
             id={id}

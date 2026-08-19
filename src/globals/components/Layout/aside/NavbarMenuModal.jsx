@@ -18,10 +18,11 @@ export default function NavbarMenuModal({ isOpen, triggerRef, onClose }) {
   return (
     <Modal
       disableHeader
-      isOpen={isOpen}
       type={"menu"}
+      isOpen={isOpen}
       onClose={onClose}
       triggerRef={triggerRef}
+      styles={`p-2 max-w-[280px] h-auto rounded-[40px]`}
     >
       <AvatarButton avatarOnClick={(e) => openInnerModal("user", e)} />
 

@@ -1,5 +1,5 @@
 import Icon from "@components/ui/Icon";
-import LiquidGlass from "../ui/LiquidGlass";
+import LiquidGlass from "@components/ui/LiquidGlass";
 
 export default function ModalHighSection({
   deleteButtonOnClick,

@@ -1,8 +1,10 @@
 export const modals = {
   editSpot: {
     title: "Editar Plaza",
-    growDirection: "center",
     disableHeader: true,
+    growDirection: "center",
+    styles: `p-4 w-screen h-screen
+    md:w-[380px] md:h-auto md:rounded-4xl`,
   },
 
   createSpot: { title: "Agregar Plaza", growDirection: "center" },
@@ -11,14 +13,22 @@ export const modals = {
     title: "Editar Piso",
     growDirection: "center",
     disableHeader: true,
+    styles: `p-4 w-screen h-screen
+    md:w-[380px] md:h-auto md:rounded-4xl`,
   },
 
-  createFloor: { title: "Agregar Piso" },
+  createFloor: {
+    title: "Agregar Piso",
+    styles: `p-7 w-[350px] h-auto rounded-4xl
+    md:w-[450px]`,
+  },
 
   editTariff: {
     title: "Editar Tarifa",
-    growDirection: "center",
     disableHeader: true,
+    growDirection: "center",
+    styles: `p-4 w-screen h-screen
+    md:w-[380px] md:h-auto md:rounded-4xl`,
   },
 
   createTariff: { title: "Agregar Tarifa", growDirection: "center" },

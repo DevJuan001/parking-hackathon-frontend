@@ -1,7 +1,7 @@
 // Hooks
 import { useCalendar } from "@hooks/useCalendar";
 // Componentes
-import CalendarContent from "@/globals/components/ui/CalendarContent";
+import CalendarContent from "@components/ui/CalendarContent";
 // Modales
 import Modal from "@modals/Modal";
 
@@ -28,11 +28,13 @@ export default function Calendar({
     <Modal
       disableHeader
       isOpen={true}
-      triggerRef={triggerRef}
-      onClose={onClose}
-      type="calendar"
       z_index="250"
+      type="calendar"
+      onClose={onClose}
+      triggerRef={triggerRef}
       growDirection={growDirection}
+      styles={`w-[365px] h-auto rounded-4xl
+      md:w-[400px]`}
     >
       <CalendarContent
         year={year}

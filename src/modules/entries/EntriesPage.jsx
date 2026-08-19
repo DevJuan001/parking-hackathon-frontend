@@ -53,11 +53,13 @@ export default function EntriesPage() {
       {modalType && (
         <Modal
           isOpen={isOpen}
-          title={modals[modalType]?.title}
           type={modalType}
           onClose={closeModal}
           triggerRef={triggerRef}
+          title={modals[modalType]?.title}
+          styles={modals[modalType]?.styles}
           location={modals[modalType]?.location}
+          margin={modals[modalType]?.margin ?? 5}
           disableHeader={modals[modalType]?.disableHeader}
         >
           {modalType === "createEntry" && (

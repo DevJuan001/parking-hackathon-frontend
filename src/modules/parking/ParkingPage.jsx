@@ -25,13 +25,14 @@ export default function ParkingPage() {
         <Modal
           isOpen={isOpen}
           type={modalType}
-          title={modals[modalType]?.title}
-          onClose={closeModal}
           location="anchored"
+          onClose={closeModal}
+          triggerRef={triggerRef}
+          title={modals[modalType]?.title}
+          styles={modals[modalType]?.styles}
+          margin={modals[modalType]?.margin ?? 0}
           disableHeader={modals[modalType]?.disableHeader}
           growDirection={modals[modalType]?.growDirection}
-          triggerRef={triggerRef}
-          margin={0}
         >
           {modalType === "editSpot" && (
             <EditSpotModal onClose={closeModal} spot={modalData} />
