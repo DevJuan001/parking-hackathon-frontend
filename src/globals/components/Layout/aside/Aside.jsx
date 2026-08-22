@@ -21,7 +21,8 @@ export default function Aside() {
 
       <button
         onClick={(e) => openInnerModal("chat", e)}
-        className="flex items-center justify-center p-3 rounded-2xl border border-[#E4E2E5]
+        className="hidden items-center justify-center p-3 rounded-2xl border border-[#E4E2E5]
+        md:flex
         hover:bg-[#F5F3F6]
         dark:border-[#202022] dark:hover:bg-[#101012]"
       >
