@@ -20,7 +20,7 @@
         "./src/utils/*"
       ],
       "@constants/*": [
-        "./src/constants/*"
+        "./src/globals/constants/*"
       ],
     },
     "jsx": "preserve",
