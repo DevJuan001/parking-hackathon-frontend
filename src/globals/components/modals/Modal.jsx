@@ -18,6 +18,7 @@ export default function Modal({
   onClose,
   disableClose = false,
   disableHeader,
+  dragToClose = false,
 }) {
   const modalRef = useRef();
   const contentRef = useRef();
@@ -48,6 +49,7 @@ export default function Modal({
     growDirection: growDirection,
     margin,
     id: modalId,
+    dragToClose,
   });
 
   const enhancedChildren = React.Children.map(children, (child) => {
