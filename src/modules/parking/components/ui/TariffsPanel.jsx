@@ -16,12 +16,10 @@ export default function TariffsPanel({ openModal }) {
 
   return (
     <section
-      className="h-full w-full flex flex-col gap-2 p-6 rounded-[50px] border border-[#EBE6E7] animate-blur-up
+      className="h-full w-full flex flex-col p-6 gap-2 rounded-[50px] border border-[#EBE6E7] overflow-hidden animate-blur-up
       dark:text-white dark:border-[#202022]"
     >
-      <div className="flex items-center">
-        <span className="font-semibold">Tarifas</span>
-      </div>
+      <span className="font-semibold">Tarifas</span>
 
       {noTariffs && (
         <div className="w-full h-full flex flex-col items-center justify-center gap-4">
@@ -45,7 +43,7 @@ export default function TariffsPanel({ openModal }) {
       )}
 
       {isFirstLoad ? (
-        <div className="h-full w-full flex flex-wrap pt-4 gap-2">
+        <div className="h-full w-full flex flex-wrap pt-4 gap-2 overflow-hidden overflow-y-auto">
           <Skeleton
             count={12}
             width="128px"
@@ -59,7 +57,7 @@ export default function TariffsPanel({ openModal }) {
         </div>
       ) : (
         !noTariffs && (
-          <div className="h-full w-full flex flex-wrap gap-2 overflow-y-auto">
+          <div className="h-full w-full flex flex-wrap gap-2 overflow-hidden overflow-y-auto">
             {tariffs.map((tariff) => (
               <TariffItem
                 key={tariff.vehicle_type}
