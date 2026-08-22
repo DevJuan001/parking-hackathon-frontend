@@ -35,6 +35,7 @@ export default function ChatModal({ triggerRef, onClose }) {
     <Modal
       type="chat"
       disableHeader
+      dragToClose
       isOpen={true}
       location="center"
       onClose={onClose}
@@ -43,9 +44,15 @@ export default function ChatModal({ triggerRef, onClose }) {
       md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
       lg:w-[800px]`}
     >
-      <AnimatedBackground className="m-2 rounded-[45px]" />
+      <AnimatedBackground
+        className="m-2
+        md:rounded-[45px]"
+      />
 
-      <div className="relative w-full h-full rounded-[50px] overflow-hidden">
+      <div
+        className="relative w-full h-full overflow-hidden
+        md:rounded-[50px]"
+      >
         <div className="absolute flex items-center gap-1 m-3 z-50">
           <LiquidGlass
             onClick={onClose}
@@ -78,7 +85,8 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <div
           ref={chatRef}
-          className="absolute w-full h-[90%] flex flex-col p-2 gap-4 mt-2 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto"
+          className="absolute w-full h-[85%] flex flex-col p-2 gap-4 mt-2 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto
+          md:h-[90%]"
         >
           {messages?.map((message) => (
             <LiquidGlass
@@ -112,7 +120,8 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <form
           onSubmit={handleSubmit}
-          className="absolute bottom-0 w-full h-[10%] flex items-center px-2 py-3 font-dmsans"
+          className="absolute bottom-0 w-full h-[15%] flex items-center px-2 py-3 font-dmsans
+          md:h-[10%]"
         >
           <textarea
             autoFocus
@@ -131,9 +140,10 @@ export default function ChatModal({ triggerRef, onClose }) {
             role="button"
             disable={isPending}
             onClick={(e) => handleSubmit(e)}
-            className={`flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
+            className={`w-17.5 flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
             ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
             active:animate-click-effect
+            md:w-16
             hover:bg-[#4a484b17] 
             dark:bg-[#000000]`}
           >
