@@ -25,7 +25,7 @@ export default function AnimatedBackground({ className }) {
       <svg
         fill="currentColor"
         className="absolute inset-0 w-full h-full opacity-12
-        dark:opacity-45"
+        dark:opacity-50"
       >
         <filter id="noise">
           <feTurbulence
