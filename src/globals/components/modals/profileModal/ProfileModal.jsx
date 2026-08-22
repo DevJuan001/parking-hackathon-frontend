@@ -24,6 +24,7 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
 
   return (
     <Modal
+      dragToClose
       disableHeader
       isOpen={true}
       type={"user"}
@@ -52,14 +53,14 @@ export default function ProfileModal({ triggerRef, onCloseModal }) {
                 <li
                   key={index}
                   onClick={() => setActiveSection(item?.name)}
-                  className={`w-full flex flex-col items-center py-2.5 px-3 gap-1 rounded-full text-xs transition
+                  className={`w-full flex flex-col items-center py-2.5 gap-1 rounded-full text-xs transition-[padding,background-color] ease-in
                   hover:cursor-pointer
-                  md:flex-row md:w-full md:gap-2 md:rounded-2xl md:text-sm
+                  md:flex-row md:w-full md:px-3 md:gap-2 md:rounded-2xl md:text-sm
                   ${
                     activeSection === item?.name
-                      ? `bg-[#F5F3F6] font-medium text-[#44474e]
+                      ? `px-4 bg-[#F5F3F6] font-medium text-[#44474e]
                       dark:text-white dark:bg-[#202022] dark:hover:bg-[#28282b]`
-                      : `text-[#68676786] hover:bg-[#efedf0]
+                      : `px-3 text-[#68676786] hover:bg-[#efedf0]
                       dark:hover:bg-[#101012] dark:hover:text-[#ffffff8a]`
                   }`}
                 >
