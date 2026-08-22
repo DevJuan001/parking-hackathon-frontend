@@ -36,7 +36,7 @@ export default function NavbarMenuModal({
 
       <button
         onClick={(e) => openInnerModal("chat", e)}
-        className="w-full h-auto flex items-center py-3 pl-4 gap-2 rounded-4xl text-[#75777E] transition cursor-pointer
+        className="w-full h-auto flex items-center py-4 px-6 gap-2 rounded-4xl text-[#75777E] transition cursor-pointer
         hover:cursor-pointer
         hover:bg-[#e5e7eb96] hover:text-black
         dark:text-[#75777eb7] dark:hover:bg-[#181818] dark:hover:text-[#E4E2E5]"
