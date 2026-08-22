@@ -11,17 +11,18 @@ export default function NavItem({
   onClick,
 }) {
   return (
-    <NavLink to={path} onClick={onClick}>
+    <NavLink to={path}>
       {({ isActive }) => (
         <div
+          onClick={onClick}
           id={`${itemId}-aside-button`}
-          className={`w-auto h-14 flex items-center py-3 px-5 gap-2 subpixel-antialiased rounded-full transition-[background-color,color,box-shadow] duration-500 ease-in-out group
+          className={`w-auto h-14 flex items-center py-3 gap-2 subpixel-antialiased rounded-full transition-[padding,background-color,color,box-shadow]  ease-in group
             md:py-3 md:px-6
             ${
               isActive
-                ? `bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
+                ? `px-6 bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
               dark:bg-white dark:text-black dark:shadow-[0px_0px_18px_-11px_#ffffff]`
-                : `bg-transparent text-[#75777E]
+                : `px-5 bg-transparent text-[#75777E]
               hover:bg-[#e5e7eb96]
               dark:bg-transparent dark:text-[#75777eb7] dark:hover:bg-[#181818]`
             }`}
@@ -31,7 +32,8 @@ export default function NavItem({
             size={25}
             fill={isActive}
             animateFill
-            className={`transition-colors duration-500 ease-in-out
+            fillDuration={400}
+            className={`transition-colors duration-300 ease-in-out
             ${
               isActive
                 ? `dark:fill-black`
@@ -43,7 +45,7 @@ export default function NavItem({
 
           <div
             className={`text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
-            ${disableText ? "hidden": "inline-block"}
+            ${disableText ? "hidden" : "inline-block"}
             ${
               showName
                 ? `max-w-50 opacity-100`
