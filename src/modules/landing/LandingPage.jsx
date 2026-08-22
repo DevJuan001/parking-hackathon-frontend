@@ -69,6 +69,7 @@ export default function LandingPage() {
 
       {modalType && (
         <Modal
+          dragToClose
           isOpen={isOpen}
           type={modalType}
           location="center"
