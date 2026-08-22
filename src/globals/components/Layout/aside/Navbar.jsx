@@ -12,7 +12,10 @@ export default function Navbar({ hasRole }) {
   const { isOpen, triggerRef, modalType, openModal, closeModal } = useModal();
 
   return (
-    <section className="relative w-screen flex items-center justify-center gap-5 pb-1 pl-1 pr-2 transition-all duration-700">
+    <section
+      className="relative w-screen flex items-center justify-center gap-2 pb-1 pl-1 pr-2 transition-all duration-700
+      md:gap-5"
+    >
       <ul
         className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[0px_0px_20px_-2px_#EBE6E7] bg-white transition-all duration-500
         md:hidden
@@ -63,10 +66,11 @@ export default function Navbar({ hasRole }) {
         id="more-options-aside-button"
         onClick={(e) => openModal(null, "menu", e.currentTarget)}
         className="self-end w-auto h-16 flex flex-col items-center justify-center py-2.5 px-5 rounded-[40px] bg-black cursor-pointer group
+        active:animate-click-effect
         dark:bg-white"
       >
         <Icon
-          name={"more_horiz"}
+          name={"apps"}
           className="text-white group-hover:text-white dark:text-black dark:group-hover:text-black"
         />
       </button>
@@ -74,8 +78,9 @@ export default function Navbar({ hasRole }) {
       {modalType === "menu" && (
         <NavbarMenuModal
           isOpen={isOpen}
-          triggerRef={triggerRef}
           onClose={closeModal}
+          triggerRef={triggerRef}
+          firstSectionItems={firstSectionItems}
         />
       )}
     </section>
