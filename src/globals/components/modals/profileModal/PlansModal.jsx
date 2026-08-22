@@ -10,6 +10,7 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
   return (
     <Modal
       margin={0}
+      dragToClose
       disableHeader
       isOpen={true}
       type={"plans"}
