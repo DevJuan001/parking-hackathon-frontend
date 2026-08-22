@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Flip } from "gsap/Flip";
 import { CustomEase } from "gsap/CustomEase";
@@ -51,6 +51,36 @@ function findSharedPairs(sourceContainer, targetContainer, targetModal) {
     }
   }
   return pairs;
+}
+
+/**
+ * Encuentra el conjunto MÍNIMO de nodos que cubren todo el contenido excepto
+ * las ramas que llevan a un shared element. Walk descendente: si un hijo NO
+ * tiene ningún data-shared-id adentro, lo agrega entero y no recursa. Si SÍ
+ * tiene un shared descendiente, recursa a sus hijos para excluir solo la rama
+ * del shared.
+ *
+ * Antes se hacía content.querySelectorAll("*") y se filtraban ~40 nodos
+ * individuales para animarlos. Cada nodo animado con filter/opacity crea su
+ * propia capa de compositing, así que 40 nodos = 40 capas GPU. En devices sin
+ * GPU dedicada (o en el primer paint del sitio, cuando el compositor todavía
+ * no está caliente) esto era el mayor costo del cierre. Ahora agrupamos por
+ * ramas y bajamos a ~3-5 nodos animados.
+ */
+function collectFadeTargets(root) {
+  const targets = [];
+  const walk = (el) => {
+    for (const child of el.children) {
+      if (child.hasAttribute("data-shared-id")) continue;
+      if (child.querySelector("[data-shared-id]")) {
+        walk(child);
+      } else {
+        targets.push(child);
+      }
+    }
+  };
+  walk(root);
+  return targets;
 }
 
 /**
@@ -140,7 +170,20 @@ function createPhantom(element, rect, targetEl = null) {
     // juntas. El snap-to-final al final copia el white-space del target
     // (que puede ser "normal" con wrap) antes de revelar el real.
     whiteSpace: "nowrap",
-    willChange: "transform, width, height, top, left, border-radius, opacity",
+    // willChange mínimo: solo lo que animatePhantom cambia frame a frame.
+    // Antes teníamos 7 props declaradas (border-radius, width, height,
+    // top, left...) y cada una reservaba memoria GPU al pedo desde el
+    // primer paint del sitio.
+    willChange: "transform, opacity",
+    // text-rendering:optimizeSpeed → desactiva kerning y ligatures durante
+    // el raster del glyph. La mayor fuente de tremble en el phantom cuando
+    // el fontSize interpola frame a frame era que el browser recalculaba
+    // kerning entre glyphs con métricas ligeramente distintas → posición
+    // por-glyph cambiaba subpixel → tremble visible. Sin kerning, los
+    // glyphs se posicionan solo por advance width (más estable frame a
+    // frame). Como el phantom vive solo 0.4s durante el vuelo y se swappea
+    // al target al final, no hay pérdida de calidad tipográfica visible.
+    textRendering: "optimizeSpeed",
     fontWeight: styles.fontWeight,
     // Font del TARGET: si source y target usan fonts distintas (ej: el
     // span del botón hereda la del padre, el del modal usa font-dmsans),
@@ -167,16 +210,15 @@ function createPhantom(element, rect, targetEl = null) {
 }
 
 /**
- * Anima un phantom desde su rect actual hasta un rect destino, interpolando
- * posición, tamaño, borderRadius, fontSize y color. El box se anima con
- * top/left/width/height (un único cambio de layout por frame) y el
- * borderRadius con la propiedad nativa (paint por frame). Es el approach
- * original del repo: prioriza visual fidelity sobre GPU-compositing.
+ * Anima un phantom desde su rect actual hasta un rect destino interpolando
+ * posición, tamaño, borderRadius, fontSize y color. Preserva el aspect ratio
+ * REAL del phantom frame a frame porque anima width y height como valores
+ * independientes (no como scale uniforme), evitando el "aplastado" visible
+ * cuando source y target tienen aspect ratios distintos.
  *
  * Cost por frame por shared element: 4 layouts (top/left/w/h) + 1 paint
  * (borderRadius) + 1 layout (fontSize) + 1 paint (color) ≈ 7 ops. Para
- * 1-2 shared elements por modal es aceptable en iPhone moderno; en devices
- * muy débiles se puede sumar prefers-reduced-motion como fallback.
+ * 1-2 shared elements por modal es aceptable.
  *
  * Usa MODAL_OPEN_EASE (la misma curva que el FLIP de apertura) para que el
  * deslizamiento vaya al mismo ritmo que la apertura del modal.
@@ -200,7 +242,7 @@ function animatePhantom(
 ) {
   gsap.set(phantom, {
     force3D: true,
-    willChange: "transform,width,height,top,left,border-radius,opacity,color",
+    willChange: "transform, opacity",
   });
 
   const tl = gsap.timeline();
@@ -210,10 +252,7 @@ function animatePhantom(
   //    width/height porque cuando el recorrido del phantom es corto, el
   //    cambio de width/height por frame es < 1px y el roundProps hacía que
   //    el box se quedara atascado en el tamaño del source durante casi todo
-  //    el vuelo, saltando al tamaño del target solo al final → eso causaba
-  //    que el texto no creciera de forma smooth y se viera un tremble
-  //    cerca del destino. Con subpixel smooth en width/height, el box
-  //    crece de forma continua y el texto acompanha sin saltos.
+  //    el vuelo, saltando al tamaño del target solo al final.
   tl.fromTo(
     phantom,
     {
@@ -233,43 +272,29 @@ function animatePhantom(
       ease,
       delay,
       // Redondeo de top/left a enteros: sin esto, el browser renderiza el
-      // box en posiciones subpixel cada frame y el texto "tiembla" porque
-      // el antialiasing recalcula la posición del glyph en cada frame.
+      // box en posiciones subpixel cada frame y el texto queda con mucho
+      // jitter porque el antialiasing recalcula la posición del glyph.
       roundProps: ["top", "left"],
     },
   );
 
-  // 2) Font-size: interpolamos desde el del source hasta el del target
-  //    para que el texto/icono crezca de forma smooth y nativa. Usamos
-  //    roundProps para que el rendering no fluctúe en subpixels.
+  // 2) Font-size: interpolamos suavemente sin roundProps. El "step" de 1px
+  //    que causaba roundProps era MÁS visible que el jitter subpixel que
+  //    intentaba prevenir. En browsers modernos el subpixel raster está
+  //    bastante bien optimizado; combinado con text-rendering:optimizeSpeed
+  //    en createPhantom (que desactiva kerning por frame) queda smooth.
   if (fromFontSize && toFontSize && fromFontSize !== toFontSize) {
     tl.fromTo(
       phantom,
       { fontSize: fromFontSize },
-      {
-        fontSize: toFontSize,
-        duration,
-        ease,
-        delay,
-        // Redondeo del fontSize a enteros: el "temblor" del texto viene
-        // de que GSAP interpola en valores como 17.83px → 18.11px y el
-        // browser recalcula el antialiasing del glyph en cada frame.
-        // Con roundProps el crecimiento va en pasos de 1px, imperceptible
-        // a 60fps pero suficiente para que el glyph quede fijo.
-        roundProps: "fontSize",
-      },
+      { fontSize: toFontSize, duration, ease, delay },
       delay,
     );
   }
 
   // 3) Color: interpolamos el color de texto del source al del target
   //    para que el texto se funda progresivamente con el estilo del
-  //    destino en lugar de saltar al final del swap. Mismo duration/ease
-  //    que el resto del vuelo para que el cambio de color vaya
-  //    sincronizado con la transición de tamaño/forma. Sin esto, el
-  //    phantom mantiene el color del source hasta el snap-to-final
-  //    (ej: blanco sobre negro) y al revelar el target se ve un brinco
-  //    al color real del modal (negro).
+  //    destino en lugar de saltar al final del swap.
   if (fromColor && toColor && fromColor !== toColor) {
     tl.fromTo(
       phantom,
@@ -294,6 +319,9 @@ export const useFlipModal = ({
   id,
   margin = 20,
   hideTrigger = true,
+  // Opt-in: por default no aplicamos drag para no cambiar el comportamiento
+  // de modales existentes. Los modales que lo quieran pasan dragToClose={true}.
+  dragToClose = false,
 }) => {
   // ANIMACIÓN DE APERTURA
   useEffect(() => {
@@ -901,33 +929,13 @@ export const useFlipModal = ({
         gsap.to(pair.source, { opacity: 0, duration: 0.15, ease: "power2.in" });
       }
 
-      // Difuminamos el contenido de la modal al inicio del cierre para que
+      // Desvanecemos el contenido de la modal al inicio del cierre para que
       // solo se vea el phantom volando de vuelta al trigger nítido. Sin
       // esto, el content (position:absolute con dimensiones fijas) se
       // recorta por el overflow:hidden de la modal mientras se encoge con
-      // FLIP → el texto se ve "rodando" durante la animación. Usamos blur
-      // en vez de opacity:0 para que el contenido siga visible (difuminado)
-      // durante el viaje — sensación más nativa, menos "snap" a vacío.
-      //
-      // Aplicamos blur a cada hijo directo de content por separado (no al
-      // content entero) para poder EXCLUIR al hijo que contiene el shared
-      // element. Si difuminamos content, el filter del padre afecta a todos
-      // sus descendientes y no hay forma de "desdifuminar" al span con
-      // data-shared-id desde CSS — filter:none en el hijo no lo salva del
-      // filter del padre. Por eso vamos hijo por hijo.
-      // blurChildren: TODOS los descendientes de content que no son ni
-      // contienen un data-shared-id. Vamos a querySelectorAll("*") (no
-      // solo children) porque el data-shared-id puede estar anidado varios
-      // niveles adentro — ej: content > form > ModalHighSection > [delete-btn,
-      // div-shared, close-btn]. Con children solo, el form (que contiene
-      // el shared) quedaba excluido entero del blur y el botón de delete
-      // salía sin difuminar debajo del phantom.
-      const blurChildren = Array.from(content.querySelectorAll("*")).filter(
-        (el) =>
-          !el.hasAttribute("data-shared-id") &&
-          !el.querySelector("[data-shared-id]"),
-      );
-      gsap.set(blurChildren, { filter: "blur(7px)" });
+      // FLIP → el texto se ve "rodando" durante la animación.
+      const fadeTargets = collectFadeTargets(content);
+      gsap.set(fadeTargets, { willChange: "opacity, transform" });
 
       // Aqui capturamos los estilos actuales del modal abierto.
       const state = Flip.getState([modal, ...modalShared], {
@@ -937,7 +945,23 @@ export const useFlipModal = ({
       // Prevención extra por si element fue liberado entre líneas
       if (!element) return;
 
-      const triggerRect = triggerRef.rect || element.getBoundingClientRect();
+      // En el cierre SIEMPRE remedimos el trigger — no usamos el rect
+      // cacheado en triggerRef.rect (que useModal capturó cuando se abrió
+      // la modal). Ese cache queda stale si entre abrir y cerrar cambió el
+      // viewport (resize, toggle de responsive en devtools, scroll, layout
+      // shift). Usarlo hacía que la modal terminara en coordenadas viejas
+      // (ej: donde estaba el botón en desktop) y el content aparecía
+      // "flotando" en un lugar random del viewport en mobile. Los phantoms
+      // ya usaban getBoundingClientRect fresco, así que iban bien —
+      // solo la modal quedaba desalineada respecto a ellos.
+      //
+      // Fallback al rect cacheado solo si el fresh devuelve tamaño 0
+      // (trigger fue removido del DOM antes de que termine la animación).
+      const freshTriggerRect = element.getBoundingClientRect();
+      const triggerRect =
+        freshTriggerRect.width && freshTriggerRect.height
+          ? freshTriggerRect
+          : triggerRef.rect || freshTriggerRect;
       const triggerStyles = window.getComputedStyle(element);
 
       // Limpiamos transforms residuales de la apertura para que Flip calcule bien la ubicación
@@ -1026,18 +1050,14 @@ export const useFlipModal = ({
         // antes de que onClose() lo retire del DOM → flash visible.
         modal.style.setProperty("visibility", "hidden", "important");
         gsap.set(modal, { willChange: "auto" });
-        // Restauramos la visibilidad del content que difuminamos durante el
-        // viaje de los phantoms de cierre — limpiamos el blur inline de
-        // cada hijo que difuminamos para que al re-abrir la modal el
-        // contenido no quede borroso.
+        // Restauramos la visibilidad del content que desvanecimos durante
+        // el viaje de los phantoms de cierre. Reusamos la misma lista
+        // (fadeTargets) que animamos para no volver a hacer un walk de "*".
         content.style.removeProperty("visibility");
-        for (const el of Array.from(content.querySelectorAll("*"))) {
-          if (
-            el.hasAttribute("data-shared-id") ||
-            el.querySelector("[data-shared-id]")
-          )
-            continue;
-          gsap.set(el, { clearProps: "filter,opacity" });
+        for (const el of fadeTargets) {
+          gsap.set(el, {
+            clearProps: "opacity,transform,scale,willChange",
+          });
         }
         // Restauramos clip-path y visibility de los targets que clippeamos
         // para la "magia" del shared element — si no, al re-abrir la modal
@@ -1161,18 +1181,21 @@ export const useFlipModal = ({
         0,
       );
 
-      // Fade a opacity:0 de los hijos difuminados. Mismo timing en ambos
-      // casos (con/sin shared) para que el cierre se sienta consistente:
-      // arranca temprano y dura poco para que la modal se vaya limpia sin
-      // quedarse con contenido borroso-visible al final.
+      // Fade + scale sutil que reemplaza al blur original. El scale a 0.94
+      // simula el "colapso hacia la modal" que antes daba la sensación de
+      // difuminado. Arranca inmediato (t=0) para que el contenido empiece a
+      // desvanecerse a la par que el FLIP encoge la modal, y termina antes
+      // de que la modal llegue al trigger para que no haya contenido visible
+      // al tamaño del botón. Ambas propiedades son composite-only.
       tl.to(
-        blurChildren,
+        fadeTargets,
         {
           opacity: 0,
-          duration: 0.2,
-          ease: "power1.out",
+          scale: 0.94,
+          duration: 0.22,
+          ease: "power2.out",
         },
-        0.1,
+        0,
       );
 
       // Ajustamos el borderRadius gradualmente para que al final coincida con el del trigger.
@@ -1200,6 +1223,260 @@ export const useFlipModal = ({
     },
     [onClose, triggerRef, modalRef, contentRef, overlayRef, id, hideTrigger],
   );
+
+  // ─── EXPOSICIÓN DE closeModal EN EL DOM ───────────────────────────
+  //
+  // Adherimos la función closeModal (que dispara el cierre animado FLIP)
+  // como propiedad no-enumerable del elemento DOM del modal. Esto le
+  // permite a otros hooks (típicamente useInnerModal) disparar el cierre
+  // animado sin necesidad de tener acceso al hook — encuentran el modal
+  // en el DOM por [data-flip-modal-id] y llaman a modal.__flipCloseModal.
+  //
+  // POR QUÉ ADHERIR AL DOM Y NO A UN CONTEXT/REGISTRO:
+  //   - El modal se rendera vía createPortal a #modal-root y no comparte
+  //     árbol React con el hook que quiere cerrarlo. Un Context requeriría
+  //     un Provider que envuelva ambos, que en la práctica no existe.
+  //   - Un registro global (Map) funcionaría pero necesita coordinación
+  //     de keys entre productor (useFlipModal) y consumidor (useInnerModal).
+  //     Adherir al DOM es más directo y se limpia solo cuando el nodo
+  //     se desmonta (el garbage collector se lleva la referencia).
+  //
+  // Se limpia en el cleanup del effect: si closeModal cambió de identidad
+  // (deps del useCallback cambiaron), retiramos la propiedad vieja antes
+  // de la nueva. Guardamos solo si la propiedad actual es la que pusimos
+  // nosotros para no pisar a otra instancia si hay races raras.
+  useEffect(() => {
+    if (!isOpen) return;
+    const modal = modalRef.current;
+    if (!modal) return;
+    modal.__flipCloseModal = closeModal;
+    return () => {
+      if (modal.__flipCloseModal === closeModal) {
+        delete modal.__flipCloseModal;
+      }
+    };
+  }, [isOpen, closeModal, modalRef]);
+
+  // ─── DRAG PARA CERRAR ─────────────────────────────────────────────
+  //
+  // Habilita drag (mouse o touch) sobre la modal. Si el usuario arrastra
+  // más de CLOSE_DISTANCE_THRESHOLD o suelta con velocidad superior a
+  // CLOSE_VELOCITY_THRESHOLD, se dispara el cierre estándar (closeModal)
+  // — la modal vuela con FLIP de vuelta al trigger, igual que si el
+  // usuario hubiera clickeado la X. Si no llega al umbral, spring-back.
+  //
+  // POR QUÉ FUNCIONA SIN TOCAR EL CIERRE:
+  // closeModal captura el estado inicial con Flip.getState, que lee
+  // getBoundingClientRect. Ese método devuelve la posición VISUAL del
+  // elemento (con transforms aplicados) — o sea, dónde quedó la modal
+  // después del drag. Después el cierre limpia el transform y arma un
+  // Flip.from que anima desde esa posición visual hasta el trigger.
+  // Cero cambios extra en la lógica de cierre.
+  //
+  // COORDINACIÓN CON SCROLL:
+  // Si el pointerdown arranca sobre content scrolleable, no intercepto
+  // — dejo que el browser scrollee normal. El drag solo funciona desde
+  // el padding de la modal (o desde content si el content no es
+  // scrolleable, ej: modales chicas). Alternativa (interceptar y hacer
+  // el clásico "solo drag si scroll está en el borde") es MUCHO más
+  // código y edge cases; esta versión cubre el 90% de UX.
+  //
+  // UMBRAL DE INICIO (DRAG_START_THRESHOLD):
+  // No declaramos drag hasta que el pointer se mueva 8px del origen.
+  // Sin esto, cualquier micro-jitter del mouse convertía un click en
+  // drag y bloqueaba clicks reales sobre botones/inputs de la modal.
+  //
+  // POINTER EVENTS:
+  // Usamos Pointer Events (no touch/mouse por separado) para tener un
+  // único código que cubre mouse, touch y pen. setPointerCapture asegura
+  // que los eventos siguen llegando aunque el pointer se salga del modal.
+  //
+  // La ref para closeModal evita que el useEffect se re-montara cada vez
+  // que closeModal cambia de identidad (que puede pasar si el parent no
+  // memoiza onClose). Sin la ref agregábamos y sacábamos listeners en
+  // cada render — barato pero contamina profile.
+  const closeModalRef = useRef(closeModal);
+  useEffect(() => {
+    closeModalRef.current = closeModal;
+  }, [closeModal]);
+
+  useEffect(() => {
+    // Opt-in: si el modal no pidió dragToClose, ni siquiera montamos los
+    // listeners. Así no pagamos ningún costo (memoria, event dispatch) en
+    // modales que no lo necesitan.
+    if (!dragToClose) return;
+    if (!isOpen) return;
+    const modal = modalRef.current;
+    const content = contentRef.current;
+    if (!modal) return;
+
+    const DRAG_START_THRESHOLD = 8; // px antes de reconocer drag
+    const CLOSE_DISTANCE_THRESHOLD = 100; // px arrastrados para cerrar
+    const CLOSE_VELOCITY_THRESHOLD = 500; // px/s en release para cerrar
+    // Shrink progresivo: cuanto más arrastra el usuario, más chica se
+    // hace la modal. Da sensación de "colapsando hacia el destino" y
+    // hace que si suelta el drag y cerramos, la transición al trigger
+    // sea visualmente más continua (la modal ya está encaminada al
+    // tamaño chico).
+    const MAX_SHRINK_DISTANCE = 200; // px donde se topa la escala
+    const MIN_SCALE = 0.88; // escala mínima (12% de encogimiento)
+
+    let drag = null;
+
+    const onPointerDown = (e) => {
+      // Solo botón primario del mouse; touch/pen sin restricción
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      // Si arranca sobre content scrolleable, no drag — dejamos scroll
+      if (content && content.contains(e.target)) {
+        if (content.scrollHeight > content.clientHeight) return;
+      }
+      drag = {
+        pointerId: e.pointerId,
+        startX: e.clientX,
+        startY: e.clientY,
+        // baseX/baseY se capturan en el momento que se supera el threshold
+        // del drag (ver onPointerMove). NO acá, porque queremos que si
+        // el usuario solo tapea sin mover, el tween que estuviera
+        // corriendo (ej: spring-back) siga sin interrumpirse.
+        baseX: 0,
+        baseY: 0,
+        lastX: e.clientX,
+        lastY: e.clientY,
+        lastTime: performance.now(),
+        velocityX: 0,
+        velocityY: 0,
+        started: false,
+      };
+    };
+
+    const onPointerMove = (e) => {
+      if (!drag || e.pointerId !== drag.pointerId) return;
+      const now = performance.now();
+      const dx = e.clientX - drag.startX;
+      const dy = e.clientY - drag.startY;
+      const dt = now - drag.lastTime;
+      // Velocity instantánea (solo el último tramo) — mejor predictor
+      // de intención del usuario que velocity promedio de todo el drag.
+      if (dt > 0) {
+        drag.velocityX = ((e.clientX - drag.lastX) / dt) * 1000;
+        drag.velocityY = ((e.clientY - drag.lastY) / dt) * 1000;
+      }
+      drag.lastX = e.clientX;
+      drag.lastY = e.clientY;
+      drag.lastTime = now;
+
+      if (!drag.started) {
+        if (Math.hypot(dx, dy) < DRAG_START_THRESHOLD) return;
+        drag.started = true;
+        try {
+          modal.setPointerCapture(e.pointerId);
+        } catch {
+          // Algunos browsers pueden fallar (elemento no focusable);
+          // ignoramos — los eventos igual siguen bubbleando al modal.
+        }
+        modal.style.userSelect = "none";
+        modal.style.cursor = "grabbing";
+        // Matamos cualquier tween activo sobre el modal (ej: un
+        // spring-back previo que todavía no terminó). Sin esto el drag
+        // "compite" con el tween y el modal tembla.
+        gsap.killTweensOf(modal);
+        // Capturamos la posición ACTUAL del modal (leída de GSAP, así
+        // respeta cualquier tween que estuviera corriendo hasta el
+        // frame anterior) como base para sumar el dx/dy del drag.
+        //
+        // Sin esto, si el usuario agarraba mid-spring-back, ocurría lo
+        // siguiente: killTweensOf congelaba el tween en (x=30, y=15),
+        // pero después aplicábamos `gsap.set(modal, { x: dx, y: dy })`
+        // usando dx/dy medidos desde el punto de grab (arrancando en 0)
+        // → la modal saltaba visualmente de (30,15) a (dx,dy) — flip-flop.
+        // Ahora modal.x = baseX + dx, así continúa desde donde estaba.
+        drag.baseX = Number(gsap.getProperty(modal, "x")) || 0;
+        drag.baseY = Number(gsap.getProperty(modal, "y")) || 0;
+      }
+
+      // preventDefault evita selección de texto con mouse y prevención
+      // de gestos default del browser durante el drag.
+      if (e.cancelable) e.preventDefault();
+
+      // Total displacement = base (donde el modal estaba al empezar el
+      // drag efectivo) + movimiento del pointer desde el grab.
+      const totalX = drag.baseX + dx;
+      const totalY = drag.baseY + dy;
+
+      // Escala progresiva basada en la distancia TOTAL desde el origen,
+      // con curva ease-out cuadrática:
+      //   eased(t) = 1 - (1-t)^2     donde t = distancia/MAX
+      // Uso distancia total (no solo el movimiento del drag actual)
+      // porque el scale es una función del "cuán lejos está la modal de
+      // su posición de reposo" — así queda consistente si el usuario
+      // agarra la modal ya desplazada y sigue arrastrando.
+      const distance = Math.hypot(totalX, totalY);
+      const t = Math.min(distance / MAX_SHRINK_DISTANCE, 1);
+      const eased = 1 - (1 - t) * (1 - t);
+      const scale = 1 - eased * (1 - MIN_SCALE);
+
+      gsap.set(modal, { x: totalX, y: totalY, scale });
+    };
+
+    const onPointerUp = (e) => {
+      if (!drag || e.pointerId !== drag.pointerId) return;
+      const state = drag;
+      drag = null;
+      // Si nunca superó el threshold, fue un click — no hacemos nada
+      // (dejamos que el click event burbujee normal a lo que sea).
+      if (!state.started) return;
+      try {
+        modal.releasePointerCapture(state.pointerId);
+      } catch {
+        // Ignoramos; releasePointerCapture puede fallar si nunca se
+        // llegó a capturar (ver setPointerCapture arriba).
+      }
+      modal.style.removeProperty("user-select");
+      modal.style.removeProperty("cursor");
+
+      const distance = Math.hypot(
+        state.lastX - state.startX,
+        state.lastY - state.startY,
+      );
+      const velocity = Math.hypot(state.velocityX, state.velocityY);
+
+      if (
+        distance > CLOSE_DISTANCE_THRESHOLD ||
+        velocity > CLOSE_VELOCITY_THRESHOLD
+      ) {
+        // Cerrar. closeModal usa Flip.getState → getBoundingClientRect,
+        // que lee la posición VISUAL (con el translate del drag). El
+        // cierre naturalmente arranca desde donde el usuario soltó y
+        // vuela al trigger. No necesitamos limpiar el transform antes;
+        // el clearProps que hace closeModal más adelante ya lo maneja.
+        closeModalRef.current();
+      } else {
+        // Spring back al origen. power3.out es sutil sin overshoot
+        // ruidoso — se siente responsive sin "rebote de goma".
+        // Reseteamos también scale porque el drag la achicó — sin esto
+        // la modal se queda encogida después del release.
+        gsap.to(modal, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: "power3.out",
+        });
+      }
+    };
+
+    modal.addEventListener("pointerdown", onPointerDown);
+    modal.addEventListener("pointermove", onPointerMove);
+    modal.addEventListener("pointerup", onPointerUp);
+    modal.addEventListener("pointercancel", onPointerUp);
+
+    return () => {
+      modal.removeEventListener("pointerdown", onPointerDown);
+      modal.removeEventListener("pointermove", onPointerMove);
+      modal.removeEventListener("pointerup", onPointerUp);
+      modal.removeEventListener("pointercancel", onPointerUp);
+    };
+  }, [dragToClose, isOpen, modalRef, contentRef]);
 
   return { closeModal };
 };
