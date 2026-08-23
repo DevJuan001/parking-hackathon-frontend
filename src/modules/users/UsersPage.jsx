@@ -1,10 +1,12 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
+import { useMediaQuery } from "@hooks/useMediaQuery";
 import { useUsers } from "@/modules/users/hooks/useUsers";
 // Constantes
 import { modals } from "@/modules/users/constants/modals";
 // Componentes
 import TopSection from "@components/ui/TopSection";
+import UsersList from "@/modules/users/components/ui/UsersList";
 import UsersKpis from "@/modules/users/components/ui/UsersKpis";
 import UsersTable from "@/modules/users/components/ui/UsersTable";
 // Modales
@@ -20,6 +22,7 @@ import FilterUsersModal from "@/modules/users/components/modals/FilterUsersModal
 export default function UsersPage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =
     useModal();
+  const isDesktop = useMediaQuery("(min-width: 48rem)");
   const {
     users,
     loading,
@@ -48,14 +51,25 @@ export default function UsersPage() {
 
       <UsersKpis />
 
-      <UsersTable
-        users={users}
-        loading={loading}
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        fetchNextPage={fetchNextPage}
-        openModal={openModal}
-      />
+      {isDesktop ? (
+        <UsersTable
+          users={users}
+          loading={loading}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          openModal={openModal}
+        />
+      ) : (
+        <UsersList
+          users={users}
+          loading={loading}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          openModal={openModal}
+        />
+      )}
 
       {modalType && (
         <Modal
