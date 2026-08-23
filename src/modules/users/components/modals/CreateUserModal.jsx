@@ -20,7 +20,7 @@ export default function CreateUserModal({ onClose }) {
   return (
     <form
       onSubmit={(e) => handleSubmit(e, openInnerModal)}
-      className="flex flex-col items-center gap-2"
+      className="flex flex-col gap-2"
     >
       <SelectMenu
         id={"role-menu"}
@@ -37,47 +37,52 @@ export default function CreateUserModal({ onClose }) {
       <FormField
         id={"name"}
         name={"name"}
-        labelText={"Nombre"}
         value={form.name}
-        onChange={handleChange}
+        disabled={loading}
         autoComplete="off"
+        labelText={"Nombre"}
         placeholder={"Miguel"}
-      />
-
-      <FormField
-        id={"first_surname"}
-        name={"first_surname"}
-        labelText={"Primer Apellido"}
-        value={form.first_surname}
         onChange={handleChange}
-        autoComplete="off"
-        placeholder={"Pérez"}
       />
 
       <FormField
+        disabled={loading}
+        autoComplete="off"
+        id={"first_surname"}
+        placeholder={"Pérez"}
+        name={"first_surname"}
+        onChange={handleChange}
+        value={form.first_surname}
+        labelText={"Primer Apellido"}
+      />
+
+      <FormField
+        autoComplete="off"
+        disabled={loading}
         id={"second_surname"}
         name={"second_surname"}
-        labelText={"Segundo Apellido"}
-        value={form.second_surname}
         onChange={handleChange}
-        autoComplete="off"
         placeholder={"Contreras"}
+        value={form.second_surname}
+        labelText={"Segundo Apellido"}
       />
 
       <FormField
         id={"email"}
         name={"email"}
-        labelText={"Correo electronico"}
+        disabled={loading}
         value={form.email}
-        onChange={handleChange}
         autoComplete="off"
+        onChange={handleChange}
+        labelText={"Correo electronico"}
         placeholder={"miguel@gmail.com"}
       />
 
       <ConfirmCancelButtons
+        disabled={loading}
+        cancelButtonOnClick={onClose}
         confirmText={loading ? <Loader /> : "Crear"}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
-        cancelButtonOnClick={onClose}
       />
 
       {innerType === "success" && (
