@@ -32,35 +32,30 @@ export default function UsersPage() {
 
   return (
     <main
-      className="w-full h-full overflow-hidden overflow-y-auto
+      className="w-full h-full flex flex-col gap-4 overflow-hidden overflow-y-auto
       dark:bg-black"
     >
       <TopSection
         sectionName={"Usuarios"}
         addButtonText={"Crear usuario"}
-        createButtonOnClick={(e) =>
-          openModal(null, "createUser", e.currentTarget)
-        }
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
         exportButtonOnClick={(e) => openModal(null, "export", e.currentTarget)}
         searchButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
+        createButtonOnClick={(e) =>
+          openModal(null, "createUser", e.currentTarget)
+        }
       />
 
-      <div
-        className="h-[85%] flex flex-col gap-4
-        md:h-[90%]"
-      >
-        <UsersKpis />
+      <UsersKpis />
 
-        <UsersTable
-          users={users}
-          loading={loading}
-          hasNextPage={hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-          fetchNextPage={fetchNextPage}
-          openModal={openModal}
-        />
-      </div>
+      <UsersTable
+        users={users}
+        loading={loading}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
+        openModal={openModal}
+      />
 
       {modalType && (
         <Modal
