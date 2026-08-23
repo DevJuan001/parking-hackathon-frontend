@@ -22,6 +22,9 @@
       "@constants/*": [
         "./src/globals/constants/*"
       ],
+      "@styles/*": [
+        "./src/globals/styles/*"
+      ],
     },
     "jsx": "preserve",
     "module": "ESNext",
