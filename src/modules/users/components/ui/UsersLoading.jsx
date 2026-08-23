@@ -3,11 +3,15 @@ import Skeleton from "@components/ui/Skeleton";
 export default function UsersLoading() {
   return (
     <div className="h-full w-full flex flex-col gap-4 mt-20">
-      <div className="h-[12.5%] flex gap-4 items-center">
+      <div
+        className="w-full h-fit flex flex-wrap items-center justify-center gap-2
+        md:flex-nowrap"
+      >
         {Array.from({ length: 4 }).map((_, index) => (
           <Skeleton
             key={index}
-            height="100%"
+            width="48%"
+            height="100px"
             shineColor="#C5C1C7"
             borderRadius={"20px"}
             backgroundColor={"#F3EEF5"}
