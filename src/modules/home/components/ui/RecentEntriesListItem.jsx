@@ -1,7 +1,7 @@
 // Utils
-import { formatTime } from "@/utils/formatTime";
+import { formatTime } from "@utils/formatTime";
 // Constantes
-import { vehicleTypesConstant } from "@/globals/constants/vehicleTypes";
+import { vehicleTypesConstant } from "@constants/vehicleTypes";
 // Components
 import Icon from "@components/ui/Icon";
 
@@ -9,7 +9,7 @@ export default function RecentEntriesList({ entry }) {
   return (
     <div
       key={entry?.id}
-      className="flex items-center gap-3 px-2 py-2 rounded-2xl transition-colors
+      className="flex items-center gap-3 px-2 rounded-2xl transition-colors
       hover:bg-[#efedf0]
       dark:hover:bg-[#ffffff15]"
     >

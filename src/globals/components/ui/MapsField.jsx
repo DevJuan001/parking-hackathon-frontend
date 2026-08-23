@@ -8,8 +8,9 @@ export default function MapsField({
   labelText,
   minLength,
   maxLength,
-  type = "text",
   placeholder,
+  type = "text",
+  autoFocus = false,
   autoComplete = "off",
 }) {
   return (
@@ -21,13 +22,14 @@ export default function MapsField({
       `}
     >
       <input
-        required
         id={id}
+        required
         type={type}
         name={name}
         value={value}
         disabled={disabled}
         onChange={onChange}
+        autoFocus={autoFocus}
         minLength={minLength}
         maxLength={maxLength}
         placeholder={placeholder}

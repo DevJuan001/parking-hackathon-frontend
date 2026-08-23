@@ -14,10 +14,10 @@ export default function RevenueChart() {
   const { chartStats, loading } = useExitsStats();
   const hasRevenues = chartStats.some((stat) => stat.value > 0);
   const noRevenues = !hasRevenues && !loading;
-  const isFirstLoad = loading;
+  const isFirstLoad = !hasRevenues && loading;
 
   return (
-    <div className="h-full w-full">
+    <div className="w-full h-full overflow-hidden">
       {noRevenues && (
         <div
           className="w-full h-full flex flex-col items-center justify-center gap-4 text-[#75777E]

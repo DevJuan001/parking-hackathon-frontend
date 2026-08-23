@@ -1,12 +1,14 @@
 // Hooks
-import { useRef, useEffect } from "react";
 import { useChat } from "@hooks/useChat";
+import { useRef, useEffect } from "react";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import LiquidGlass from "@components/ui/LiquidGlass";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
 // Modales
 import Modal from "@modals/Modal";
+import DeleteChatModal from "@modals/DeleteChatModal";
 import MarkdownConverter from "@components/ui/MarkdownConverter";
 
 export default function ChatModal({ triggerRef, onClose }) {
@@ -19,6 +21,8 @@ export default function ChatModal({ triggerRef, onClose }) {
     handleKeyDown,
   } = useChat();
   const chatRef = useRef(null);
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   useEffect(() => {
     chatRef.current?.scrollTo({
@@ -31,6 +35,7 @@ export default function ChatModal({ triggerRef, onClose }) {
     <Modal
       type="chat"
       disableHeader
+      dragToClose
       isOpen={true}
       location="center"
       onClose={onClose}
@@ -39,13 +44,20 @@ export default function ChatModal({ triggerRef, onClose }) {
       md:h-[calc(100vh-19%)] md:w-[750px] md:rounded-[50px]
       lg:w-[800px]`}
     >
-      <AnimatedBackground className="rounded-[40px]" />
+      <AnimatedBackground
+        className="m-2
+        md:rounded-[45px]"
+      />
 
-      <div className="relative w-full h-full rounded-[50px] overflow-hidden">
+      <div
+        className="relative w-full h-full overflow-hidden
+        md:rounded-[50px]"
+      >
         <div className="absolute flex items-center gap-1 m-3 z-50">
           <LiquidGlass
             onClick={onClose}
             className="w-10 h-10 flex items-center justify-center rounded-full
+            active:animate-click-effect
             hover:bg-[#49454f21] hover:cursor-pointer"
           >
             <Icon
@@ -57,8 +69,9 @@ export default function ChatModal({ triggerRef, onClose }) {
           </LiquidGlass>
 
           <LiquidGlass
-            onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center rounded-full
+            onClick={(e) => openInnerModal("deleteChat", e)}
+            className="w-10 h-10 flex items-center justify-center rounded-4xl
+            active:animate-click-effect
             hover:bg-[#49454f21] hover:cursor-pointer"
           >
             <Icon
@@ -72,7 +85,8 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <div
           ref={chatRef}
-          className="absolute w-full h-[90%] flex flex-col p-2 gap-4 mt-2 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto"
+          className="absolute w-full h-[85%] flex flex-col p-2 gap-4 mt-2 bg-linear-to-b font-dmsans overflow-hidden overflow-y-auto
+          md:h-[90%]"
         >
           {messages?.map((message) => (
             <LiquidGlass
@@ -106,7 +120,8 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <form
           onSubmit={handleSubmit}
-          className="absolute bottom-0 w-full h-[10%] flex items-center px-2 py-3 font-dmsans"
+          className="absolute bottom-0 w-full h-[14%] flex items-center px-2 py-3 font-dmsans
+          md:h-[10%]"
         >
           <textarea
             autoFocus
@@ -125,11 +140,11 @@ export default function ChatModal({ triggerRef, onClose }) {
             role="button"
             disable={isPending}
             onClick={(e) => handleSubmit(e)}
-            className={`flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
+            className={`w-17.5 flex items-center justify-center p-5 rounded-full
             ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
             active:animate-click-effect
-            hover:bg-[#4a484b17] 
-            dark:bg-[#000000]`}
+            md:w-16
+            hover:bg-[#4a484b17]`}
           >
             <Icon
               name="arrow_upward"
@@ -144,6 +159,13 @@ export default function ChatModal({ triggerRef, onClose }) {
             />
           </LiquidGlass>
         </form>
+
+        {innerType === "deleteChat" && (
+          <DeleteChatModal
+            triggerRef={innerTrigger}
+            onClose={closeInnerModal}
+          />
+        )}
       </div>
     </Modal>
   );

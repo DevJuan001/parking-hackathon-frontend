@@ -1,4 +1,4 @@
-import Skeleton from "@/globals/components/ui/Skeleton";
+import Skeleton from "@components/ui/Skeleton";
 
 export default function HomeLoading() {
   return (

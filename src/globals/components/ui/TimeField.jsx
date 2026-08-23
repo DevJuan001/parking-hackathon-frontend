@@ -1,7 +1,7 @@
 // Hooks
 import { useInnerModal } from "@hooks/useInnerModal";
 // Utils
-import { formatTimeForDisplay } from "@/utils/timeUtils";
+import { formatTimeForDisplay } from "@utils/timeUtils";
 // Componentes
 import Icon from "@components/ui/Icon";
 // Modales

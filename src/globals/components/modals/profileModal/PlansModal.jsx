@@ -10,18 +10,20 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
   return (
     <Modal
       margin={0}
+      dragToClose
       disableHeader
       isOpen={true}
       type={"plans"}
       onClose={onClose}
       triggerRef={triggerRef}
-      styles={"w-screen h-screen p-7"}
+      styles="w-screen h-screen p-7
+      xl:px-28"
     >
-      <div className="w-full flex flex-col gap-2">
+      <div className="w-full h-full flex flex-col gap-2">
         <LiquidGlass
           role="button"
           onClick={onClose}
-          className="self-end w-fit flex items-center justify-center p-3 rounded-full
+          className="self-end w-12 h-12 flex items-center justify-center p-3 rounded-full
           hover:bg-[#afadad23] hover:cursor-pointer"
         >
           <Icon
@@ -31,7 +33,7 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
           />
         </LiquidGlass>
 
-        <div className="flex flex-col items-center gap-10 font-dmsans">
+        <div className="w-full h-full flex flex-col items-center gap-10 font-dmsans">
           <div className="flex flex-col items-center gap-2">
             <Icon
               name={"local_florist"}
@@ -62,12 +64,12 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
 
           <div
             className="w-full h-full flex flex-wrap justify-center gap-2
-            md:flex-nowrap"
+            xl:flex-nowrap"
           >
             {pricingPlans.map((plan) => (
               <div
                 key={plan.title}
-                className={`w-90 flex flex-col justify-between p-7 border border-[#E4E2E5] rounded-3xl
+                className={`w-full flex flex-1 flex-col justify-between p-7 border border-[#E4E2E5] rounded-3xl
                 ${
                   plan.title === parkingInfo?.plan
                     ? `bg-black text-white
@@ -105,7 +107,7 @@ export default function PlansModal({ triggerRef, parkingInfo, onClose }) {
 
                 <div className="w-full flex flex-col gap-1.5 mt-5">
                   <span
-                    className="text-3xl font-semibold
+                    className="text-nowrap text-3xl font-semibold
                     md:text-4xl"
                   >
                     {plan.price} / mes

@@ -25,8 +25,8 @@ export default function ParkingInfoContent() {
   return (
     <form
       onSubmit={(e) => handleSubmit(e, openInnerModal)}
-      className="w-full flex flex-col p-3 pt-0 gap-2 font-dmsans overflow-y-auto animate-blur-up
-      md:pt-3
+      className="w-full flex flex-col p-3 pt-0 gap-2 mb-20 font-dmsans overflow-y-auto animate-blur-up
+      md:pt-3 md:mb-0
       dark:text-[#E4E2E5]"
     >
       <div

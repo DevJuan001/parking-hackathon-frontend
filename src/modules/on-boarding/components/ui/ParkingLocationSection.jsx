@@ -30,10 +30,12 @@ export default function ParkingLocationSection({
       </div>
 
       <form
+        onSubmit={continueButtonOnClick}
         className="w-full flex flex-col gap-2
         lg:w-lg"
       >
         <MapsField
+          autoFocus
           id="address"
           name="address"
           labelText="Dirección *"

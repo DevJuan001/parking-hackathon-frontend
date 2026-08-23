@@ -11,6 +11,7 @@ export default function FormField({
   maxLength,
   type = "text",
   placeholder,
+  autoFocus = false,
   autoComplete = "off",
 }) {
   return (
@@ -29,6 +30,7 @@ export default function FormField({
         value={value}
         disabled={disabled}
         onChange={onChange}
+        autoFocus={autoFocus}
         minLength={minLength}
         maxLength={maxLength}
         placeholder={placeholder}
