@@ -120,7 +120,7 @@ export default function ChatModal({ triggerRef, onClose }) {
 
         <form
           onSubmit={handleSubmit}
-          className="absolute bottom-0 w-full h-[15%] flex items-center px-2 py-3 font-dmsans
+          className="absolute bottom-0 w-full h-[14%] flex items-center px-2 py-3 font-dmsans
           md:h-[10%]"
         >
           <textarea
@@ -140,12 +140,11 @@ export default function ChatModal({ triggerRef, onClose }) {
             role="button"
             disable={isPending}
             onClick={(e) => handleSubmit(e)}
-            className={`w-17.5 flex items-center justify-center p-5 rounded-full bg-[#fbf9fccc]
+            className={`w-17.5 flex items-center justify-center p-5 rounded-full
             ${isPending ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}
             active:animate-click-effect
             md:w-16
-            hover:bg-[#4a484b17] 
-            dark:bg-[#000000]`}
+            hover:bg-[#4a484b17]`}
           >
             <Icon
               name="arrow_upward"
