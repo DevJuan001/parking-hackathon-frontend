@@ -26,25 +26,26 @@ export default function DisableUserModal({ onClose, user }) {
       </span>
 
       <ConfirmCancelButtons
+        disabled={loading}
+        confirmBgColor="#ba1a1a"
+        cancelButtonOnClick={onClose}
         confirmText={loading ? <Loader /> : "Deshabilitar"}
-        confirmBgColor="#ff0000"
         confirmButtonOnClick={(e) =>
           handleDisable(e, openInnerModal, () => {
             closeInnerModal();
             onClose();
           })
         }
-        cancelButtonOnClick={onClose}
       />
 
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="¡No se pudo deshabilitar el usuario!"
           errorText={error}
+          onClose={closeInnerModal}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          errorTitle="¡No se pudo deshabilitar el usuario!"
         />
       )}
     </section>
