@@ -771,7 +771,7 @@ export const useFlipModal = ({
           duration: MODAL_OPEN_DURATION,
           ease: "sine.in",
         },
-        0.1,
+        0.5,
       );
 
       // Oscurecemos el overlay de fondo en paralelo con la apertura del modal
