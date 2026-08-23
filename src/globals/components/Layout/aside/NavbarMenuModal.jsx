@@ -2,7 +2,7 @@
 import { useLogout } from "@hooks/useLogout";
 import { useInnerModal } from "@hooks/useInnerModal";
 // Constants
-import { secondSectionItems } from "@/globals/constants/asideMenuItems";
+import { secondSectionItems } from "@constants/asideMenuItems";
 // Components
 import Icon from "@components/ui/Icon";
 import NavItem from "@components/Layout/aside/NavItem";
@@ -37,6 +37,7 @@ export default function NavbarMenuModal({
       <button
         onClick={(e) => openInnerModal("chat", e)}
         className="w-full h-auto flex items-center py-4 px-6 gap-2 rounded-4xl text-[#75777E] transition cursor-pointer
+        lg:hidden
         hover:cursor-pointer
         hover:bg-[#e5e7eb96] hover:text-black
         dark:text-[#75777eb7] dark:hover:bg-[#181818] dark:hover:text-[#E4E2E5]"
@@ -48,6 +49,7 @@ export default function NavbarMenuModal({
 
       {firstSectionItems.slice(4, 7).map((item) => (
         <NavItem
+          hideOnDesktop
           showName={true}
           itemId={`${item.itemId}`}
           key={item.name}
@@ -77,9 +79,7 @@ export default function NavbarMenuModal({
         />
       )}
 
-      {innerType === "chat" && (
-        <ChatModal triggerRef={innerTrigger} onClose={closeInnerModal} />
-      )}
+      {innerType === "chat" && <ChatModal triggerRef={innerTrigger} />}
     </Modal>
   );
 }
