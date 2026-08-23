@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { HOUR_NUMBERS, MINUTE_NUMBERS, to12h, to24h } from "@/utils/timeUtils";
+import { HOUR_NUMBERS, MINUTE_NUMBERS, to12h, to24h } from "@utils/timeUtils";
 
 export function useTimePicker({ value, onChange }) {
   const initial = getInitial(value);
