@@ -28,9 +28,9 @@ export default function ConfirmCancelButtons({
         style={{ backgroundColor: confirmBgColor }}
         className={`flex items-center px-6 py-3.5 gap-2 rounded-4xl text-sm text-white font-medium transition
           ${disabled && "opacity-70"}
-        active:animate-click-effect
-        hover:text-gray-300
-        dark:bg-white dark:text-black dark:hover:text-gray-800`}
+          active:animate-click-effect
+          hover:text-gray-300
+          dark:bg-white! dark:text-black dark:hover:text-gray-800`}
       >
         {confirmImage && (
           <Icon
@@ -48,10 +48,10 @@ export default function ConfirmCancelButtons({
         type="button"
         disabled={disabled}
         onClick={cancelButtonOnClick}
-        className={`${cancelButtonWidth} flex items-center px-6 py-3.5 rounded-4xl text-sm text-[#75777E] font-medium transition
-        active:animate-click-effect
-        hover:cursor-pointer hover:bg-[#F5F3F6]
-        dark:bg-[#101012] dark:text-white dark:hover:bg-[#28282bbd]`}
+        className={`${cancelButtonWidth} flex items-center px-6 py-3.5 rounded-4xl text-sm text-[#75777E] font-medium transition-colors
+          active:animate-click-effect
+          hover:cursor-pointer hover:bg-[#F5F3F6]
+          dark:bg-[#1010127a] dark:text-[#7E80888] dark:hover:bg-[#28282b71]`}
       >
         <span>{cancelText}</span>
       </LiquidGlass>
