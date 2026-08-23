@@ -9,7 +9,6 @@ export default function NavItem({
   showName,
   disableText,
   onClick,
-  hideOnDesktop = false,
 }) {
   return (
     <NavLink to={path}>
@@ -17,14 +16,8 @@ export default function NavItem({
         <div
           onClick={onClick}
           id={`${itemId}-aside-button`}
-          className={`w-auto h-14 items-center py-3 gap-2 subpixel-antialiased rounded-full transition-[padding,background-color,color,box-shadow] ease-in group
+          className={`w-auto h-14 flex items-center py-3 gap-2 subpixel-antialiased rounded-full transition-[padding,background-color,color,box-shadow] ease-in group
             md:px-6
-            ${
-              hideOnDesktop
-                ? `flex
-              md:hidden`
-                : "flex"
-            }
             ${
               isActive
                 ? `px-6 bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
