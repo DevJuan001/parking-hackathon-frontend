@@ -1,9 +1,4 @@
 export const modals = {
-  dayInfo: {
-    location: "right",
-    disableHeader: true,
-  },
-
   editReservation: {
     margin: 0,
     disableHeader: true,
