@@ -1,6 +1,6 @@
+import "@hooks/useFlipModal";
 import "@components/ui/Icon";
-import "@/globals/styles/index.css";
-import "@/globals/hooks/useFlipModal";
+import "@styles/index.css";
 import AppRouter from "@/router/AppRouter";
 import { useTheme } from "@hooks/useTheme";
 import { BrowserRouter } from "react-router-dom";
@@ -13,6 +13,7 @@ function App() {
       <BrowserRouter>
         <AppRouter />
       </BrowserRouter>
+      
       <div id="modal-root"></div>
     </div>
   );
