@@ -386,6 +386,14 @@ export const useFlipModal = ({
         clearProps: "position,top,left,width,height,boxSizing",
       });
 
+      // Fijamos el content a su ancho final ANTES de que el FLIP anime el
+      // modal. Sin esto, el content sigue el flujo del modal y su ancho
+      // cambia frame a frame → el texto se re-wrappea visiblemente durante
+      // la apertura. Con width fijo, el texto se layoutea una sola vez con
+      // su forma final, y el overflow:hidden del modal lo recorta
+      // progresivamente mientras crece.
+      gsap.set(content, { width: content.offsetWidth });
+
       // Asignamos el mismo flipId al trigger y al modal para que GSAP los trate como
       // un par "shared element": el modal hereda la posición/forma del trigger al inicio.
       const flipId = `modal-morph-${id}`;
@@ -717,9 +725,11 @@ export const useFlipModal = ({
             // en el content (children), NO en el modal. El header con el
             // botón de cerrar debe quedar fijo arriba sin scrollear, así que
             // el overflow vive en el div de children que tiene flex-1.
-            gsap.set(content, {
-              overflowY: "auto",
-            });
+            // Liberamos el width fijo que usamos para prevenir reflow del
+            // texto durante la animación. El content vuelve a su flow normal.
+
+            gsap.set(content, { overflowY: "auto" });
+
             gsap.set(modal, {
               willChange: "auto",
               clearProps: "backgroundColor,color,padding",
@@ -856,16 +866,8 @@ export const useFlipModal = ({
       const modalCurrentRect = modal.getBoundingClientRect();
       gsap.set(modal, { height: modalCurrentRect.height });
 
-      // Fijamos la posición y tamaño del contenido como absolute para que no afecte al layout del la modal
-      const contentRect = content.getBoundingClientRect();
-      gsap.set(content, {
-        position: "absolute",
-        top: content.offsetTop,
-        left: content.offsetLeft,
-        width: contentRect.width,
-        height: contentRect.height,
-        boxSizing: "border-box",
-      });
+      // Ocultamos overflow para que el contenido del modal no se desborde al encoger
+      gsap.set(modal, { overflow: "hidden" });
 
       // Reasignamos el mismo flipId al trigger y al modal para el viaje de vuelta
       const flipId = `modal-morph-${id}`;
@@ -993,7 +995,13 @@ export const useFlipModal = ({
       // Animamos top/left/width/height (box) + borderRadius + fontSize + color
       // en paralelo para que el box se encoja y el texto se re-rasterice
       // nativamente en cada frame (crisp, sin blur).
-      for (const { phantom, pair, fromBR, fromFontSize, fromColor } of closePhantoms) {
+      for (const {
+        phantom,
+        pair,
+        fromBR,
+        fromFontSize,
+        fromColor,
+      } of closePhantoms) {
         const currentRect = {
           top: parseFloat(phantom.style.top),
           left: parseFloat(phantom.style.left),
