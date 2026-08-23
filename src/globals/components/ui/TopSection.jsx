@@ -25,13 +25,12 @@ export default function TopSection({
 
   return (
     <section
-      className={`h-[13%] w-full flex items-center justify-between pb-2 font-poppins ${sectionVisible ? "block" : "hidden"}
-      sm:h-[9%]
-      md:h-[8%]
+      className={`w-full h- flex items-center justify-between
+      ${sectionVisible ? "block" : "hidden"}
       `}
     >
       <span
-        className="text-nowrap text-2xl font-medium bg-linear-to-r from-black to-[#75777e] bg-clip-text text-transparent
+        className="text-nowrap text-3xl text-transparent font-medium bg-linear-to-r from-black to-[#75777e] bg-clip-text
         dark:from-[#E2E4E5] dark:to-[#878991]"
       >
         {sectionName}
