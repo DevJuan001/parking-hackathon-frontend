@@ -59,11 +59,11 @@ export default function UsersList({
             hover:bg-[#efedf0]
             dark:bg-[#101012] dark:text-[#E4E2E5] dark:hover:bg-[#202022]"
           >
-            <div className="flex items-center gap-5">
+            <div className="w-full flex items-center gap-5">
               <Avatar user={user} />
 
-              <div className="flex flex-col">
-                <span className="font-medium">
+              <div className="w-fit flex flex-col">
+                <span className="max-w-28 font-medium text-ellipsis overflow-hidden">
                   {user.name} {user.first_surname}
                 </span>
 
@@ -77,7 +77,7 @@ export default function UsersList({
             </div>
 
             <div
-              className={`flex items-center py-1 px-2 gap-1 rounded-full font-medium ${userStatus[user.status]?.styles}`}
+              className={`flex items-center py-1 px-2 gap-1 rounded-full ${userStatus[user.status]?.styles}`}
             >
               <Icon
                 name={userStatus[user.status]?.icon}
