@@ -77,7 +77,7 @@ export default function UsersList({
             </div>
 
             <div
-              className={`flex items-center py-1 px-2 gap-1 rounded-full ${userStatus[user.status]?.styles}`}
+              className={`flex items-center py-1 px-2 gap-1 rounded-full text-sm ${userStatus[user.status]?.styles}`}
             >
               <Icon
                 name={userStatus[user.status]?.icon}
