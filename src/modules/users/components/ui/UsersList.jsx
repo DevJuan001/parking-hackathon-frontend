@@ -56,7 +56,8 @@ export default function UsersList({
             ref={getItemRef(index)}
             onClick={(e) => openModal(user, "editUser", e.currentTarget)}
             className="w-full flex items-center justify-between p-4 gap-2 rounded-4xl bg-[#F5F3F6]
-            hover:bg-[#efedf0]"
+            hover:bg-[#efedf0]
+            dark:bg-[#101012] dark:text-[#E4E2E5] dark:hover:bg-[#202022]"
           >
             <div className="flex items-center gap-5">
               <Avatar user={user} />
