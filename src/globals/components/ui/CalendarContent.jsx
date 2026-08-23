@@ -1,5 +1,5 @@
 // Utils
-import { months } from "@/utils/months";
+import { months } from "@utils/months";
 // Componentes
 import Icon from "@components/ui/Icon";
 
