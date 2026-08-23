@@ -79,7 +79,8 @@ export default function TopSection({
             {createButtonOnClick && (
               <button
                 onClick={createButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon name={"add"} />
 
@@ -90,7 +91,8 @@ export default function TopSection({
             {filterButtonOnClick && (
               <button
                 onClick={filterButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon data-shared-id="filter-icon" name={"page_info"} />
 
@@ -101,7 +103,8 @@ export default function TopSection({
             {exportButtonOnClick && (
               <button
                 onClick={exportButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon data-shared-id="export-icon" name={"download"} />
 
