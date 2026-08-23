@@ -37,6 +37,7 @@ export default function ParkingNameSection({
         md:w-lg"
       >
         <FormField
+          autoFocus
           id="parking_name"
           name="parking_name"
           labelText="Nombre *"
