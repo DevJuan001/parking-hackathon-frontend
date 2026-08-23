@@ -3,7 +3,7 @@ import { useInnerModal } from "@hooks/useInnerModal";
 import { useCurrentUser } from "@hooks/useCurrentUser";
 import { useParkingInfo } from "@hooks/useParkingInfo";
 // Utils
-import { formatDateTime } from "@/utils/formatDateTime";
+import { formatDateTime } from "@utils/formatDateTime";
 // Componentes
 import Icon from "@components/ui/Icon";
 import AnimatedBackground from "@components/ui/AnimatedBackground";
