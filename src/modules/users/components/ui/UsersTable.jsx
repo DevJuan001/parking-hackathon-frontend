@@ -1,10 +1,11 @@
+// Hooks
+import { useInfiniteScroll } from "@hooks/useInfiniteScroll";
 // Constantes
 import { userStatus } from "@/modules/users/constants/userStatus";
 // Componentes
 import Icon from "@components/ui/Icon";
 import Skeleton from "@components/ui/Skeleton";
 import ActionButtons from "@components/ui/ActionButtons";
-import { useInfiniteScroll } from "@/globals/hooks/useInfiniteScroll";
 
 export default function UsersTable({
   users,
@@ -24,7 +25,7 @@ export default function UsersTable({
 
   return (
     <section
-      className={`${noUsers || isFirstLoad ? "h-full" : "h-auto border"} w-full border border-[#E4E2E5] rounded-3xl overflow-x-auto overflow-y-auto
+      className={`${noUsers || isFirstLoad ? "h-full" : "h-auto border"} w-full border border-[#E4E2E5] rounded-2xl overflow-x-auto overflow-y-auto
       dark:border-[#17171a] dark:text-[#E4E2E5]`}
     >
       {noUsers && (
@@ -51,35 +52,31 @@ export default function UsersTable({
         />
       ) : (
         !noUsers && (
-          <table className="h-full w-full">
+          <table className="h-full w-full text-sm font-dmsans">
             <thead
-              className="sticky h-10 border-b border-[#E4E2E5]
-              dark:border-[#17171a]"
+              className="sticky h-10 border-b border-[#E4E2E5] text-[#75777E] hover:bg-[#f5f3f6]
+              dark:border-[#17171a] dark:text-[#7E8088] dark:hover:bg-[#17171a]"
             >
               <tr>
-                <th className="font-medium text-sm pl-4 text-start">Rol</th>
+                <th className="font-medium pl-4 text-start">Rol</th>
 
-                <th className="font-medium text-sm pl-4 text-start">Nombre</th>
+                <th className="font-medium pl-4 text-start">Nombre</th>
 
-                <th className="font-medium text-sm pl-4 text-start">
-                  Primer apellido
-                </th>
+                <th className="font-medium pl-4 text-start">Primer apellido</th>
 
-                <th className="font-medium text-sm pl-4 text-start">
+                <th className="font-medium pl-4 text-start">
                   Segundo apellido
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">Correo</th>
+                <th className="font-medium pl-4 text-start">Correo</th>
 
-                <th className="font-medium text-sm pl-4 text-start">
+                <th className="font-medium pl-4 text-start">
                   Fecha de creación
                 </th>
 
-                <th className="font-medium text-sm pl-4 text-start">Estado</th>
+                <th className="font-medium pl-4 text-start">Estado</th>
 
-                <th className="font-medium text-sm pl-4 text-center">
-                  Acciones
-                </th>
+                <th className="font-medium pl-4 text-center">Acciones</th>
               </tr>
             </thead>
 
@@ -88,38 +85,26 @@ export default function UsersTable({
                 <tr
                   ref={getItemRef(index)}
                   key={user.id}
-                  className="h-12 transition-colors duration-200
+                  className="h-12
                   hover:bg-[#f5f3f6]
                   dark:hover:bg-[#17171a]"
                 >
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.role_name}
-                  </th>
+                  <td className="pl-4 text-start">{user.role_name}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.name}
-                  </th>
+                  <td className="pl-4 text-start">{user.name}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.first_surname}
-                  </th>
+                  <td className="pl-4 text-start">{user.first_surname}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.second_surname}
-                  </th>
+                  <td className="pl-4 text-start">{user.second_surname}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.email}
-                  </th>
+                  <td className="pl-4 text-start">{user.email}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
-                    {user.created_at}
-                  </th>
+                  <td className="pl-4 text-start">{user.created_at}</td>
 
-                  <th className="font-medium text-sm pl-4 text-start">
+                  <td className="pl-4 text-start">
                     <div
-                      className={`w-fit flex items-center gap-1 py-0.5 px-2.5 rounded-2xl
-                  ${userStatus[user.status]?.styles}`}
+                      className={`w-fit flex items-center gap-1 py-1 px-2 rounded-2xl
+                      ${userStatus[user.status]?.styles}`}
                     >
                       <Icon
                         name={userStatus[user.status]?.icon}
@@ -129,12 +114,11 @@ export default function UsersTable({
 
                       <span>{userStatus[user.status]?.text}</span>
                     </div>
-                  </th>
+                  </td>
 
-                  <th className="relative font-medium text-sm pl-4">
+                  <td className="relative pl-4">
                     <ActionButtons
                       backgroundColor="#FFFFFF"
-                      moreInfoButtonVisible={false}
                       editButtonId={`edit-user-${user.id}-button`}
                       editButtonOnClick={(e) =>
                         openModal(user, "editUser", e.currentTarget)
@@ -148,7 +132,7 @@ export default function UsersTable({
                         )
                       }
                     />
-                  </th>
+                  </td>
                 </tr>
               ))}
 
@@ -158,10 +142,10 @@ export default function UsersTable({
                     <Skeleton
                       width="100%"
                       height="48px"
-                      backgroundColor={"#F3EEF5"}
-                      darkModeBackgroundColor={"#101012"}
                       shineColor="#C5C1C7"
+                      backgroundColor={"#F3EEF5"}
                       darkModeShineColor="#1e1e1e"
+                      darkModeBackgroundColor={"#101012"}
                     />
                   </th>
                 </tr>
