@@ -1,16 +1,18 @@
 import Modal from "@modals/Modal";
-import LiquidGlass from "../ui/LiquidGlass";
+import LiquidGlass from "@components/ui/LiquidGlass";
 
 export default function DeleteChatModal({ triggerRef, onClose }) {
   return (
     <Modal
+      dragToClose
       isOpen={true}
       disableHeader
       onClose={onClose}
       location="anchored"
       triggerRef={triggerRef}
       growDirection="bottom-right"
-      styles={`w-fit p-7 rounded-[40px]`}
+      styles={`w-sm p-7 rounded-[40px]
+      md:w-md`}
     >
       <div
         className="w-full flex flex-col gap-4 font-dmsans
@@ -18,9 +20,7 @@ export default function DeleteChatModal({ triggerRef, onClose }) {
       >
         <span className="text-2xl font-semibold">Nuevo chat</span>
 
-        <span className="text-nowrap">
-          Se borrara este chat perdiendo todo el progreso
-        </span>
+        <span>Al crear un nuevo chat, se borrara la conversación actual</span>
 
         <div className="w-full flex justify-end gap-2">
           <LiquidGlass
