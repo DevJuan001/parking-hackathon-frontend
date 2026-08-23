@@ -1,11 +1,31 @@
 export const modals = {
-  editUser: { title: "Editar Usuario", location: "center" },
+  editUser: {
+    title: "Editar Usuario",
+    location: "center",
+    styles: `w-screen h-screen p-7
+    md:w-125 md:h-fit md:rounded-4xl`,
+  },
 
-  createUser: { title: "Crear Usuario", location: "center" },
+  createUser: {
+    title: "Crear Usuario",
+    location: "center",
+    styles: `w-screen h-screen p-7
+    md:w-125 md:h-fit md:rounded-4xl`,
+  },
 
-  disableUser: { title: "Deshabilitar Usuario" },
+  disableUser: {
+    growDirection: "left-bottom",
+    title: "Deshabilitar Usuario",
+    styles: `w-92 p-7 rounded-4xl
+    md:w-120`,
+  },
 
-  enableUser: { title: "Habilitar Usuario" },
+  enableUser: {
+    growDirection: "left-bottom",
+    title: "Habilitar Usuario",
+    styles: `w-92 p-7 rounded-4xl
+    md:w-120`,
+  },
 
   filter: {
     title: "Filtrar",
