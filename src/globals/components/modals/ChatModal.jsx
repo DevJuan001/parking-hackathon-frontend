@@ -160,11 +160,14 @@ export default function ChatModal({ triggerRef, onClose }) {
             />
           </LiquidGlass>
         </form>
-      </div>
 
-      {innerType === "deleteChat" && (
-        <DeleteChatModal triggerRef={innerTrigger} onClose={closeInnerModal} />
-      )}
+        {innerType === "deleteChat" && (
+          <DeleteChatModal
+            triggerRef={innerTrigger}
+            onClose={closeInnerModal}
+          />
+        )}
+      </div>
     </Modal>
   );
 }
