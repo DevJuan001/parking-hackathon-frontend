@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getModalTrigger } from "@/utils/getModalTrigger";
+import { getModalTrigger } from "@utils/getModalTrigger";
 import { createUserService } from "@/modules/users/services/createUserService";
 import { useFormValidation } from "@hooks/useFormValidation";
 

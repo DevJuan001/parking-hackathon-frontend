@@ -26,7 +26,7 @@ export default function TimeField({
       role="button"
       disabled={disabled}
       onClick={disabled ? null : (e) => openInnerModal("timePickerModal", e)}
-      className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl bg-[#FBF9FC]
+      className={`relative w-full h-16.5 flex items-center border border-[#E4E2E5] rounded-2xl bg-[#FBF9FC] font-poppins
       hover:cursor-pointer
       ${disabled ? "opacity-60" : className}
       dark:bg-black dark:border-[#202022] dark:text-[#E4E2E5]`}

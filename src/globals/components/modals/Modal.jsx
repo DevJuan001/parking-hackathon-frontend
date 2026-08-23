@@ -79,7 +79,7 @@ export default function Modal({
           maxHeight: "100vh",
         }}
         ref={modalRef}
-        className={`flex flex-col bg-[#fbf9fc] font-poppins shadow-lg ${
+        className={`flex flex-col bg-[#fbf9fc] shadow-lg ${
           styles ??
           `p-7 w-100 rounded-4xl
           md:w-125`
@@ -90,7 +90,7 @@ export default function Modal({
           {!disableHeader && (
             <header className="flex justify-between items-center mb-2 shrink-0">
               <span
-                className="min-w-56 font-medium text-lg
+                className="min-w-56 text-lg font-medium font-poppins
                 dark:text-[#e4e2e5]"
               >
                 {title}

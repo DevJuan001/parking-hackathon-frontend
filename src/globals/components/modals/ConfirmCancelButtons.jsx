@@ -1,4 +1,5 @@
 import Icon from "@components/ui/Icon";
+import LiquidGlass from "../ui/LiquidGlass";
 
 export default function ConfirmCancelButtons({
   disabled = false,
@@ -16,19 +17,20 @@ export default function ConfirmCancelButtons({
 }) {
   return (
     <div
-      className={`flex ${flexDirection} items-center self-${itemsPosition} pt-5 gap-2`}
+      className={`w-full flex ${flexDirection} items-center self-${itemsPosition} pt-5 gap-2`}
     >
       <button
+        type="submit"
         id="confirm-button"
         ref={confirmBtnRef}
-        type="submit"
-        onClick={confirmButtonOnClick}
         disabled={disabled}
+        onClick={confirmButtonOnClick}
         style={{ backgroundColor: confirmBgColor }}
-        className={`h-11 flex items-center px-5 py-2.5 gap-2 font-medium text-sm text-white rounded-2xl transition duration-300
-        focus:animate-click-effect
-        hover:text-gray-300
-        dark:bg-white! dark:text-black dark:hover:text-gray-800`}
+        className={`flex items-center px-6 py-3.5 gap-2 rounded-4xl text-sm text-white font-medium transition
+          ${disabled && "opacity-70"}
+          active:animate-click-effect
+          hover:text-gray-300
+          dark:bg-white! dark:text-black dark:hover:text-gray-800`}
       >
         {confirmImage && (
           <Icon
@@ -41,18 +43,18 @@ export default function ConfirmCancelButtons({
         <span>{confirmText}</span>
       </button>
 
-      <button
+      <LiquidGlass
         id="cancel-button"
         type="button"
         disabled={disabled}
         onClick={cancelButtonOnClick}
-        className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 bg-[#F5F3F6]
-        focus:animate-click-effect
-        hover:bg-gray-200
-        dark:bg-[#101012] dark:text-white dark:hover:bg-[#28282bbd]`}
+        className={`${cancelButtonWidth} flex items-center px-6 py-3.5 rounded-4xl text-sm text-[#75777E] font-medium transition-colors
+          active:animate-click-effect
+          hover:cursor-pointer hover:bg-[#F5F3F6]
+          dark:bg-[#1010127a] dark:text-[#7E80888] dark:hover:bg-[#28282b71]`}
       >
         <span>{cancelText}</span>
-      </button>
+      </LiquidGlass>
     </div>
   );
 }

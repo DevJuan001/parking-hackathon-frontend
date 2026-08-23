@@ -9,7 +9,6 @@ export default function NavItem({
   showName,
   disableText,
   onClick,
-  hideOnDesktop = false,
 }) {
   return (
     <NavLink to={path}>
@@ -17,14 +16,8 @@ export default function NavItem({
         <div
           onClick={onClick}
           id={`${itemId}-aside-button`}
-          className={`w-auto h-14 items-center py-3 gap-2 subpixel-antialiased rounded-full transition-[padding,background-color,color,box-shadow] ease-in group
-            md:py-3 md:px-6
-            ${
-              hideOnDesktop
-                ? `flex
-              md:hidden`
-                : "flex"
-            }
+          className={`w-auto h-14 flex items-center py-3 gap-2 subpixel-antialiased rounded-full transition-[padding,background-color,color,box-shadow] ease-in group
+            md:px-6
             ${
               isActive
                 ? `px-6 bg-black shadow-[0px_0px_18px_-11px_#000000] text-white
@@ -36,11 +29,10 @@ export default function NavItem({
         >
           <Icon
             name={icon}
-            size={25}
             fill={isActive}
             animateFill
-            fillDuration={400}
-            className={`transition-colors duration-300 ease-in-out
+            fillDuration={300}
+            className={`
             ${
               isActive
                 ? `dark:fill-black`
@@ -51,7 +43,7 @@ export default function NavItem({
           />
 
           <div
-            className={`text-center font-medium overflow-hidden transition-[max-width,opacity] duration-500 ease-in-out
+            className={`text-center font-medium font-dmsans overflow-hidden transition-[max-width,opacity] duration-450 ease-in-out
             ${disableText ? "hidden" : "inline-block"}
             ${
               showName
@@ -61,9 +53,8 @@ export default function NavItem({
             }
             ${
               isActive
-                ? `font-semibold max-w-50 opacity-100`
-                : `font-medium
-                group-hover:text-black
+                ? `max-w-50 opacity-100`
+                : `group-hover:text-black
                 dark:group-hover:text-white`
             }`}
           >

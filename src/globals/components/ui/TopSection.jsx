@@ -25,13 +25,12 @@ export default function TopSection({
 
   return (
     <section
-      className={`h-[13%] w-full flex items-center justify-between pb-2 font-poppins ${sectionVisible ? "block" : "hidden"}
-      sm:h-[9%]
-      md:h-[8%]
+      className={`w-full h- flex items-center justify-between
+      ${sectionVisible ? "block" : "hidden"}
       `}
     >
       <span
-        className="text-nowrap text-2xl font-medium bg-linear-to-r from-black to-[#75777e] bg-clip-text text-transparent
+        className="text-nowrap text-3xl text-transparent font-medium bg-linear-to-r from-black to-[#75777e] bg-clip-text
         dark:from-[#E2E4E5] dark:to-[#878991]"
       >
         {sectionName}
@@ -80,7 +79,8 @@ export default function TopSection({
             {createButtonOnClick && (
               <button
                 onClick={createButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon name={"add"} />
 
@@ -91,7 +91,8 @@ export default function TopSection({
             {filterButtonOnClick && (
               <button
                 onClick={filterButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon data-shared-id="filter-icon" name={"page_info"} />
 
@@ -102,7 +103,8 @@ export default function TopSection({
             {exportButtonOnClick && (
               <button
                 onClick={exportButtonOnClick}
-                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl"
+                className="flex items-center p-4 gap-2 bg-[#F5F3F6] rounded-4xl
+                dark:bg-[#101012] dark:text-[#E4E2E5]"
               >
                 <Icon data-shared-id="export-icon" name={"download"} />
 

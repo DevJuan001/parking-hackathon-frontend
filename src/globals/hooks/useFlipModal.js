@@ -748,19 +748,30 @@ export const useFlipModal = ({
       // Transición explícita del borderRadius desde el del trigger hasta el
       // final de la modal. La sacamos de los props del FLIP para poder
       // ajustarla independientemente y mantener consistencia con el cierre,
-      // que también la anima con un tween propio. Usamos sine.in para que
-      // el borde empiece a cambiar pronto en el vuelo y se asiente antes
-      // de terminar, sin el delay marcado de power2.in.
+      // que también la anima con un tween propio.
+      //
+      // Duración matcheada con MODAL_OPEN_DURATION (no 0.3s) para que el
+      // radio siga settleando mientras el modal ya está a tamaño completo:
+      // MODAL_OPEN_EASE alcanza ~85% del tamaño a t=0.18s, así que si el
+      // radio termina a 0.3s se pierde la ventana visible del settlement.
+      // Con la duración completa, el radio se termina de asentar durante
+      // los últimos frames del FLIP — justo cuando el modal ya está grande
+      // y se puede apreciar cómo la esquina se abre.
+      //
+      // power2.out (arranca rápido, desacelera al final) en vez de sine.in:
+      // así el radio empieza a moverse durante el crecimiento (visible
+      // mientras la caja crece) y desacelera suavemente hacia el radio
+      // final, en lugar de quedarse pegado al del trigger y saltar al final.
       // clip-path con round() en vez de borderRadius: GPU-compositable.
       tl.fromTo(
         modal,
         { clipPath: `inset(0 round ${triggerBorderRadius})` },
         {
           clipPath: `inset(0 round ${finalBorderRadius})`,
-          duration: 0.3,
+          duration: MODAL_OPEN_DURATION,
           ease: "sine.in",
         },
-        0,
+        0.5,
       );
 
       // Oscurecemos el overlay de fondo en paralelo con la apertura del modal
@@ -1056,7 +1067,17 @@ export const useFlipModal = ({
         // Sin esto, hay un frame donde el modal (sin position:fixed ni
         // dimensions inline) se renderiza en su posición natural (top-left)
         // antes de que onClose() lo retire del DOM → flash visible.
-        modal.style.setProperty("visibility", "hidden", "important");
+        //
+        // display:none en vez de visibility:hidden: al remover position:fixed
+        // arriba, el modal deja de ser contexto de posicionamiento, y
+        // cualquier hijo con position:absolute cae al initial containing
+        // block (viewport) y se pinta arriba a la izquierda durante el
+        // frame entre cleanup y el unmount de React.
+        // visibility:hidden no lo tapaba porque un descendiente puede
+        // sobreescribirla con visibility:visible (clase Tailwind, estilo
+        // inline, reset). display:none no se puede sobreescribir desde
+        // los hijos — nada del subtree renderiza, nada se escapa al viewport.
+        modal.style.setProperty("display", "none", "important");
         gsap.set(modal, { willChange: "auto" });
         // Restauramos la visibilidad del content que desvanecimos durante
         // el viaje de los phantoms de cierre. Reusamos la misma lista

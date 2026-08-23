@@ -2,52 +2,62 @@ import Icon from "@components/ui/Icon";
 
 export default function ActionButtons({
   children,
-  backgroundColor = "#F5F3F6",
-  visibilityIcon = true,
   editButtonId,
-  editButtonVisible = true,
-  editButtonOnClick,
   deleteButtonId,
-  deleteButtonVisible = true,
+  editButtonOnClick,
   deleteButtonOnClick,
+  visibilityIcon = true,
   moreInfoButtonOnClick,
-  moreInfoButtonVisible = true,
 }) {
   return (
-    <section className="flex items-center justify-center gap-3 dark:invert">
+    <section className="flex items-center justify-center gap-3">
       {children}
 
-      {moreInfoButtonVisible && (
+      {moreInfoButtonOnClick && (
         <button
           onClick={moreInfoButtonOnClick}
-          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
-          hover:bg-[#969292a8]`}
+          className="flex items-center p-2 rounded-xl transition-colors bg-white
+          hover:bg-[#969292a8]
+          dark:bg-black dark:hover:bg-[#9692924b]"
         >
-          <Icon name={"arrow_outward"} className="dark:brightness-0" />
+          <Icon
+            name={"arrow_outward"}
+            className="text-[#75777E]
+            dark:text-[#7E8088]"
+          />
         </button>
       )}
 
-      {editButtonVisible && (
+      {editButtonOnClick && (
         <button
           id={editButtonId}
           onClick={editButtonOnClick}
-          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
-          hover:bg-[#969292a8]`}
+          className="flex items-center p-2 rounded-xl transition-colors bg-white
+          hover:bg-[#969292a8]
+          dark:bg-black dark:hover:bg-[#9692924b]"
         >
-          <Icon name={"edit"} className="dark:brightness-0" />
+          <Icon
+            size={22}
+            name={"edit"}
+            className="text-[#75777E]
+            dark:text-[#7E8088]"
+          />
         </button>
       )}
 
-      {deleteButtonVisible && (
+      {deleteButtonOnClick && (
         <button
           id={deleteButtonId}
           onClick={deleteButtonOnClick}
-          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] 
-          hover:bg-[#969292a8]`}
+          className="flex items-center p-2 rounded-xl transition-colors bg-white
+          hover:bg-[#969292a8]
+          dark:bg-black dark:hover:bg-[#9692924b]"
         >
           <Icon
+            size={22}
             name={`${visibilityIcon ? "visibility" : "visibility_off"}`}
-            className="dark:brightness-0"
+            className="text-[#75777E]
+            dark:text-[#7E8088]"
           />
         </button>
       )}

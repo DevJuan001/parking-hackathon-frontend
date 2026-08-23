@@ -26,6 +26,7 @@ export default function Calendar({
 
   return (
     <Modal
+      dragToClose
       disableHeader
       isOpen={true}
       z_index="250"

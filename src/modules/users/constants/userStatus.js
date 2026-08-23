@@ -18,6 +18,6 @@ export const userStatus = {
     visibilityIcon: true,
     icon: "circle",
     fill: true,
-    styles: "bg-green-100 text-green-600 dark:bg-[#1e1e20cb]",
+    styles: "bg-green-100 text-green-600 dark:bg-green-950/60",
   },
 };

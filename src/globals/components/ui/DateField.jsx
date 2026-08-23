@@ -25,7 +25,7 @@ export default function DateField({
       type="button"
       disabled={disabled}
       onClick={(e) => openInnerModal("calendar", e)}
-      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#E4E2E5] text-center text-sm
+      className={`relative w-full h-16.5 flex px-4 rounded-2xl border border-[#E4E2E5] text-center text-sm font-poppins
       focus:shadow-[0_0_2px_1px_#e5e7eb]
       dark:border-[#1e1e20cb] dark:text-white
       ${disabled ? "opacity-60" : className}`}

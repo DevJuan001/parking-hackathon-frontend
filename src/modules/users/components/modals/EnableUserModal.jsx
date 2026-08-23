@@ -38,12 +38,12 @@ export default function EnableUserModal({ onClose, user }) {
 
       {innerType === "error" && (
         <ErrorModal
-          triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="¡No se pudo habilitar el usuario!"
           errorText={error}
+          triggerRef={innerTrigger}
+          onClose={closeInnerModal}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          errorTitle="¡No se pudo habilitar el usuario!"
         />
       )}
     </section>

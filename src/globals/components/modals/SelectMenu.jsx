@@ -41,7 +41,7 @@ export default function SelectMenu({
 
   return (
     <div
-      className={`relative flex flex-col gap-1
+      className={`w-full relative flex flex-col gap-1 font-poppins
       ${miniVersion ? "w-36" : disabled ? "opacity-50" : "w-full"}
       `}
     >
@@ -129,7 +129,7 @@ export default function SelectMenu({
           }}
           triggerRef={innerTrigger}
           growDirection={growDirection}
-          styles={`p-1 w-[350px] h-auto rounded-4xl
+          styles={`p-1 w-[350px] h-auto rounded-4xl font-poppins
           md:w-[400px]`}
         >
           <SelectMenuContent

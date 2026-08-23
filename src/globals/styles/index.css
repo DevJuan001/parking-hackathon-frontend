@@ -168,10 +168,10 @@
     }
   }
 
-  --default-font-family: "Inter", sans-serif;
+  --default-font-family: "Dm sans", sans-serif;
   --font-inter: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
-  --font-dmsans: "DM sans", sans-serif;
+  --font-dmsans: "Dm sans", sans-serif;
 }
 
 :root {

@@ -1,10 +1,12 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
+import { useMediaQuery } from "@hooks/useMediaQuery";
 import { useUsers } from "@/modules/users/hooks/useUsers";
 // Constantes
 import { modals } from "@/modules/users/constants/modals";
 // Componentes
 import TopSection from "@components/ui/TopSection";
+import UsersList from "@/modules/users/components/ui/UsersList";
 import UsersKpis from "@/modules/users/components/ui/UsersKpis";
 import UsersTable from "@/modules/users/components/ui/UsersTable";
 // Modales
@@ -20,6 +22,7 @@ import FilterUsersModal from "@/modules/users/components/modals/FilterUsersModal
 export default function UsersPage() {
   const { isOpen, modalType, modalData, triggerRef, openModal, closeModal } =
     useModal();
+  const isDesktop = useMediaQuery("(min-width: 48rem)");
   const {
     users,
     loading,
@@ -32,26 +35,23 @@ export default function UsersPage() {
 
   return (
     <main
-      className="w-full h-full overflow-hidden overflow-y-auto
+      className="w-full h-full flex flex-col gap-4 overflow-hidden overflow-y-auto
       dark:bg-black"
     >
       <TopSection
         sectionName={"Usuarios"}
         addButtonText={"Crear usuario"}
-        createButtonOnClick={(e) =>
-          openModal(null, "createUser", e.currentTarget)
-        }
         filterButtonOnClick={(e) => openModal(null, "filter", e.currentTarget)}
         exportButtonOnClick={(e) => openModal(null, "export", e.currentTarget)}
         searchButtonOnClick={(e) => openModal(null, "search", e.currentTarget)}
+        createButtonOnClick={(e) =>
+          openModal(null, "createUser", e.currentTarget)
+        }
       />
 
-      <div
-        className="h-[85%] flex flex-col gap-4
-        md:h-[90%]"
-      >
-        <UsersKpis />
+      <UsersKpis />
 
+      {isDesktop ? (
         <UsersTable
           users={users}
           loading={loading}
@@ -60,7 +60,16 @@ export default function UsersPage() {
           fetchNextPage={fetchNextPage}
           openModal={openModal}
         />
-      </div>
+      ) : (
+        <UsersList
+          users={users}
+          loading={loading}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          openModal={openModal}
+        />
+      )}
 
       {modalType && (
         <Modal
