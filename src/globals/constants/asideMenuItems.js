@@ -41,7 +41,7 @@ export const firstSectionItems = [
     itemId: "entries",
     name: "Entradas",
     path: "/entries",
-    icon: "browse_activity",
+    icon: "table_rows",
     roles: ["Admin"],
   },
 
