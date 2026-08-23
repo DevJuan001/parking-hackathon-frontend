@@ -1,5 +1,5 @@
-import { avatarItem } from "@/globals/constants/asideMenuItems";
 import { useCurrentUser } from "@hooks/useCurrentUser";
+import { avatarItem } from "@constants/asideMenuItems";
 
 export default function AvatarButton({ avatarOnClick }) {
   const { user } = useCurrentUser();

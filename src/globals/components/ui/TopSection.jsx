@@ -1,5 +1,5 @@
 // Hooks
-import { useInnerModal } from "@/globals/hooks/useInnerModal";
+import { useInnerModal } from "@hooks/useInnerModal";
 // Componentes
 import Icon from "@components/ui/Icon";
 import SearchButton from "@components/ui/SearchButton";

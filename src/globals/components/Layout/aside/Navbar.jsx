@@ -1,7 +1,7 @@
 // Hooks
 import { useModal } from "@hooks/useModal";
 // Constantes
-import { firstSectionItems } from "@/globals/constants/asideMenuItems";
+import { firstSectionItems } from "@constants/asideMenuItems";
 // Componentes
 import NavItem from "@components/Layout/aside/NavItem";
 import Icon from "@components/ui/Icon";
